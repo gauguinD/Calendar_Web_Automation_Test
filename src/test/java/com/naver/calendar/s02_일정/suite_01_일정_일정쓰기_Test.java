@@ -80,7 +80,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 시간 종일 일정 생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    // @Test
+    @Test
     public void TC_02_일정_일정쓰기_시간종일일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -104,7 +104,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
-    //@Test
+    @Test
     public void TC_03_일정_일정쓰기_시간일정_Assert_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
         util.get(URL);
@@ -125,7 +125,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
      * Result : 해당하는 날짜에 종일 일정 생성 됨
      * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
      */
-    //@Test
+    @Test
     public void TC_04_일정_일정쓰기_종일일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -154,7 +154,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
-    //@Test
+    @Test
     public void TC_05_일정_일정쓰기_종일일정_Assert_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
         util.get(URL);
@@ -176,7 +176,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 음력 일정 생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    //@Test
+    @Test
     public void TC_06_일정_일정쓰기_음력일정_Test() throws Exception {
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
         assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
@@ -220,7 +220,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
-    //@Test
+    @Test
     public void TC_07_일정_일정쓰기_음력일정_Assert_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + LunarDate + "\"}}";
         util.get(URL);
@@ -241,7 +241,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 선택한 참가자 추가 되어 약속 일정생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    //@Test
+    @Test
     public void TC_08_일정_일정쓰기_약속일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -269,7 +269,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     }
 
 
-    //@Test
+    @Test
     public void TC_09_일정_일정쓰기_약속일정_Assert_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
         util.get(URL);
@@ -299,7 +299,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 선택한 참가자 추가 되어 약속 일정생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    //@Test
+    @Test
     public void TC_10_일정_일정쓰기_음력약속일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -343,7 +343,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     }
 
 
-    //@Test
+    @Test
     public void TC_11_일정_일정쓰기_음력약속일정_Assert_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + LunarDate + "\"}}";
         util.get(URL);
@@ -372,7 +372,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 선택한 반복 옵션으로 일정생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    //@Test
+    @Test
     public void TC_12_일정_일정쓰기_반복일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -453,7 +453,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     }
 
 
-    //@Test
+    @Test
     public void TC_13_일정_일정쓰기_반복일정_Assert_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
         util.get(URL);
@@ -537,7 +537,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 공유숨김 일정 생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    //@Test
+    @Test
     public void TC_14_일정_일정쓰기_공유숨김일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -566,7 +566,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
-    //@Test
+    @Test
     public void TC_15_일정_일정쓰기_공유숨김일정_Assert_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
         util.get(URL);
@@ -598,7 +598,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 공개 일정 생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    //@Test
+    @Test
     public void TC_16_일정_일정쓰기_공개일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -619,7 +619,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
-    //@Test
+    @Test
     public void TC_17_일정_일정쓰기_공개일정_Assert_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
         util.get(URL);
@@ -649,7 +649,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 스티커 일정 생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    //@Test
+    @Test
     public void TC_18_일정_일정쓰기_스티커일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -679,7 +679,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 범주 설정된 일정 생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    //@Test
+    @Test
     public void TC_20_일정_일정쓰기_범주일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -757,7 +757,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 기본 일정 생성 됨
     * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
     */
-    //@Test
+    @Test
     public void TC_16_일정_일정쓰기_기본일정_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -787,7 +787,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Step : 일정삭제 > 공유일정 삭제
     * Result : 해당하는 일정 삭제 됨
     */
-    //@Test
+    @Test
     public void TC_15_일정_일정쓰기_공유일정삭제_Test() throws Exception {
         int tdValue = 0;
         int divValue = 0;
@@ -841,7 +841,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Step : 일정삭제 > 공유일정 삭제
     * Result : 해당하는 일정 삭제 됨
     */
-    //@Test
+    @Test
     public void TC_96_일정_일정쓰기_공유일정삭제_Test() throws Exception {
         int tdValue = 0;
         int divValue = 0;
@@ -894,7 +894,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
      * Step : 일정삭제 > 시간일정 삭제
      * Result : 해당하는 일정 삭제 됨
      */
-    //@Test
+    @Test
     public void TC_97_일정_일정쓰기_시간일정삭제_Test() throws Exception {
         int tdValue = 0;
         int divValue = 0;
@@ -945,7 +945,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Step : 일정삭제 > 반복일정 전체 삭제
     * Result : 해당하는 반복일정 전체 삭제 됨
     */
-    //@Test
+    @Test
     public void TC_98_일정_일정쓰기_반복일정삭제_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
         util.get(URL);
@@ -971,7 +971,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     }
 
 
-    //@Test
+    @Test
     public void TC_99_일정_일정쓰기_시간일정삭제_old_Test() throws Exception {
         int tdValue = 0;
         int divValue = 0;
