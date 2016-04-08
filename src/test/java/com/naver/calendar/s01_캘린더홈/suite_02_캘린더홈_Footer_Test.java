@@ -46,6 +46,9 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
         String skinName;
         String skinColor;
 
+        //화면 크기 때문에
+        util.windowMaximize();
+
         util.clickAndWait(By.className("_skinLayerBtn"));
         util.waitForIsElementPresent(By.className("skin_title"));
 

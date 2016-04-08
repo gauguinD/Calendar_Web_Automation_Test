@@ -2,6 +2,7 @@
 package main;
 
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.testng.ITestResult;
@@ -19,10 +20,12 @@ public class Testcase {
 	public void setupClass (String browser) throws Exception {
 
 		try {
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--start-maximized");
 			capability = Capabilities.gridSetUp(browser);
 			util = new Utilities(capability);
 			util.openAndWait(module.calURL);
-			
+			//util.manage().window().maximize();
 		}
 		catch (UnreachableBrowserException ue){
 			System.out.println(" ** setupClass catch UnreachableBrowserException");
