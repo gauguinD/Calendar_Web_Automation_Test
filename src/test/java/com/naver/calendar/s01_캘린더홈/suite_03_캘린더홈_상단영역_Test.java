@@ -93,7 +93,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     * URL : https://calendar.naver.com/promotion.nhn
     */
 
-    //@Test
+    @Test
     public void TC_03_Footer_모바일캘린더_Test() throws Exception {
 
         util.clickAndWait(By.className("_mobile_calendar"));
@@ -117,7 +117,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     * URL : https://calendar.naver.com/subscribePage.nhn
     */
 
-    //@Test
+    @Test
     public void TC_04_Footer_인기공개캘린더_Test() throws Exception{
 
         util.clickAndWait(By.className("_open_public_calendar"));
@@ -140,7 +140,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     * URL : https://calendar.naver.com/school.nhn
     */
 
-    //@Test
+    @Test
     public void TC_05_Footer_선생님우대프로그램_Test() throws Exception{
 
         util.clickAndWait(By.className("_open_school"));
@@ -163,7 +163,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     * URL : https://calendar.naver.com/notice.nhn
     */
 
-    //@Test
+    @Test
     public void TC_06_Footer_공지사항_Test() throws Exception{
 
         util.clickAndWait(By.className("_open_notice"));
@@ -183,13 +183,13 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         util.waitForTitle("일정 : 네이버 캘린더");
     }
 
-        /*
+    /*
     * Step : Footer > 캘린더고객센터 클릭
     * Result : 캘린더고객센터 페이지로 이동됨
     * URL : https://help.naver.com/support/service/main.nhn?serviceNo=635
     */
 
-    //@Test
+    @Test
     public void TC_07_Footer_캘린더고객센터_Test() throws Exception{
 
         util.clickAndWait(By.className("_calendar_faq"));
