@@ -6,11 +6,11 @@
 	<test name="chrome" preserve-order = "true">
 		<parameter name="browser"  value="chrome"/>
 		<classes>
-			<!--
 			<class name="com.naver.calendar.s01_캘린더홈.suite_01_캘린더홈_GNB_Test"/>
+			<!--
 			<class name="com.naver.calendar.s01_캘린더홈.suite_02_캘린더홈_Footer_Test"/>
-			-->
 			<class name="com.naver.calendar.s01_캘린더홈.suite_03_캘린더홈_상단영역_Test"/>
+			-->
 			<!--
 			<class name="com.naver.calendar.s01_캘린더홈.suite_04_캘린더홈_좌측영역_Test"/>
 			<class name="com.naver.calendar.s02_일정.suite_01_일정_일정쓰기_Test"/>
