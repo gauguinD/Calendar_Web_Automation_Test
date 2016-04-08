@@ -29,7 +29,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
      * Step : 좌측영역 > 일정,약속쓰기 클릭
      * Result : 오늘 날짜, 현재 시간으로 일정쓰기창으로 이동
      */
-    //@Test
+    @Test
     public void TC_01_좌측영역_일정약속쓰기_Test() throws Exception {
 
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
@@ -62,7 +62,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     * Step : 좌측영역 > 기념일 관리 클릭
     * Result : 기념일 관리 페이지로 이동
     */
-    //@Test
+    @Test
     public void TC_02_좌측영역_기념일관리_Test() throws Exception{
         util.clickAndWait(By.xpath("//span[contains(text(),'기념일 관리')]"));
         assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
@@ -74,7 +74,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     * Step : 좌측영역 > 기념일 관리 클릭
     * Result : 기념일 관리 페이지로 이동
     */
-    //@Test
+    @Test
     public void TC_03_좌측영역_날짜영역_Test() throws Exception{
 
         String miniCalendar;
@@ -122,7 +122,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     * Step : 좌측영역 > 미니달력 클릭
     * Result : 미니 달력에서 클릭한 날짜로 이동 됨
     */
-    //@Test
+    @Test
     public void TC_05_좌측영역_미니달력_Test() throws Exception{
         // 1년 버튼 동작 확인
         util.clickAndWait(By.className("btn_1year"));
@@ -177,7 +177,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     * Result : 기념일 관리 페이지로 이동
     */
 
-    //@Test
+    @Test
     public void TC_08_좌측영역_캘린더만들기_Test() throws Exception{
         util.clickAndWait(By.className("btn_makecal"));
         util.clickAndWait(By.partialLinkText("내 캘린더 만들기"));
@@ -220,8 +220,8 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         }
     }
 
-    //@Test
-    public void TC_09_Delete_calendar_Test() throws Exception{
+    @Test
+    public void TC_09_좌측영역_캘린더삭제_Test() throws Exception{
         util.clickAndWait(By.className("btn_settingcal"));
         util.printLog(util.isElementPresent(By.xpath("//div[@class='_calendar_name' and contains(data-value, '"+dataValue+"']")).toString());
 
@@ -248,46 +248,6 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
             //*[@id="calendar_list_container"]/div[2]/ul/li[5]
         }
         */
-    }
-
-
-    //@Test
-    public void TC_04_NewcalendarEvent_Day_Test() throws Exception{
-        util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
-
-        if(!(util.isElementPresent(By.xpath("//a[@class='_set_timezone change_time']")).isDisplayed())){}
-        else
-        {
-            util.isElementPresent(By.id("ch1_1")).click();
-        }
-
-        util.waitForIsElementPresent(By.xpath("//*[@id='holder']/div/div[1]/a[2]"));
-        util.isElementPresent(By.id("tx0_0")).sendKeys(module.contents);
-
-        //util.clickAndWait(By.id("start_date"));
-
-        util.isElementPresent(By.id("start_date")).clear();
-        util.isElementPresent(By.id("start_date")).sendKeys(module.StartDate);
-        //util.clickAndWait(By.id("end_date"));
-
-        util.isElementPresent(By.id("end_date")).clear();
-        util.isElementPresent(By.id("end_date")).sendKeys(module.EndDate);
-
-        util.clickAndWait(By.xpath("//button[@class ='btn_sys pos_save']"));
-        util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
-    }
-
-    //@Test
-    public void TC_04_AssertEvent_Test() throws Exception {
-        URL = module.calURL+"#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\""+module.StartDate+"\"}}";
-        util.get(URL);
-
-        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'"+module.contents+"')]"));
-        util.clickAndWait(By.xpath("//a[contains(text(),'"+module.contents+"')]"));
-
-        util.waitForIsElementPresent(By.className("_modify_text"));
-        //util.printLog("End");
-
     }
 
 }

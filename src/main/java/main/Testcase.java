@@ -61,6 +61,6 @@ public class Testcase {
 			System.out.println(" ** tearDownClass catch WebDriverException");
 		}
 		util.printLog("Quit Suite : " + util.printClassName(this));
-		util.close();
+		//util.close();
 	}
 }
