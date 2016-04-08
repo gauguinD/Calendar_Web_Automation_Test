@@ -40,8 +40,8 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 		"if (window.screen) {window.moveTo(0, 0);window.resizeTo(window.screen.availWidth,window.screen.availHeight);};";
 
 	// RemoteWebDriver Hub Address
-	public static String HubAddress = "http://localhost:4444/wd/hub";
-	//public static String HubAddress = "http://10.12.57.154:8080/wd/hub";
+	//public static String HubAddress = "http://localhost:4444/wd/hub";
+	public static String HubAddress = "http://10.12.61.38:4444/wd/hub";
 	public static RemoteTouchScreen touch;
 	
 	public String mainWindowHandle = null;
