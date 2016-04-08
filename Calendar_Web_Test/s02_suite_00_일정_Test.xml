@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="CalendarWeb Regression Test" parallel="tests" thread-count="10">
+
+	<test name="chrome" preserve-order = "true">
+		<parameter name="browser"  value="chrome"/>
+		<classes>
+			<!--
+			<class name="com.naver.suite_01_일정_일정쓰기_Test"/>
+			-->
+			<class name="com.naver.suite_01_일정_일정쓰기_Test"/>
+			<!--
+			<class name="com.naver.suite_01_일정_일정쓰기_Test"/>
+			-->
+			</classes>
+	</test>
+	
+      
+</suite> <!-- Suite -->
