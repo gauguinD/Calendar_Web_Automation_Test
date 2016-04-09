@@ -135,13 +135,13 @@ public class Modules {
 
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
 
-		if(util.waitAndGetXpathCount(By.xpath("//*[@id='nav_snb']/div/div[2]/div/div/div/span")) > 8 ) {
+		if(util.waitAndGetXpathCount(By.xpath("//div[@class='_title date']/span")) > 8 ) {
 
 			//System.out.println("case 1. 이번달이면서 미니 달력이 접혀있을경우 - YY,MM,DD 로 노출 됨");
 			GetDate(util);
 
-			String g = util.waitForIsElementPresent(By.xpath("//*[@id='nav_snb']/div/div[2]/div/div/div/span[9]")).getAttribute("class").substring(4);
-			String h = util.waitForIsElementPresent(By.xpath("//*[@id='nav_snb']/div/div[2]/div/div/div/span[10]")).getAttribute("class").substring(4);
+			String g = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[9]")).getAttribute("class").substring(4);
+			String h = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[10]")).getAttribute("class").substring(4);
 			int date = Integer.parseInt(g + h);
 
 			todayCal.set(Calendar.DATE, date);
@@ -186,19 +186,27 @@ public class Modules {
 		}
 	}
 
-	public void GetDate(Utilities util) throws Exception{
-		a = util.waitForIsElementPresent(By.xpath("//*[@id='nav_snb']/div/div[2]/div/div/div/span[1]")).getAttribute("class").substring(4);
-		b = util.waitForIsElementPresent(By.xpath("//*[@id='nav_snb']/div/div[2]/div/div/div/span[2]")).getAttribute("class").substring(4);
-		c = util.waitForIsElementPresent(By.xpath("//*[@id='nav_snb']/div/div[2]/div/div/div/span[3]")).getAttribute("class").substring(4);
-		d = util.waitForIsElementPresent(By.xpath("//*[@id='nav_snb']/div/div[2]/div/div/div/span[4]")).getAttribute("class").substring(4);
-		e = util.waitForIsElementPresent(By.xpath("//*[@id='nav_snb']/div/div[2]/div/div/div/span[6]")).getAttribute("class").substring(4);
-		f = util.waitForIsElementPresent(By.xpath("//*[@id='nav_snb']/div/div[2]/div/div/div/span[7]")).getAttribute("class").substring(4);
+	public String GetDate(Utilities util) throws Exception{
+
+
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM");
+
+		a = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[1]")).getAttribute("class").substring(4);
+		b = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[2]")).getAttribute("class").substring(4);
+		c = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[3]")).getAttribute("class").substring(4);
+		d = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[4]")).getAttribute("class").substring(4);
+		e = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[6]")).getAttribute("class").substring(4);
+		f = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[7]")).getAttribute("class").substring(4);
 
 		year = Integer.parseInt(a + b + c + d);
 		month = Integer.parseInt(e + f);
 
 		todayCal.set(Calendar.YEAR, year);
 		todayCal.set(Calendar.MONTH, month-1);
+
+		String dateFormat = format1.format(todayCal.getTime());
+
+		return dateFormat;
 	}
 
 	//iterator로 대체

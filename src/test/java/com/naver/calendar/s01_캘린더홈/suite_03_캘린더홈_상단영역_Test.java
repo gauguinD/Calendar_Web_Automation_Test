@@ -55,7 +55,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
      * Step : 상단영역 > 일정검색 > 상세검색 클릭
      * Result : 일정검색 > 상세검색 옵션 노출 됨
      */
-    @Test
+    //@Test
     public void TC_02_상단영역_일정검색_상세검색_Test() throws Exception{
 
         String searchKeyword = "일정";
@@ -88,20 +88,25 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     }
 
     /*
-    * Step : Footer > 모바일 캘린더 클릭
-    * Result : 모바일캘린더 페이지로 이동됨
-    * URL : https://calendar.naver.com/promotion.nhn
+    * Step : 상단영역 > 공지사항 클릭
+    * Result : 공지사항 페이지로 이동됨
+    * URL : https://calendar.naver.com/notice.nhn
     */
 
     @Test
-    public void TC_03_Footer_모바일캘린더_Test() throws Exception {
+    public void TC_03_상단영역_공지사항_Test() throws Exception {
 
-        util.clickAndWait(By.className("_mobile_calendar"));
+        //공지사항 제목 확인
+        String noticeTitle;
+        noticeTitle = util.isElementPresent(By.xpath("//span[@class='notice']/a")).getAttribute("onclick title");
+        util.printLog("현재 공지사항 제목은 : "+noticeTitle);
+
+        util.clickAndWait(By.xpath("//span[@class='notice']"));
         util.waitForNewWindow();
 
         Title = util.getTitle();
         URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://calendar.naver.com/promotion.nhn"));
+        assertTrue(URL.contains("http://calendar.naver.com/notice.nhn"));
         assertTrue(Title.contains("네이버 캘린더"));
 
         //util.switchTo();
@@ -112,21 +117,20 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     }
 
     /*
-    * Step : Footer > 인기 공개 캘린더 클릭
-    * Result : 인기 공개 캘린더 페이지로 이동됨
-    * URL : https://calendar.naver.com/subscribePage.nhn
+    * Step : 상단영역 > 할일보기 클릭
+    * Result : 할일보기 페이지로 이동됨
+    * URL : https://calendar.naver.com/tasks.nhn
     */
 
     @Test
-    public void TC_04_Footer_인기공개캘린더_Test() throws Exception{
+    public void TC_04_상단영역_할일보기_Test() throws Exception{
 
-        util.clickAndWait(By.className("_open_public_calendar"));
-        util.waitForNewWindow();
+        util.clickAndWait(By.xpath("//button[@class='_go_task type_schedule todo']"));
 
         Title = util.getTitle();
         URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://calendar.naver.com/subscribePage.nhn"));
-        assertTrue(Title.contains("네이버 인기 공개 캘린더"));
+        assertTrue(URL.contains("https://calendar.naver.com/tasks.nhn"));
+        assertTrue(Title.contains("할 일 : 네이버 캘린더"));
 
         util.close();
         util.selectMainWindow();
@@ -135,36 +139,37 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     }
 
     /*
-    * Step : Footer > 선생님우대프로그램 클릭
-    * Result : 선생님우대프로그램 페이지로 이동됨
-    * URL : https://calendar.naver.com/school.nhn
+    * Step : 상단영역 > 날짜 영역 클릭
+    * Result : <,> 화살표 클릭함에 따라 이전달, 다음달로 이동됨
     */
 
     @Test
-    public void TC_05_Footer_선생님우대프로그램_Test() throws Exception{
+    public void TC_05_상단영역_날짜영역_Test() throws Exception{
 
-        util.clickAndWait(By.className("_open_school"));
-        util.waitForNewWindow();
-
-        Title = util.getTitle();
+        //URL에서 현재 날짜를 가져옴
+        //URL에서 날짜 바뀐것을 확인
         URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://calendar.naver.com/school.nhn"));
-        assertTrue(Title.contains("스승의 날 기념 선생님 5천분께, 학급 관리 패키지를 드립니다!"));
+        util.printLog(URL);
 
-        util.close();
-        util.selectMainWindow();
+        util.printLog("\n현재 날짜는 :"+ module.GetDate(util));
+        util.clickAndWait(By.xpath("//button[@class='prev']"));
+        util.printLog("\n이전 달을 클릭한 날짜는 : "+module.GetDate(util));
 
-        util.waitForTitle("일정 : 네이버 캘린더");
+        URL = util.getCurrentUrl();
+        assertTrue(URL.contains("http://calendar.naver.com/notice.nhn"));
+
+
+        util.clickAndWait(By.xpath("//button[@class='next']"));
+        util.clickAndWait(By.xpath("//button[@class='next']"));
+        util.printLog("\n다음 달을 두번 클릭한 날짜는 : "+module.GetDate(util));
     }
 
     /*
-    * Step : Footer > 공지사항 클릭
-    * Result : 공지사항 페이지로 이동됨
-    * URL : https://calendar.naver.com/notice.nhn
+    * Step : 상단영역 > 오늘 클릭
+    * Result : 미니달력, 캘린더 뷰에 오늘 날짜로 이동됨
     */
-
     @Test
-    public void TC_06_Footer_공지사항_Test() throws Exception{
+    public void TC_06_상단영역_오늘_Test() throws Exception{
 
         util.clickAndWait(By.className("_open_notice"));
         util.waitForNewWindow();
@@ -184,27 +189,88 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     }
 
     /*
-    * Step : Footer > 캘린더고객센터 클릭
-    * Result : 캘린더고객센터 페이지로 이동됨
-    * URL : https://help.naver.com/support/service/main.nhn?serviceNo=635
+    * Step : 상단영역 > 일간 클릭
+    * Result : 일간 > 일간 클릭하면 캘린더 영역 일간으로 노출 됨
+    * URL : 뷰 방식 day로 표시되는것 확인
     */
 
     @Test
-    public void TC_07_Footer_캘린더고객센터_Test() throws Exception{
-
-        util.clickAndWait(By.className("_calendar_faq"));
-        util.waitForNewWindow();
+    public void TC_07_상단영역_일간_Test() throws Exception{
+    }
 
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://help.naver.com/support/service/main.nhn?serviceNo=635"));
-        assertTrue(Title.contains("네이버 고객센터"));
+    /*
+    * Step : 상단영역 > 주간 클릭
+    * Result : 월간 > 주간 클릭하면 캘린더 영역 주간으로 노출 됨
+    * URL : 뷰 방식 week로 표시되는것 확인
+    */
 
-        util.selectMainWindow();
-        util.closeNewWindow();
+    @Test
+    public void TC_08_상단영역_주간_Test() throws Exception{
+    }
 
-        util.waitForTitle("일정 : 네이버 캘린더");
+
+    /*
+    * Step : 상단영역 > 월간 클릭
+    * Result : 월간 > 월간 클리하면 캘린더 영역 월간으로 노출 됨
+    * URL : 뷰 방식 month로 표시되는것 확인
+    */
+
+    @Test
+    public void TC_09_상단영역_월간_Test() throws Exception{
+    }
+
+    /*
+    * Step : 상단영역 > 목록 클릭
+    * Result : 목록 > 목록 클리하면 캘린더 영역 목록으로 노출 됨
+    * URL : 뷰 방식 list로 표시되는것 확인
+    */
+
+    @Test
+    public void TC_10_상단영역_목록_Test() throws Exception{
+    }
+
+    /*
+    * Step : 상단영역 > 평일 클릭
+    * Result : 평일 > 평일 클리하면 캘린더 영역 평일으로 노출 됨
+    * URL : 뷰 방식 user로 표시되는것 확인
+    */
+
+    @Test
+    public void TC_11_상단영역_평일_Test() throws Exception{
+    }
+
+
+    /*
+    * Step : 상단영역 > 새로고침 클릭
+    * Result : 페이지 새로 고침 됨
+    */
+
+    @Test
+    public void TC_12_상단영역_새로고침_Test() throws Exception{
+    }
+
+
+    /*
+    * Step : 상단영역 > 날짜계산기 클릭
+    * Result : 날짜 계산기 노출 됨
+    */
+
+    @Test
+    public void TC_13_상단영역_날짜계산기_Test() throws Exception{
+    }
+
+
+    /*
+    * Step : 상단영역 > 인쇄 클릭
+    * Result : 인쇄 페이지로 이동 됨
+    * URL : https://calendar.naver.com/printconfig.nhn
+    */
+
+    @Test
+    public void TC_14_상단영역_인쇄_Test() throws Exception{
     }
 
 }
+
+
