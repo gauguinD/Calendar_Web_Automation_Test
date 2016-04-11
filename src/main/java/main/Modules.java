@@ -2,6 +2,7 @@ package main;
 
 import org.openqa.selenium.By;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,31 +60,27 @@ public class Modules {
 	public final String everyYear = "매년";
 
 	public String SubName;
+	//public String CurrentDate;
 
 	public String a,b,c,d,e,f = null;
 	int year,month = 0;
 
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
+	SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
 	Calendar todayCal = Calendar.getInstance();
-	
-	//public final String searchURL = "http://m.search.naver.com/search.naver?query=&where=m.kin&sm=msv_hty";
-	//public final String searchTitle = ": 네이버 통합검색";
 
 	//현재시간 구해서 변수로 설정
 	//java의 calendar 클래스 이용
 	Calendar cal = Calendar.getInstance();
-	SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
 	String datetime = sdf1.format(cal.getTime());
 
 	//시스템 타이머 이용
 	long systemTime = System.currentTimeMillis();
-	SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
 	String datetime2 = sdf2.format(new Date(systemTime));
 
-	public String contents = "일정 "+datetime;
-	
-	public final String ID = "nvqa_4tc040";
-	public final String PW = "qalab123";
-	public CharSequence searchTitle;
+	public String contents = "일정 "+ datetime;
 
 	public Modules() {
 	}
@@ -133,7 +130,7 @@ public class Modules {
 		//case 3. 이번달이 아니면서 미니달력이 접혀있지 않을 경우 - YY,MM 로 노출 됨
 		//case 4. 이번달이 아니면서 미니달력이 접혀있을경우 - 존재하지 않음
 
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
+		//SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
 
 		if(util.waitAndGetXpathCount(By.xpath("//div[@class='_title date']/span")) > 8 ) {
 
@@ -148,7 +145,7 @@ public class Modules {
 
 			String dateFormat = format1.format(todayCal.getTime());
 
-			System.out.println("현재 달력 날짜는 case 1: " + dateFormat);
+			//System.out.println("현재 달력 날짜는 case 1: " + dateFormat);
 
 		}
 		//미니 달력이 안접혀서 년,월만 보일때는 미니 달력에서 오늘 날짜를 가져와서 표시해준다
@@ -156,15 +153,15 @@ public class Modules {
 			//case 3. 이번달이 아니면서 미니달력이 접혀있지 않을 경우 - YY,MM 로 노출 됨
 			if(!util.isElementPresentNotExist(By.xpath("//td[@class='calendar-date calendar-today select_area']")))
 			{
-				SimpleDateFormat format2 = new SimpleDateFormat("yyyy.MM.dd");
+				//SimpleDateFormat format2 = new SimpleDateFormat("yyyy.MM.dd");
 
 				GetDate(util);
 
-				String dateFormat1 = format2.format(todayCal.getTime());
+				String dateFormat1 = format1.format(todayCal.getTime());
 
 				//System.out.println("case 3. 이번달이 아니면서 미니달력이 접혀있지 않을 경우 - YY,MM 로 노출 됨");
 				//String dateFormat = format2.format(todayCal.getTime());
-				System.out.println("현재 달력 날짜는 case 3: " + dateFormat1);
+				//System.out.println("현재 달력 날짜는 case 3: " + dateFormat1);
 			}
 			//caes 2. 이번달이면서 미니 달력이 접혀있지 않을 경우 - YY,MM 로 노출 됨
 			else {
@@ -180,7 +177,7 @@ public class Modules {
 				String dateFormat = format1.format(todayCal.getTime());
 
 				//System.out.println("CurrentDate 함수에서 가져온 오늘의 날짜 :" + a + b + c + d + "." + e + f);
-				System.out.println("현재 달력 날짜는 case 2: " + dateFormat);
+				//System.out.println("현재 달력 날짜는 case 2: " + dateFormat);
 			}
 
 		}
@@ -207,6 +204,44 @@ public class Modules {
 		String dateFormat = format1.format(todayCal.getTime());
 
 		return dateFormat;
+	}
+
+	public String GetDateFromURL(Utilities util) throws ParseException {
+
+		String date;
+		String URL;
+
+
+		//URL에서 현재 날짜 부분만 저장
+		URL = util.getCurrentUrl();
+		date = URL.substring(URL.length()-19);
+		//util.printLog(date);
+		date = date.substring(0,10);
+
+		Date CurrentDate = format2.parse(date);
+		date = format1.format(CurrentDate.getTime());
+
+		return date;
+	}
+
+	public String TodayDate(){
+
+		String date = null;
+
+		date = datetime;
+
+		return date;
+	}
+
+	public void ViewType(Utilities util, String option) throws Exception {
+
+		util.clickAndWait(By.xpath("//button[@class='_user_layer custom_layer on']"));
+		util.waitForIsElementPresent(By.xpath("//div[@class='period_edit_layer layer_popup']"));
+
+		util.clickAndWait(By.xpath(option));
+		util.clickAndWait(By.xpath("//button[@class='_save normal2']"));
+
+		util.printLog(util.waitForIsElementPresent(By.xpath("//button[@class='_user custom on']")).getText());
 	}
 
 	//iterator로 대체
