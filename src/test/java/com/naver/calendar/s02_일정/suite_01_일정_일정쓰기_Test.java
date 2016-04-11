@@ -41,6 +41,9 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     public void TC_01_일정_일정쓰기_Test() throws Exception {
         util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
         assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+
+        util.clickAndWait(By.xpath("//button[@class ='btn_sys pos_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
 
@@ -726,7 +729,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
-    //@Test
+    @Test
     public void TC_19_일정_일정쓰기_스티커일정_Assert_Test() throws Exception {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
         util.get(URL);

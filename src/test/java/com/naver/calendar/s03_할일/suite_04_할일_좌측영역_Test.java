@@ -1,4 +1,4 @@
-package com.naver.calendar.s01_캘린더홈;
+package com.naver.calendar.s03_할일;
 
 import main.TestIds;
 import main.Testcase;
@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 
-public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
+public class suite_04_할일_좌측영역_Test extends Testcase {
 
     public String Title = null;
     public String URL = null;
