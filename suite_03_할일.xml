@@ -79,6 +79,7 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
+					<encoding>UTF-8</encoding>
 					<systemPropertyVariables>
 						<org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
 					</systemPropertyVariables>
