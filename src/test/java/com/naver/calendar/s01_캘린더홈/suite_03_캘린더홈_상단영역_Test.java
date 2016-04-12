@@ -71,6 +71,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
 
         //util.printLog(util.isElementPresent(By.className("search_area")).getAttribute("style"));
         util.click(By.className("detail"));
+        util.waitForIsElementPresent(By.xpath("//div[@id='content_top']/div[2]/div[2]/div[1]/input"));
         util.type(By.xpath("//div[@id='content_top']/div[2]/div[2]/div[1]/input"),searchTitle);
         //util.waitForIsElementPresent(By.className("btn_srch"));
         //util.printLog(util.isElementPresent(By.className("search_area")).getAttribute("style"));
@@ -187,7 +188,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     @Test
     public void TC_07_상단영역_일간_Test() throws Exception{
 
-        util.click(By.xpath("//button[@class='_day diary']"));
+        util.click(By.xpath("//button[contains(@class,'_day diary')]"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_day diary on']"));
 
         //URL 검증 필요
@@ -205,7 +206,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     @Test
     public void TC_08_상단영역_주간_Test() throws Exception{
 
-        util.click(By.xpath("//button[@class='_week  week']"));
+        util.click(By.xpath("//button[contains(@class,'_week  week')]"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_week  week on']"));
 
         //URL 검증 필요
@@ -223,7 +224,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     @Test
     public void TC_09_상단영역_월간_Test() throws Exception{
 
-        util.click(By.xpath("//button[@class='_month month']"));
+        util.click(By.xpath("//button[contains(@class,'_month month')]"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_month month on']"));
 
         //URL 검증 필요
@@ -240,7 +241,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     @Test
     public void TC_10_상단영역_목록_Test() throws Exception{
 
-        util.click(By.xpath("//button[@class='_list list']"));
+        util.click(By.xpath("//button[contains(@class,'_list list')]"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
 
         //URL 검증 필요
@@ -257,7 +258,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     @Test
     public void TC_11_상단영역_평일_Test() throws Exception{
 
-        util.click(By.xpath("//button[@class='_user custom']"));
+        util.click(By.xpath("//button[contains(@class,'_user custom')]"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_user custom on']"));
 
         //URL 검증 필요

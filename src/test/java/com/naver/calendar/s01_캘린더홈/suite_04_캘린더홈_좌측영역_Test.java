@@ -38,9 +38,9 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     public void TC_01_좌측영역_일정약속쓰기_Test() throws Exception {
 
         util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
-        assertTrue(util.isElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
 
-        util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
+        util.click(By.xpath("//a[@class='_back btn_back_calender']"));
 
     }
 
@@ -51,7 +51,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_02_좌측영역_기념일관리_Test() throws Exception{
         util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
-        assertTrue(util.isElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_btn_back_calender btn_back_calender']")).isDisplayed());
 
         util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
     }
@@ -183,7 +183,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
         //캘린더 목록의 캘린더 갯수 가져오기
         int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
-        System.out.print("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
+        util.printLog("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
 
         //생성한 캘린더의 이름과 dataValue를 가져오기
         //dataValue = util.isElementPresent(By.xpath("//a[contains(text(),'"+Subname+"')]")).getAttribute("data-value").toString();
@@ -197,7 +197,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         for(int i=1; i <= NumberOfCalender; i++)
         {
             String SubTemp;
-            SubTemp = util.isElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li[" + i + "]/a[2]")).getAttribute("title");
+            SubTemp = util.waitForIsElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li[" + i + "]/a[2]")).getAttribute("title");
 
             if(SubTemp.contentEquals(Subname))
             {
@@ -227,15 +227,16 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         //util.click(By.className("btn_makecal"));
         util.click(By.xpath("//li[@class ='_share']"));
 
+        util.waitForIsElementPresent(By.id("$$_calendar_name"));
         util.clearAndType(By.id("$$_calendar_name"),"공유캘린더");
-        Subname = util.isElementPresent(By.id("$$_calendar_name")).getAttribute("value");
+        Subname = util.waitForIsElementPresent(By.id("$$_calendar_name")).getAttribute("value");
         util.printLog(Subname);
 
         util.click(By.xpath("//button[@class ='_save normal']"));
 
         //캘린더 목록의 캘린더 갯수 가져오기
         int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
-        System.out.print("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
+        util.printLog("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
 
         for(int i=1; i <= NumberOfCalender; i++)
         {

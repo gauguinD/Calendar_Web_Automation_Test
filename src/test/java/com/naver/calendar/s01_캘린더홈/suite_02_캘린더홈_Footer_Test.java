@@ -30,7 +30,7 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
     public void TC_01_Footer_환경설정_Test() throws Exception {
 
         util.click(By.className("_config"));
-        assertTrue(util.isElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_btn_back_calender btn_back_calender']")).isDisplayed());
 
         util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
     }

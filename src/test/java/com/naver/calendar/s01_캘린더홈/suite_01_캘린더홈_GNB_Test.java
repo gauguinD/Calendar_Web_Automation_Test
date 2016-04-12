@@ -43,7 +43,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
      * URL : http://me.naver.com"
      */
     @Test
-    public void TC_02_GNB_탭_Test() throws Exception{
+    public void TC_02_GNB_탭_me_Test() throws Exception{
 
         util.click(By.className("me"));
         module.assertCalendarPage(util,module.meTitle,module.meURL);
@@ -59,7 +59,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
  * URL : http://me.naver.com"
  */
     @Test
-    public void TC_03_GNB_탭_Test() throws Exception{
+    public void TC_03_GNB_탭_메일_Test() throws Exception{
 
         util.click(By.className("me"));
         module.assertCalendarPage(util,module.meTitle,module.meURL);
@@ -260,6 +260,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     public void TC_04_GNB_프로필_내정보_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
+        util.click(By.className("gnb_name"));
         util.click(By.className("gnb_info"));
         util.waitForIsElementPresent(By.className("sptxt"));
 
@@ -414,7 +415,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
 
         // 알림이 없을때
         // 알림 없음 문구 노출 확인
-        util.isElementPresent(By.className("svc_msg_box"));
+        util.waitForIsElementPresent(By.className("svc_msg_box"));
     }
 
     /*

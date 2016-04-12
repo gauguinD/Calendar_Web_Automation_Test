@@ -1179,7 +1179,7 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 						lastWindowHandle = getWindowHandle();
 						
 						waitForPageToLoad();
-						Thread.sleep(1000);
+						Thread.sleep(3000);
 						
 						printLog ("새창 URL : " + getCurrentUrl());
 						printLog ("새창 Title : " + getTitle());
