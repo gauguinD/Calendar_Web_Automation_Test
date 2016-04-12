@@ -10,7 +10,7 @@ import java.util.Calendar;
 import static org.testng.Assert.assertTrue;
 
 
-public class suite_02_일정_반복일정쓰기_Test extends Testcase {
+public class suite_02_일정_약속쓰기_Test extends Testcase {
 
     public String Title = null;
     public String URL = null;

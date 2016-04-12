@@ -28,6 +28,18 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
     @Test
     public void TC_00_좌측영역_로그인_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
+
+        util.waitForTitle(module.calTitle);
+        util.goTo(module.taskURL);
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+
+        assertTrue(Title.contains(module.taskTitle));
+        assertTrue(URL.contains(module.taskURL));
     }
 
      /*

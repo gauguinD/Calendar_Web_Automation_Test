@@ -41,6 +41,9 @@ public class Modules {
 	public final String calURL = "https://calendar.naver.com/";
 	public final String calTitle = "일정 : 네이버 캘린더";
 
+	public final String taskURL = "https://calendar.naver.com/tasks.nhn";
+	public final String taskTitle = "할 일 : 네이버 캘린더";
+
 	public final String startDateURL = "http://www.convertstring.com/ko/EncodeDecode/UrlDecode";
 
 	public final String StartDate = "2016-02-25";
@@ -72,12 +75,12 @@ public class Modules {
 	//현재시간 구해서 변수로 설정
 	//java의 calendar 클래스 이용
 	Calendar cal = Calendar.getInstance();
-	SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+	SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
 	String datetime = sdf1.format(cal.getTime());
 
 	//시스템 타이머 이용
 	long systemTime = System.currentTimeMillis();
-	SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+	SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 	String datetime2 = sdf2.format(new Date(systemTime));
 
 	public String contents = "일정 "+ datetime;
@@ -225,12 +228,11 @@ public class Modules {
 	}
 
 	public String TodayDate(){
+		return datetime;
+	}
 
-		String date = null;
-
-		date = datetime;
-
-		return date;
+	public String TodayDate2(){
+		return datetime2;
 	}
 
 	public void ViewType(Utilities util, String option) throws Exception {

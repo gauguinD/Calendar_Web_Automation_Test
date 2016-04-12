@@ -20,6 +20,18 @@ public class suite_02_할일_Footer_Test extends Testcase {
     @Test
     public void TC_00_Footer_로그인_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
+
+        util.waitForTitle(module.calTitle);
+        util.goTo(module.taskURL);
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+
+        assertTrue(Title.contains(module.taskTitle));
+        assertTrue(URL.contains(module.taskURL));
     }
 
     /*
@@ -30,9 +42,9 @@ public class suite_02_할일_Footer_Test extends Testcase {
     public void TC_01_Footer_환경설정_Test() throws Exception {
 
         util.click(By.className("_config"));
-        assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_btn_back_calender btn_back_calender']")).isDisplayed());
 
-        util.click(By.linkText("캘린더로 돌아가기"));
+        util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
     }
 
     /*
@@ -87,7 +99,7 @@ public class suite_02_할일_Footer_Test extends Testcase {
         util.close();
         util.selectMainWindow();
 
-        util.waitForTitle("일정 : 네이버 캘린더");
+        util.waitForTitle(module.taskTitle);
     }
 
     /*
@@ -110,7 +122,7 @@ public class suite_02_할일_Footer_Test extends Testcase {
         util.close();
         util.selectMainWindow();
 
-        util.waitForTitle("일정 : 네이버 캘린더");
+        util.waitForTitle(module.taskTitle);
     }
 
     /*
@@ -133,7 +145,7 @@ public class suite_02_할일_Footer_Test extends Testcase {
         util.close();
         util.selectMainWindow();
 
-        util.waitForTitle("일정 : 네이버 캘린더");
+        util.waitForTitle(module.taskTitle);
     }
 
     /*
@@ -159,7 +171,7 @@ public class suite_02_할일_Footer_Test extends Testcase {
         util.closeNewWindow();
 
 
-        util.waitForTitle("일정 : 네이버 캘린더");
+        util.waitForTitle(module.taskTitle);
     }
 
         /*
@@ -183,7 +195,7 @@ public class suite_02_할일_Footer_Test extends Testcase {
         util.selectMainWindow();
         util.closeNewWindow();
 
-        util.waitForTitle("일정 : 네이버 캘린더");
+        util.waitForTitle(module.taskTitle);
     }
 
 }

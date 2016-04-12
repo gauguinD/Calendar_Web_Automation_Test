@@ -20,6 +20,18 @@ public class suite_01_할일_GNB_Test extends Testcase {
     @Test
     public void TC_00_GNB_로그인_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
+
+        util.waitForTitle(module.calTitle);
+        util.goTo(module.taskURL);
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+
+        assertTrue(Title.contains(module.taskTitle));
+        assertTrue(URL.contains(module.taskURL));
     }
 
     /*
@@ -34,21 +46,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         module.assertCalendarPage(util,module.mainTitle,module.mainURL);
 
         util.goBack();
-        module.assertCalendarPage(util,module.calTitle,module.calURL);
-
-        /*
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-
-        assertTrue(Title.contains(module.mainTitle));
-        assertTrue(URL.contains(module.mainURL));
-
-        util.goBack();
-        */
-
+        module.assertCalendarPage(util,module.taskTitle,module.taskURL);
     }
 
     /*
@@ -63,22 +61,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         module.assertCalendarPage(util,module.meTitle,module.meURL);
 
         util.goBack();
-        util.waitForTitle(module.calTitle);
-
-        //module.assertCalendarPage(util,module.calTitle,module.calURL);
-
-        /*Title = util.getTitle();
-        URL = util.getCurrentUrl();
-
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-
-        assertTrue(Title.contains(module.meitle));
-        assertTrue(URL.contains(module.meURL));
-
-        util.goBack();
-        */
-
+        util.waitForTitle(module.taskTitle);
 
 
         util.click(By.className("mail"));
@@ -93,7 +76,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         assertTrue(URL.contains(module.mailURL));
 
         util.goBack();
-        util.waitForTitle(module.calTitle);
+        util.waitForTitle(module.taskTitle);
     }
 
     /*
@@ -131,7 +114,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         assertTrue(Title.contains("네이버 내정보"));
 
         util.goBack();
-        util.waitForTitle(module.calTitle);
+        util.waitForTitle(module.taskTitle);
     }
 
     /*
@@ -155,7 +138,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         assertTrue(URL.contains("https://nid.naver.com/user2/help/myInfo.nhn?m=viewSecurity&menu=security"));
         assertTrue(Title.contains("보안설정 : 네이버 내정보"));
         util.goBack();
-        util.waitForTitle(module.calTitle);
+        util.waitForTitle(module.taskTitle);
     }
 
     /*
@@ -181,7 +164,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         assertTrue(Title.contains(TestIds.CalUser.getId()+"님의블로그 : 네이버 블로그"));
 
         util.goBack();
-        util.waitForTitle(module.calTitle);
+        util.waitForTitle(module.taskTitle);
     }
 
 
@@ -205,7 +188,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         assertTrue(Title.contains("네이버 카페"));
 
         util.goBack();
-        util.waitForTitle(module.calTitle);
+        util.waitForTitle(module.taskTitle);
     }
 
 
@@ -228,7 +211,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         assertTrue(Title.contains("네이버페이"));
 
         util.goBack();
-        util.waitForTitle(module.calTitle);
+        util.waitForTitle(module.taskTitle);
     }
 
 

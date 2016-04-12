@@ -5,10 +5,12 @@ import main.Testcase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
+import java.util.Calendar;
+
 import static org.testng.Assert.assertTrue;
 
 
-public class suite_01_일정_일정쓰기_Test extends Testcase {
+public class suite_03_일정_반복일정쓰기_Test extends Testcase {
 
     public String Title = null;
     public String URL = null;
@@ -44,57 +46,6 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
-    /*
-    * Step : 일정삭제 > 시간일정 삭제
-    * Result : 해당하는 일정 삭제 됨
-    */
-    @Test
-    public void TC_02_일정_일정쓰기_일정삭제_Test() throws Exception {
-        int tdValue = 0;
-        int divValue = 0;
-
-        URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.TodayDate2() + "\"}}";
-        util.get(URL);
-
-        //선택한 날짜의 dayindex 를 가져옴
-        dayIndex = util.waitForIsElementPresent(By.xpath("//strong[contains(text(),'" + module.StartDate.substring(8, 10) + "')]")).getAttribute("dayindex");
-        //util.printLog(dayIndex);
-
-        //선택한 날짜에 일정이 2개 이상일 경우 +가 노출되는것에 대한 예외상황
-        //NumOfEvent = 해당 일자에 일정의 개수
-        if(util.isElementPresentNotExist(By.xpath("//a[contains(@key,'"+dayIndex+"')][contains(@class,'_more_schedule')]")))
-        {
-            util.isElementPresent(By.xpath("//a[contains(@key,'"+dayIndex+"')][contains(@class,'_more_schedule')]")).click();
-            NumOfEvent = util.getXpathCount(By.xpath("html/body/div[5]/div/ul/li"));
-            //util.printLog(NumOfEvent);
-
-            //선택한 날짜에 일정이 2개 이상일 경우 일치하는 제목 찾아서 클릭
-            //제목이 동일한 일정이 있을경우???
-            for(int i = 1; i < NumOfEvent+1; i++)
-            {
-                util.printLog(module.contents);
-                Subject = util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).getText();
-                util.printLog(i+"번 일정의 제목은 : "+Subject+" 입니다.");
-                //util.scrollToElement(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a"));
-                if(module.contents == Subject)
-                {
-                    util.printLog("제목 : "+Subject+" 일정을 삭제합니다");
-                    util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).click();
-                }
-            }
-        }
-        else
-            //일정 간편보기 클릭
-            util.click(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
-
-        //일정 간편보기에서 삭제 클릭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']")).click();
-
-        //확인 클릭
-        util.getAlert().accept();
-
-    }
-
 
     /*
      * Step : 일정쓰기 > 시간일정 생성
@@ -126,56 +77,6 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
-    /*
-    * Step : 일정삭제 > 시간일정 삭제
-    * Result : 해당하는 일정 삭제 됨
-    */
-    @Test
-    public void TC_02_일정_일정쓰기_시간일정삭제_Test() throws Exception {
-        int tdValue = 0;
-        int divValue = 0;
-
-        URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
-        util.get(URL);
-
-        //선택한 날짜의 dayindex 를 가져옴
-        dayIndex = util.waitForIsElementPresent(By.xpath("//strong[contains(text(),'" + module.StartDate.substring(8, 10) + "')]")).getAttribute("dayindex");
-        util.printLog(dayIndex);
-
-        //선택한 날짜에 일정이 2개 이상일 경우 +가 노출되는것에 대한 예외상황
-        //NumOfEvent = 해당 일자에 일정의 개수
-        if(util.isElementPresentNotExist(By.xpath("//a[contains(@key,'"+dayIndex+"')][contains(@class,'_more_schedule')]")))
-        {
-            util.isElementPresent(By.xpath("//a[contains(@key,'"+dayIndex+"')][contains(@class,'_more_schedule')]")).click();
-            NumOfEvent = util.getXpathCount(By.xpath("html/body/div[5]/div/ul/li"));
-            //util.printLog(NumOfEvent);
-
-            //선택한 날짜에 일정이 2개 이상일 경우 일치하는 제목 찾아서 클릭
-            //제목이 동일한 일정이 있을경우???
-            for(int i = 1; i < NumOfEvent+1; i++)
-            {
-                util.printLog(module.contents);
-                Subject = util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).getText();
-                util.printLog(i+"번 일정의 제목은 : "+Subject+" 입니다.");
-                //util.scrollToElement(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a"));
-                if(module.contents == Subject)
-                {
-                    util.printLog("제목 : "+Subject+" 일정을 삭제합니다");
-                    util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).click();
-                }
-            }
-        }
-        else
-            //일정 간편보기 클릭
-            util.click(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
-
-        //일정 간편보기에서 삭제 클릭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']")).click();
-
-        //확인 클릭
-        util.getAlert().accept();
-
-    }
 
     /*
     * Step : 일정쓰기 > 시간 종일 일정 생성
@@ -221,8 +122,6 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         } else
             util.printLog("해당하는 날짜에 해당하는 일정이 존재하지 않습니다");
     }
-
-
 
     /*
      * Step : 일정쓰기 > 종일일정 생성
@@ -340,6 +239,301 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
             util.printLog("해당하는 날짜에 해당하는 일정이 존재하지 않습니다");
     }
 
+    /*
+    * Step : 일정쓰기 > 약속일정 생성
+    * Result : 해당하는 날짜에 선택한 참가자 추가 되어 약속 일정생성 됨
+    * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
+    */
+    @Test
+    public void TC_08_일정_일정쓰기_약속일정_Test() throws Exception {
+
+        util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
+        assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+
+        //제목 입력
+        util.isElementPresent(By.id("tx0_0")).sendKeys(module.contents);
+
+        //시작 날짜 입력
+        util.isElementPresent(By.id("start_date")).clear();
+        util.isElementPresent(By.id("start_date")).sendKeys(module.StartDate);
+
+        //종료 날짜 입력
+        util.isElementPresent(By.id("end_date")).clear();
+        util.isElementPresent(By.id("end_date")).sendKeys(module.EndDate);
+
+        //참석자 초대
+        util.isElementPresent(By.id("nhn_cp_entry")).sendKeys(module.Attendee);
+        util.isElementPresent(By.className("add_btn")).click();
+        assertTrue(util.isElementPresent(By.xpath("//span[@class='mail _open_popup']")).getAttribute("title").contains(module.Attendee));
+
+        //저장하기
+        util.click(By.xpath("//button[@class ='btn_sys pos_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
+    }
+
+
+    @Test
+    public void TC_09_일정_일정쓰기_약속일정_Assert_Test() throws Exception {
+        URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
+        util.get(URL);
+
+        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
+
+        if (util.isElementPresent(By.xpath("//a[contains(text(),'" + module.contents + "')]")).isDisplayed()) {
+            util.click(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
+            util.printLog("해당하는 날짜에 제목:" + module.contents + " 일정이 존재합니다");
+            util.waitForIsElementPresent(By.className("_modify_text"));
+        } else
+            util.printLog("해당하는 날짜에 해당하는 일정이 존재하지 않습니다");
+
+        //참가자 보기 클릭
+        util.isElementPresent(By.xpath("//a[@class='btn_sy _view_attendee']")).click();
+
+        //해당하는 참가자 있는지 확인
+        if (util.waitForIsElementPresent(By.xpath("//span[@class='txt_member ellipsis' and contains(text(),'" + module.Attendee + "')]")).isDisplayed()) {
+            util.printLog("해당하는 날짜의 약속에 참가자:" + module.Attendee + " 가 있습니다.");
+        } else
+            util.printLog("해당하는 날짜의 약속에 참가자가 존재하지 않습니다");
+    }
+
+
+    /*
+    * Step : 일정쓰기 > 음력약속일정 생성
+    * Result : 해당하는 날짜에 선택한 참가자 추가 되어 약속 일정생성 됨
+    * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
+    */
+    @Test
+    public void TC_10_일정_일정쓰기_음력약속일정_Test() throws Exception {
+
+        util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
+        assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+
+        //종일 일정쓰기 설정 되어 있는지 확인
+        if (!(util.isElementPresent(By.xpath("//a[@class='_set_timezone change_time']")).isDisplayed())) {
+        } else {
+            util.isElementPresent(By.id("ch1_1")).click();
+        }
+        //음력으로 설정 되어 있는지 확인
+        if (util.isElementPresent(By.xpath("//p[@class='_converted_solar_date time_default no_view']")).isDisplayed()) {
+            util.printLog("음력입니다");
+        } else {
+            util.isElementPresent(By.xpath("//div[@class='selectbox-label']")).click();
+            util.isElementPresent(By.xpath("//li[contains(text(),'음력')]")).click();
+        }
+        //제목 입력
+        util.isElementPresent(By.id("tx0_0")).sendKeys(module.contents);
+        //시작 날짜 입력
+        util.isElementPresent(By.id("start_date")).clear();
+        util.isElementPresent(By.id("start_date")).sendKeys(module.StartDate);
+        //종료 날짜 입력
+        util.isElementPresent(By.id("end_date")).clear();
+        util.isElementPresent(By.id("end_date")).sendKeys(module.EndDate);
+        //참석자 초대
+        util.isElementPresent(By.id("nhn_cp_entry")).sendKeys(module.Attendee);
+        util.isElementPresent(By.className("add_btn")).click();
+        assertTrue(util.isElementPresent(By.xpath("//span[@class='mail _open_popup']")).getAttribute("title").contains(module.Attendee));
+
+        //음력 날짜 저장
+        //지정한 양력날짜가 아닌 새로운 양력날짜로 저장 되기 때문에 LunarDate로 새로 저장
+        //나중에 Assert할때도 해당 정보 전달
+        String str;
+        str = util.isElementPresent(By.xpath("//p[@class='_converted_solar_date time_default no_view']")).getText();
+        LunarDate = str.substring(5).replace(".", "-");
+
+        //저장하기
+        util.click(By.xpath("//button[@class ='btn_sys pos_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
+    }
+
+
+    @Test
+    public void TC_11_일정_일정쓰기_음력약속일정_Assert_Test() throws Exception {
+        URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + LunarDate + "\"}}";
+        util.get(URL);
+
+        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
+
+        if (util.isElementPresent(By.xpath("//a[contains(text(),'" + module.contents + "')]")).isDisplayed()) {
+            util.click(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
+            util.printLog("해당하는 날짜에 음력약속 \n 제목:" + module.contents + " 일정이 존재합니다");
+            util.waitForIsElementPresent(By.className("_modify_text"));
+        } else
+            util.printLog("해당하는 날짜에 해당하는 일정이 존재하지 않습니다");
+
+        //참가자 보기 클릭
+        util.isElementPresent(By.xpath("//a[@class='btn_sy _view_attendee']")).click();
+
+        //해당하는 참가자 있는지 확인
+        if (util.waitForIsElementPresent(By.xpath("//span[@class='txt_member ellipsis' and contains(text(),'" + module.Attendee + "')]")).isDisplayed()) {
+            util.printLog("해당하는 날짜의 약속에 참가자:" + module.Attendee + " 가 있습니다.");
+        } else
+            util.printLog("해당하는 날짜의 약속에 참가자가 존재하지 않습니다");
+    }
+
+    /*
+    * Step : 일정쓰기 > 반복일정 생성
+    * Result : 해당하는 날짜에 선택한 반복 옵션으로 일정생성 됨
+    * URL : http://calendar.naver.com/#{"sSection":"scheduleMain","oParameter":{"sViewType":"month","sDate":""+module.StartDate+"\"}}";
+    */
+    @Test
+    public void TC_12_일정_일정쓰기_반복일정_Test() throws Exception {
+
+        util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
+        assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+
+        /*
+        //종일 일정쓰기 설정 되어 있는지 확인
+        if(!(util.isElementPresent(By.xpath("//a[@class='_set_timezone change_time']")).isDisplayed())){}
+        else
+        {
+            util.isElementPresent(By.id("ch1_1")).click();
+        }
+        //음력으로 설정 되어 있는지 확인
+        if(util.isElementPresent(By.xpath("//p[@class='_converted_solar_date time_default no_view']")).isDisplayed())
+        {
+            util.printLog("음력입니다");
+        }
+        else
+        {
+            util.isElementPresent(By.xpath("//div[@class='selectbox-label']")).click();
+            util.isElementPresent(By.xpath("//li[contains(text(),'음력')]")).click();
+        }
+        */
+
+        //제목 입력
+        util.isElementPresent(By.id("tx0_0")).sendKeys(module.contents);
+        //시작 날짜 입력
+        util.isElementPresent(By.id("start_date")).clear();
+        util.isElementPresent(By.id("start_date")).sendKeys(module.StartDate);
+        //종료 날짜 입력
+        util.isElementPresent(By.id("end_date")).clear();
+        util.isElementPresent(By.id("end_date")).sendKeys(module.EndDate);
+
+        //반복설정 옵션 클릭
+        util.click(By.xpath("//a[@class='_repeat_btn btn_sy repeat img_ri']"));
+        //빈도 설정
+        util.click(By.xpath("//div[@class='_frequency_select  selectbox13']"));
+        //util.isElementPresent(By.xpath("//li[contains(text(),'"+module.everyDay+"')]")).click();
+        //util.isElementPresent(By.xpath("//li[contains(text(),'"+module.everyWeekDay+"')]")).click();
+        util.isElementPresent(By.xpath("//li[contains(text(),'" + module.everyWeeks + "')]")).click();
+        //util.isElementPresent(By.xpath("//li[contains(text(),'"+module.everyMonth+"')]")).click();
+        //util.isElementPresent(By.xpath("//li[contains(text(),'"+module.everyYear+"')]")).click();
+
+        //무한반복 제거(매주, 매주 월-금, 매월, 매년)
+        if (!util.isElementPresent(By.id("repeat_end_date")).isEnabled()) {
+            util.click(By.id("ch1_12"));
+        }
+
+        //범위저장
+        repeatStartDate = util.isElementPresent(By.id("repeat_start_date")).getAttribute("value");
+        repeatEndDate = util.isElementPresent(By.id("repeat_end_date")).getAttribute("value");
+        util.printLog("생성될 일정 반복 시작일은 : " + repeatStartDate);
+        util.printLog("생성될 일정 반복 종료일은 : " + repeatEndDate);
+
+        //module.CurrentDate(util,repeatStartDate);
+
+        util.click(By.xpath("//button[@class='_save normal']"));
+
+
+        /*
+        //참석자 초대
+        util.isElementPresent(By.id("nhn_cp_entry")).sendKeys(module.Attendee);
+        util.isElementPresent(By.className("add_btn")).click();
+        assertTrue(util.isElementPresent(By.xpath("//span[@class='mail _open_popup']")).getAttribute("title").contains(module.Attendee));
+
+        //음력 날짜 저장
+        //지정한 양력날짜가 아닌 새로운 양력날짜로 저장 되기 때문에 LunarDate로 새로 저장
+        //나중에 Assert할때도 해당 정보 전달
+        String str;
+        str = util.isElementPresent(By.xpath("//p[@class='_converted_solar_date time_default no_view']")).getText();
+        LunarDate = str.substring(5).replace(".","-");
+        */
+
+
+        //저장하기
+        util.click(By.xpath("//button[@class ='btn_sys pos_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
+    }
+
+
+    @Test
+    public void TC_13_일정_일정쓰기_반복일정_Assert_Test() throws Exception {
+        URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
+        util.get(URL);
+        //util.printLog("\nDate : "+module.StartDate);
+
+        module.CurrentDate(util);
+
+        //현재 날짜를 int형으로 변환
+        int todayYear = Integer.parseInt(module.StartDate.substring(0, 4));
+        int todayMonth = Integer.parseInt(module.StartDate.substring(5, 7));
+        int todayDate = Integer.parseInt(module.StartDate.substring(8, 10));
+        //util.printLog(year+"."+month+"."+day);
+
+        int startYear = Integer.parseInt(repeatStartDate.substring(0, 4));
+        int startMonth = Integer.parseInt(repeatStartDate.substring(5, 7));
+        int startDate = Integer.parseInt(repeatStartDate.substring(8, 10));
+
+        int endYear = Integer.parseInt(repeatEndDate.substring(0, 4));
+        int endMonth = Integer.parseInt(repeatEndDate.substring(5, 7));
+        int endDate = Integer.parseInt(repeatEndDate.substring(8, 10));
+
+        //날짜 계산을 위해서 캘린더 타입으로 생성
+        Calendar todayCal = Calendar.getInstance();
+        Calendar startCal = Calendar.getInstance();
+        Calendar endCal = Calendar.getInstance();
+
+        //현재 날짜 캘린더 타입에 셋팅
+        todayCal.set(Calendar.YEAR, todayYear);
+        todayCal.set(Calendar.MONTH, todayMonth);
+        todayCal.set(Calendar.DATE, todayDate);
+
+        //반복 시작 날짜를 캘린더 타입에 셋팅
+        startCal.set(Calendar.YEAR, startYear);
+        startCal.set(Calendar.MONTH, startMonth);
+        startCal.set(Calendar.DATE, startDate);
+
+        //반복 종료 날짜를 캘린더 타입에 셋
+        endCal.set(Calendar.YEAR, endYear);
+        endCal.set(Calendar.MONTH, endMonth);
+        endCal.set(Calendar.DATE, endDate);
+
+        //util.printLog(todayCal.getTime().toString());
+        util.printLog("일정 반복 시작일은 :" + startCal.getTime().toString());
+        util.printLog("일정 반복 종료일은 :" + endCal.getTime().toString());
+
+        //반복 일정의 총 개수를 구함
+        int count = 0;
+        while (!startCal.after(endCal)) {
+            count++;
+            startCal.add(Calendar.DATE, 1);
+        }
+        util.printLog("시작일과 종료일은 " + count + "입니다.");
+
+
+        //내일 날짜
+        todayCal.set(Calendar.YEAR, Calendar.MONTH, (Calendar.DATE + 1));
+        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
+
+        if (util.isElementPresent(By.xpath("//a[contains(text(),'" + module.contents + "')]")).isDisplayed()) {
+            util.click(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
+            util.printLog("해당하는 날짜에 음력약속 [제목:" + module.contents + "] 일정이 존재합니다");
+            util.waitForIsElementPresent(By.className("_modify_text"));
+        } else
+            util.printLog("해당하는 날짜에 해당하는 일정이 존재하지 않습니다");
+
+        /*
+        //참가자 보기 클릭
+        util.isElementPresent(By.xpath("//a[@class='btn_sy _view_attendee']")).click();
+
+        //해당하는 참가자 있는지 확인
+        if (util.waitForIsElementPresent(By.xpath("//span[@class='txt_member ellipsis' and contains(text(),'"+module.Attendee+"')]")).isDisplayed())
+        {
+            util.printLog("해당하는 날짜의 약속에 참가자:" + module.Attendee + " 가 있습니다.");
+        } else
+            util.printLog("해당하는 날짜의 약속에 참가자가 존재하지 않습니다");
+            */
+    }
 
     /*
     * Step : 일정쓰기 > 공유숨김 일정 생성
@@ -593,6 +787,113 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     }
 
     /*
+    * Step : 일정삭제 > 공유일정 삭제
+    * Result : 해당하는 일정 삭제 됨
+    */
+    @Test
+    public void TC_15_일정_일정쓰기_공유일정삭제_Test() throws Exception {
+        int tdValue = 0;
+        int divValue = 0;
+
+        URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
+        util.get(URL);
+
+        //선택한 날짜의 dayindex 를 가져옴
+        dayIndex = util.waitForIsElementPresent(By.xpath("//strong[contains(text(),'" + module.StartDate.substring(8, 10) + "')]")).getAttribute("dayindex");
+        util.printLog(dayIndex);
+
+        //선택한 날짜에 일정이 2개 이상일 경우 +가 노출되는것에 대한 예외상황
+        //NumOfEvent = 해당 일자에 일정의 개수
+        if(util.isElementPresentNotExist(By.xpath("//a[contains(@key,'"+dayIndex+"')][contains(@class,'_more_schedule')]")))
+        {
+            util.isElementPresent(By.xpath("//a[contains(@key,'"+dayIndex+"')][contains(@class,'_more_schedule')]")).click();
+            NumOfEvent = util.getXpathCount(By.xpath("html/body/div[5]/div/ul/li"));
+            //util.printLog(NumOfEvent);
+
+            //선택한 날짜에 일정이 2개 이상일 경우 일치하는 제목 찾아서 클릭
+            //제목이 동일한 일정이 있을경우???
+            for(int i = 1; i < NumOfEvent+1; i++)
+            {
+                //util.printLog(module.contents);
+                Subject = util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).getText();
+                //util.printLog(i+"번 일정의 제목은 : "+Subject+" 입니다.");
+                //util.scrollToElement(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a"));
+                if(module.contents.contains(Subject))
+                {
+                    util.printLog("제목 : "+Subject+" 일정을 삭제합니다");
+                    util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).click();
+                }
+            }
+        }
+        else
+            //일정 간편보기 클릭
+            util.click(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
+
+        //일정 간편보기에서 삭제 클릭
+        util.waitForIsElementPresent(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']")).click();
+
+        //알림메일 발송하지 않음 체크하고 확인
+        util.click(By.id("_wpageTMP8_send_to_shared_nobody"));
+        util.click(By.xpath("//button[@class ='_ok normal']"));
+        util.getAlert().accept();
+
+    }
+
+
+    /*
+    * Step : 일정삭제 > 공유일정 삭제
+    * Result : 해당하는 일정 삭제 됨
+    */
+    @Test
+    public void TC_96_일정_일정쓰기_공유일정삭제_Test() throws Exception {
+        int tdValue = 0;
+        int divValue = 0;
+
+        URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
+        util.get(URL);
+
+        //선택한 날짜의 dayindex 를 가져옴
+        dayIndex = util.waitForIsElementPresent(By.xpath("//strong[contains(text(),'" + module.StartDate.substring(8, 10) + "')]")).getAttribute("dayindex");
+        util.printLog(dayIndex);
+
+        //선택한 날짜에 일정이 2개 이상일 경우 +가 노출되는것에 대한 예외상황
+        //NumOfEvent = 해당 일자에 일정의 개수
+        if(util.isElementPresentNotExist(By.xpath("//a[contains(@key,'"+dayIndex+"')][contains(@class,'_more_schedule')]")))
+        {
+            util.isElementPresent(By.xpath("//a[contains(@key,'"+dayIndex+"')][contains(@class,'_more_schedule')]")).click();
+            NumOfEvent = util.getXpathCount(By.xpath("html/body/div[5]/div/ul/li"));
+            //util.printLog(NumOfEvent);
+
+            //선택한 날짜에 일정이 2개 이상일 경우 일치하는 제목 찾아서 클릭
+            //제목이 동일한 일정이 있을경우???
+            for(int i = 1; i < NumOfEvent+1; i++)
+            {
+                //util.printLog(module.contents);
+                Subject = util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).getText();
+                //util.printLog(i+"번 일정의 제목은 : "+Subject+" 입니다.");
+                //util.scrollToElement(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a"));
+                if(module.contents.contains(Subject))
+                {
+                    util.printLog("제목 : "+Subject+" 일정을 삭제합니다");
+                    util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).click();
+                }
+            }
+        }
+        else
+            //일정 간편보기 클릭
+            util.click(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
+
+        //일정 간편보기에서 삭제 클릭
+        util.waitForIsElementPresent(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']")).click();
+
+        //알림메일 발송하지 않음 체크하고 확인
+        util.click(By.id("_wpageTMP8_send_to_shared_nobody"));
+        util.click(By.xpath("//button[@class ='_ok normal']"));
+        util.getAlert().accept();
+
+    }
+
+    /*
      * Step : 일정삭제 > 시간일정 삭제
      * Result : 해당하는 일정 삭제 됨
      */
@@ -640,6 +941,35 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
 
         //확인 클릭
         util.getAlert().accept();
+
+    }
+
+    /*
+    * Step : 일정삭제 > 반복일정 전체 삭제
+    * Result : 해당하는 반복일정 전체 삭제 됨
+    */
+    @Test
+    public void TC_98_일정_일정쓰기_반복일정삭제_Test() throws Exception {
+        URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + module.StartDate + "\"}}";
+        util.get(URL);
+        //util.printLog("\nDate : "+module.StartDate);
+
+        //일정 간편보기
+        util.click(By.xpath("//a[contains(text(),'" + module.contents + "')]"));
+
+        //일정 간편보기에서 삭제 클릭
+        util.waitForIsElementPresent(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']")).click();
+
+        //전체 일정 반복 삭제 선택
+        util.waitForIsElementPresent(By.id("_wpageTMP8_repeat_del_all")).click();
+        //이 일정 이후 삭제 선택
+        //util.waitForIsElementPresent(By.id("_wpageTMP8_repeat_del_after")).click();
+        //이 일정만 삭제 선택
+        //util.waitForIsElementPresent(By.id("_wpageTMP8_repeat_del_this")).click();
+
+        //확인 클릭
+        //util.getAlert().accept();
+        util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal']")).click();
 
     }
 
