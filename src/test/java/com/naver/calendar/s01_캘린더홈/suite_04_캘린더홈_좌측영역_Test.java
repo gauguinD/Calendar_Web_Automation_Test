@@ -150,11 +150,10 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
 
     /*
-    * Step : 좌측영역 > 내캘린더 클릭
-    * Result : 내캘린더에 해당하는 일정만 노출 됨
-    *
+    * Step : 좌측영역 > +버튼 클릭 > 내 캘린더 만들기
+    * Result : 내 캘린더 생성 목록 확인 됨
     */
-    @Test
+    //@Test
     public void TC_08_좌측영역_캘린더만들기_Test() throws Exception{
         util.click(By.className("btn_makecal"));
 
@@ -224,7 +223,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     public void TC_09_좌측영역_공유캘린더만들기_Test() throws Exception{
 
         util.isElementPresent(By.className("btn_makecal"));
-        //util.click(By.className("btn_makecal"));
+        util.click(By.className("btn_makecal"));
         util.click(By.xpath("//li[@class ='_share']"));
 
         util.waitForIsElementPresent(By.id("$$_calendar_name"));
@@ -316,6 +315,8 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
     @Test
     public void TC_11_좌측영역_시간표만들기_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.className("btn_makecal"));
         util.click(By.className("btn_makecal"));
         util.click(By.xpath("//li[@class='_timetable']"));
 

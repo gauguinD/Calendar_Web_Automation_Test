@@ -192,6 +192,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[@class='_day diary on']"));
 
         //URL 검증 필요
+        util.waitForIsElementPresent(By.xpath("//span[@class='date']/span[10]"));
         URL = util.getCurrentUrl();
         assertTrue(URL.contains("day"));
      }
@@ -210,7 +211,10 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[@class='_week  week on']"));
 
         //URL 검증 필요
+        util.waitForIsElementPresent(By.xpath("//span[@class='date']/span[11]"));
         URL = util.getCurrentUrl();
+        util.printLog(URL);
+
         assertTrue(URL.contains("week"));
     }
 
@@ -228,7 +232,10 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[@class='_month month on']"));
 
         //URL 검증 필요
+        util.waitForIsVisible(By.xpath("//div[@class='monthly_calendar']"));
         URL = util.getCurrentUrl();
+
+        util.printLog(URL);
         assertTrue(URL.contains("month"));
     }
 
@@ -244,8 +251,12 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         util.click(By.xpath("//button[contains(@class,'_list list')]"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
 
+
         //URL 검증 필요
+        util.waitForIsVisible(By.xpath("//div[@class='list_frame']"));
         URL = util.getCurrentUrl();
+
+        util.printLog(URL);
         assertTrue(URL.contains("list"));
     }
 
@@ -260,10 +271,6 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
 
         util.click(By.xpath("//button[contains(@class,'_user custom')]"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_user custom on']"));
-
-        //URL 검증 필요
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("user"));
 
         //평일만 옵션 선택
         module.ViewType(util,"//input[@id='_user_setting_workweek']");
@@ -281,6 +288,11 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         module.ViewType(util,"//input[@id='_user_setting_3week']");
         //4주 옵션 선택
         module.ViewType(util,"//input[@id='_user_setting_4week']");
+
+        URL = util.getCurrentUrl();
+        util.printLog(URL);
+        assertTrue(URL.contains("user"));
+
     }
 
 
