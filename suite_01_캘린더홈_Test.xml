@@ -1,114 +1,25 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-    <groupId>calendarTest</groupId>
-    <artifactId>test</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+<suite name="CalendarWeb Regression Test" parallel="tests" thread-count="10">
 
-    <name>CalendarTest</name>
-    <url>http://maven.apache.org</url>
+    <test name="chrome" preserve-order = "true">
+        <parameter name="browser"  value="chrome"/>
+        <classes>
 
-    <properties>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+            <!--
+            <class name="com.naver.calendar.s01_캘린더홈.suite_01_캘린더홈_GNB_Test"/>
+            <class name="com.naver.calendar.s01_캘린더홈.suite_02_캘린더홈_Footer_Test"/>
+            <class name="com.naver.calendar.s01_캘린더홈.suite_03_캘린더홈_상단영역_Test"/>
+            -->
+            <class name="com.naver.calendar.s01_캘린더홈.suite_04_캘린더홈_좌측영역_Test"/>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>2.48.2</version>
-        </dependency>
+            <!--
+            <class name="com.naver.calendar.s01_캘린더홈.suite_04_캘린더홈_좌측영역_Test"/>
+            <class name="com.naver.calendar.s01_캘린더홈.suite_05_캘린더홈_캘린더영역_Test"/>
+            -->
+        </classes>
+    </test>
 
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.9.4</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
 
-        <dependency>
-            <groupId>org.uncommons</groupId>
-            <artifactId>reportng</artifactId>
-            <version>1.1.4</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.testng</groupId>
-                    <artifactId>testng</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>4.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.6.2</version>
-        </dependency>
-    </dependencies>
-
-    <repositories>
-        <repository>
-            <id>maven-repo</id>
-            <url>http://repo2.maven.org/maven2/</url>
-        </repository>
-    </repositories>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <systemPropertyVariables>
-                        <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
-                    </systemPropertyVariables>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>suite_01_캘린더홈.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>org.uncommons.reportng.HTMLReporter</value>
-                        </property>
-                    </properties>
-
-                    <workingDirectory>target/</workingDirectory>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
-                <configuration>
-                    <argLine>
-                        -Xms256m -Xmx512m -XX:MaxPermSize=128m -Dfile.encoding=UTF-8
-                    </argLine>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-</project>
+</suite> <!-- Suite -->

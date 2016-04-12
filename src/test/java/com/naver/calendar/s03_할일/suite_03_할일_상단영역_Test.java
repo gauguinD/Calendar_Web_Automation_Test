@@ -38,17 +38,17 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         //검색창에서 Space 입력하고 검색버튼 클릭
         //캘린더로 돌아가기 노출되는것 확인
         //노출된 검색어가 입력한 검색어와 동일한지 확인
-        util.clickAndWait(By.className("search"));
+        util.click(By.className("search"));
         util.type(By.className("search"),searchKeyword);
         util.pressKeys(By.className("search"), Keys.SPACE);
 
-        util.clickAndWait(By.className("search_btn"));
+        util.click(By.className("search_btn"));
 
         util.waitForIsElementPresent(By.className("btn_back_calender"));
         SearchResult = util.findElement(By.className("keyword")).getText();
 
         assertTrue(SearchResult.contains(searchKeyword));
-        util.clickAndWait(By.className("btn_back_calender"));
+        util.click(By.className("btn_back_calender"));
     }
 
     /*
@@ -70,13 +70,13 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         //상세버튼 클릭하고 제목에 검색어 입력 후 검색버튼 클릭
 
         //util.printLog(util.isElementPresent(By.className("search_area")).getAttribute("style"));
-        util.clickAndWait(By.className("detail"));
+        util.click(By.className("detail"));
         util.type(By.xpath("//div[@id='content_top']/div[2]/div[2]/div[1]/input"),searchTitle);
         //util.waitForIsElementPresent(By.className("btn_srch"));
         //util.printLog(util.isElementPresent(By.className("search_area")).getAttribute("style"));
 
         //util.type(By.id("_title"),searchTitle);
-        util.clickAndWait(By.className("btn_srch"));
+        util.click(By.className("btn_srch"));
 
         //캘린더로 돌아가기 노출되는것 확인
         //제목에 검색에 유지되는것 확인
@@ -86,7 +86,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         SearchResult = util.isElementPresent(By.className("keyword")).getText();
         assertTrue(SearchResult.contains(searchTitle));
 
-        util.clickAndWait(By.className("btn_back_calender"));
+        util.click(By.className("btn_back_calender"));
     }
 
     /*
@@ -102,7 +102,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         noticeTitle = util.isElementPresent(By.xpath("//span[@class='notice']/a")).getText();
         util.printLog("현재 공지사항 제목은 : "+noticeTitle);
 
-        util.clickAndWait(By.xpath("//span[@class='notice']"));
+        util.click(By.xpath("//span[@class='notice']"));
         util.waitForNewWindow();
 
         Title = util.getTitle();
@@ -126,7 +126,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     @Test
     public void TC_04_상단영역_할일보기_Test() throws Exception{
 
-        util.clickAndWait(By.xpath("//button[@class='_go_task type_schedule todo']"));
+        util.click(By.xpath("//button[@class='_go_task type_schedule todo']"));
 
         Title = util.getTitle();
         URL = util.getCurrentUrl();
@@ -134,7 +134,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         assertTrue(URL.contains("https://calendar.naver.com/tasks.nhn"));
         assertTrue(Title.contains("할 일 : 네이버 캘린더"));
 
-        util.clickAndWait(By.xpath("//button[@class='_viewSchedule type_schedule']"));
+        util.click(By.xpath("//button[@class='_viewSchedule type_schedule']"));
         util.waitForTitle("일정 : 네이버 캘린더");
     }
 
@@ -152,11 +152,11 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         //util.printLog(URL);
 
         util.printLog("\n현재 날짜는 :"+ module.GetDate(util));
-        util.clickAndWait(By.xpath("//button[@class='prev']"));
+        util.click(By.xpath("//button[@class='prev']"));
         util.printLog("\n이전 달을 클릭한 날짜는 : "+module.GetDate(util));
 
-        util.clickAndWait(By.xpath("//button[@class='next']"));
-        util.clickAndWait(By.xpath("//button[@class='next']"));
+        util.click(By.xpath("//button[@class='next']"));
+        util.click(By.xpath("//button[@class='next']"));
         util.printLog("\n다음 달을 두번 클릭한 날짜는 : "+module.GetDate(util));
     }
 
@@ -169,7 +169,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
 
 
         util.printLog("\n현재 날짜는 :"+ module.GetDateFromURL(util));
-        util.clickAndWait(By.className("today"));
+        util.click(By.className("today"));
 
         util.printLog("\n오늘 버튼을 클릭한 후 날짜는 : "+ module.GetDateFromURL(util));
         util.waitForTitle("일정 : 네이버 캘린더");
@@ -187,7 +187,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     @Test
     public void TC_07_상단영역_일간_Test() throws Exception{
 
-        util.clickAndWait(By.xpath("//button[@class='_day diary']"));
+        util.click(By.xpath("//button[@class='_day diary']"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_day diary on']"));
 
         //URL 검증 필요
@@ -205,7 +205,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     @Test
     public void TC_08_상단영역_주간_Test() throws Exception{
 
-        util.clickAndWait(By.xpath("//button[@class='_week  week']"));
+        util.click(By.xpath("//button[@class='_week  week']"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_week  week on']"));
 
         //URL 검증 필요
@@ -223,7 +223,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     @Test
     public void TC_09_상단영역_월간_Test() throws Exception{
 
-        util.clickAndWait(By.xpath("//button[@class='_month month']"));
+        util.click(By.xpath("//button[@class='_month month']"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_month month on']"));
 
         //URL 검증 필요
@@ -240,7 +240,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     @Test
     public void TC_10_상단영역_목록_Test() throws Exception{
 
-        util.clickAndWait(By.xpath("//button[@class='_list list']"));
+        util.click(By.xpath("//button[@class='_list list']"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
 
         //URL 검증 필요
@@ -257,7 +257,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     @Test
     public void TC_11_상단영역_평일_Test() throws Exception{
 
-        util.clickAndWait(By.xpath("//button[@class='_user custom']"));
+        util.click(By.xpath("//button[@class='_user custom']"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_user custom on']"));
 
         //URL 검증 필요
@@ -291,7 +291,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     @Test
     public void TC_12_상단영역_새로고침_Test() throws Exception{
 
-        util.clickAndWait(By.className("reload"));
+        util.click(By.className("reload"));
         }
 
 
@@ -307,13 +307,13 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         String month;
         String day;
 
-        util.clickAndWait(By.className("calculator"));
+        util.click(By.className("calculator"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_layer_content layer_content']"));
         //현재 날짜 계산기의 날짜 확인
         util.printLog(util.isElementPresent(By.xpath("//strong[@class='_set_date']/strong/strong")).getText());
 
         /*
-        util.clickAndWait(By.xpath("//input[@class='_basic_date input_txt']"));
+        util.click(By.xpath("//input[@class='_basic_date input_txt']"));
         util.waitForIsElementPresent(By.id("_dateSelector"));
 
         //날짜 계산기의 현재 날짜 확인
@@ -324,8 +324,8 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         util.printLog(year+"."+month+"."+day);
         */
 
-        //util.clickAndWait(By.xpath("//input[@class='_basic_date input_txt']"));
-        util.clickAndWait(By.xpath("//a[@class='_close btn_sp btn_clse']"));
+        //util.click(By.xpath("//input[@class='_basic_date input_txt']"));
+        util.click(By.xpath("//a[@class='_close btn_sp btn_clse']"));
 
     }
 
@@ -338,7 +338,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
 
     @Test
     public void TC_14_상단영역_인쇄_Test() throws Exception{
-        util.clickAndWait(By.className("print"));
+        util.click(By.className("print"));
         util.waitForNewWindow();
 
         Title = util.getTitle();

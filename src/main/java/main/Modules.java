@@ -90,16 +90,16 @@ public class Modules {
 		//if (util.getCapabilities().getVersion().equals("16"))
 		//util.type(By.linkText("로그인"), " ");
 
-		util.clickAndWait(By.className("btn_login"));
+		util.click(By.className("btn_login"));
 		util.type(By.id("id"), ID);
 		util.type(By.id("pw"), Password);
-		util.clickAndWait(By.className("btn_login"));
+		util.click(By.className("btn_login"));
 
 		/*
 		//연락처 입력 화면 노출시 확인 클릭
 		if(util.isElementPresent(By.className("spot")).isDisplayed())
 		{
-			util.clickAndWait(By.className("btn_close"));
+			util.click(By.className("btn_close"));
 			util.switchTo().alert().accept();
 		}
 		*/
@@ -132,7 +132,7 @@ public class Modules {
 
 		//SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
 
-		if(util.waitAndGetXpathCount(By.xpath("//div[@class='_title date']/span")) > 8 ) {
+		if(util.getXpathCount(By.xpath("//div[@class='_title date']/span")) > 8 ) {
 
 			//System.out.println("case 1. 이번달이면서 미니 달력이 접혀있을경우 - YY,MM,DD 로 노출 됨");
 			GetDate(util);
@@ -235,11 +235,11 @@ public class Modules {
 
 	public void ViewType(Utilities util, String option) throws Exception {
 
-		util.clickAndWait(By.xpath("//button[@class='_user_layer custom_layer on']"));
+		util.click(By.xpath("//button[@class='_user_layer custom_layer on']"));
 		util.waitForIsElementPresent(By.xpath("//div[@class='period_edit_layer layer_popup']"));
 
-		util.clickAndWait(By.xpath(option));
-		util.clickAndWait(By.xpath("//button[@class='_save normal2']"));
+		util.click(By.xpath(option));
+		util.click(By.xpath("//button[@class='_save normal2']"));
 
 		util.printLog(util.waitForIsElementPresent(By.xpath("//button[@class='_user custom on']")).getText());
 	}
@@ -250,7 +250,7 @@ public class Modules {
 		String calNameTemp;
 		String calId = null;
 
-		calNum = util.waitAndGetXpathCount(By.xpath("//ul[@class='category_list']/li"));
+		calNum = util.getXpathCount(By.xpath("//ul[@class='category_list']/li"));
 
 		for(int i=1; i < calNum; i++){
 			calNameTemp = util.findElement(By.xpath("//ul[@class='category_list']/li["+i+"]/a[2]")).getAttribute("title");
@@ -352,7 +352,7 @@ public class Modules {
 
 	public void StickerSelect (Utilities util, Modules module,int i) throws Exception {
 		int Sticker = 0;
-		Sticker = util.waitAndGetXpathCount(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li"));
+		Sticker = util.getXpathCount(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li"));
 
 		System.out.println(Sticker);
 
@@ -379,35 +379,35 @@ public class Modules {
 			NameOfStickerSet = util.findElement(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li["+j+"]/button/span")).getText();
 			System.out.println("현재 스티커 세트는 : "+NameOfStickerSet);
 
-			util.clickAndWait(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li["+j+"]/button"));
+			util.click(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li["+j+"]/button"));
 
-			MaxSticker = util.waitAndGetXpathCount(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li"));
+			MaxSticker = util.getXpathCount(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li"));
 			System.out.println("전체 스티커의 개수는 :"+MaxSticker);
 			/*
             //개별 스티커 클릭
             for(int j=1; j < MaxSticker+1; j++)
             {
-                util.waitAndClick(By.xpath("//ul[@class='_big_sticker_list']/li["+j+"]"));
+                util.click(By.xpath("//ul[@class='_big_sticker_list']/li["+j+"]"));
 
                 ///html/body/div[6]/div/div/div[1]/div[3]/ul/li[1]
 
-                //util.clickAndWait(By.xpath("li[@class='_sticker'][key='"+j+"']"));
+                //util.click(By.xpath("li[@class='_sticker'][key='"+j+"']"));
                 util.scrollToElement(By.xpath("//ul[@class='_big_sticker_list']/li["+j+"]"));
             }
             */
 			System.out.println(NameOfStickerSet+" 스티커 세트는 정상입니다.");
 		}
 
-		util.clickAndWait(By.xpath("//button[@class='normal normal_v1 _save']"));
+		util.click(By.xpath("//button[@class='normal normal_v1 _save']"));
 	}
 
 	public void eventColor (Utilities util) throws Exception {
 		int NumberOfEvent;
-		NumberOfEvent = util.waitAndGetXpathCount(By.xpath("//ul[@class='category_lst']/li"));
+		NumberOfEvent = util.getXpathCount(By.xpath("//ul[@class='category_lst']/li"));
 
 		for(int i=1; i<NumberOfEvent+1; i++)
 		{
-			util.clickAndWait(By.xpath("//ul[@class='category_lst']/li["+i+"]"));
+			util.click(By.xpath("//ul[@class='category_lst']/li["+i+"]"));
 		}
 		System.out.println("전체 범주의 개수는 :"+NumberOfEvent);
 	}
@@ -415,7 +415,7 @@ public class Modules {
 	public void uploadImage (Utilities util) throws Exception {
 		String filePath = "/Users/Naver/Desktop/index.jpg";
 
-		//util.clickAndWait(By.xpath("//*[@id='myfile']"));
+		//util.click(By.xpath("//*[@id='myfile']"));
 		//util.executeScript("document.getElementById('fileName').value='" + filePath + "';");
 		//util.executeScript("window.document.getElementById('myfile').setAttribute('value','"+filePath+"');");
 		util.findElement(By.id("myfile")).sendKeys(filePath);
@@ -424,7 +424,7 @@ public class Modules {
 	public void uploadFile (Utilities util) throws Exception {
 		String filePath = "/Users/Naver/Desktop/index.txt";
 
-		//util.clickAndWait(By.xpath("//*[@id='myfile']"));
+		//util.click(By.xpath("//*[@id='myfile']"));
 		//util.executeScript("document.getElementById('fileName').value='" + filePath + "';");
 		//util.executeScript("window.document.getElementById('myfile').setAttribute('value','"+filePath+"');");
 		util.findElement(By.id("uploadFile")).sendKeys(filePath);

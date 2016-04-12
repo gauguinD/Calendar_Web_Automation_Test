@@ -29,10 +29,10 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
     @Test
     public void TC_01_Footer_환경설정_Test() throws Exception {
 
-        util.clickAndWait(By.className("_config"));
-        assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+        util.click(By.className("_config"));
+        assertTrue(util.isElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
 
-        util.clickAndWait(By.linkText("캘린더로 돌아가기"));
+        util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
     }
 
     /*
@@ -49,24 +49,23 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
         //화면 크기 때문에
         util.windowMaximize();
 
-        util.clickAndWait(By.className("_skinLayerBtn"));
+        util.click(By.className("_skinLayerBtn"));
         util.waitForIsElementPresent(By.className("skin_title"));
 
-        skinNum = util.waitAndGetXpathCount(By.xpath("//ul[@class='sk_list_area']/li"));
-
+        skinNum = util.getXpathCount(By.xpath("//ul[@class='sk_list_area']/li"));
         for(int i=1; i<skinNum+1; i++)
         {
-            util.clickAndWait(By.xpath("//ul[@class='sk_list_area']/li["+i+"]"));
+            util.click(By.xpath("//ul[@class='sk_list_area']/li["+i+"]"));
             //ul[@class='sk_list_area']/li[1]/a/strong
             skinName = util.isElementPresent(By.xpath("//*[@id='wrap']")).getAttribute("class");
             skinColor = util.isElementPresent(By.xpath("//ul[@class='sk_list_area']/li["+i+"]/a")).getAttribute("data-name");
 
             util.printLog(skinName);
             util.printLog(skinColor);
-            //assertTrue(skinName.contains(skinColor));
+            assertTrue(skinName.contains(skinColor));
         }
 
-        util.clickAndWait(By.xpath("//button[@class='_save']"));
+        util.click(By.xpath("//button[@class='_save']"));
     }
 
     /*
@@ -78,7 +77,7 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
     @Test
     public void TC_03_Footer_모바일캘린더_Test() throws Exception {
 
-        util.clickAndWait(By.className("_mobile_calendar"));
+        util.click(By.className("_mobile_calendar"));
         util.waitForNewWindow();
 
         Title = util.getTitle();
@@ -102,7 +101,7 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
     @Test
     public void TC_04_Footer_인기공개캘린더_Test() throws Exception{
 
-        util.clickAndWait(By.className("_open_public_calendar"));
+        util.click(By.className("_open_public_calendar"));
         util.waitForNewWindow();
 
         Title = util.getTitle();
@@ -125,7 +124,7 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
     @Test
     public void TC_05_Footer_선생님우대프로그램_Test() throws Exception{
 
-        util.clickAndWait(By.className("_open_school"));
+        util.click(By.className("_open_school"));
         util.waitForNewWindow();
 
         Title = util.getTitle();
@@ -148,7 +147,7 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
     @Test
     public void TC_06_Footer_공지사항_Test() throws Exception{
 
-        util.clickAndWait(By.className("_open_notice"));
+        util.click(By.className("_open_notice"));
         util.waitForNewWindow();
 
         util.switchTo();
@@ -174,7 +173,7 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
     @Test
     public void TC_07_Footer_캘린더고객센터_Test() throws Exception{
 
-        util.clickAndWait(By.className("_calendar_faq"));
+        util.click(By.className("_calendar_faq"));
         util.waitForNewWindow();
 
 

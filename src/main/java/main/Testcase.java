@@ -23,9 +23,9 @@ public class Testcase {
 			//options.addArguments("--start-maximized");
 			capability = Capabilities.gridSetUp(browser);
 			util = new Utilities(capability);
-			util.openAndWait(module.calURL);
+			util.goTo(module.calURL);
 			//util.selectMainWindow();
-			//util.windowMaximize();
+			util.windowMaximize();
 		}
 		catch (UnreachableBrowserException ue){
 			System.out.println(" ** setupClass catch UnreachableBrowserException");

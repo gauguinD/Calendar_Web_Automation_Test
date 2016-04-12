@@ -37,10 +37,11 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_01_좌측영역_일정약속쓰기_Test() throws Exception {
 
-        util.clickAndWait(By.xpath("//span[contains(text(),'약속쓰기')]"));
-        assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+        util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
+        assertTrue(util.isElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
 
-        util.clickAndWait(By.xpath("//a[@class='_back btn_back_calender']"));
+        util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
+
     }
 
     /*
@@ -49,10 +50,10 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     */
     @Test
     public void TC_02_좌측영역_기념일관리_Test() throws Exception{
-        util.clickAndWait(By.xpath("//span[contains(text(),'기념일 관리')]"));
-        assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+        util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
+        assertTrue(util.isElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
 
-        util.clickAndWait(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
+        util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
     }
 
     /*
@@ -68,26 +69,26 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         module.CurrentDate(util);
 
         //미니 달력 펼치기 버튼 클릭
-        util.clickAndWait(By.xpath("//button[@class='_fold btn_fold']"));
+        util.click(By.xpath("//button[@class='_fold btn_fold']"));
         module.CurrentDate(util);
-        util.clickAndWait(By.xpath("//button[@class='_fold btn_fold']"));
+        util.click(By.xpath("//button[@class='_fold btn_fold']"));
 
         if(miniCalendar.contains("top: 97px; left: 0px;"))
         {
             util.printLog(miniCalendar);
-            util.clickAndWait(By.xpath("//button[@class='_fold btn_fold']"));
+            util.click(By.xpath("//button[@class='_fold btn_fold']"));
             module.CurrentDate(util);
         }
 
 
         //날짜 <,> 버튼 동작 확인
         //이전 달 버튼 클릭
-        util.clickAndWait(By.xpath("//a[@class='btn_prev rollover calendar-btn-prev-mon']"));
+        util.click(By.xpath("//a[@class='btn_prev rollover calendar-btn-prev-mon']"));
         module.CurrentDate(util);
 
         //다음 달 버튼 클릭
-        util.clickAndWait(By.xpath("//a[@class='btn_next rollover calendar-btn-next-mon']"));
-        util.clickAndWait(By.xpath("//a[@class='btn_next rollover calendar-btn-next-mon']"));
+        util.click(By.xpath("//a[@class='btn_next rollover calendar-btn-next-mon']"));
+        util.click(By.xpath("//a[@class='btn_next rollover calendar-btn-next-mon']"));
         module.CurrentDate(util);
     }
 
@@ -98,7 +99,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_04_좌측영역_1년보기_Test() throws Exception{
         // 1년 버튼 동작 확인
-        util.clickAndWait(By.className("btn_1year"));
+        util.click(By.className("btn_1year"));
         util.waitForIsElementPresent(By.xpath("//div[@class='sub_tit']/h3"));
     }
 
@@ -110,7 +111,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_05_좌측영역_미니달력_Test() throws Exception{
         // 1년 버튼 동작 확인
-        util.clickAndWait(By.className("btn_1year"));
+        util.click(By.className("btn_1year"));
         util.waitForIsElementPresent(By.xpath("//div[@class='sub_tit']/h3"));
     }
 
@@ -123,7 +124,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     public void TC_06_좌측영역_전체일정보기_Test() throws Exception{
 
         String viewType;
-        util.clickAndWait(By.xpath("//div[@class='_all all_view select']"));
+        util.click(By.xpath("//div[@class='_all all_view select']"));
         viewType = util.waitForIsElementPresent(By.xpath("//div[@class='view_schedule']")).getAttribute("style");
         assertTrue(viewType.contains("display: block;"));
         //util.waitForIsElementPresent(By.xpath("//div[@class='_all all_view select']"));
@@ -139,7 +140,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     public void TC_07_좌측영역_내캘린더_Test() throws Exception{
 
         String calendarName;
-        util.clickAndWait(By.xpath("//li/a[2]/span[@class='cal_type' and contains(text(),'[기본]')]"));
+        util.click(By.xpath("//li/a[2]/span[@class='cal_type' and contains(text(),'[기본]')]"));
 
         calendarName = util.isElementPresent(By.xpath("//li[@calendarid='6819065']")).getAttribute("class");
         //util.printLog(calendarName);
@@ -155,9 +156,9 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     */
     @Test
     public void TC_08_좌측영역_캘린더만들기_Test() throws Exception{
-        util.clickAndWait(By.className("btn_makecal"));
+        util.click(By.className("btn_makecal"));
 
-        for(int i=1; i<util.waitAndGetXpathCount(By.className("action_list")); i++)
+        for(int i=1; i<util.getXpathCount(By.className("action_list")); i++)
         {
             util.printLog(util.isElementPresent(By.xpath("//ul[@class='action_list']/li["+i+"]/a")).getText());
         }
@@ -171,17 +172,17 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_08_좌측영역_내캘린더만들기_Test() throws Exception{
 
-        util.waitAndClick(By.className("btn_makecal"));
-        util.clickAndWait(By.partialLinkText("내 캘린더 만들기"));
+        util.click(By.className("btn_makecal"));
+        util.click(By.partialLinkText("내 캘린더 만들기"));
 
         util.clearAndType(By.id("$$_calendar_name"),"내 캘린더");
         Subname = util.isElementPresent(By.id("$$_calendar_name")).getAttribute("value");
         util.printLog(Subname);
 
-        util.clickAndWait(By.xpath("//button[@class ='_save normal']"));
+        util.click(By.xpath("//button[@class ='_save normal']"));
 
         //캘린더 목록의 캘린더 갯수 가져오기
-        int NumberOfCalender = util.waitAndGetXpathCount(By.className("cal_name"));
+        int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
         System.out.print("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
 
         //생성한 캘린더의 이름과 dataValue를 가져오기
@@ -223,17 +224,17 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     public void TC_09_좌측영역_공유캘린더만들기_Test() throws Exception{
 
         util.isElementPresent(By.className("btn_makecal"));
-        //util.waitAndClick(By.className("btn_makecal"));
-        util.clickAndWait(By.xpath("//li[@class ='_share']"));
+        //util.click(By.className("btn_makecal"));
+        util.click(By.xpath("//li[@class ='_share']"));
 
         util.clearAndType(By.id("$$_calendar_name"),"공유캘린더");
         Subname = util.isElementPresent(By.id("$$_calendar_name")).getAttribute("value");
         util.printLog(Subname);
 
-        util.clickAndWait(By.xpath("//button[@class ='_save normal']"));
+        util.click(By.xpath("//button[@class ='_save normal']"));
 
         //캘린더 목록의 캘린더 갯수 가져오기
-        int NumberOfCalender = util.waitAndGetXpathCount(By.className("cal_name"));
+        int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
         System.out.print("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
 
         for(int i=1; i <= NumberOfCalender; i++)
@@ -260,8 +261,8 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
     @Test
     public void TC_10_좌측영역_구독캘린더만들기_Test() throws Exception{
-        util.waitAndClick(By.className("btn_makecal"));
-        util.clickAndWait(By.xpath("//li[@class ='_subscribe']"));
+        util.click(By.className("btn_makecal"));
+        util.click(By.xpath("//li[@class ='_subscribe']"));
 
 
         util.waitForNewWindow();
@@ -281,10 +282,10 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.type(By.id("$$_calendar_name"),"구독캘린더");
         util.printLog(Subname);
 
-        util.clickAndWait(By.xpath("//button[@class ='_save normal']"));
+        util.click(By.xpath("//button[@class ='_save normal']"));
 
         //캘린더 목록의 캘린더 갯수 가져오기
-        int NumberOfCalender = util.waitAndGetXpathCount(By.className("cal_name"));
+        int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
         System.out.print("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
 
         //생성된 캘린더가 있는지 캘린더 목록에서 확인한다
@@ -314,17 +315,17 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
     @Test
     public void TC_11_좌측영역_시간표만들기_Test() throws Exception{
-        util.waitAndClick(By.className("btn_makecal"));
-        util.clickAndWait(By.xpath("//li[@class='_timetable']"));
+        util.click(By.className("btn_makecal"));
+        util.click(By.xpath("//li[@class='_timetable']"));
 
-        util.clearAndType(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"),"내시간표");
+        util.type(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"),"내시간표");
         Subname = util.isElementPresent(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]")).getAttribute("value");
         util.printLog(Subname);
 
-        util.clickAndWait(By.xpath("//button[@class ='_save normal']"));
+        util.click(By.xpath("//button[@class ='_save normal']"));
 
         //캘린더 목록의 캘린더 갯수 가져오기
-        int NumberOfCalender = util.waitAndGetXpathCount(By.className("cal_name"));
+        int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
         System.out.print("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
 
         //생성된 캘린더가 있는지 캘린더 목록에서 확인한다
@@ -350,7 +351,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
     //@Test
     public void TC_09_좌측영역_캘린더삭제_Test() throws Exception{
-        util.clickAndWait(By.className("btn_settingcal"));
+        util.click(By.className("btn_settingcal"));
         util.printLog(util.isElementPresent(By.xpath("//div[@class='_calendar_name' and contains(data-value, '"+dataValue+"']")).toString());
 
     }
