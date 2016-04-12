@@ -227,7 +227,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     public void TC_09_상단영역_완료된할일포함_Test() throws Exception{
 
         util.waitForIsElementPresent(By.className("no_list"));
-        util.click(By.id("ck_cplt"));
+        util.click(By.xpath("//input[@class='_includingCompleted']"));
 
         assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_progress_status btn_state v3']")).isDisplayed());
     }
