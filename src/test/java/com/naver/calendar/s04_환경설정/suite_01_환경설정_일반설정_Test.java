@@ -23,167 +23,79 @@ public class suite_01_환경설정_일반설정_Test extends Testcase {
     }
 
     /*
-     * Step : Footer > 환경설정 클릭
-     * Result : 환경설정 페이지로 이동됨
+     * Step : 일반설정 > 캘린더 기본화면 확인
+     * Result : 캘린더 기본 화면의 현재 값을 확인
      */
     @Test
-    public void TC_01_Footer_환경설정_Test() throws Exception {
+    public void TC_01_일반설정_캘린더기본화면_Test() throws Exception {
 
         util.click(By.className("_config"));
-        assertTrue(util.isElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
 
-        util.click(By.linkText("캘린더로 돌아가기"));
+       if(util.waitForIsElementPresent(By.id("default_main_view_schedule")).isSelected()) {
+            util.printLog("현재 캘린더 기본 화면은 [일정보기] 로 설정되어 있습니다.");
+           assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_main_view_mode inp01']")).getAttribute("value").contains("schedule_view"));
+       }
+        else {
+            util.printLog("현재 캘린더 기본 화면은 [할일보기] 로 설정 되어 있습니다.");
+           assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_main_view_mode inp01']")).getAttribute("value").contains("task_view"));
+        }
     }
 
     /*
-     * Step : Footer > 스킨설정 클릭
-     * Result : 스킨설정 레이어 노출됨
+     * Step : 일반설정 > 일정 기본 화면 상태 확인
+     * Result : 일정 기본 화면의 현재 값을 확인
      */
     @Test
-    public void TC_02_Footer_스킨설정_Test() throws Exception{
+    public void TC_02_일반설정_일정기본화면_Test() throws Exception{
 
-        int skinNum;
-        String skinName;
-        String skinColor;
+        String user;
 
-        util.click(By.className("_skinLayerBtn"));
-        util.waitForIsElementPresent(By.className("skin_title"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
 
-        skinNum = util.getXpathCount(By.xpath("//ul[@class='sk_list_area']/li"));
-
-        for(int i=1; i<skinNum+1; i++)
-        {
-            util.click(By.xpath("//ul[@class='sk_list_area']/li["+i+"]"));
-            //ul[@class='sk_list_area']/li[1]/a/strong
-            skinName = util.isElementPresent(By.xpath("//*[@id='wrap']")).getAttribute("class");
-            skinColor = util.isElementPresent(By.xpath("//ul[@class='sk_list_area']/li["+i+"]/a")).getAttribute("data-name");
-
-            util.printLog(skinName);
-            util.printLog(skinColor);
-            //assertTrue(skinName.contains(skinColor));
+        if(util.waitForIsElementPresent(By.id("default_view_day")).isSelected()) {
+            util.printLog("현재 일정 기본 화면은 [일별보기] 로 설정되어 있습니다.");
+            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("day"));
         }
+        else if(util.waitForIsElementPresent(By.id("default_view_week")).isSelected()) {
+            util.printLog("현재 캘린더 기본 화면은 [주별보기] 로 설정 되어 있습니다.");
+            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("week"));
+        }
+        else if(util.waitForIsElementPresent(By.id("default_view_month")).isSelected()) {
+            util.printLog("현재 캘린더 기본 화면은 [월별보기] 로 설정 되어 있습니다.");
+            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("month"));
+        }
+        else if(util.waitForIsElementPresent(By.id("default_view_list")).isSelected()) {
+            util.printLog("현재 캘린더 기본 화면은 [목록보기] 로 설정 되어 있습니다.");
+            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("list"));
+        }
+        else if(util.waitForIsElementPresent(By.id("default_view_user")).isSelected()) {
+            util.printLog("현재 캘린더 기본 화면은 [사용자 설정 보기] 로 설정 되어 있습니다.");
 
-        util.click(By.xpath("//button[@class='_save']"));
+            user = util.waitForIsElementPresent(By.xpath("//select[@class='_cfg_customdate day_select']/option")).getAttribute("value");
+            util.printLog(user);
+
+            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("user"));
+        }
     }
 
     /*
-    * Step : Footer > 모바일 캘린더 클릭
-    * Result : 모바일캘린더 페이지로 이동됨
-    * URL : https://calendar.naver.com/promotion.nhn
+    * Step : 일반설정 > 단축키 사용 확인
+    * Result : 단축키 사용의 현재 값을 확인
     */
 
     @Test
-    public void TC_03_Footer_모바일캘린더_Test() throws Exception {
+    public void TC_03_일반설정_단축키_Test() throws Exception {
 
-        util.click(By.className("_mobile_calendar"));
-        util.waitForNewWindow();
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://calendar.naver.com/promotion.nhn"));
-        assertTrue(Title.contains("네이버 캘린더"));
-
-        //util.switchTo();
-        util.close();
-        util.selectMainWindow();
-
-        util.waitForTitle("일정 : 네이버 캘린더");
+        if(util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_cfg_hotkey_mode inp01')][contains(@value,'true')]")).isSelected()) {
+            util.printLog("현재 단축키 사용은 [사용함] 으로 설정되어 있습니다.");
+            assertTrue(util.isElementPresent(By.xpath("//label[@for='hotkey_mode']")).getText().contains("사용함"));
+        }
+        else {
+            util.printLog("현재 단축키 사용은 [사용 안함] 로 설정 되어 있습니다.");
+            assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'_cfg_hotkey_mode inp01')][contains(@value,'false')]")).isSelected());
+        }
     }
-
-    /*
-    * Step : Footer > 인기 공개 캘린더 클릭
-    * Result : 인기 공개 캘린더 페이지로 이동됨
-    * URL : https://calendar.naver.com/subscribePage.nhn
-    */
-
-    @Test
-    public void TC_04_Footer_인기공개캘린더_Test() throws Exception{
-
-        util.click(By.className("_open_public_calendar"));
-        util.waitForNewWindow();
-
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://calendar.naver.com/subscribePage.nhn"));
-        assertTrue(Title.contains("네이버 인기 공개 캘린더"));
-
-        util.close();
-        util.selectMainWindow();
-
-        util.waitForTitle("일정 : 네이버 캘린더");
-    }
-
-    /*
-    * Step : Footer > 선생님우대프로그램 클릭
-    * Result : 선생님우대프로그램 페이지로 이동됨
-    * URL : https://calendar.naver.com/school.nhn
-    */
-
-    @Test
-    public void TC_05_Footer_선생님우대프로그램_Test() throws Exception{
-
-        util.click(By.className("_open_school"));
-        util.waitForNewWindow();
-
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://calendar.naver.com/school.nhn"));
-        assertTrue(Title.contains("스승의 날 기념 선생님 5천분께, 학급 관리 패키지를 드립니다!"));
-
-        util.close();
-        util.selectMainWindow();
-
-        util.waitForTitle("일정 : 네이버 캘린더");
-    }
-
-    /*
-    * Step : Footer > 공지사항 클릭
-    * Result : 공지사항 페이지로 이동됨
-    * URL : https://calendar.naver.com/notice.nhn
-    */
-
-    @Test
-    public void TC_06_Footer_공지사항_Test() throws Exception{
-
-        util.click(By.className("_open_notice"));
-        util.waitForNewWindow();
-
-        util.switchTo();
-
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("http://calendar.naver.com/notice.nhn"));
-        assertTrue(Title.contains("네이버 캘린더"));
-
-        util.selectMainWindow();
-        util.closeNewWindow();
-
-
-        util.waitForTitle("일정 : 네이버 캘린더");
-    }
-
-        /*
-    * Step : Footer > 캘린더고객센터 클릭
-    * Result : 캘린더고객센터 페이지로 이동됨
-    * URL : https://help.naver.com/support/service/main.nhn?serviceNo=635
-    */
-
-    @Test
-    public void TC_07_Footer_캘린더고객센터_Test() throws Exception{
-
-        util.click(By.className("_calendar_faq"));
-        util.waitForNewWindow();
-
-
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://help.naver.com/support/service/main.nhn?serviceNo=635"));
-        assertTrue(Title.contains("네이버 고객센터"));
-
-        util.selectMainWindow();
-        util.closeNewWindow();
-
-        util.waitForTitle("일정 : 네이버 캘린더");
-    }
-
 }
