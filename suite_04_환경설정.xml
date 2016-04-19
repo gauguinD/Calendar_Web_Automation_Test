@@ -83,7 +83,7 @@
 						<org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>suite_03_할일_Test.xml</suiteXmlFile>
+						<suiteXmlFile>suite_04_환경설정_Test.xml</suiteXmlFile>
 					</suiteXmlFiles>
 
 					<properties>
