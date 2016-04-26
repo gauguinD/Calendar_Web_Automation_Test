@@ -90,22 +90,23 @@ public class Modules {
 
 	public void 로그인(Utilities util, String ID, String Password) throws Exception {
 
-		//if (util.getCapabilities().getVersion().equals("16"))
-		//util.type(By.linkText("로그인"), " ");
-
 		util.click(By.className("btn_login"));
 		util.type(By.id("id"), ID);
 		util.type(By.id("pw"), Password);
 		util.click(By.className("btn_login"));
 
-		/*
+		String currentTitle;
+		currentTitle = util.getTitle();
 		//연락처 입력 화면 노출시 확인 클릭
-		if(util.isElementPresent(By.className("spot")).isDisplayed())
+
+		if(currentTitle.contains("연락처 정보 업데이트 안내 : 네이버"))
 		{
 			util.click(By.className("btn_close"));
 			util.switchTo().alert().accept();
+
+			util.goTo(calURL);
 		}
-		*/
+
 		//assertNotNull (util.waitForIsElementPresent(By.linkText("로그아웃")));
 	}
 

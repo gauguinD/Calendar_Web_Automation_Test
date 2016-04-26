@@ -151,6 +151,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
 
     }
 
+
     /*
     * Step : 일정설정 > 추가시간대 확인
     * Result : 추가시간대의 현재 값을 확인
@@ -201,6 +202,39 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
             }
         }
 
+        util.click(By.xpath("//a[@class='_additional_time_guide example2']"));
+        util.waitForNewWindow();
+
+        Title = util.getTitle();
+        assertTrue(URL.contains("https://calendar.naver.com/html/guide/guide_additional_time.html"));
+
+        util.close();
+        util.selectMainWindow();
+
+        util.waitForTitle(module.calTitle);
+
     }
+
+    /*
+     * Step : 일정설정 > 시간표시 확인
+     * Result : 시간표시의 현재 값을 확인
+     */
+    @Test
+    public void TC_06_일정설정_초대받은일정자동등록_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+        if(util.waitForIsElementPresent(By.xpath("//input[contains(@class,'inp01 _cfg_auto_create_only_aware_schedule')][contains(@value,'false')]")).isSelected()) {
+            util.printLog("현재 초대받은 일정 자동등록 설정은 [모든 초대 일정을 내 캘린더에 등록]으로 설정되어 있습니다.");
+            assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'inp01 _cfg_auto_create_only_aware_schedule')][contains(@value,'false')]")).isSelected());
+        }
+        else {
+            util.printLog("현재 초대받은 일정 자동등록 설정은 [내 주소록에 등록된 사람이 보낸 초대 일정만 내 캘린더에 등록]으로 설정 되어 있습니다.");
+            assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'inp01 _cfg_auto_create_only_aware_schedule')][contains(@value,'true')]")).isSelected());
+        }
+    }
+
+
+
 
 }
