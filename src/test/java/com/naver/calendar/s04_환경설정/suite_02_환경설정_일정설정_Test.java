@@ -49,7 +49,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
      * Step : 일정설정 > 시간표시 확인
      * Result : 시간표시의 현재 값을 확인
      */
-    @Test
+    //@Test
     public void TC_02_일정설정_시간표시_Test() throws Exception{
 
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -69,7 +69,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     * Result : 일정표시시간의 현재 값을 확인
     */
 
-    @Test
+    //@Test
     public void TC_03_일정설정_일정표시시간_Test() throws Exception {
 
         int valueNum = 0;
@@ -112,7 +112,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     * Result : 기본시간대의 현재 값을 확인
     */
 
-    @Test
+    //@Test
     public void TC_04_일정설정_기본시간대_Test() throws Exception {
 
         int valueNum = 0;
@@ -157,7 +157,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     * Result : 추가시간대의 현재 값을 확인
     */
 
-    @Test
+    //@Test
     public void TC_05_일정설정_추가시간대_Test() throws Exception {
 
         int valueNum = 0;
@@ -205,7 +205,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.click(By.xpath("//a[@class='_additional_time_guide example2']"));
         util.waitForNewWindow();
 
-        Title = util.getTitle();
+        URL = util.getCurrentUrl();
         assertTrue(URL.contains("https://calendar.naver.com/html/guide/guide_additional_time.html"));
 
         util.close();
@@ -219,7 +219,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
      * Step : 일정설정 > 시간표시 확인
      * Result : 시간표시의 현재 값을 확인
      */
-    @Test
+    //@Test
     public void TC_06_일정설정_초대받은일정자동등록_Test() throws Exception{
 
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -233,6 +233,111 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
             assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'inp01 _cfg_auto_create_only_aware_schedule')][contains(@value,'true')]")).isSelected());
         }
     }
+
+    /*
+     * Step : 일정설정 > 캘린더 초기화 방법 안내
+     * Result : 캘린더 초기화 방법 안내 페이지로 이동
+     * URL : http://calendar.naver.com/notice.nhn?type=read&docId=10000000000003775681&boardId=1000003514
+     */
+    //@Test
+    public void TC_07_일정설정_캘린더초기화방법안내_Test() throws Exception{
+
+        util.click(By.xpath("//a[@class='link_reset']"));
+        util.waitForNewWindow();
+
+        URL = util.getCurrentUrl();
+        assertTrue(URL.contains("http://calendar.naver.com/notice.nhn?type=read&docId=10000000000003775681&boardId=1000003514"));
+
+        util.close();
+        util.selectMainWindow();
+
+        util.waitForTitle(module.calTitle);
+    }
+
+    /*
+     * Step : 일정설정 > 캘린더 목록 확인
+     * Result : 현재 캘린더 개수 노출
+     */
+    //@Test
+    public void TC_08_일정설정_캘린더목록_Test() throws Exception{
+
+        int calList;
+        int calNum;
+
+        calList = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
+        util.printLog("현재 캘린더 개수는 "+calList+"개 입니다.");
+
+        //좌측영역의 캘린더 목록에서 할일을 뺀 숫자와 환경설정의 캘린더 목록이 같은지 확인
+        calNum = util.getXpathCount(By.xpath("//ul[@class='category_list']/li"));
+        assertTrue(calList==calNum-1);
+    }
+
+    /*
+     * Step : 일정설정 > 기본캘린더 확인
+     * Result : 현재 기본캘린더 확인, 변경 확인
+     */
+    @Test
+    public void TC_09_일정설정_기본캘린더_Test() throws Exception{
+
+        String basicValue;
+        String basicCalName;
+        int randomNum;
+
+        randomNum = util.getRandomNum(1,util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr")));
+
+        basicValue = util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid");
+        basicCalName = util.waitForIsElementPresent(By.xpath("//a[contains(@data-value,'"+basicValue+"')]/strong")).getText();
+
+        //현재 기본 캘린더 명을 가져옴
+        //util.printLog(basicValue);
+        util.printLog("현재 기본 캘린더의 이름은 : "+basicCalName);
+
+        //기본캘린더로 설정 가능한 캘린더가 클릭 될때까지 1~캘린더개수 에서 랜덤으로 숫자를 지정
+        while(util.waitForIsElementPresent(By.xpath("//tbody/tr["+randomNum+"]/td/input")).isEnabled()){
+            System.out.println(randomNum);
+            util.click(By.xpath("//tbody/tr["+randomNum+"]/td/input"));
+            break;
+        }
+
+        //저장하고 얼럿에서 확인
+        util.click(By.xpath("//button[@class='_save normal']"));
+        util.getAlert().accept();
+
+        //환경설정 재 진입
+        util.waitForIsElementPresent(By.className("_config"));
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+        basicValue = util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid");
+        basicCalName = util.waitForIsElementPresent(By.xpath("//a[contains(@data-value,'"+basicValue+"')]/strong")).getText();
+
+        //새로 설정한 기본 캘린더의 값이 좌측 영역 캘린더 목록에 노출되는지 확인
+        //util.printLog(basicValue);
+        util.printLog("현재 기본 캘린더의 이름은 : "+basicCalName);
+        assertTrue(util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid").contains(basicValue));
+    }
+
+    /*
+ * Step : 일정설정 > 캘린더 목록 확인
+ * Result : 현재 캘린더 개수 노출
+ */
+    @Test
+    public void TC_10_일정설정_목록에표시_Test() throws Exception{
+
+        int calList;
+        int calNum;
+
+        calList = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
+        util.printLog("현재 캘린더 개수는 "+calList+"개 입니다.");
+
+        //좌측영역의 캘린더 목록에서 할일을 뺀 숫자와 환경설정의 캘린더 목록이 같은지 확인
+        calNum = util.getXpathCount(By.xpath("//ul[@class='category_list']/li"));
+        assertTrue(calList==calNum-1);
+    }
+
 
 
 

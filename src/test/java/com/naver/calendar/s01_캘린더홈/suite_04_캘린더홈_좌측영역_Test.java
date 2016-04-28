@@ -143,25 +143,14 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.xpath("//li/a[2]/span[@class='cal_type' and contains(text(),'[기본]')]"));
 
         calendarName = util.isElementPresent(By.xpath("//li[@calendarid='6819065']")).getAttribute("class");
+        //calendarName = util.waitForIsElementPresent(By.xpath("//li[@class='_calendar  _private' and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid");
+
+
         //util.printLog(calendarName);
         assertTrue(calendarName.contains("select"));
 
     }
 
-
-    /*
-    * Step : 좌측영역 > +버튼 클릭 > 내 캘린더 만들기
-    * Result : 내 캘린더 생성 목록 확인 됨
-    */
-    //@Test
-    public void TC_08_좌측영역_캘린더만들기_Test() throws Exception{
-        util.click(By.className("btn_makecal"));
-
-        for(int i=1; i<util.getXpathCount(By.className("action_list")); i++)
-        {
-            util.printLog(util.isElementPresent(By.xpath("//ul[@class='action_list']/li["+i+"]/a")).getText());
-        }
-    }
 
     /*
     * Step : 좌측영역 > +버튼 클릭 > 내 캘린더 만들기
@@ -175,7 +164,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.partialLinkText("내 캘린더 만들기"));
 
         util.clearAndType(By.id("$$_calendar_name"),"내 캘린더");
-        Subname = util.isElementPresent(By.id("$$_calendar_name")).getAttribute("value");
+        Subname = util.waitForIsElementPresent(By.id("$$_calendar_name")).getAttribute("value");
         util.printLog(Subname);
 
         util.click(By.xpath("//button[@class ='_save normal']"));
@@ -193,15 +182,15 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
 
         //생성된 캘린더가 있는지 캘린더 목록에서 확인한다
-        for(int i=1; i <= NumberOfCalender; i++)
+        for(int i=1; i < NumberOfCalender; i++)
         {
             String SubTemp;
-            SubTemp = util.waitForIsElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li[" + i + "]/a[2]")).getAttribute("title");
+            SubTemp = util.waitForIsElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li["+i+"]/a[2]")).getAttribute("title");
 
             if(SubTemp.contentEquals(Subname))
             {
                 util.printLog("True");
-                privateCalendarValue = util.isElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li["+i+"]")).getAttribute("calendarid");
+                privateCalendarValue = util.waitForIsElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li["+i+"]")).getAttribute("calendarid");
                 util.printLog(privateCalendarValue);
             }
             else
@@ -226,8 +215,11 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.className("btn_makecal"));
         util.click(By.xpath("//li[@class ='_share']"));
 
-        util.waitForIsElementPresent(By.id("$$_calendar_name"));
         util.clearAndType(By.id("$$_calendar_name"),"공유캘린더");
+        //util.waitForIsElementPresent(By.id("$$_calendar_name"));
+        //util.clear(By.xpath("//input[@id='$$_calendar_name']"));
+        //util.clear(By.xpath("//tr[@class='_calendar_info_area']/td/input"));
+        //util.type(By.xpath("//tr[@class='_calendar_info_area']/td/input"),"공유캘린더");
         Subname = util.waitForIsElementPresent(By.id("$$_calendar_name")).getAttribute("value");
         util.printLog(Subname);
 
@@ -239,8 +231,9 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
         for(int i=1; i <= NumberOfCalender; i++)
         {
-            String SubTemp;
-            SubTemp = util.isElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li[" + i + "]/a[2]")).getAttribute("title");
+             String SubTemp;
+            //util.printLog(util.waitForIsElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li[" + i + "]/a[2]")).getAttribute("title"));
+            SubTemp = util.waitForIsElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li[" + i + "]/a[2]")).getAttribute("title");
 
             if(SubTemp.contentEquals(Subname))
             {
@@ -321,7 +314,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.xpath("//li[@class='_timetable']"));
 
         util.type(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"),"내시간표");
-        Subname = util.isElementPresent(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]")).getAttribute("value");
+        Subname = util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]")).getAttribute("value");
         util.printLog(Subname);
 
         util.click(By.xpath("//button[@class ='_save normal']"));
@@ -350,12 +343,147 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     }
 
 
+    /*
+    * Step : 좌측영역 > 환경 설정 버튼 클릭
+    * Result : 환경설정 페이지로 이동 됨
+    */
 
-    //@Test
-    public void TC_09_좌측영역_캘린더삭제_Test() throws Exception{
-        util.click(By.className("btn_settingcal"));
-        util.printLog(util.isElementPresent(By.xpath("//div[@class='_calendar_name' and contains(data-value, '"+dataValue+"']")).toString());
+   @Test
+    public void TC_12_좌측영역_환경설정_Test() throws Exception{
 
+       util.waitForIsElementPresent(By.xpath("//a[@class='btn_settingcal']"));
+       util.click(By.xpath("//a[@class='btn_settingcal']"));
+
+       util.waitForIsElementPresent(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
+       assertTrue(util.isElementPresent(By.xpath("//a[@class='_btn_back_calender btn_back_calender']")).isDisplayed());
+       util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
+
+       //할일이나 일정일때 둘다 노출되는 버튼이 나올때까지 기다림
+       util.waitForIsElementPresent(By.xpath("//a[@class='fold_widget']"));
+    }
+
+
+
+    /*
+    * Step : 좌측영역 > 중요일정보기 버튼 클릭
+    * Result : 중요 일정만 노출 됨
+    */
+
+    @Test
+    public void TC_13_좌측영역_중요일정보기_Test() throws Exception{
+
+        //기본 상태는 전체보기로 되어 있음
+        util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_all all_view')]"));
+
+
+        //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_important important')]")).getAttribute("class"));
+        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_important important')]"));
+        util.click(By.xpath("//li[contains(@class,'_important important')]"));
+
+
+        //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_important important')]")).getAttribute("class"));
+        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_important important')]"));
+        assertTrue(util.isElementPresent(By.xpath("//li[contains(@class,'_important important')]")).getAttribute("class").contains("select"));
+
+        util.click(By.xpath("//div[contains(@class,'_all all_view')]"));
+        util.waitForIsElementPresent(By.xpath("/div[@class='_all all_view select']"));
+    }
+
+     /*
+    * Step : 좌측영역 > 범주일정보기 버튼 클릭
+    * Result : 범주 일정만 노출 됨
+    */
+
+    @Test
+    public void TC_14_좌측영역_범주일정보기_Test() throws Exception{
+
+        //기본 상태는 전체보기로 되어 있음
+        util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_all all_view')]"));
+
+
+        //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_category color')]")).getAttribute("class"));
+
+        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_category color')]"));
+        util.click(By.xpath("//li[contains(@class,'_category color')]"));
+
+        //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_category color')]")).getAttribute("class"));
+
+        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_category color')]"));
+        assertTrue(util.isElementPresent(By.xpath("//li[contains(@class,'_category color')]")).getAttribute("class").contains("select"));
+
+        util.click(By.xpath("//div[contains(@class,'_all all_view')]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_all all_view select']"));
+    }
+
+    /*
+    * Step : 좌측영역 > 범주일정보기 버튼 클릭
+    * Result : 범주 일정만 노출 됨
+    */
+
+    @Test
+    public void TC_15_좌측영역_오래된일정정리하기_Test() throws Exception{
+
+        //기본 상태는 전체보기로 되어 있음
+        util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_all all_view')]"));
+
+
+        //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_cleaning delete')]")).getAttribute("class"));
+
+        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_cleaning delete')]"));
+        util.click(By.xpath("//li[contains(@class,'_cleaning delete')]"));
+
+        util.waitForIsElementPresent(By.xpath("//div[contains(@class,'ly_delete_schedule layer_popup')]"));
+        assertTrue(util.isElementPresent(By.xpath("//div[@class='layer_header']")).isDisplayed());
+
+        util.click(By.xpath("//button[@class='_close normal']"));
+        util.waitForIsNotVisible(By.xpath("//div[@class='layer_header']"));
+
+        //util.click(By.xpath("//div[contains(@class,'_all all_view')]"));
+        //util.waitForIsElementPresent(By.xpath("//div[@class='_all all_view select']"));
+    }
+
+    /*
+    * Step : 좌측영역 > 배너 클릭
+    * Result : 해당 배너 관련 페이지로 이동 됨
+    * URL : https://www.worksmobile.com/kr/
+    */
+
+    @Test
+    public void TC_16_좌측영역_배너_Test() throws Exception{
+
+        util.click(By.xpath("//div[@class ='_works_banner bn_nworks']"));
+        util.waitForNewWindow();
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+        assertTrue(URL.contains("https://www.worksmobile.com/kr/"));
+        assertTrue(Title.contains("Works Mobile 비즈니스 협업 서비스"));
+
+        util.close();
+        util.selectMainWindow();
+
+        util.waitForTitle("일정 : 네이버 캘린더");
+    }
+
+    /*
+    * Step : 좌측영역 > 오늘 할 일 클릭
+    * Result : 할 일 페이지로 이동 됨
+    * URL : https://calendar.naver.com/tasks.nhn
+    */
+
+    @Test
+    public void TC_17_좌측영역_오늘할일_Test() throws Exception{
+
+        util.click(By.xpath("//a[@class ='_go_task']"));
+        util.waitForIsElementPresent(By.xpath("//a[@class='_openNewTaskForm write_todo']"));
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+        assertTrue(URL.contains("https://calendar.naver.com/tasks.nhn"));
+        assertTrue(Title.contains("할 일 : 네이버 캘린더"));
+
+        util.click(By.xpath("//button[@class='_viewSchedule type_schedule']"));
+        util.waitForTitle("일정 : 네이버 캘린더");
     }
 
 }
