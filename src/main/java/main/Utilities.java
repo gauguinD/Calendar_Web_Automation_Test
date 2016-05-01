@@ -1499,5 +1499,21 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 		return true;
 	}
 
+	/**
+	 * Element가 존재하는지 확인하는 메소드
+	 * @param locator 존재 확인 할 Element를 지정
+	 * @return locator에 존재하는 WebElement (element, null)
+	 */
+	public boolean isElementPresentNoExist(By locator) {
+
+		try {
+			findElement(locator);
+		}
+		catch (Exception e){
+			return true;
+		}
+		return false;
+	}
+
 
 }
