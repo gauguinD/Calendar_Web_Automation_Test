@@ -207,7 +207,6 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     * Step : 좌측영역 > + 버튼 클릭 > 공유 캘린더 만들기
     * Result : 공유 캘린더 생성 됨
     */
-
     @Test
     public void TC_09_좌측영역_공유캘린더만들기_Test() throws Exception{
 
