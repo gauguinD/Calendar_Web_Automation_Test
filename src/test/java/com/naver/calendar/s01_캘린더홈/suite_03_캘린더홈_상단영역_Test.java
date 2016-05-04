@@ -27,7 +27,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
      * Step : 상단영역 > 일정검색 클릭
      * Result : 해당 검색어 검색결과 노출 된다.
      */
-    //@Test
+    @Test
     public void TC_01_상단영역_일정검색_Test() throws Exception {
 
         String searchKeyword = "일정";

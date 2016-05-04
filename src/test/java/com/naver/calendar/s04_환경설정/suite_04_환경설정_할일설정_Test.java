@@ -838,7 +838,7 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
     * Result : 해당 캘린더 목록에서 노출되지 않음
     */
 
-    @Test
+    //@Test
     public void TC_20_일정설정_구독해지_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));

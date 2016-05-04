@@ -46,7 +46,15 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     public void TC_02_GNB_탭_me_Test() throws Exception{
 
         util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+
+        assertTrue(Title.contains(module.meTitle));
+        assertTrue(URL.contains(module.meURL));
 
         util.goBack();
         util.waitForTitle(module.calTitle);
@@ -61,13 +69,8 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     @Test
     public void TC_03_GNB_탭_메일_Test() throws Exception{
 
-        util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
-
-        util.goBack();
-        util.waitForTitle(module.calTitle);
-
         util.click(By.className("mail"));
+
         Title = util.getTitle();
         URL = util.getCurrentUrl();
         util.printLog("[Title] : " + Title);
@@ -85,21 +88,16 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
  * URL : http://me.naver.com"
  */
     @Test
-    public void TC_04_GNB_탭_Test() throws Exception{
+    public void TC_04_GNB_탭_메모_쪽지_Test() throws Exception{
 
-        util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
+        util.click(By.className("note"));
 
-        util.goBack();
-        util.waitForTitle(module.calTitle);
-
-        util.click(By.className("mail"));
         Title = util.getTitle();
         URL = util.getCurrentUrl();
         util.printLog("[Title] : " + Title);
         util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.mailTitle));
-        assertTrue(URL.contains(module.mailURL));
+        assertTrue(Title.contains(module.noteTitle));
+        assertTrue(URL.contains(module.noteURL));
 
         util.goBack();
         util.waitForTitle(module.calTitle);
@@ -111,21 +109,16 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
  * URL : http://me.naver.com"
  */
     @Test
-    public void TC_05_GNB_탭_Test() throws Exception{
+    public void TC_05_GNB_탭_메모_Test() throws Exception{
 
-        util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
+        util.click(By.className("memo"));
 
-        util.goBack();
-        util.waitForTitle(module.calTitle);
-
-        util.click(By.className("mail"));
         Title = util.getTitle();
         URL = util.getCurrentUrl();
         util.printLog("[Title] : " + Title);
         util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.mailTitle));
-        assertTrue(URL.contains(module.mailURL));
+        assertTrue(Title.contains(module.memoTitle));
+        assertTrue(URL.contains(module.memoURL));
 
         util.goBack();
         util.waitForTitle(module.calTitle);
@@ -137,21 +130,16 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
  * URL : http://me.naver.com"
  */
     @Test
-    public void TC_06_GNB_탭_Test() throws Exception{
+    public void TC_06_GNB_탭_오피스_주소록_Test() throws Exception{
 
-        util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
+        util.click(By.className("contact"));
 
-        util.goBack();
-        util.waitForTitle(module.calTitle);
-
-        util.click(By.className("mail"));
         Title = util.getTitle();
         URL = util.getCurrentUrl();
         util.printLog("[Title] : " + Title);
         util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.mailTitle));
-        assertTrue(URL.contains(module.mailURL));
+        assertTrue(Title.contains(module.contactTitle));
+        assertTrue(URL.contains(module.contactURL));
 
         util.goBack();
         util.waitForTitle(module.calTitle);
@@ -163,21 +151,16 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
  * URL : http://me.naver.com"
  */
     @Test
-    public void TC_07_GNB_탭_Test() throws Exception{
+    public void TC_07_GNB_탭_클라우드_Test() throws Exception{
 
-        util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
+        util.click(By.className("cloud"));
 
-        util.goBack();
-        util.waitForTitle(module.calTitle);
-
-        util.click(By.className("mail"));
         Title = util.getTitle();
         URL = util.getCurrentUrl();
         util.printLog("[Title] : " + Title);
         util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.mailTitle));
-        assertTrue(URL.contains(module.mailURL));
+        assertTrue(Title.contains(module.cloudTitle));
+        assertTrue(URL.contains(module.cloudURL));
 
         util.goBack();
         util.waitForTitle(module.calTitle);
@@ -189,21 +172,16 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
  * URL : http://me.naver.com"
  */
     @Test
-    public void TC_08_GNB_탭_Test() throws Exception{
+    public void TC_08_GNB_탭_오피스_Test() throws Exception{
 
-        util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
+        util.click(By.className("office"));
 
-        util.goBack();
-        util.waitForTitle(module.calTitle);
-
-        util.click(By.className("mail"));
         Title = util.getTitle();
         URL = util.getCurrentUrl();
         util.printLog("[Title] : " + Title);
         util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.mailTitle));
-        assertTrue(URL.contains(module.mailURL));
+        assertTrue(Title.contains(module.officeTitle));
+        assertTrue(URL.contains(module.officeURL));
 
         util.goBack();
         util.waitForTitle(module.calTitle);
@@ -215,21 +193,16 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
  * URL : http://me.naver.com"
  */
     @Test
-    public void TC_09_GNB_탭_Test() throws Exception{
+    public void TC_09_GNB_탭_가계부_Test() throws Exception{
 
-        util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
+        util.click(By.className("moneybook"));
 
-        util.goBack();
-        util.waitForTitle(module.calTitle);
-
-        util.click(By.className("mail"));
         Title = util.getTitle();
         URL = util.getCurrentUrl();
         util.printLog("[Title] : " + Title);
         util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.mailTitle));
-        assertTrue(URL.contains(module.mailURL));
+        assertTrue(Title.contains(module.moneybookTitle));
+        assertTrue(URL.contains(module.moneybookURL));
 
         util.goBack();
         util.waitForTitle(module.calTitle);
@@ -241,7 +214,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     * Result : 프로필 레이어 노출됨
     */
     @Test
-    public void TC_03_GNB_프로필_Test() throws Exception {
+    public void TC_10_GNB_프로필_Test() throws Exception {
         // 프로필 사진 클릭
         // 사용자 메일에 사용자 아이디 포함하고 있는지 확인
         util.click(By.className("gnb_name"));
@@ -257,7 +230,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_04_GNB_프로필_내정보_Test() throws Exception{
+    public void TC_11_GNB_프로필_내정보_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -282,7 +255,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_05_GNB_프로필_보안설정_Test() throws Exception{
+    public void TC_12_GNB_프로필_보안설정_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -306,7 +279,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_06_GNB_프로필_내블로그_Test() throws Exception{
+    public void TC_13_GNB_프로필_내블로그_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -333,7 +306,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_07_GNB_프로필_가입한카페_Test() throws Exception{
+    public void TC_14_GNB_프로필_가입한카페_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -357,7 +330,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_08_GNB_프로필_NPAY_Test() throws Exception{
+    public void TC_15_GNB_프로필_NPAY_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -380,7 +353,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_09_GNB_프로필_로그아웃_Test() throws Exception{
+    public void TC_16_GNB_프로필_로그아웃_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -402,7 +375,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_10_GNB_알림_Test() throws Exception{
+    public void TC_17_GNB_알림_Test() throws Exception{
         //로그아웃 동작 이후에 재 로그인
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
         // 알림 목록 아이콘 확인
@@ -424,7 +397,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_11_GNB_서비스아이콘_Test() throws Exception{
+    public void TC_18_GNB_서비스아이콘_Test() throws Exception{
 
         // 알림 목록 아이콘 확인
         util.click(By.className("gnb_service_li"));

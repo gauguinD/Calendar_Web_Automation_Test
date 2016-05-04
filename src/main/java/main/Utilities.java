@@ -612,6 +612,7 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 			if (element.isSelected()) {
 				return true;
 			}
+
 		}catch (NoSuchElementException e) { 
 			return false;
 		}

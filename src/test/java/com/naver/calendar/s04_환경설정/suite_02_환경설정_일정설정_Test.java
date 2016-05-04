@@ -20,36 +20,50 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     public String basicValue;
     public String basicCalName;
     public int randomNum;
-
+    public String subName;
+    public String privateCalendarValue;
 
     public String tempValue = null;
     public String tempCalName = null;
     public int maxCalNum;
     public int tempNum;
 
+    public String calEdit;
+    public String calEditMemberList;
+    public String calEditMemberValue = null;
+    public String calEditResult;
+    public String calEditName;
+
+    public  String assertAlert;
 
     /*
-   * Step : 로그인 > 해당 계정으로 로그인
-   * Result : 해당하는 계정으로 로그인 됨
+    * Step : 로그인 > 해당 계정으로 로그인
+    * Result : 해당하는 계정으로 로그인 됨
     */
+
     @Test
     public void TC_00_Footer_로그인_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
     }
 
+
     /*
      * Step : 일정설정 > 한주의 시작 확인
      * Result : 한주의 시작의 현재 값을 확인
      */
+
     @Test
     public void TC_01_일정설정_한주의시작_Test() throws Exception {
 
+        //환경설정 이동
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
 
+        //환경설정 > 일정설정 이동
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
+        //환경설정 > 일정설정 > 현재 한주의 시작 값 확인
         if(util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_cfg_start_day inp01')][contains(@value,'sunday')]")).isSelected()) {
             util.printLog("현재 한주의 시작은 [일요일] 로 설정되어 있습니다.");
             assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'_cfg_start_day inp01')][contains(@value,'sunday')]")).isSelected());
@@ -60,15 +74,19 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         }
     }
 
-    /*
+
+     /*
      * Step : 일정설정 > 시간표시 확인
      * Result : 시간표시의 현재 값을 확인
      */
+
     @Test
     public void TC_02_일정설정_시간표시_Test() throws Exception{
 
+        //환경설정 > 일정설정인것 확인
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
+        //환경설정 > 일정설정 > 시간표시의 현재 값 확인
         if(util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_cfg_time_mode inp01')][contains(@value,'false')]")).isSelected()) {
             util.printLog("현재 시간표시는 [오후 01:00] 로 설정되어 있습니다.");
             assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'_cfg_time_mode inp01')][contains(@value,'false')]")).isSelected());
@@ -78,6 +96,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
             assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'_cfg_time_mode inp01')][contains(@value,'true')]")).isSelected());
         }
     }
+
 
     /*
     * Step : 일정설정 > 일정표시시간 확인
@@ -90,6 +109,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         int valueNum = 0;
         String startTime;
 
+        //환경설정 > 일정설정인것 확인
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
         //일정 표시 시간 > 시작시간의 설정값의 개수를 받아옴
@@ -122,6 +142,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
 
     }
 
+
     /*
     * Step : 일정설정 > 기본시간대 확인
     * Result : 기본시간대의 현재 값을 확인
@@ -134,6 +155,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         String basicTimeCountry;
         String basicTimeCity;
 
+        //환경설정 > 일정설정인것 확인
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
         //기본시간대 > 기본시간대의 설정값의 개수를 받아옴
@@ -179,6 +201,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         String addTimeCountry;
         String addTimeCity;
 
+        //환경설정 > 일정설정인것 확인
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
         //추가시간대 > 추가시간대의 설정값의 개수를 받아옴
@@ -217,6 +240,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
             }
         }
 
+        //환경설정 > 일정설정에서 예시보기 링크 확인
         util.click(By.xpath("//a[@class='_additional_time_guide example2']"));
         util.waitForNewWindow();
 
@@ -230,33 +254,40 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
 
     }
 
+
     /*
      * Step : 일정설정 > 시간표시 확인
      * Result : 시간표시의 현재 값을 확인
      */
+
     @Test
     public void TC_06_일정설정_초대받은일정자동등록_Test() throws Exception{
 
+        //환경설정 > 일정설정인것 확인
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
-        if(util.waitForIsElementPresent(By.xpath("//input[contains(@class,'inp01 _cfg_auto_create_only_aware_schedule')][contains(@value,'false')]")).isSelected()) {
+        //환경설정 > 일정설정 > 초대받은 일정 자동 등록값 확인
+        if(util.waitForIsSelected(By.xpath("//input[contains(@class,'inp01 _cfg_auto_create_only_aware_schedule')]"))) {
             util.printLog("현재 초대받은 일정 자동등록 설정은 [모든 초대 일정을 내 캘린더에 등록]으로 설정되어 있습니다.");
-            assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'inp01 _cfg_auto_create_only_aware_schedule')][contains(@value,'false')]")).isSelected());
+            assertTrue(util.waitForIsSelected(By.xpath("//input[contains(@class,'inp01 _cfg_auto_create_only_aware_schedule')]")));
         }
         else {
             util.printLog("현재 초대받은 일정 자동등록 설정은 [내 주소록에 등록된 사람이 보낸 초대 일정만 내 캘린더에 등록]으로 설정 되어 있습니다.");
-            assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'inp01 _cfg_auto_create_only_aware_schedule')][contains(@value,'true')]")).isSelected());
+            assertTrue(util.waitForIsSelected(By.xpath("//input[contains(@class,'_cfg_auto_create_all_schedule')]")));
         }
     }
 
-    /*
+
+     /*
      * Step : 일정설정 > 캘린더 초기화 방법 안내
      * Result : 캘린더 초기화 방법 안내 페이지로 이동
      * URL : http://calendar.naver.com/notice.nhn?type=read&docId=10000000000003775681&boardId=1000003514
      */
+
     @Test
     public void TC_07_일정설정_캘린더초기화방법안내_Test() throws Exception{
 
+        //환경설정 > 일정설정에서 캘린더초기화방법안내 링크 확인
         util.click(By.xpath("//a[@class='link_reset']"));
         util.waitForNewWindow();
 
@@ -269,38 +300,42 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.waitForTitle(module.calTitle);
     }
 
-    /*
+
+     /*
      * Step : 일정설정 > 캘린더 목록 확인
      * Result : 현재 캘린더 개수 노출
      */
+
     @Test
     public void TC_08_일정설정_캘린더목록_Test() throws Exception{
 
         int calList;
         int calNum;
 
+        //환경설정 > 일정설정 > 현재 캘린더 목록의 숫자를 확인
         calList = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
         util.printLog("현재 캘린더 개수는 "+calList+"개 입니다.");
 
         //좌측영역의 캘린더 목록에서 할일을 뺀 숫자와 환경설정의 캘린더 목록이 같은지 확인
         calNum = util.getXpathCount(By.xpath("//ul[@class='category_list']/li"));
-        assertTrue(calList==calNum-1);
+        System.out.println(calNum);
+        assertTrue(calList==calNum - 1);
     }
 
-    /*
+
+     /*
      * Step : 일정설정 > 기본캘린더 확인
      * Result : 현재 기본캘린더 확인, 변경 확인
      */
+
     @Test
     public void TC_09_일정설정_기본캘린더_Test() throws Exception{
 
         randomNum = util.getRandomNum(1,util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr")));
-
         basicValue = util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid");
         basicCalName = util.waitForIsElementPresent(By.xpath("//a[contains(@data-value,'"+basicValue+"')]/strong")).getText();
 
         //현재 기본 캘린더 명을 가져옴
-        //util.printLog(basicValue);
         util.printLog("현재 기본 캘린더의 이름은 : "+basicCalName);
 
         //기본캘린더로 설정 가능한 캘린더가 클릭 될때까지 1~캘린더개수 에서 랜덤으로 숫자를 지정
@@ -314,11 +349,12 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.click(By.xpath("//button[@class='_save normal']"));
         util.getAlert().accept();
 
-        //환경설정 재 진입
+        //환경설정 이동
         util.waitForIsElementPresent(By.className("_config"));
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
 
+        //환경설정 > 일정설정 이동
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
@@ -331,19 +367,20 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         assertTrue(util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid").contains(basicValue));
     }
 
+
     /*
     * Step : 일정설정 > 캘린더 목록 확인
-     * Result : 목록에 표시 체크 해제시에 노출 안되는것 확인
+    * Result : 목록에 표시 체크 해제시에 노출 안되는것 확인
     */
 
     @Test
     public void TC_10_일정설정_목록에표시_Test() throws Exception{
 
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
-        randomNum = util.getRandomNum(1,maxCalNum);
+        randomNum = util.getRandomNum(2,maxCalNum);
         String[] calName = new String[maxCalNum];
 
-
+        //목록에 표시 체크가 가능한 값을 random으로 찾음
         while(util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr["+randomNum+"]/td[3]/input")).isEnabled()) {
 
             tempValue = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + randomNum + "]/td[2]/input")).getAttribute("value");
@@ -364,21 +401,66 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         //환경설정 재 진입
         util.waitForIsElementPresent(By.className("_config"));
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
         //환경설정 > 일정설정 진입
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
-
+        util.printLog("현재 목록에 있는 캘린더는 다음과 같습니다.");
         //좌측영역의 캘린더 목록과 비교해서 목록표시 해제한 챌린더 제목이 없는것을 확인한다.
+
         for(int i=1; i<maxCalNum; i++) {
             calName[i] = util.waitForIsElementPresent(By.xpath("//ul[@class='category_list']/li[" + i + "]")).getAttribute("calendarid");
-            util.printLog("현재 목록에 있는 캘린더는 다음과 같습니다.");
             util.printLog(util.waitForIsElementPresent(By.xpath("//ul[@class='category_list']/li[" + i + "]/a[2]")).getAttribute("title"));
         }
         assertFalse(Arrays.toString(calName).contains(tempValue));
 
     }
+
+
+    /*
+    * Step : 일정설정 > 캘린더 목록 확인
+    * Result : 목록에 표시 체크 해제했던 캘린더 다시 목록에 표시
+    */
+
+    @Test
+    public void TC_11_일정설정_목록에표시_목록에표시복구_Test() throws Exception{
+
+        maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
+        String[] calName = new String[maxCalNum];
+
+        //현재 목록에 표시한 캘린더 명을 가져옴
+        util.printLog("목록에서 삭제한 캘린더 명은 : "+tempCalName);
+        util.click(By.xpath("//tr[contains(@class,'"+tempValue+"')]/td[3]/input"));
+
+        //저장하고 얼럿에서 확인
+        util.click(By.xpath("//button[@class='_save normal']"));
+        assertAlert = util.getAlert().getText();
+        assertTrue(assertAlert.contains("환경설정의 변경 사항이 저장되었습니다."));
+        util.getAlert().accept();
+        util.waitForPageLoaded();
+
+        //환경설정 재 진입
+        assertTrue(util.waitForIsElementPresent(By.className("_config")).isDisplayed());
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+        //환경설정 > 일정설정 진입
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']")).isDisplayed());
+
+        util.printLog("현재 목록에 있는 캘린더는 다음과 같습니다.");
+
+        //좌측영역의 캘린더 목록과 비교해서 목록표시 복귀한 챌린더 제목이 없는것을 확인한다.
+        for(int i=1; i<maxCalNum; i++) {
+            calName[i] = util.waitForIsElementPresent(By.xpath("//ul[@class='category_list']/li[" + i + "]")).getAttribute("calendarid");
+             util.printLog(util.waitForIsElementPresent(By.xpath("//ul[@class='category_list']/li[" + i + "]/a[2]")).getAttribute("title"));
+        }
+
+        assertTrue(Arrays.toString(calName).contains(tempValue));
+    }
+
 
     /*
     * Step : 일정설정 > 외부일정 가져오기 확인
@@ -386,7 +468,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_11_일정설정_외부일정_가져오기_Test() throws Exception{
+    public void TC_12_일정설정_외부일정_가져오기_Test() throws Exception{
 
         basicValue = util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid");
         basicCalName = util.waitForIsElementPresent(By.xpath("//a[contains(@data-value,'"+basicValue+"')]/strong")).getText();
@@ -406,13 +488,14 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.waitForTitle(module.calTitle);
     }
 
+
     /*
     * Step : 일정설정 > 외부일정 내보내기 확인
-    * Result : 외부일정 기 팝업 노출 확인
+    * Result : 외부일정 내보내기 팝업 노출 확인
     */
 
     @Test
-    public void TC_12_일정설정_외부일정_가져오기_Test() throws Exception{
+    public void TC_13_일정설정_외부일정_내보내기_Test() throws Exception{
 
         util.click(By.xpath("//tr[contains(@data-value,'"+basicValue+"')]/td[4]/a[2]"));
         util.waitForNewWindow();
@@ -429,41 +512,88 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.waitForTitle(module.calTitle);
     }
 
+
+    /*
+    * Step : 일정설정 > 캘린더 삭제 > 삭제할 캘린더를 생성
+    * Result : 삭제할캘린더+오늘날짜 생성 됨
+    */
+
+    @Test
+    public void TC_14_일정설정_삭제_삭제할캘린더생성_Test() throws Exception{
+
+        util.click(By.className("btn_makecal"));
+        util.click(By.partialLinkText("내 캘린더 만들기"));
+
+        util.clearAndType(By.id("$$_calendar_name"),"삭제할캘린더"+module.contents);
+        subName = util.waitForIsElementPresent(By.id("$$_calendar_name")).getAttribute("value");
+        util.printLog(subName);
+
+        util.click(By.xpath("//button[@class ='_save normal']"));
+        util.waitForIsElementPresent(By.className("search"));
+
+        //캘린더 목록의 캘린더 갯수 가져오기
+        int NumberOfCalender = util.getXpathCount(By.xpath("//ul[@class='category_list']/li"));
+        util.printLog("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
+
+        //생성된 캘린더가 있는지 캘린더 목록에서 확인한다
+        for(int i=1; i < NumberOfCalender+1; i++)
+        {
+            String subTemp;
+            System.out.println(i);
+            subTemp = util.waitForIsElementPresent(By.xpath("//ul[@class='category_list']/li["+i+"]/a[2]")).getAttribute("title");
+
+            if(subTemp.contentEquals(subName))
+            {
+                util.printLog("True");
+                privateCalendarValue = util.waitForIsElementPresent(By.xpath("//ul[@class='category_list']/li["+i+"]")).getAttribute("calendarid");
+                util.printLog(privateCalendarValue);
+            }
+        }
+    }
+
+
     /*
     * Step : 일정설정 > 캘린더 삭제 클릭
     * Result : 해당 캘린더 목록에서 노출 안됨
     */
 
     @Test
-    public void TC_13_일정설정_삭제_Tet() throws Exception{
+    public void TC_15_일정설정_삭제_Test() throws Exception{
 
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
         String[] calName = new String[maxCalNum];
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
-        //util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr["+randomNum+"]/td[5]/div/a"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
 
-
-        for(int i=2; i < maxCalNum; i++){
-            //기본 캘린더는 제외
-            //기본 캘린더가 1번이 아닐때 예외처리 필요
-            //삭제 가능한 캘린더가 없을때 예외처리 필요
-            //randomNum = util.getRandomNum(2,maxCalNum);
-            tempNum = util.getXpathCount(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr["+i+"]/td[5]/div/a"));
-
-            //삭제 탈퇴에 따른 예외처리
-            if (tempNum == 1){
-                if(util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr["+i+"]/td[5]/div/a")).getText() == "삭제"){
+        //기본 캘린더만 있을때 예외처리
+        if(maxCalNum == 1){
+            util.printLog("현재 삭제할 캘린더가 없습니다.");
+        }
+        else{
+            for(int i=2; i < maxCalNum+1; i++){
+                calEdit = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr["+i+"]/td[5]/div")).getText();
+                //비공개캘린더일때 삭제 노출 됨
+                if(calEdit.contains("삭제")){
                     tempCalName = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]/td[1]/a")).getText();
                     tempValue = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]")).getAttribute("data-value");
-                    util.click(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i+ "]/td[5]/div/a[@class='_del_del link']"));
-                    util.printLog("삭제하는 캘린더 명은  [" + tempCalName + "] 입니다.");
-                }
 
-                break;
+                    util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr["+i+"]/td[5]/div/a[1]"));
+                    util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr["+i+"]/td[5]/div/a[1]"));
+                    util.printLog("삭제하는 캘린더 명은  [" + tempCalName + "] 입니다.");
+
+                    assertAlert = util.getAlert().getText();
+                    assertTrue(assertAlert.contains("캘린더를 삭제하면 캘린더에 등록되어 있는 모든 일정도 영구적으로 삭제됩니다."));
+                    util.getAlert().accept();
+                    break;
+                }
             }
         }
-        util.getAlert().accept();
+
 
 
         //저장하고 얼럿에서 확인
@@ -477,7 +607,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.waitForIsElementPresent(By.className("_config"));
 
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
         //환경설정 > 일정설정 진입
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -492,22 +622,79 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
 
 
     /*
+    * Step : 일정설정 > 캘린더 삭제 > 양도할 캘린더를 생성
+    * Result : 양도할캘린더+오늘날짜 생성 됨
+    */
+
+    @Test
+    public void TC_16_일정설정_양도_양도할캘린더생성_Test() throws Exception{
+
+        String subName;
+
+        util.isElementPresent(By.className("btn_makecal"));
+        util.click(By.className("btn_makecal"));
+        util.click(By.xpath("//li[@class ='_share']"));
+
+        util.clearAndType(By.id("$$_calendar_name"),"양도할캘린더"+module.contents);
+
+        util.type(By.xpath("//input[@class='input_txt _input']"),"nvqa_4tc043");
+        util.click(By.xpath("//span[@class='add_btn']"));
+        util.waitForIsElementPresent(By.xpath("//ul[@class='_member_list']/li[2]"));
+
+        subName = util.waitForIsElementPresent(By.id("$$_calendar_name")).getAttribute("value");
+        util.printLog(subName);
+
+        util.click(By.xpath("//button[@class ='_save normal']"));
+    }
+
+
+    /*
+    * Step : 로그인 > 해당 계정으로 로그인
+    * Result : 해당하는 계정으로 로그인 됨
+    */
+
+    @Test
+    public void TC_17_일정설정_양도_양도할캘린더생성_초대_Test() throws Exception {
+        module.LogOutAndLogIn(util, TestIds.CalUser3.getId(), TestIds.CalUser3.getPw());
+        util.goTo(module.mailURL);
+
+        util.waitForTitle(module.mailTitle);
+
+        util.click(By.xpath("//ol[@class='mailList  preview_none sender_context ']/li[1]"));
+        util.waitForIsElementPresent(By.xpath("//*[@id='readFrame']/xmeta/xmeta/xmeta/xmeta/xmeta/table[1]/tbody/tr[2]/td/table[2]/tbody/tr/td/table[3]/tbody/tr[6]/td/a[1]"));
+        util.click(By.xpath("//*[@id=\"readFrame\"]/xmeta/xmeta/xmeta/xmeta/xmeta/table[1]/tbody/tr[2]/td/table[2]/tbody/tr/td/table[3]/tbody/tr[6]/td/a[1]"));
+
+        util.waitForNewWindow();
+        util.click(By.xpath("//button[@class='normal _acceptInvitation']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_acceptInvitation normal4']"));
+
+        util.close();
+        util.selectMainWindow();
+
+        module.LogOutAndLogIn(util, TestIds.CalUser.getId(),TestIds.CalUser.getPw());
+        util.goTo(module.calURL);
+
+        util.waitForIsElementPresent(By.className("_config"));
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        //환경설정 > 일정설정 진입
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+    }
+
+
+    /*
     * Step : 일정설정 > 캘린더 양도 클릭
     * Result : 해당 캘린더 목록에서 마스터 변경 되어 있음
     */
 
     @Test
-    public void TC_14_일정설정_양도_Test() throws Exception {
+    public void TC_18_일정설정_양도_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
-        String calEdit;
-        String calEditMemberList;
-        String calEditMemberValue = null;
-        String calEditResult;
-        String calEditName;
 
-        for(int i=1; i<maxCalNum; i++){
+        for(int i=1; i< maxCalNum+1; i++){
             calEdit = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr["+i+"]/td[5]/div")).getText();
             //공유캘린더 참석자, 마스터일때 탈퇴 노출 됨
             if(calEdit.contains("양도")){
@@ -528,13 +715,12 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                         calEditName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr["+i+"]/td[1]/a/strong")).getText();
 
                         //양도 버튼을 클릭
-                        util.click(By.xpath("//div[@class='layer_footer']/button[1]"));
-                        util.waitForPageToLoad();
+                        util.clickAndNoWait(By.xpath("//div[@class='layer_footer']/button[1]"));
 
                         //양도 버튼을 클릭하고 다시 환경설정 > 일정설정으로 와서 해당 캘린더에서 권한이 바뀌어 탈퇴만 노출되는것을 확인한다.
                         util.waitForIsElementPresent(By.className("btn_settingcal"));
-                        util.click(By.className("btn_settingcal"));
-                        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+                        util.click(By.xpath("//a[@class='btn_settingcal']"));
+                        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
 
                         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
                         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -545,6 +731,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                         assertTrue(calEditResult.contains("탈퇴"));
                         break;
                     }
+                    /*
                     else if (calEditMemberList.contains("조회")){
                         util.click(By.xpath("//tbody[@class='_member_list_body']/tr[./td[3][contains(text(),'조회')]]/td/input[@class='radio01']"));
                         calEditMemberValue = util.waitForIsElementPresent(By.xpath("//tbody[@class='_member_list_body']/tr[./td[3][contains(text(),'수정/삭제')]]/td/input[@class='radio01']")).getAttribute("value");
@@ -561,14 +748,152 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                     }
                     else{
                         util.click(By.xpath("//div[@class='layer_footer']/button[2]"));
-                    }
+                    }*/
 
                 }
 
-           }
+            }
 
         }
     }
+
+
+    /*
+    * Step : 일정설정 > 캘린더 삭제 > 양도한 캘린더를 삭제
+    * Result : 양도한 캘린더 삭제 된다.
+    */
+
+    @Test
+    public void TC_19_일정설정_양도_양도한캘린더삭제_Test() throws Exception {
+
+        module.LogOutAndLogIn(util, TestIds.CalUser3.getId(),TestIds.CalUser3.getPw());
+        util.goTo(module.calURL);
+
+        util.waitForIsElementPresent(By.className("_config"));
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+        //환경설정 > 일정설정 진입
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+        util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
+        maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
+
+        String[] calName = new String[maxCalNum];
+
+        for (int i = 1; i < maxCalNum; i++) {
+            calEdit = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div")).getText();
+            //공유캘린더 마스터일때 양도,탈퇴,폐쇄 노출 됨
+            if (calEdit.contains("폐쇄")) {
+
+                calEditName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[1]/a/strong")).getText();
+
+                util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
+                util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
+
+
+                assertAlert = util.getAlert().getText();
+                assertTrue(assertAlert.contains("공유 캘린더를 폐쇄하면 참여자가 모두 탈퇴 처리되고,\n" +
+                        "캘린더에 등록한 모든 일정이 삭제됩니다."));
+                util.getAlert().accept();
+
+                assertAlert = util.getAlert().getText();
+                assertTrue(assertAlert.contains("캘린더가 폐쇄되었습니다."));
+                util.getAlert().accept();
+
+                util.waitForIsElementPresent(By.className("btn_settingcal"));
+                util.click(By.className("btn_settingcal"));
+                util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+                util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+                util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+                //좌측영역의 캘린더 목록과 비교해서 캘린더 1개가 삭제된것을 확인한다.
+                for (i = 1; i < maxCalNum - 1; i++) {
+                    System.out.println(i);
+                    calName[i] = util.waitForIsElementPresent(By.xpath("//ul[@class='category_list']/li[" + i + "]")).getAttribute("calendarid");
+                }
+
+                util.printLog("폐쇄한 캘린더 명은 [" + calEditName + "] 입니다.");
+                assertFalse(Arrays.toString(calName).contains(calEditName));
+
+                break;
+
+            }
+        }
+
+        module.LogOutAndLogIn(util, TestIds.CalUser.getId(),TestIds.CalUser.getPw());
+        util.goTo(module.calURL);
+
+        util.waitForIsElementPresent(By.className("_config"));
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        //환경설정 > 일정설정 진입
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+    }
+
+
+    /*
+    * Step : 일정설정 > 캘린더 탈퇴 > 탈퇴할 캘린더를 생성
+    * Result : 탈퇴할캘린더+오늘날짜 생성 됨
+    */
+
+    @Test
+    public void TC_20_일정설정_탈퇴_탈퇴할캘린더생성_Test() throws Exception{
+
+        util.isElementPresent(By.className("btn_makecal"));
+        util.click(By.className("btn_makecal"));
+        util.click(By.xpath("//li[@class ='_share']"));
+
+        util.clearAndType(By.id("$$_calendar_name"),"탈퇴할캘린더"+module.contents);
+
+        util.type(By.xpath("//input[@class='input_txt _input']"),"nvqa_4tc043");
+        util.click(By.xpath("//span[@class='add_btn']"));
+        util.waitForIsElementPresent(By.xpath("//ul[@class='_member_list']/li[2]"));
+
+        subName = util.waitForIsElementPresent(By.id("$$_calendar_name")).getAttribute("value");
+        util.printLog(subName);
+
+        util.click(By.xpath("//button[@class ='_save normal']"));
+    }
+
+
+    /*
+    * Step : 로그인 > 해당 계정으로 로그인
+    * Result : 해당하는 계정으로 로그인 됨
+    */
+
+    @Test
+    public void TC_21_일정설정_탈퇴_탈퇴할캘린더생성_초대_Test() throws Exception {
+        module.LogOutAndLogIn(util, TestIds.CalUser3.getId(), TestIds.CalUser3.getPw());
+        util.goTo(module.mailURL);
+
+        util.waitForTitle(module.mailTitle);
+
+        util.click(By.xpath("//ol[@class='mailList  preview_none sender_context ']/li[1]"));
+        util.waitForIsElementPresent(By.xpath("//*[@id='readFrame']/xmeta/xmeta/xmeta/xmeta/xmeta/table[1]/tbody/tr[2]/td/table[2]/tbody/tr/td/table[3]/tbody/tr[6]/td/a[1]"));
+        util.click(By.xpath("//*[@id=\"readFrame\"]/xmeta/xmeta/xmeta/xmeta/xmeta/table[1]/tbody/tr[2]/td/table[2]/tbody/tr/td/table[3]/tbody/tr[6]/td/a[1]"));
+
+        util.waitForNewWindow();
+        util.click(By.xpath("//button[@class='normal _acceptInvitation']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_acceptInvitation normal4']"));
+
+        util.close();
+        util.selectMainWindow();
+
+        module.LogOutAndLogIn(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
+        util.goTo(module.calURL);
+
+        util.waitForIsElementPresent(By.className("_config"));
+        util.click(By.xpath("//a[@class='_config']"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        //환경설정 > 일정설정 진입
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+    }
+
 
     /*
     * Step : 일정설정 > 캘린더 탈퇴 클릭
@@ -576,19 +901,14 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_15_일정설정_탈퇴_Test() throws Exception {
+    public void TC_22_일정설정_탈퇴_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
-        String calEdit;
-        String calEditMemberList;
-        String calEditMemberValue = null;
-        String calEditResult;
-        String calEditName;
 
         String[] calName = new String[maxCalNum];
 
-        for (int i = 1; i < maxCalNum; i++) {
+        for (int i = 1; i < maxCalNum+1; i++) {
             calEdit = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div")).getText();
             //공유캘린더 참석자, 마스터일때 탈퇴 노출 됨
             if (calEdit.contains("양도")) {
@@ -607,18 +927,18 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                         calEditName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[1]/a/strong")).getText();
 
                         util.click(By.xpath("//div[@class='layer_footer']/button[1]"));
-                        calEditResult = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr["+i+"]/td[5]/div/a")).getText();
-
-                        //새로고침 해서 탈퇴 노출 되는 시점 확인 필요
-                        assertTrue(calEditResult.contains("탈퇴"));
+                        util.waitForPageLoaded();
 
                         util.waitForIsElementPresent(By.className("btn_settingcal"));
-
-                        util.click(By.className("btn_settingcal"));
-                        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+                        util.click(By.xpath("//a[@class='btn_settingcal']"));
+                        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
 
                         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
                         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+                        //새로고침 해서 탈퇴 노출 되는 시점 확인 필요
+                        calEditResult = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr["+i+"]/td[5]/div/a")).getText();
+                        assertTrue(calEditResult.contains("탈퇴"));
 
                         //좌측영역의 캘린더 목록과 비교해서 캘린더 1개가 삭제된것을 확인한다.
                         for(i=1; i < maxCalNum-1; i++) {
@@ -651,20 +971,97 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     }
 
 
-    /*
-    * Step : 좌측영역 > + 버튼 클릭 > 공유 캘린더 만들기
-    * Result : 공유 캘린더 생성 됨
-    */
-    @Test
-    public void TC_15_일정설정_폐쇄_캘린더생성_Test() throws Exception{
 
-        String subName;
+    /*
+    * Step : 일정설정 > 캘린더 탈퇴 > 탈퇴할 캘린더를 생성
+    * Result : 탈퇴할캘린더+오늘날짜 생성 됨
+    */
+
+    @Test
+    public void TC_23_일정설정_탈퇴_탈퇴한캘린더삭제_Test() throws Exception {
+
+        module.LogOutAndLogIn(util, TestIds.CalUser3.getId(),TestIds.CalUser3.getPw());
+        util.goTo(module.calURL);
+
+        util.waitForIsElementPresent(By.className("_config"));
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+        //환경설정 > 일정설정 진입
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+        util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
+        maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
+
+        String[] calName = new String[maxCalNum];
+
+        for (int i = 1; i < maxCalNum; i++) {
+            calEdit = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div")).getText();
+            //공유캘린더 마스터일때 양도,탈퇴,폐쇄 노출 됨
+            if (calEdit.contains("폐쇄")) {
+
+                calEditName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[1]/a/strong")).getText();
+
+                util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
+                util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
+
+
+                assertAlert = util.getAlert().getText();
+                assertTrue(assertAlert.contains("공유 캘린더를 폐쇄하면 참여자가 모두 탈퇴 처리되고,\n" +
+                        "캘린더에 등록한 모든 일정이 삭제됩니다."));
+                util.getAlert().accept();
+
+                assertAlert = util.getAlert().getText();
+                assertTrue(assertAlert.contains("캘린더가 폐쇄되었습니다."));
+                util.getAlert().accept();
+
+                util.waitForIsElementPresent(By.className("btn_settingcal"));
+                util.click(By.className("btn_settingcal"));
+                util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+                util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+                util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+                //좌측영역의 캘린더 목록과 비교해서 캘린더 1개가 삭제된것을 확인한다.
+                for (i = 1; i < maxCalNum - 1; i++) {
+                    System.out.println(i);
+                    calName[i] = util.waitForIsElementPresent(By.xpath("//ul[@class='category_list']/li[" + i + "]")).getAttribute("calendarid");
+                }
+
+                util.printLog("폐쇄한 캘린더 명은 [" + calEditName + "] 입니다.");
+                assertFalse(Arrays.toString(calName).contains(calEditName));
+
+                break;
+
+            }
+        }
+
+        module.LogOutAndLogIn(util, TestIds.CalUser.getId(),TestIds.CalUser.getPw());
+        util.goTo(module.calURL);
+
+        util.waitForIsElementPresent(By.className("_config"));
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        //환경설정 > 일정설정 진입
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+    }
+
+
+    /*
+    * Step : 일정설정 > 캘린더 폐쇄 > 폐쇄할 캘린더를 생성
+    * Result : 폐쇄할캘린더+오늘날짜 생성 됨
+    */
+
+    @Test
+    public void TC_24_일정설정_폐쇄_캘린더생성_Test() throws Exception{
 
         util.isElementPresent(By.className("btn_makecal"));
         util.click(By.className("btn_makecal"));
         util.click(By.xpath("//li[@class ='_share']"));
 
-        util.clearAndType(By.id("$$_calendar_name"),"공유캘린더");
+        util.clearAndType(By.id("$$_calendar_name"),"폐쇄할캘린더"+module.contents);
 
         util.type(By.xpath("//input[@class='input_txt _input']"),"nvqa_4tc040");
         util.click(By.xpath("//span[@class='add_btn']"));
@@ -680,12 +1077,14 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.click(By.xpath("//button[@class ='_save normal']"));
     }
 
+
     /*
     * Step : 로그인 > 해당 계정으로 로그인 > 메일 이동 > 공유캘린더 초대 수락
     * Result : 공유 캘린더에 CalUser2, 3 가 추가 됨
     */
+
     @Test
-    public void TC_16_일정설정_폐쇄_캘린더생성_초대1_Test() throws Exception {
+    public void TC_25_일정설정_폐쇄_캘린더생성_초대1_Test() throws Exception {
         module.LogOutAndLogIn(util, TestIds.CalUser2.getId(), TestIds.CalUser2.getPw());
         util.goTo(module.mailURL);
 
@@ -703,12 +1102,14 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.selectMainWindow();
     }
 
+
     /*
     * Step : 로그인 > 해당 계정으로 로그인
     * Result : 해당하는 계정으로 로그인 됨
     */
+
     @Test
-    public void TC_17_일정설정_폐쇄_캘린더생성_초대2_Test() throws Exception {
+    public void TC_26_일정설정_폐쇄_캘린더생성_초대2_Test() throws Exception {
         module.LogOutAndLogIn(util, TestIds.CalUser3.getId(), TestIds.CalUser3.getPw());
         util.goTo(module.mailURL);
 
@@ -728,8 +1129,9 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         module.LogOutAndLogIn(util, TestIds.CalUser.getId(),TestIds.CalUser.getPw());
         util.goTo(module.calURL);
 
+        util.waitForIsElementPresent(By.className("_config"));
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
         //환경설정 > 일정설정 진입
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -738,18 +1140,16 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
 
 
 
-     /*
+    /*
     * Step : 일정설정 > 캘린더 탈퇴 클릭
     * Result : 해당 캘린더 목록에서 노출되지 않음
     */
 
     @Test
-    public void TC_18_일정설정_폐쇄_Test() throws Exception {
+    public void TC_27_일정설정_폐쇄_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
-        String calEdit;
-        String calEditName;
 
         String[] calName = new String[maxCalNum];
 
@@ -764,18 +1164,18 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                 util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
 
 
-                util.getAlert().getText().contains("캘린더에 등록한 모든 일정이 삭제됩니다.");
+                assertAlert = util.getAlert().getText();
+                assertTrue(assertAlert.contains("공유 캘린더를 폐쇄하면 참여자가 모두 탈퇴 처리되고,\n" +
+                        "캘린더에 등록한 모든 일정이 삭제됩니다."));
                 util.getAlert().accept();
-                //util.sleep(1);
 
-                util.getAlert().getText().contains("캘린더를 폐쇄하시겠습니까?");
+                assertAlert = util.getAlert().getText();
+                assertTrue(assertAlert.contains("캘린더가 폐쇄되었습니다."));
                 util.getAlert().accept();
-                //util.sleep(1);
-
 
                 util.waitForIsElementPresent(By.className("btn_settingcal"));
                 util.click(By.className("btn_settingcal"));
-                util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+                util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
 
                 util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
                 util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -795,16 +1195,21 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         }
     }
 
+
     /*
     * Step : 일정설정 > 캘린더 탈퇴 클릭
     * Result : 해당 캘린더 목록에서 노출되지 않음
     */
 
     @Test
-    public void TC_19_일정설정_구독해지_캘린더구독_Test() throws Exception {
+    public void TC_28_일정설정_구독해지_캘린더구독_Test() throws Exception {
 
         //util.goTo("http://me2.do/xsxu9Adl");
         util.goTo("http://me2.do/xSEexqNu");
+        util.waitForTitle("일정 : 네이버 캘린더");
+        util.waitForIsElementPresent(By.className("monthly_calendar"));
+        util.waitForPageToLoad();
+
         util.waitForIsElementPresent(By.xpath("//button[@class='btn btn_sub']"));
         util.click(By.xpath("//button[@class='btn btn_sub']"));
 
@@ -826,20 +1231,21 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.waitForTitle(module.calTitle);
 
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
         //환경설정 > 일정설정 진입
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
     }
 
-     /*
+
+    /*
     * Step : 일정설정 > 캘린더 탈퇴 클릭
     * Result : 해당 캘린더 목록에서 노출되지 않음
     */
 
     @Test
-    public void TC_20_일정설정_구독해지_Test() throws Exception {
+    public void TC_29_일정설정_구독해지_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
@@ -848,7 +1254,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
 
         String[] calName = new String[maxCalNum];
 
-        for (int i = 1; i < maxCalNum; i++) {
+        for (int i = 1; i < maxCalNum+1; i++) {
             calEdit = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div")).getText();
             //공유캘린더 마스터일때 양도,탈퇴,폐쇄 노출 됨
             if (calEdit.contains("구독해지")) {
@@ -858,14 +1264,14 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                 util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
                 util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
 
-
-                util.getAlert().getText().contains("해지하시겠습니까?");
+                assertAlert = util.getAlert().getText();
+                assertTrue(assertAlert.contains("해지하시겠습니까?"));
                 util.getAlert().accept();
-                util.sleep(1);
+                //util.sleep(1);
 
                 util.waitForIsElementPresent(By.className("btn_settingcal"));
                 util.click(By.className("btn_settingcal"));
-                util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+                util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
 
                 util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
                 util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -884,9 +1290,4 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
             }
         }
     }
-
-
-
-
-
 }

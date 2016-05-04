@@ -63,6 +63,7 @@ public class Modules {
 	public final String everyYear = "매년";
 
 	public String SubName;
+	public String URL;
 	//public String CurrentDate;
 
 	public String a,b,c,d,e,f = null;
@@ -125,6 +126,8 @@ public class Modules {
 		String currentTitle;
 		currentTitle = util.getTitle();
 		//연락처 입력 화면 노출시 확인 클릭
+
+		util.waitForIsNotVisible(By.className("btn_inner"));
 
 		if(currentTitle.contains("연락처 정보 업데이트 안내 : 네이버"))
 		{
