@@ -13,279 +13,610 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
     public String Title = null;
     public String URL = null;
 
+    public String defaultCountry;
+    public String defaultCity;
+
+    public String additionalCountry;
+    public String additionalCity;
+
+    public String tempEventSubject;
+
     /*
    * Step : 로그인 > 해당 계정으로 로그인
    * Result : 해당하는 계정으로 로그인 됨
     */
     @Test
-    public void TC_00_GNB_로그인_Test() throws Exception {
+    public void TC_00_캘리더영역_로그인_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
+        util.waitForIsElementPresent(By.xpath("//a[@class=_'svc_lnk pwe_home']"));
     }
 
     /*
-     * Step : GNB > NAVER 클릭
-     * Result : 네이버 페이지로 이동됨
-     * URL : http://m.naver.com"
-     */
-    @Test
-    public void TC_01_GNB_NAVER_Test() throws Exception {
-
-        util.click(By.className("naver"));
-        module.assertCalendarPage(util,module.mainTitle,module.mainURL);
-
-        util.goBack();
-        module.assertCalendarPage(util,module.calTitle,module.calURL);
-
-        /*
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-
-        assertTrue(Title.contains(module.mainTitle));
-        assertTrue(URL.contains(module.mainURL));
-
-        util.goBack();
-        */
-
-    }
-
-    /*
-     * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
-     * Result : 개별 서비스 페이지로 이동됨
-     * URL : http://me.naver.com"
-     */
-    @Test
-    public void TC_02_GNB_탭_Test() throws Exception{
-
-        util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
-
-        util.goBack();
-        util.waitForTitle(module.calTitle);
-
-        //module.assertCalendarPage(util,module.calTitle,module.calURL);
-
-        /*Title = util.getTitle();
-        URL = util.getCurrentUrl();
-
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-
-        assertTrue(Title.contains(module.meitle));
-        assertTrue(URL.contains(module.meURL));
-
-        util.goBack();
-        */
-
-
-
-        util.click(By.className("mail"));
-
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-
-        assertTrue(Title.contains(module.mailTitle));
-        assertTrue(URL.contains(module.mailURL));
-
-        util.goBack();
-        util.waitForTitle(module.calTitle);
-    }
-
-    /*
-    * Step : GNB > 프로필사진 클릭
-    * Result : 프로필 레이어 노출됨
-    */
-    @Test
-    public void TC_03_GNB_프로필_Test() throws Exception {
-        // 프로필 사진 클릭
-        // 사용자 메일에 사용자 아이디 포함하고 있는지 확인
-        util.click(By.className("gnb_name"));
-        util.waitForIsElementPresent(By.className("gnb_mail_address"));
-        assertTrue(util.isElementPresent(By.className("gnb_mail_address")).getText().contains(TestIds.CalUser.getId()));
-
-         }
-
-    /*
-    * Step : GNB > 프로필 > 내정보 클릭
-    * Result : 내정보 페이지로 이동됨
-    * URL : https://nid.naver.com/user2/help/myInfo.nhn?menu=home
+    * Step : 캘린더영역 > 일간 클릭
+    * Result : 일간 > 일간 클릭하면 캘린더 영역 일간으로 노출 됨
+    * URL : 뷰 방식 day로 표시되는것 확인
     */
 
     @Test
-    public void TC_04_GNB_프로필_내정보_Test() throws Exception{
-        // 프로필 영역
-        // 내 정보 클릭
-        util.click(By.className("gnb_info"));
-        util.waitForIsElementPresent(By.className("sptxt"));
+    public void TC_01_캘린더영역_일간_Test() throws Exception{
 
-        util.waitForTitle("네이버 내정보");
+        util.click(By.xpath("//button[contains(@class,'_day diary')]"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_day diary on']"));
 
-        Title = util.getTitle();
+        //URL 검증 필요
+        util.waitForIsElementPresent(By.xpath("//span[@class='date']/span[10]"));
         URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://nid.naver.com/user2/help/myInfo.nhn?menu=home"));
-        assertTrue(Title.contains("네이버 내정보"));
-
-        util.goBack();
-        util.waitForTitle(module.calTitle);
+        assertTrue(URL.contains("day"));
     }
 
+
     /*
-    * Step : GNB > 프로필 > 보안설정 클릭
-    * Result : 보안 설정 페이지로 이동 됨
-    * URL : https://nid.naver.com/user2/help/myInfo.nhn?m=viewSecurity&menu=security
+    * Step : 캘린더영역 > 일간 > 시간대 클릭
+    * Result : 일간 > 현재 시간대 노출 됨
     */
 
     @Test
-    public void TC_05_GNB_프로필_보안설정_Test() throws Exception{
-        // 프로필 영역
-        // 내 정보 클릭
-        util.click(By.className("gnb_name"));
-        util.click(By.className("gnb_secure"));
+    public void TC_02_캘린더영역_일간_시간대_Test() throws Exception{
 
-        util.waitForTitle("보안설정 : 네이버 내정보");
+        util.click(By.className("_set_timezone"));
 
-        Title = util.getTitle();
+        //시간대에서 현재 기본 시간대 국가,도시 확인
+        util.waitForIsElementPresent(By.className("layer_add_timezone"));
+        defaultCountry = util.waitForIsElementPresent(By.xpath("//div[@class='_default_country  selectbox13 nation']/div/div")).getText();
+        defaultCity = util.waitForIsElementPresent(By.xpath("//div[@class='_default_city  selectbox13']/div/div")).getText();
+
+        util.printLog("현재 기본 시간대 국가는 ["+defaultCountry+"] 도시는 ["+defaultCity+"]입니다.");
+
+        assertTrue(defaultCountry.contains("대한민국"));
+        assertTrue(defaultCity.contains("서울"));
+
+        //시간대에서 현재 추가 시간대 국가,도시 확인
+        additionalCountry = util.waitForIsElementPresent(By.xpath("//div[@class='_additional_country  selectbox13 nation']/div/div")).getText();
+        additionalCity = util.waitForIsElementPresent(By.xpath("//div[@class='_additional_city  selectbox13']/div/div")).getText();
+
+        util.printLog("현재 추가 시간대 국가는 ["+additionalCountry+"] 도시는 ["+additionalCity+"]입니다.");
+
+        assertTrue(additionalCountry.contains("설정안함"));
+        assertTrue(additionalCity.contains("설정안함"));
+
+        util.click(By.xpath("//button[@class='_save normal2']"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 일간 > 할일생성
+    * Result : 일간 > 할일 생성 됨
+    */
+
+    @Test
+    public void TC_03_캘린더영역_일간_할일_생성_Test() throws Exception {
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_task']"));
+        util.click(By.xpath("//div[@class='_new_task']"));
+
+        //일간영역_할일 제목으로 일정 생성
+        util.waitForIsElementPresent(By.id("_taskForm"));
+        util.type(By.className("_content"),"일간영역_할일");
+        util.click(By.className("_save"));
+
+        //일간영역_할일 제목으로 할일 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_task']/div/div/a")).getText();
+        assertTrue(tempEventSubject.contains("일간영역_할일"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 일간 > 할일삭제
+    * Result : 일간 > 할일 삭제 됨
+    */
+
+    @Test
+    public void TC_04_캘린더영역_일간_할일_삭제_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//td[@class='_task']"));
+        util.click(By.xpath("//td[@class='_task']"));
+
+        //할일 노출 되고 할일 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.id("_taskForm"));
+        util.click(By.xpath("//button[@class='_delete btn_delete']"));
+        util.getAlert().accept();
+
+        //할일 사라지고 _new_task 노출되는것 확인
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_task']"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='_new_task']")).isDisplayed());
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 일간 > 기념일생성
+    * Result : 일간 > 기념일 생성 됨
+    */
+
+    @Test
+    public void TC_05_캘린더영역_일간_기념일_생성_Test() throws Exception {
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_anniversary']"));
+        util.click(By.xpath("//div[@class='_new_anniversary']"));
+
+        //일간영역_기념일 제목으로 일정 생성
+        util.waitForIsElementPresent(By.xpath("//div[@class='schedule_body anniversary_edit']"));
+        util.type(By.xpath("//div[@class='pos_input']/input"),"일간영역_기념일");
+        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
+
+        //일간영역_기념일 제목으로 기념일 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_anniversary']/div/div/a")).getText();
+        assertTrue(tempEventSubject.contains("일간영역_기념일"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 일간 > 기념일삭제
+    * Result : 일간 > 기념일 삭제 됨
+    */
+
+    @Test
+    public void TC_06_캘린더영역_일간_기념일_삭제_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//td[@class='_anniversary']"));
+        util.click(By.xpath("//td[@class='_anniversary']"));
+
+        //기념일 노출 되고 기념일 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view']"));
+        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+
+        //기념일 사라지고 _new_anniversary 노출되는것 확인
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_anniversary']"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='_new_anniversary']")).isDisplayed());
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 일간 > 종일일정 생성
+    * Result : 일간 > 종일일정 생성 됨
+    */
+
+    @Test
+    public void TC_07_캘린더영역_일간_종일일정_생성_Test() throws Exception {
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_allday']"));
+        util.click(By.xpath("//div[@class='_new_allday']"));
+
+        //일간영역_종일 제목으로 일정 생성
+        util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
+        util.type(By.xpath("//div[@class='pos_input']/input"),"일간영역_종일일정");
+        util.click(By.xpath("//button[@class='btn_sys pos_save']"));
+
+        //일간영역_종일 제목으로 종일일정 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_schedule']/div/div/a")).getText();
+        assertTrue(tempEventSubject.contains("일간영역_종일일정"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 일간 > 종일일정 삭제
+    * Result : 일간 > 종일일정 삭제 됨
+    */
+
+    @Test
+    public void TC_08_캘린더영역_일간_종일일정_삭제_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//td[@class='_schedule']"));
+        util.click(By.xpath("//td[@class='_schedule']"));
+
+        //종일일정 노출 되고 종일일정 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
+        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert().accept();
+
+        //종일일정 사라지고 _new_allday 노출되는것 확인
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_allday']"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='_new_allday']")).isDisplayed());
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 일간 > 시간일정 생성
+    * Result : 일간 > 시간일정 생성 됨
+    */
+
+    @Test
+    public void TC_09_캘린더영역_일간_시간일정_생성_Test() throws Exception {
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='timeline']"));
+        util.click(By.xpath("//div[@class='timeline']"));
+
+        //일간영역_시간 제목으로 일정 생성
+        util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
+        util.type(By.xpath("//div[@class='pos_input']/input"),"일간영역_시간");
+        util.click(By.xpath("//button[@class='btn_sys pos_save']"));
+
+        //일간영역_시간 제목으로 시간일정 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div/p/a")).getText();
+        assertTrue(tempEventSubject.contains("일간영역_시간"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 일간 > 시간일정 삭제
+    * Result : 일간 > 시간일정 삭제 됨
+    */
+
+    @Test
+    public void TC_10_캘린더영역_일간_시간일정_삭제_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//td[@class='_time_schedule_container']"));
+        util.click(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div"));
+
+        //시간일정 노출 되고 일정 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
+        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert().accept();
+
+        //시간일정 사라지고 _new_anniversary 노출되는것 확인
+        util.waitForIsNotVisible(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div"));
+        assertTrue(util.waitForIsNotVisible(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div")));
+    }
+
+
+    /*
+    * Step : 상단영역 > 주간 클릭
+    * Result : 월간 > 주간 클릭하면 캘린더 영역 주간으로 노출 됨
+    * URL : 뷰 방식 week로 표시되는것 확인
+    */
+
+    @Test
+    public void TC_11_캘린더영역_주간_Test() throws Exception{
+
+        util.click(By.xpath("//button[contains(@class,'_week  week')]"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_week  week on']"));
+
+        //URL 검증 필요
+        util.waitForIsElementPresent(By.xpath("//span[@class='date']/span[11]"));
+        URL = util.getCurrentUrl();
+        util.printLog(URL);
+
+        assertTrue(URL.contains("week"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 일간 > 시간대 클릭
+    * Result : 일간 > 현재 시간대 노출 됨
+    */
+
+    @Test
+    public void TC_12_캘린더영역_주간_시간대_Test() throws Exception{
+
+        util.click(By.className("_set_timezone"));
+
+        //시간대에서 현재 기본 시간대 국가,도시 확인
+        util.waitForIsElementPresent(By.className("layer_add_timezone"));
+        defaultCountry = util.waitForIsElementPresent(By.xpath("//div[@class='_default_country  selectbox13 nation']/div/div")).getText();
+        defaultCity = util.waitForIsElementPresent(By.xpath("//div[@class='_default_city  selectbox13']/div/div")).getText();
+
+        util.printLog("현재 기본 시간대 국가는 ["+defaultCountry+"] 도시는 ["+defaultCity+"]입니다.");
+
+        assertTrue(defaultCountry.contains("대한민국"));
+        assertTrue(defaultCity.contains("서울"));
+
+        //시간대에서 현재 추가 시간대 국가,도시 확인
+        additionalCountry = util.waitForIsElementPresent(By.xpath("//div[@class='_additional_country  selectbox13 nation']/div/div")).getText();
+        additionalCity = util.waitForIsElementPresent(By.xpath("//div[@class='_additional_city  selectbox13']/div/div")).getText();
+
+        util.printLog("현재 추가 시간대 국가는 ["+additionalCountry+"] 도시는 ["+additionalCity+"]입니다.");
+
+        assertTrue(additionalCountry.contains("설정안함"));
+        assertTrue(additionalCity.contains("설정안함"));
+
+        util.click(By.xpath("//button[@class='_save normal2']"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 주간 > 할일생성
+    * Result : 주간 > 할일 생성 됨
+    */
+
+    @Test
+    public void TC_13_캘린더영역_주간_할일_생성_Test() throws Exception {
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_task']"));
+        util.click(By.xpath("//div[@class='_new_task']"));
+
+        //주간영역_할일 제목으로 일정 생성
+        util.waitForIsElementPresent(By.id("_taskForm"));
+        util.type(By.className("_content"),"주간영역_할일");
+        util.click(By.className("_save"));
+
+        //주간영역_할일 제목으로 할일 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_task']/div/div/a")).getText();
+        assertTrue(tempEventSubject.contains("주간영역_할일"));
+    }
+
+
+
+    /*
+    * Step : 캘린더영역 > 주간 > 할일삭제
+    * Result : 주간 > 할일 삭제 됨
+    */
+
+    @Test
+    public void TC_14_캘린더영역_주간_할일_삭제_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//td[@class='_task']"));
+        util.click(By.xpath("//td[@class='_task']"));
+
+        //할일 노출 되고 할일 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.id("_taskForm"));
+        util.click(By.xpath("//button[@class='_delete btn_delete']"));
+        util.getAlert().accept();
+
+        //할일 사라지고 _new_task 노출되는것 확인
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_task']"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='_new_task']")).isDisplayed());
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 주간 > 기념일생성
+    * Result : 주간 > 기념일 생성 됨
+    */
+
+    @Test
+    public void TC_15_캘린더영역_주간_기념일_생성_Test() throws Exception {
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_anniversary']"));
+        util.click(By.xpath("//div[@class='_new_anniversary']"));
+
+        //주간영역_기념일 제목으로 일정 생성
+        util.waitForIsElementPresent(By.xpath("//div[@class='schedule_body anniversary_edit']"));
+        util.type(By.xpath("//div[@class='pos_input']/input"),"주간영역_기념일");
+        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
+
+        //주간영역_기념일 제목으로 기념일 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_anniversary']/div/div/a")).getText();
+        assertTrue(tempEventSubject.contains("주간영역_기념일"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 주간 > 기념일삭제
+    * Result : 주간 > 기념일 삭제 됨
+    */
+
+    @Test
+    public void TC_16_캘린더영역_주간_기념일_삭제_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//td[@class='_anniversary']"));
+        util.click(By.xpath("//td[@class='_anniversary']"));
+
+        //기념일 노출 되고 기념일 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view']"));
+        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+
+        //기념일 사라지고 _new_anniversary 노출되는것 확인
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_anniversary']"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='_new_anniversary']")).isDisplayed());
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 주간 > 종일일정 생성
+    * Result : 주간 > 종일일정 생성 됨
+    */
+
+    @Test
+    public void TC_17_캘린더영역_주간_종일일정_생성_Test() throws Exception {
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_allday']"));
+        util.click(By.xpath("//div[@class='_new_allday']"));
+
+        //주간영역_종일 제목으로 일정 생성
+        util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
+        util.type(By.xpath("//div[@class='pos_input']/input"),"주간영역_종일일정");
+        util.click(By.xpath("//button[@class='btn_sys pos_save']"));
+
+        //주간영역_종일 제목으로 종일일정 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_schedule']/div/div/a")).getText();
+        assertTrue(tempEventSubject.contains("주간영역_종일일정"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 주간 > 종일일정 삭제
+    * Result : 주간 > 종일일정 삭제 됨
+    */
+
+    @Test
+    public void TC_18_캘린더영역_주간_종일일정_삭제_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//td[@class='_schedule']"));
+        util.click(By.xpath("//td[@class='_schedule']"));
+
+        //종일일정 노출 되고 종일일정 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
+        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert().accept();
+
+        //종일일정 사라지고 _new_allday 노출되는것 확인
+        util.waitForIsElementPresent(By.xpath("//div[@class='_new_allday']"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='_new_allday']")).isDisplayed());
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 주간 > 시간일정 생성
+    * Result : 주간 > 시간일정 생성 됨
+    */
+
+    @Test
+    public void TC_19_캘린더영역_주간_시간일정_생성_Test() throws Exception {
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='timeline']"));
+        util.click(By.xpath("//div[@class='timeline']"));
+
+        //주간영역_시간 제목으로 일정 생성
+        util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
+        util.type(By.xpath("//div[@class='pos_input']/input"),"주간영역_시간");
+        util.click(By.xpath("//button[@class='btn_sys pos_save']"));
+
+        //주간영역_시간 제목으로 시간일정 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div/p/a")).getText();
+        assertTrue(tempEventSubject.contains("주간영역_시간"));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 주간 > 시간일정 삭제
+    * Result : 주간 > 시간일정 삭제 됨
+    */
+
+    @Test
+    public void TC_20_캘린더영역_주간_시간일정_삭제_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//td[@class='_time_schedule_container']"));
+        util.click(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div"));
+
+        //시간일정 노출 되고 일정 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
+        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert().accept();
+
+        //시간일정 사라지고 _new_anniversary 노출되는것 확인
+        util.waitForIsNotVisible(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div"));
+        assertTrue(util.waitForIsNotVisible(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div")));
+    }
+
+
+    /*
+    * Step : 상단영역 > 월간 클릭
+    * Result : 월간 > 월간 클리하면 캘린더 영역 월간으로 노출 됨
+    * URL : 뷰 방식 month로 표시되는것 확인
+    */
+
+    @Test
+    public void TC_21_캘린더영역_월간_Test() throws Exception{
+
+        util.click(By.xpath("//button[contains(@class,'_month month')]"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_month month on']"));
+
+        //URL 검증 필요
+        util.waitForIsVisible(By.xpath("//div[@class='monthly_calendar']"));
         URL = util.getCurrentUrl();
 
-        assertTrue(URL.contains("https://nid.naver.com/user2/help/myInfo.nhn?m=viewSecurity&menu=security"));
-        assertTrue(Title.contains("보안설정 : 네이버 내정보"));
-        util.goBack();
-        util.waitForTitle(module.calTitle);
+        util.printLog(URL);
+        assertTrue(URL.contains("month"));
     }
 
+
     /*
-    * Step : GNB > 프로필 > 내 블로그 클릭
-    * Result : 내 블로그로 이동 됨
-    * URL : http://blog.naver.com/사용자계정
+    * Step : 캘린더영역 > 월간 > 일정 생성
+    * Result : 월간 > 일정 생성 됨
     */
 
     @Test
-    public void TC_06_GNB_프로필_내블로그_Test() throws Exception{
-        // 프로필 영역
-        // 내 정보 클릭
-        util.click(By.className("gnb_name"));
-        util.click(By.className("gnb_blog"));
+    public void TC_22_캘린더영역_월간_일정_생성_Test() throws Exception {
 
-        util.waitForTitle(TestIds.CalUser.getId()+"님의블로그 : 네이버 블로그");
+        util.waitForIsElementPresent(By.xpath("//td[@class='_month_cell month_schedule_drop today_area']"));
+        util.click(By.xpath("//td[@class='_month_cell month_schedule_drop today_area']"));
+
+        //월간영역_일정 제목으로 일정 생성
+        util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
+        util.type(By.xpath("//div[@class='pos_input']/input"),"월간영역_일정");
+        util.click(By.xpath("//button[@class='btn_sys pos_save']"));
+
+        //월간영역_일 제목으로 시간일정 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//a[contains(text(),'월간영역_일정')]")).getText();
+        assertTrue(tempEventSubject.contains("월간영역_일정"));
+    }
 
 
-        Title = util.getTitle();
+    /*
+    * Step : 캘린더영역 > 월간 > 일정 삭제
+    * Result : 월간 > 일정 삭제 됨
+    */
+
+    @Test
+    public void TC_23_캘린더영역_월간_일정_삭제_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'월간영역_일정')]"));
+        util.click(By.xpath("//a[contains(text(),'월간영역_일정')]"));
+
+        //일정 노출 되고 일정 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
+        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert().accept();
+
+        //일정 사라지는것 확인
+        util.waitForIsNotVisible(By.xpath("//a[contains(text(),'월간영역_일정')]"));
+        assertTrue(util.waitForIsNotVisible(By.xpath("//a[contains(text(),'월간영역_일정')]")));
+    }
+
+
+    /*
+    * Step : 캘린더영역 > 목록 클릭
+    * Result : 목록 > 목록 클리하면 캘린더 영역 목록으로 노출 됨
+    * URL : 뷰 방식 list로 표시되는것 확인
+    */
+
+    @Test
+    public void TC_24_캘린더영역_목록_Test() throws Exception{
+
+        util.click(By.xpath("//button[contains(@class,'_list list')]"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
+
+
+        //URL 검증 필요
+        util.waitForIsVisible(By.xpath("//div[@class='list_frame']"));
         URL = util.getCurrentUrl();
 
-        assertTrue(URL.contains("http://blog.naver.com/"+TestIds.CalUser.getId()));
-        assertTrue(Title.contains(TestIds.CalUser.getId()+"님의블로그 : 네이버 블로그"));
-
-        util.goBack();
-        util.waitForTitle(module.calTitle);
+        util.printLog(URL);
+        assertTrue(URL.contains("list"));
     }
 
 
     /*
-    * Step : GNB > 프로필 > 가입한 카페 클릭
-    * Result : 카페로 이동 됨
-    * URL : http://section.cafe.naver.com/
+    * Step : 캘린더영역 > 목록 > 일정 생성
+    * Result : 목록 > 일정 생성 됨
     */
 
     @Test
-    public void TC_07_GNB_프로필_가입한카페_Test() throws Exception{
-        // 프로필 영역
-        // 내 정보 클릭
-        util.click(By.className("gnb_name"));
-        util.click(By.className("gnb_cafe"));
-        //util.waitForIsElementPresent(By.className("gnb_notice_all"));
+    public void TC_25_캘린더영역_목록_일정_생성_Test() throws Exception {
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("http://section.cafe.naver.com/"));
-        assertTrue(Title.contains("네이버 카페"));
+        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'today')]/dl/dt//span/button"));
+        util.click(By.xpath("//li[contains(@class,'today')]/dl/dt//span/button"));
 
-        util.goBack();
-        util.waitForTitle(module.calTitle);
+        //목록영역_일정 제목으로 일정 생성
+        util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
+        util.type(By.xpath("//div[@class='pos_input']/input"),"목록영역_일정");
+        util.click(By.xpath("//button[@class='btn_sys pos_save']"));
+
+        //목록영역_일 제목으로 시간일정 생성 되었는지 확인
+        tempEventSubject = util.waitForIsElementPresent(By.xpath("//a[contains(text(),'목록영역_일정')]")).getText();
+        assertTrue(tempEventSubject.contains("목록영역_일정"));
     }
 
 
     /*
-    * Step : GNB > 프로필 > NPAY 클릭
-    * Result : NPAY로 이동됨
-    * URL : https://order.pay.naver.com/home
+    * Step : 캘린더영역 > 목록 > 일정 삭제
+    * Result : 목록 > 일정 삭제 됨
     */
 
     @Test
-    public void TC_08_GNB_프로필_NPAY_Test() throws Exception{
-        // 프로필 영역
-        // 내 정보 클릭
-        util.click(By.className("gnb_name"));
-        util.click(By.className("gnb_pay"));
+    public void TC_26_캘린더영역_목록_일정_삭제_Test() throws Exception{
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://order.pay.naver.com/home"));
-        assertTrue(Title.contains("네이버페이"));
+        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'목록영역_일정')]"));
+        util.click(By.xpath("//a[contains(text(),'목록영역_일정')]"));
 
-        util.goBack();
-        util.waitForTitle(module.calTitle);
+        //일정 노출 되고 일정 삭제 버튼 클릭
+        util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
+        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert().accept();
+
+        //일정 사라지는것 확인
+        util.waitForIsNotVisible(By.xpath("//a[contains(text(),'목록영역_일정')]"));
+        assertTrue(util.waitForIsNotVisible(By.xpath("//a[contains(text(),'목록영역_일정')]")));
     }
 
 
-    /*
-    * Step : GNB > 프로필 > 로그아웃 클릭
-    * Result : 로그아웃되고 캘린더 페이지로 이동됨
-    * URL : https://calendar.naver.com/section.nhn
-    */
-
-    @Test
-    public void TC_09_GNB_프로필_로그아웃_Test() throws Exception{
-        // 프로필 영역
-        // 내 정보 클릭
-        util.click(By.className("gnb_name"));
-        util.click(By.id("gnb_logout_button"));
-
-        util.waitForTitle("네이버 캘린더 :: 친절한 나의 스케줄 매니저");
-
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://calendar.naver.com/section.nhn"));
-        assertTrue(Title.contains("네이버 캘린더 :: 친절한 나의 스케줄 매니저"));
-    }
-
-
-
-    /*
-    * Step : GNB > 알림 아이콘 클릭
-    * Result : 알림 목록 노출됨
-    */
-
-    @Test
-    public void TC_10_GNB_알림_Test() throws Exception{
-        //로그아웃 동작 이후에 재 로그인
-        module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
-        // 알림 목록 아이콘 확인
-        util.click(By.className("gnb_notice_li"));
-        // 알림 유무 확인
-
-        // 알림이 있을때
-        // 알림 개수, 삭제, 링크 정상 동작 확인
-        // 읽은 알림 삭제 버튼,모두 삭제 버튼 확인
-
-        // 알림이 없을때
-        // 알림 없음 문구 노출 확인
-        util.isElementPresent(By.className("svc_msg_box"));
-    }
-
-    /*
-    * Step : GNB > 서비스 아이콘 클릭
-    * Result : 다를 서비스 목록 노출됨
-    */
-
-    @Test
-    public void TC_11_GNB_서비스아이콘_Test() throws Exception{
-
-        // 알림 목록 아이콘 확인
-        util.click(By.className("gnb_service_li"));
-    }
 }
