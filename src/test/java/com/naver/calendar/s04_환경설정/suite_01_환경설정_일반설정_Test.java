@@ -63,7 +63,7 @@ public class suite_01_환경설정_일반설정_Test extends Testcase {
         }
         else if(util.waitForIsElementPresent(By.id("default_view_month")).isSelected()) {
             util.printLog("현재 캘린더 기본 화면은 [월별보기] 로 설정 되어 있습니다.");
-            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("month"));
+            assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'_cfg_default_view_mode inp01') and contains(@value,'month')]")).isSelected());
         }
         else if(util.waitForIsElementPresent(By.id("default_view_list")).isSelected()) {
             util.printLog("현재 캘린더 기본 화면은 [목록보기] 로 설정 되어 있습니다.");

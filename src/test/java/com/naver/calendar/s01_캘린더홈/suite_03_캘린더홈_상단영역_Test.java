@@ -351,6 +351,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     @Test
     public void TC_14_상단영역_인쇄_Test() throws Exception{
         util.click(By.className("print"));
+        util.sleep(5);
         util.waitForNewWindow();
 
         Title = util.getTitle();

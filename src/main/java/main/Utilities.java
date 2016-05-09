@@ -1478,6 +1478,7 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 
 		WebElement element = null;
 		element = waitForIsElementPresent(locator);
+		click(locator);
 		clear(locator);
 		element.sendKeys(inputText);
 		//locator.findElement((SearchContext) this).sendKeys(inputText);

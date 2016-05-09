@@ -319,7 +319,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         //좌측영역의 캘린더 목록에서 할일을 뺀 숫자와 환경설정의 캘린더 목록이 같은지 확인
         calNum = util.getXpathCount(By.xpath("//ul[@class='category_list']/li"));
         System.out.println(calNum);
-        assertTrue(calList==calNum - 1);
+        assertTrue(calList==calNum-1);
     }
 
 
@@ -367,6 +367,39 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         assertTrue(util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid").contains(basicValue));
     }
 
+         /*
+     * Step : 일정설정 > 기본캘린더 확인
+     * Result : 현재 기본캘린더 확인, 변경 확인
+     */
+
+    @Test
+    public void TC_10_일정설정_기본캘린더_기본캘린더복구_Test() throws Exception{
+
+        util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_cfg_calendar_default inp01') and contains(@value,'6819065')]"));
+        util.click(By.xpath("//input[contains(@class,'_cfg_calendar_default inp01') and contains(@value,'6819065')]"));
+
+        //저장하고 얼럿에서 확인
+        util.click(By.xpath("//button[@class='_save normal']"));
+        util.getAlert().accept();
+
+        //환경설정 이동
+        util.waitForIsElementPresent(By.className("_config"));
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+        //환경설정 > 일정설정 이동
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+        basicValue = util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid");
+        basicCalName = util.waitForIsElementPresent(By.xpath("//a[contains(@data-value,'"+basicValue+"')]/strong")).getText();
+
+        //새로 설정한 기본 캘린더의 값이 좌측 영역 캘린더 목록에 노출되는지 확인
+        //util.printLog(basicValue);
+        util.printLog("현재 기본 캘린더의 이름은 : "+basicCalName);
+        assertTrue(util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid").contains(basicValue));
+    }
+
 
     /*
     * Step : 일정설정 > 캘린더 목록 확인
@@ -374,7 +407,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_10_일정설정_목록에표시_Test() throws Exception{
+    public void TC_11_일정설정_목록에표시_Test() throws Exception{
 
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
         randomNum = util.getRandomNum(2,maxCalNum);
@@ -425,7 +458,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_11_일정설정_목록에표시_목록에표시복구_Test() throws Exception{
+    public void TC_12_일정설정_목록에표시_목록에표시복구_Test() throws Exception{
 
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
         String[] calName = new String[maxCalNum];
@@ -468,7 +501,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_12_일정설정_외부일정_가져오기_Test() throws Exception{
+    public void TC_13_일정설정_외부일정_가져오기_Test() throws Exception{
 
         basicValue = util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_calendar') and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid");
         basicCalName = util.waitForIsElementPresent(By.xpath("//a[contains(@data-value,'"+basicValue+"')]/strong")).getText();
@@ -495,7 +528,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_13_일정설정_외부일정_내보내기_Test() throws Exception{
+    public void TC_14_일정설정_외부일정_내보내기_Test() throws Exception{
 
         util.click(By.xpath("//tr[contains(@data-value,'"+basicValue+"')]/td[4]/a[2]"));
         util.waitForNewWindow();
@@ -519,7 +552,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_14_일정설정_삭제_삭제할캘린더생성_Test() throws Exception{
+    public void TC_15_일정설정_삭제_삭제할캘린더생성_Test() throws Exception{
 
         util.click(By.className("btn_makecal"));
         util.click(By.partialLinkText("내 캘린더 만들기"));
@@ -558,7 +591,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_15_일정설정_삭제_Test() throws Exception{
+    public void TC_16_일정설정_삭제_Test() throws Exception{
 
         util.click(By.className("_config"));
         util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
@@ -627,7 +660,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_16_일정설정_양도_양도할캘린더생성_Test() throws Exception{
+    public void TC_17_일정설정_양도_양도할캘린더생성_Test() throws Exception{
 
         String subName;
 
@@ -654,7 +687,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_17_일정설정_양도_양도할캘린더생성_초대_Test() throws Exception {
+    public void TC_18_일정설정_양도_양도할캘린더생성_초대_Test() throws Exception {
         module.LogOutAndLogIn(util, TestIds.CalUser3.getId(), TestIds.CalUser3.getPw());
         util.goTo(module.mailURL);
 
@@ -689,7 +722,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_18_일정설정_양도_Test() throws Exception {
+    public void TC_19_일정설정_양도_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
@@ -764,7 +797,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_19_일정설정_양도_양도한캘린더삭제_Test() throws Exception {
+    public void TC_20_일정설정_양도_양도한캘린더삭제_Test() throws Exception {
 
         module.LogOutAndLogIn(util, TestIds.CalUser3.getId(),TestIds.CalUser3.getPw());
         util.goTo(module.calURL);
@@ -841,7 +874,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_20_일정설정_탈퇴_탈퇴할캘린더생성_Test() throws Exception{
+    public void TC_21_일정설정_탈퇴_탈퇴할캘린더생성_Test() throws Exception{
 
         util.isElementPresent(By.className("btn_makecal"));
         util.click(By.className("btn_makecal"));
@@ -866,7 +899,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_21_일정설정_탈퇴_탈퇴할캘린더생성_초대_Test() throws Exception {
+    public void TC_22_일정설정_탈퇴_탈퇴할캘린더생성_초대_Test() throws Exception {
         module.LogOutAndLogIn(util, TestIds.CalUser3.getId(), TestIds.CalUser3.getPw());
         util.goTo(module.mailURL);
 
@@ -901,7 +934,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_22_일정설정_탈퇴_Test() throws Exception {
+    public void TC_23_일정설정_탈퇴_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
@@ -978,7 +1011,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_23_일정설정_탈퇴_탈퇴한캘린더삭제_Test() throws Exception {
+    public void TC_24_일정설정_탈퇴_탈퇴한캘린더삭제_Test() throws Exception {
 
         module.LogOutAndLogIn(util, TestIds.CalUser3.getId(),TestIds.CalUser3.getPw());
         util.goTo(module.calURL);
@@ -1055,7 +1088,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_24_일정설정_폐쇄_캘린더생성_Test() throws Exception{
+    public void TC_25_일정설정_폐쇄_캘린더생성_Test() throws Exception{
 
         util.isElementPresent(By.className("btn_makecal"));
         util.click(By.className("btn_makecal"));
@@ -1084,7 +1117,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_25_일정설정_폐쇄_캘린더생성_초대1_Test() throws Exception {
+    public void TC_26_일정설정_폐쇄_캘린더생성_초대1_Test() throws Exception {
         module.LogOutAndLogIn(util, TestIds.CalUser2.getId(), TestIds.CalUser2.getPw());
         util.goTo(module.mailURL);
 
@@ -1109,7 +1142,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_26_일정설정_폐쇄_캘린더생성_초대2_Test() throws Exception {
+    public void TC_27_일정설정_폐쇄_캘린더생성_초대2_Test() throws Exception {
         module.LogOutAndLogIn(util, TestIds.CalUser3.getId(), TestIds.CalUser3.getPw());
         util.goTo(module.mailURL);
 
@@ -1146,7 +1179,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_27_일정설정_폐쇄_Test() throws Exception {
+    public void TC_28_일정설정_폐쇄_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
@@ -1202,7 +1235,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_28_일정설정_구독해지_캘린더구독_Test() throws Exception {
+    public void TC_29_일정설정_구독해지_캘린더구독_Test() throws Exception {
 
         //util.goTo("http://me2.do/xsxu9Adl");
         util.goTo("http://me2.do/xSEexqNu");
@@ -1245,7 +1278,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_29_일정설정_구독해지_Test() throws Exception {
+    public void TC_30일정설정_구독해지_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
