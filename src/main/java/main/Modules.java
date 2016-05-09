@@ -26,10 +26,10 @@ public class Modules {
 	public final String memoURL = "https://memo.naver.com/";
 	public final String memoTitle = "네이버 메모";
 
-	public final String contactURL = "http://contact.naver.com/";
+	public final String contactURL = "https://contact.naver.com/";
 	public final String contactTitle = "네이버 주소록";
 
-	public final String cloudURL = "http://cloud.naver.com/";
+	public final String cloudURL = "http://photo.cloud.naver.com/";
 	public final String cloudTitle = "네이버 클라우드";
 
 	public final String moneybookURL = "http://moneybook.naver.com/";
@@ -64,6 +64,7 @@ public class Modules {
 
 	public String SubName;
 	public String URL;
+	public String Title;
 	//public String CurrentDate;
 
 	public String a,b,c,d,e,f = null;
@@ -461,6 +462,32 @@ public class Modules {
 		//util.executeScript("document.getElementById('fileName').value='" + filePath + "';");
 		//util.executeScript("window.document.getElementById('myfile').setAttribute('value','"+filePath+"');");
 		util.findElement(By.id("uploadFile")).sendKeys(filePath);
+	}
+
+	public void goBackToCalendar(Utilities util) throws Exception{
+		util.goBack();
+		if(util.waitForIsNotVisible(By.xpath("//a[@class='_svc_lnk pwe_home']")))
+			util.goTo(calURL);
+		util.waitForTitle(calTitle);
+
+		Title = util.getTitle();
+		URL = util.getCurrentUrl();
+
+		assertTrue(Title.contains(calTitle));
+		assertTrue(URL.contains(calURL));
+	}
+
+	public void goBackToTask(Utilities util) throws Exception{
+		util.goBack();
+		if(util.waitForIsNotVisible(By.xpath("//a[@class='_svc_lnk pwe_home']")))
+			util.goTo(taskURL);
+		util.waitForTitle(taskTitle);
+
+		Title = util.getTitle();
+		URL = util.getCurrentUrl();
+
+		assertTrue(Title.contains(taskTitle));
+		assertTrue(URL.contains(taskURL));
 	}
 
 

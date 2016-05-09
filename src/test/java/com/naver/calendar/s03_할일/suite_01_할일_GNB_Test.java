@@ -21,7 +21,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
     public void TC_00_GNB_로그인_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
 
-        util.waitForTitle(module.calTitle);
+        util.waitForTitle(module.taskTitle);
         util.goTo(module.taskURL);
 
         Title = util.getTitle();
@@ -34,37 +34,34 @@ public class suite_01_할일_GNB_Test extends Testcase {
         assertTrue(URL.contains(module.taskURL));
     }
 
+
     /*
-     * Step : GNB > NAVER 클릭
-     * Result : 네이버 페이지로 이동됨
-     * URL : http://m.naver.com"
-     */
+    * Step : GNB > NAVER 클릭
+    * Result : 네이버 페이지로 이동됨
+    * URL : http://m.naver.com"
+    */
+
     @Test
     public void TC_01_GNB_NAVER_Test() throws Exception {
 
         util.click(By.className("naver"));
         module.assertCalendarPage(util,module.mainTitle,module.mainURL);
 
-        util.goBack();
-        module.assertCalendarPage(util,module.taskTitle,module.taskURL);
+        module.goBackToTask(util);
     }
 
+
     /*
-     * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
-     * Result : 개별 서비스 페이지로 이동됨
-     * URL : http://me.naver.com"
-     */
+    * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
+    * Result : 개별 서비스 페이지로 이동됨
+    * URL : http://me.naver.com"
+    */
+
     @Test
-    public void TC_02_GNB_탭_Test() throws Exception{
+    public void TC_02_GNB_탭_me_Test() throws Exception{
 
         util.click(By.className("me"));
-        module.assertCalendarPage(util,module.meTitle,module.meURL);
-
-        util.goBack();
-        util.waitForTitle(module.taskTitle);
-
-
-        util.click(By.className("mail"));
+        util.waitForIsElementPresent(By.xpath("//a[@class='N=a:PNB.me']"));
 
         Title = util.getTitle();
         URL = util.getCurrentUrl();
@@ -72,26 +69,182 @@ public class suite_01_할일_GNB_Test extends Testcase {
         util.printLog("[Title] : " + Title);
         util.printLog("[URL] : " + URL);
 
+        assertTrue(Title.contains(module.meTitle));
+        assertTrue(URL.contains(module.meURL));
+
+        module.goBackToTask(util);
+    }
+
+
+    /*
+    * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
+    * Result : 개별 서비스 페이지로 이동됨
+    * URL : http://me.naver.com"
+    */
+
+    @Test
+    public void TC_03_GNB_탭_메일_Test() throws Exception{
+
+        util.click(By.className("mail"));
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
         assertTrue(Title.contains(module.mailTitle));
         assertTrue(URL.contains(module.mailURL));
 
-        util.goBack();
-        util.waitForTitle(module.taskTitle);
+        module.goBackToTask(util);
     }
+
+
+    /*
+    * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
+    * Result : 개별 서비스 페이지로 이동됨
+    * URL : http://me.naver.com"
+    */
+
+    @Test
+    public void TC_04_GNB_탭_메모_쪽지_Test() throws Exception{
+
+        util.click(By.className("note"));
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+        assertTrue(Title.contains(module.noteTitle));
+        assertTrue(URL.contains(module.noteURL));
+
+        module.goBackToTask(util);
+    }
+
+
+    /*
+    * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
+    * Result : 개별 서비스 페이지로 이동됨
+    * URL : http://me.naver.com"
+    */
+
+    @Test
+    public void TC_05_GNB_탭_메모_Test() throws Exception{
+
+        util.click(By.className("memo"));
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+        assertTrue(Title.contains(module.memoTitle));
+        assertTrue(URL.contains(module.memoURL));
+
+        module.goBackToTask(util);
+    }
+
+
+    /*
+    * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
+    * Result : 개별 서비스 페이지로 이동됨
+    * URL : http://me.naver.com"
+    */
+
+    @Test
+    public void TC_06_GNB_탭_오피스_주소록_Test() throws Exception{
+
+        util.click(By.className("contact"));
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+        assertTrue(Title.contains(module.contactTitle));
+        assertTrue(URL.contains(module.contactURL));
+
+        module.goBackToTask(util);
+    }
+
+
+    /*
+    * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
+    * Result : 개별 서비스 페이지로 이동됨
+    * URL : http://me.naver.com"
+    */
+
+    @Test
+    public void TC_07_GNB_탭_클라우드_Test() throws Exception{
+
+        util.click(By.className("ndrive"));
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+        assertTrue(Title.contains(module.cloudTitle));
+        assertTrue(URL.contains(module.cloudURL));
+
+        module.goBackToTask(util);
+    }
+
+
+    /*
+    * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
+    * Result : 개별 서비스 페이지로 이동됨
+    * URL : http://me.naver.com"
+    */
+
+    @Test
+    public void TC_08_GNB_탭_오피스_Test() throws Exception{
+
+        util.click(By.className("office"));
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+        assertTrue(Title.contains(module.officeTitle));
+        assertTrue(URL.contains(module.officeURL));
+
+        module.goBackToTask(util);
+    }
+
+
+    /*
+    * Step : GNB > me,메일,쪽지,메모,주소록,클라우드,오피스,가계부 클릭
+    * Result : 개별 서비스 페이지로 이동됨
+    * URL : http://me.naver.com"
+    */
+
+    @Test
+    public void TC_09_GNB_탭_가계부_Test() throws Exception{
+
+        util.click(By.className("moneybook"));
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+        assertTrue(Title.contains(module.moneybookTitle));
+        assertTrue(URL.contains(module.moneybookURL));
+
+        module.goBackToTask(util);
+    }
+
 
     /*
     * Step : GNB > 프로필사진 클릭
     * Result : 프로필 레이어 노출됨
     */
+
     @Test
-    public void TC_03_GNB_프로필_Test() throws Exception {
+    public void TC_10_GNB_프로필_Test() throws Exception {
         // 프로필 사진 클릭
         // 사용자 메일에 사용자 아이디 포함하고 있는지 확인
         util.click(By.className("gnb_name"));
         util.waitForIsElementPresent(By.className("gnb_mail_address"));
         assertTrue(util.isElementPresent(By.className("gnb_mail_address")).getText().contains(TestIds.CalUser.getId()));
 
-         }
+    }
+
 
     /*
     * Step : GNB > 프로필 > 내정보 클릭
@@ -100,10 +253,12 @@ public class suite_01_할일_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_04_GNB_프로필_내정보_Test() throws Exception{
+    public void TC_11_GNB_프로필_내정보_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
-        util.click(By.className("gnb_info"));
+        //util.click(By.className("gnb_name"));
+        util.waitForIsElementPresent(By.className("gnb_info"));
+        util.click(By.xpath("//li[@class='gnb_info']"));
         util.waitForIsElementPresent(By.className("sptxt"));
 
         util.waitForTitle("네이버 내정보");
@@ -124,7 +279,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_05_GNB_프로필_보안설정_Test() throws Exception{
+    public void TC_12_GNB_프로필_보안설정_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -148,7 +303,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_06_GNB_프로필_내블로그_Test() throws Exception{
+    public void TC_13_GNB_프로필_내블로그_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -175,7 +330,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_07_GNB_프로필_가입한카페_Test() throws Exception{
+    public void TC_14_GNB_프로필_가입한카페_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -199,7 +354,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_08_GNB_프로필_NPAY_Test() throws Exception{
+    public void TC_15_GNB_프로필_NPAY_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -222,7 +377,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_09_GNB_프로필_로그아웃_Test() throws Exception{
+    public void TC_16_GNB_프로필_로그아웃_Test() throws Exception{
         // 프로필 영역
         // 내 정보 클릭
         util.click(By.className("gnb_name"));
@@ -244,7 +399,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_10_GNB_알림_Test() throws Exception{
+    public void TC_17_GNB_알림_Test() throws Exception{
         //로그아웃 동작 이후에 재 로그인
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
         // 알림 목록 아이콘 확인
@@ -257,7 +412,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
 
         // 알림이 없을때
         // 알림 없음 문구 노출 확인
-        util.isElementPresent(By.className("svc_msg_box"));
+        util.waitForIsElementPresent(By.className("svc_msg_box"));
     }
 
     /*
@@ -266,7 +421,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
     */
 
     @Test
-    public void TC_11_GNB_서비스아이콘_Test() throws Exception{
+    public void TC_18_GNB_서비스아이콘_Test() throws Exception{
 
         // 알림 목록 아이콘 확인
         util.click(By.className("gnb_service_li"));

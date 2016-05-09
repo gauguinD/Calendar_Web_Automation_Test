@@ -186,6 +186,12 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
         util.type(By.xpath("//div[@class='pos_input']/input"),"일간영역_종일일정");
         util.click(By.xpath("//button[@class='btn_sys pos_save']"));
 
+        if(util.waitForIsVisible(By.xpath("//div[@class='_schedule_entry_popup schedule_entry_alarm_layer layer_popup no_view select_free_layer join_schedule_edit_layer']")))
+        {
+            util.click(By.xpath("//input[@id='_wpageTMP8_send_to_shared_nobody']"));
+            util.click(By.xpath("//button[@class='_ok normal']"));
+        }
+
         //일간영역_종일 제목으로 종일일정 생성 되었는지 확인
         tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_schedule']/div/div/a")).getText();
         assertTrue(tempEventSubject.contains("일간영역_종일일정"));

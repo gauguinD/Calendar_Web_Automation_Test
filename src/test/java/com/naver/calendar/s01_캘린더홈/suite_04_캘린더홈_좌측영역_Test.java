@@ -20,6 +20,8 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     String openCalendarValue = null;
     String timeTableValue = null;
 
+    int maxCalNum;
+
 
     /*
     * Step : 로그인 > 해당 계정으로 로그인
@@ -143,10 +145,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.xpath("//li/a[2]/span[@class='cal_type' and contains(text(),'[기본]')]"));
 
         calendarName = util.isElementPresent(By.xpath("//li[@calendarid='6819065']")).getAttribute("class");
-        //calendarName = util.waitForIsElementPresent(By.xpath("//li[@class='_calendar  _private' and ./a[2]/span[contains(.,'[기본]')]]")).getAttribute("calendarid");
 
-
-        //util.printLog(calendarName);
         assertTrue(calendarName.contains("select"));
 
     }
@@ -163,15 +162,17 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.className("btn_makecal"));
         util.click(By.partialLinkText("내 캘린더 만들기"));
 
-        util.clearAndType(By.id("$$_calendar_name"),"내 캘린더");
-        Subname = util.waitForIsElementPresent(By.id("$$_calendar_name")).getAttribute("value");
+        //til.clearAndType(By.xpath("//tr[@class='_calendar_info_area']/td/input"),"좌측영역_내캘린더만들기");
+        util.clear(By.xpath("//tr[@class='_calendar_info_area']/td/input"));
+        util.type(By.xpath("//tr[@class='_calendar_info_area']/td/input"),"좌측영역_내캘린더만들기");
+        Subname = util.waitForIsElementPresent(By.xpath("//tr[@class='_calendar_info_area']/td/input")).getAttribute("value");
         util.printLog(Subname);
 
         util.click(By.xpath("//button[@class ='_save normal']"));
 
         //캘린더 목록의 캘린더 갯수 가져오기
-        int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
-        util.printLog("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
+        maxCalNum = util.getXpathCount(By.className("cal_name"));
+        util.printLog("캘린더 목록의 갯수 가져오기 :" + maxCalNum);
 
         //생성한 캘린더의 이름과 dataValue를 가져오기
         //dataValue = util.isElementPresent(By.xpath("//a[contains(text(),'"+Subname+"')]")).getAttribute("data-value").toString();
@@ -182,14 +183,14 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
 
         //생성된 캘린더가 있는지 캘린더 목록에서 확인한다
-        for(int i=1; i < NumberOfCalender; i++)
+        for(int i=1; i < maxCalNum; i++)
         {
             String SubTemp;
             SubTemp = util.waitForIsElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li["+i+"]/a[2]")).getAttribute("title");
 
             if(SubTemp.contentEquals(Subname))
             {
-                util.printLog("True");
+                //util.printLog("True");
                 privateCalendarValue = util.waitForIsElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li["+i+"]")).getAttribute("calendarid");
                 util.printLog(privateCalendarValue);
             }
@@ -197,10 +198,29 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
             {
                 //util.printLog("Fail");
             }
-            //*[@id="calendar_list_container"]/div[2]/ul/li[1]
-            //*[@id="calendar_list_container"]/div[2]/ul/li[5]
         }
     }
+
+
+    /*
+    * Step : 일정설정 > 캘린더 삭제 클릭
+    * Result : 해당 캘린더 목록에서 노출 안됨
+
+    @Test
+    public void TC_09_좌측영역_내캘린더만들기_삭제_Test() throws Exception {
+
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+        util.waitForIsElementPresent(By.xpath("//tr[contains(@data-value,'63883743')]/td[5]/div/a"));
+
+
+    }
+
+    */
 
 
     /*
@@ -214,21 +234,20 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.className("btn_makecal"));
         util.click(By.xpath("//li[@class ='_share']"));
 
-        util.clearAndType(By.id("$$_calendar_name"),"공유캘린더");
-        //util.waitForIsElementPresent(By.id("$$_calendar_name"));
-        //util.clear(By.xpath("//input[@id='$$_calendar_name']"));
-        //util.clear(By.xpath("//tr[@class='_calendar_info_area']/td/input"));
-        //util.type(By.xpath("//tr[@class='_calendar_info_area']/td/input"),"공유캘린더");
-        Subname = util.waitForIsElementPresent(By.id("$$_calendar_name")).getAttribute("value");
+        util.waitForIsElementPresent(By.xpath("//tr[@class='_calendar_info_area']/td/input"));
+        util.click(By.xpath("//tr[@class='_calendar_info_area']/td/input"));
+        util.clear(By.xpath("//tr[@class='_calendar_info_area']/td/input"));
+        util.type(By.xpath("//tr[@class='_calendar_info_area']/td/input"),"좌측영역_공유캘린더만들기");
+        Subname = util.waitForIsElementPresent(By.xpath("//tr[@class='_calendar_info_area']/td/input")).getAttribute("value");
         util.printLog(Subname);
 
         util.click(By.xpath("//button[@class ='_save normal']"));
 
         //캘린더 목록의 캘린더 갯수 가져오기
-        int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
-        util.printLog("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
+        int maxCalNum = util.getXpathCount(By.className("cal_name"));
+        util.printLog("캘린더 목록의 갯수 가져오기 :" + maxCalNum);
 
-        for(int i=1; i <= NumberOfCalender; i++)
+        for(int i=1; i <= maxCalNum; i++)
         {
              String SubTemp;
             //util.printLog(util.waitForIsElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li[" + i + "]/a[2]")).getAttribute("title"));
@@ -277,11 +296,11 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.xpath("//button[@class ='_save normal']"));
 
         //캘린더 목록의 캘린더 갯수 가져오기
-        int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
-        System.out.print("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
+        int maxCalNum = util.getXpathCount(By.className("cal_name"));
+        System.out.print("캘린더 목록의 갯수 가져오기 :" + maxCalNum);
 
         //생성된 캘린더가 있는지 캘린더 목록에서 확인한다
-        for(int i=1; i <= NumberOfCalender; i++)
+        for(int i=1; i <= maxCalNum; i++)
         {
             String SubTemp;
             SubTemp = util.isElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li[" + i + "]/a[2]")).getAttribute("title");
@@ -312,18 +331,23 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.className("btn_makecal"));
         util.click(By.xpath("//li[@class='_timetable']"));
 
-        util.type(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"),"내시간표");
+        util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"));
+        util.click(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"));
+        util.clear(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"));
+        util.type(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"),"좌측영역_시간표만들기");
+
+        //util.type(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"),"내시간표");
         Subname = util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]")).getAttribute("value");
         util.printLog(Subname);
 
         util.click(By.xpath("//button[@class ='_save normal']"));
 
         //캘린더 목록의 캘린더 갯수 가져오기
-        int NumberOfCalender = util.getXpathCount(By.className("cal_name"));
-        System.out.print("캘린더 목록의 갯수 가져오기 :" + NumberOfCalender);
+        int maxCalNum = util.getXpathCount(By.className("cal_name"));
+        System.out.print("캘린더 목록의 갯수 가져오기 :" + maxCalNum);
 
         //생성된 캘린더가 있는지 캘린더 목록에서 확인한다
-        for(int i=1; i <= NumberOfCalender; i++)
+        for(int i=1; i <= maxCalNum; i++)
         {
             String SubTemp;
             SubTemp = util.isElementPresent(By.xpath("//*[@id='calendar_list_container']/div[2]/ul/li[" + i + "]/a[2]")).getAttribute("title");

@@ -69,7 +69,6 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
 
         //상세버튼 클릭하고 제목에 검색어 입력 후 검색버튼 클릭
 
-        //util.printLog(util.isElementPresent(By.className("search_area")).getAttribute("style"));
         util.click(By.className("detail"));
         util.waitForIsElementPresent(By.xpath("//div[@id='content_top']/div[2]/div[2]/div[1]/input"));
         util.type(By.xpath("//div[@id='content_top']/div[2]/div[2]/div[1]/input"),searchTitle);
@@ -135,8 +134,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         assertTrue(URL.contains("https://calendar.naver.com/tasks.nhn"));
         assertTrue(Title.contains("할 일 : 네이버 캘린더"));
 
-        util.click(By.xpath("//button[@class='_viewSchedule type_schedule']"));
-        util.waitForTitle("일정 : 네이버 캘린더");
+        module.goBackToCalendar(util);
     }
 
     /*
@@ -155,6 +153,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         util.printLog("\n현재 날짜는 :"+ module.GetDate(util));
         util.click(By.xpath("//button[@class='prev']"));
         util.printLog("\n이전 달을 클릭한 날짜는 : "+module.GetDate(util));
+
 
         util.click(By.xpath("//button[@class='next']"));
         util.click(By.xpath("//button[@class='next']"));
