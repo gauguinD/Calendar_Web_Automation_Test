@@ -3,8 +3,8 @@ package main;
 public enum TestIds {
 
 	CalUser("nvqa_4tc023", "qalab123", ""),
-	CalUser2("nvqa_4tc040", "qalab123", ""),
-	CalUser3("nvqa_4tc043", "qalab123", "");
+	CalUser2("nvqa_4tc022", "qalab123", ""),
+	CalUser3("nvqa_4tc025", "qalab123", "");
 
 	private String id;
 	private String pw;
