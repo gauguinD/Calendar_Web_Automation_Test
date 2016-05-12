@@ -29,73 +29,87 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     @Test
     public void TC_01_일반설정_캘린더기본화면_Test() throws Exception {
 
+        //환경설정 이동
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
 
-       if(util.waitForIsElementPresent(By.id("default_main_view_schedule")).isSelected()) {
-            util.printLog("현재 캘린더 기본 화면은 [일정보기] 로 설정되어 있습니다.");
-           assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_main_view_mode inp01']")).getAttribute("value").contains("schedule_view"));
-       }
-        else {
-            util.printLog("현재 캘린더 기본 화면은 [할일보기] 로 설정 되어 있습니다.");
-           assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_main_view_mode inp01']")).getAttribute("value").contains("task_view"));
-        }
+        //환경설정 > 일정설정 이동
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
     }
 
-    /*
-     * Step : 일반설정 > 일정 기본 화면 상태 확인
-     * Result : 일정 기본 화면의 현재 값을 확인
-     */
-    @Test
-    public void TC_02_일반설정_일정기본화면_Test() throws Exception{
-
-        String user;
-
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
-
-        if(util.waitForIsElementPresent(By.id("default_view_day")).isSelected()) {
-            util.printLog("현재 일정 기본 화면은 [일별보기] 로 설정되어 있습니다.");
-            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("day"));
-        }
-        else if(util.waitForIsElementPresent(By.id("default_view_week")).isSelected()) {
-            util.printLog("현재 캘린더 기본 화면은 [주별보기] 로 설정 되어 있습니다.");
-            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("week"));
-        }
-        else if(util.waitForIsElementPresent(By.id("default_view_month")).isSelected()) {
-            util.printLog("현재 캘린더 기본 화면은 [월별보기] 로 설정 되어 있습니다.");
-            assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'_cfg_default_view_mode inp01') and contains(@value,'month')]")).isSelected());
-        }
-        else if(util.waitForIsElementPresent(By.id("default_view_list")).isSelected()) {
-            util.printLog("현재 캘린더 기본 화면은 [목록보기] 로 설정 되어 있습니다.");
-            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("list"));
-        }
-        else if(util.waitForIsElementPresent(By.id("default_view_user")).isSelected()) {
-            util.printLog("현재 캘린더 기본 화면은 [사용자 설정 보기] 로 설정 되어 있습니다.");
-
-            user = util.waitForIsElementPresent(By.xpath("//select[@class='_cfg_customdate day_select']/option")).getAttribute("value");
-            util.printLog(user);
-
-            assertTrue(util.isElementPresent(By.xpath("//input[@class='_cfg_default_view_mode inp01']")).getAttribute("value").contains("user"));
-        }
-    }
-
-    /*
-    * Step : 일반설정 > 단축키 사용 확인
-    * Result : 단축키 사용의 현재 값을 확인
+       /*
+    * Step : 일정설정 > 캘린더 삭제 클릭
+    * Result : 해당 캘린더 목록에서 노출 안됨
     */
 
     @Test
-    public void TC_03_일반설정_단축키_Test() throws Exception {
+    public void TC_16_일정설정_삭제_Test() throws Exception {
 
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        //String calName;
+        String calEdit;
+        String tempCalName;
+        //String tempValue;
 
-        if(util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_cfg_hotkey_mode inp01')][contains(@value,'true')]")).isSelected()) {
-            util.printLog("현재 단축키 사용은 [사용함] 으로 설정되어 있습니다.");
-            assertTrue(util.isElementPresent(By.xpath("//label[@for='hotkey_mode']")).getText().contains("사용함"));
+        int maxCalNum;
+        util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
+        maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
+
+        //기본 캘린더만 있을때 예외처리
+        if (maxCalNum == 1) {
+            util.printLog("현재 삭제할 캘린더가 없습니다.");
+        } else {
+            for (int i = 2; i < maxCalNum + 1; i++) {
+                calEdit = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div")).getText();
+                //비공개캘린더일때 삭제 노출 됨
+                if (calEdit.contains("삭제")) {
+                    tempCalName = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]/td[1]/a")).getText();
+                    //tempValue = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]")).getAttribute("data-value");
+
+                    util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
+                    util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
+                    util.printLog("삭제하는 캘린더 명은  [" + tempCalName + "] 입니다.");
+
+                    String assertAlert = util.getAlert().getText();
+                    assertTrue(assertAlert.contains("캘린더를 삭제하면 캘린더에 등록되어 있는 모든 일정도 영구적으로 삭제됩니다."));
+                    util.getAlert().accept();
+                }
+                else if(calEdit.contains("폐쇄")){
+                    tempCalName = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]/td[1]/a")).getText();
+                    //tempValue = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]")).getAttribute("data-value");
+
+                    util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
+                    util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
+                    util.printLog("삭제하는 캘린더 명은  [" + tempCalName + "] 입니다.");
+
+                    String assertAlert = util.getAlert().getText();
+                    assertTrue(assertAlert.contains("공유 캘린더를 폐쇄하면 참여자가 모두 탈퇴 처리되고"));
+                    util.getAlert().accept();
+
+                    assertAlert = util.getAlert().getText();
+                    assertTrue(assertAlert.contains("캘린더가 폐쇄되었습니다."));
+                    util.getAlert().accept();
+                }
+                else{
+                }
+            }
         }
-        else {
-            util.printLog("현재 단축키 사용은 [사용 안함] 로 설정 되어 있습니다.");
-            assertTrue(util.isElementPresent(By.xpath("//input[contains(@class,'_cfg_hotkey_mode inp01')][contains(@value,'false')]")).isSelected());
-        }
+
+        //저장하고 얼럿에서 확인
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
+        util.click(By.xpath("//button[@class='_save normal']"));
+        util.getAlert().accept();
+
+        //환경설정 재 진입
+        util.waitForPageLoaded();
+        util.waitForIsElementPresent(By.id("searchKeyWord"));
+        util.waitForIsElementPresent(By.className("_config"));
+
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        //환경설정 > 일정설정 진입
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
     }
 }

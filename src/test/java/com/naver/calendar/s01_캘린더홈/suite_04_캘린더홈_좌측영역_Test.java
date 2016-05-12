@@ -556,6 +556,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         assertTrue(Title.contains("할 일 : 네이버 캘린더"));
 
         util.click(By.xpath("//button[@class='_viewSchedule type_schedule']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_go_task type_schedule todo']"));
         util.waitForTitle("일정 : 네이버 캘린더");
     }
 

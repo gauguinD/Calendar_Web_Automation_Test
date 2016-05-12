@@ -8,8 +8,10 @@
         <classes>
             <!--
             <class name="com.naver.calendar.s04_환경설정.suite_01_환경설정_일반설정_Test"/>
-            <class name="com.naver.calendar.s04_환경설정.suite_01_환경설정_일반설정_Test"/>
+           <class name="com.naver.calendar.s04_환경설정.suite_01_환경설정_일반설정_Test"/>
+
             -->
+            <class name="com.naver.calendar.s04_환경설정.suite_01_환경설정_일반설정_Test"/>
             <class name="com.naver.calendar.s04_환경설정.suite_02_환경설정_일정설정_Test"/>
             <!--
             <class name="com.naver.calendar.s01_캘린더홈.suite_04_캘린더홈_좌측영역_Test"/>
