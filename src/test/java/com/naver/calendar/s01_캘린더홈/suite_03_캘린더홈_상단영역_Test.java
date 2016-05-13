@@ -135,6 +135,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         assertTrue(Title.contains("할 일 : 네이버 캘린더"));
 
         module.goBackToCalendar(util);
+        util.waitForTitle(module.calTitle);
     }
 
     /*

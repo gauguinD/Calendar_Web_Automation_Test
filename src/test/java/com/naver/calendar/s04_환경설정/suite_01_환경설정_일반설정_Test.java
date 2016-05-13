@@ -18,7 +18,7 @@ public class suite_01_환경설정_일반설정_Test extends Testcase {
    * Result : 해당하는 계정으로 로그인 됨
     */
     @Test
-    public void TC_00_Footer_로그인_Test() throws Exception {
+    public void TC_00_일반설정_로그인_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
     }
 

@@ -67,6 +67,11 @@ public class Modules {
 	public String Title;
 	//public String CurrentDate;
 
+	public int maxTaskNum;
+	public String taskName;
+
+	public String tasks[] ={};
+
 	public String a,b,c,d,e,f = null;
 	int year,month = 0;
 
@@ -491,5 +496,15 @@ public class Modules {
 	}
 
 
+	public void taskOrder(Utilities util) throws Exception{
+		maxTaskNum = util.getXpathCount(By.xpath("//tbody[@class='_private_task_group']/tr"));
+		tasks = new String[maxTaskNum];
+
+		for (int i = 1; i <= maxTaskNum; i++) {
+			taskName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_task_group']/tr[" + i + "]/td")).getText();
+			util.printLog(taskName);
+			tasks[i-1] = (i+"."+taskName);
+		}
+	}
 
 }

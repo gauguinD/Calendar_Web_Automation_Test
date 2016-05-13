@@ -408,11 +408,12 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.xpath("//tr[contains(@data-value,'"+timeTableValue+"')]/td[5]/div/a"));
 
         util.getAlert().accept();
-        util.waitForPageLoaded();
-        util.click(By.xpath("//button[@class='_save normal']"));
 
-        util.getAlert().accept();
         util.waitForPageLoaded();
+        //util.click(By.xpath("//button[@class='_save normal']"));
+
+        //util.getAlert().accept();
+        //util.waitForPageLoaded();
     }
 
 

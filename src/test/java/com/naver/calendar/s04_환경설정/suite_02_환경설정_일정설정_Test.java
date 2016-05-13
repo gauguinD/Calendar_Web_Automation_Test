@@ -42,7 +42,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_00_Footer_로그인_Test() throws Exception {
+    public void TC_00_일정설정_로그인_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
     }
 
@@ -835,7 +835,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     * Result : 양도한 캘린더 삭제 된다.
     */
 
-    @Test
+    //@Test
     public void TC_20_일정설정_양도_양도한캘린더삭제_Test() throws Exception {
 
         module.LogOutAndLogIn(util, TestIds.CalUser2.getId(),TestIds.CalUser2.getPw());
@@ -992,15 +992,15 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                     util.click(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr["+i+"]/td[5]/div/a[contains(text(),'탈퇴')]"));
                     //util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
                     //공유캘린더 탈퇴시에 참가자가 있을경우 예외처리
-                    calEditMemberList = util.waitForIsElementPresent(By.xpath("//tbody[@class='_member_list_body']")).getText();
+                    //calEditMemberList = util.waitForIsElementPresent(By.xpath("//tbody[@class='_member_list_body']")).getText();
 
                     assertAlert = util.getAlert().getText();
                     assertTrue(assertAlert.contains("공유 캘린더를 탈퇴하면 해당 공유 캘린더에 등록한 일정이 모두 삭제됩니다."));
                     util.getAlert().accept();
 
-                    assertAlert = util.getAlert().getText();
-                    assertTrue(assertAlert.contains("존재하지 않는 캘린더입니다."));
-                    util.getAlert().accept();
+                    //assertAlert = util.getAlert().getText();
+                    //assertTrue(assertAlert.contains("존재하지 않는 캘린더입니다."));
+                    //util.getAlert().accept();
 
                     //마스터가 탈퇴할 시에 마스터 권한 양도하고 탈퇴한다.
                     /*if (calEditMemberList.contains("수정/삭제")) {
