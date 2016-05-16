@@ -69,6 +69,62 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
         util.waitForPageLoaded();
     }
 
+        /*
+    * Step : 할일설정 > 할일 그룹 추가
+    * Result : 할일 그룹이 추가 됨
+    */
+
+    @Test
+    public void TC_02_할일설정_할일그룹추가후삭제_Test() throws Exception {
+
+        //할일 그룹 추가
+
+        util.sleep(3);
+        util.goTo(module.taskURL);
+
+        util.waitForIsElementPresent(By.xpath("//a[@class='_newGroup btn_makecal']"));
+        util.click(By.xpath("//div[@class='snb_todo']/div/div[3]/div/div/a[1]"));
+        util.click(By.xpath("//p[contains(@class,'all')]"));
+
+        //util.waitForIsElementPresent(By.xpath("//div[@class='snb_todo']/div/div[3]/div/div/a[1]"));
+        //module.removeBlindText(util,"//div[@class='snb_todo']/div/div[3]");
+        //util.click(By.xpath("//div[@class='snb_todo']/div/div[3]/div/div/a[1]"));
+        //assertTrue(util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li[6]")).isDisplayed());
+
+
+        //새 그룹 추가된것 확인하고 해당 그룹 이름 받아옴
+        util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li[6]"));
+        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li[6]/a[1]")).getText();
+
+        //환경설정 > 할일 설정으로 이동
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[4]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_task tc-panel tc-selected']"));
+
+        //5번째 그룹생긴것 확인
+        util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_task_group']/tr[5]"));
+        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar_title') and contains(text(),':"+taskName+"')]"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar_title') and contains(text(),':"+taskName+"')]")).isDisplayed());
+
+        util.click(By.xpath("//tr[contains(@class,'tr_28780122 _cfg_task_group_list') and ./td[contains(text(),'"+taskName+"')]]/td[2]"));
+
+        util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_basic']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_submit']"));
+        util.click(By.xpath("//button[@class='_submit']"));
+
+        util.sleep(3);
+
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
+        util.click(By.xpath("//button[@class='_save normal']"));
+        util.getAlert().accept();
+        util.waitForPageLoaded();
+
+        assertTrue(util.waitForIsNotVisible(By.xpath("//tbody[@class='_private_task_group']/tr[5]")));
+
+    }
+
 
     /*
     * Step : 할일설정 > 할일 그룹 목록 순서 변경

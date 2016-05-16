@@ -24,13 +24,13 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     }
 
     /*
-     * Step : 상단영역 > 일정검색 클릭
+     * Step : 상단영역 > 할일검색 클릭
      * Result : 해당 검색어 검색결과 노출 된다.
      */
     @Test
-    public void TC_01_상단영역_일정검색_Test() throws Exception {
+    public void TC_01_상단영역_할일검색_Test() throws Exception {
 
-        String searchKeyword = "일정";
+        String searchKeyword = "할일";
         String SearchResult;
 
 
