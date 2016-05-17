@@ -38,6 +38,10 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         //검색창에서 Space 입력하고 검색버튼 클릭
         //캘린더로 돌아가기 노출되는것 확인
         //노출된 검색어가 입력한 검색어와 동일한지 확인
+        util.waitForIsElementPresent(By.xpath("//input[@class='searchKeyWord']"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//input[@class='searchKeyWord']")).getAttribute("value").contains("일정 검색"));
+
+
         util.click(By.className("search"));
         util.type(By.className("search"),searchKeyword);
         util.pressKeys(By.className("search"), Keys.SPACE);
@@ -305,6 +309,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     public void TC_12_상단영역_새로고침_Test() throws Exception{
 
         util.click(By.className("reload"));
+        assertTrue(util.waitForIsElementPresent(By.className("reload")).isDisplayed());
         }
 
 

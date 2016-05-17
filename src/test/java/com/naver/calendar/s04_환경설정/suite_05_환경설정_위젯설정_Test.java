@@ -31,8 +31,8 @@ public class suite_05_환경설정_위젯설정_Test extends Testcase {
 
 
     /*
-    * Step : 위젯설정 > 위젯 설정 확인
-    * Result : 위젯 설정 사용함으로 설정하면 위젯이 노출 됨
+    * Step : 위젯설정 > 위젯 상태 확인
+    * Result : 현재 위젯 설정 상태 확인
     */
 
     @Test
@@ -58,7 +58,7 @@ public class suite_05_환경설정_위젯설정_Test extends Testcase {
 
 
     /*
-    * Step : 위젯설정 > 위젯 설정 확인
+    * Step : 위젯설정 > 위젯 사용으로 설정
     * Result : 위젯 설정 사용함으로 설정하면 위젯이 노출 됨
     */
 

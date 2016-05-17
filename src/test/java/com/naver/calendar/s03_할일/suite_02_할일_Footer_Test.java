@@ -72,7 +72,7 @@ public class suite_02_할일_Footer_Test extends Testcase {
 
             util.printLog(skinName);
             util.printLog(skinColor);
-            //assertTrue(skinName.contains(skinColor));
+            assertTrue(skinName.contains(skinColor));
         }
 
         util.click(By.xpath("//button[@class='_save']"));
