@@ -59,8 +59,9 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     }
 
     /*
-    * Step : 좌측영역 > 기념일 관리 클릭
-    * Result : 기념일 관리 페이지로 이동
+    * Step : 좌측영역 > 날짜영역 클릭
+    * Result : 해당 날짜로 일정쓰기 노출 됨
+    *
     */
     @Test
     public void TC_03_좌측영역_날짜영역_Test() throws Exception{
