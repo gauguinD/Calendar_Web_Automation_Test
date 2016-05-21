@@ -68,7 +68,9 @@ public class Modules {
 	//public String CurrentDate;
 
 	public int maxTaskNum;
+	public int taskNum;
 	public String taskName;
+	public int newTaskNum;
 
 	public String tasks[] ={};
 
@@ -505,6 +507,25 @@ public class Modules {
 			util.printLog(taskName);
 			tasks[i-1] = (i+"."+taskName);
 		}
+	}
+
+	public void deleteTask(Utilities util, String taskId, int newTaskNum) throws Exception {
+
+		//빠른 할일 쓰기 상세보기로 진입
+		util.click(By.xpath("//li[@id='"+taskId+"']/div/a[3]"));
+		util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_wrap']"));
+		assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_wrap']")).isDisplayed());
+
+		util.waitForIsElementPresent(By.xpath("//button[@class='_delete btn_delete']"));
+		util.click(By.xpath("//button[@class='_delete btn_delete']"));
+
+		util.getAlert().accept();
+		util.waitForPageLoaded();
+
+		//할일의 개수를 확인해서 한개 늘어난것 확인
+		taskNum = util.getXpathCount(By.xpath("//div[@class='_list todo_list']/div/ul/li"));
+		System.out.println(taskNum);
+		assertTrue(taskNum == newTaskNum);
 	}
 
 }

@@ -10,11 +10,13 @@
             <class name="com.naver.calendar.s03_할일.suite_01_할일_GNB_Test"/>
             <class name="com.naver.calendar.s03_할일.suite_02_할일_Footer_Test"/>
             <class name="com.naver.calendar.s03_할일.suite_03_할일_상단영역_Test"/>
+            <class name="com.naver.calendar.s03_할일.suite_04_할일_좌측영역_Test"/>
             -->
             <class name="com.naver.calendar.s03_할일.suite_01_할일_GNB_Test"/>
             <class name="com.naver.calendar.s03_할일.suite_02_할일_Footer_Test"/>
             <class name="com.naver.calendar.s03_할일.suite_03_할일_상단영역_Test"/>
             <class name="com.naver.calendar.s03_할일.suite_04_할일_좌측영역_Test"/>
+            <class name="com.naver.calendar.s03_할일.suite_05_할일_할일쓰기_Test"/>
             <!--
             <class name="com.naver.calendar.s02_일정.suite_01_일정_일정쓰기_Test"/>
             <class name="com.naver.calendar.s03_할일.suite_03_할일_상단영역_Test"/>
