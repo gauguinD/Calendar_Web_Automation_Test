@@ -4,7 +4,8 @@ public enum TestIds {
 
 	CalUser("nvqa_4tc023", "qalab123", ""),
 	CalUser2("nvqa_4tc022", "qalab123", ""),
-	CalUser3("nvqa_4tc025", "qalab123", "");
+	CalUser3("nvqa_4tc025", "qalab123", ""),
+	WorksCalUser4("cal01@worksadmin-jp.com", "naver!23","");
 
 	private String id;
 	private String pw;

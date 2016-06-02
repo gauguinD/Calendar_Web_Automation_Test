@@ -9,7 +9,7 @@
             <!--
             <class name="com.naver.calendar.s02_일정.suite_01_일정_일정쓰기_Test"/>
             -->
-            <class name="com.naver.calendar.s02_일정.suite_01_일정_일정쓰기_Test"/>
+            <class name="com.naver.calendar.s02_일정.suite_03_일정_기념일쓰기_Test"/>
             <!--
             <class name="com.naver.calendar.s02_일정.suite_01_일정_일정쓰기_Test"/>
             -->

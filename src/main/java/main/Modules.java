@@ -119,6 +119,34 @@ public class Modules {
 		//assertNotNull (util.waitForIsElementPresent(By.linkText("로그아웃")));
 	}
 
+	public void LogInWorksCal(Utilities util, String ID, String Password) throws Exception {
+
+		util.waitForIsElementPresent(By.xpath("//input[@id='user_id']"));
+		util.type(By.xpath("//input[@id='user_id']"),ID);
+
+		util.click(By.xpath("//button[@id='loginStart']"));
+
+		util.waitForIsElementPresent(By.id("inputId"));
+		//util.type(By.id("inputId"), ID);
+		util.type(By.id("password"), Password);
+		util.click(By.id("loginBtn"));
+
+		String currentTitle;
+		currentTitle = util.getTitle();
+		//연락처 입력 화면 노출시 확인 클릭
+
+		if(currentTitle.contains("연락처 정보 업데이트 안내 : 네이버"))
+		{
+			util.click(By.className("btn_close"));
+			util.switchTo().alert().accept();
+
+			util.goTo(calURL);
+		}
+
+		//assertNotNull (util.waitForIsElementPresent(By.linkText("로그아웃")));
+	}
+
+
 	public void LogOutAndLogIn(Utilities util, String ID, String Password) throws Exception {
 
 		util.click(By.className("gnb_name"));

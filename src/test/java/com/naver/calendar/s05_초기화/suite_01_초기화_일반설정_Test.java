@@ -14,13 +14,74 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     public String URL = null;
 
     /*
-   * Step : 로그인 > 해당 계정으로 로그인
-   * Result : 해당하는 계정으로 로그인 됨
+    * Step : 로그인 > 해당 계정으로 로그인
+    * Result : 해당하는 계정으로 로그인 됨
     */
     @Test
     public void TC_00_Footer_로그인_Test() throws Exception {
+        //util.goTo("https://calendar.worksmobile.com");
+
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
     }
+
+    /*
+    * Step : 로그인 > 해당 계정으로 로그인
+    * Result : 해당하는 계정으로 로그인 됨
+    */
+
+    //@Test
+    public void TC_01_Works_로그인_Test() throws Exception {
+        util.goTo("https://calendar.worksmobile.com");
+        module.LogInWorksCal(util, TestIds.WorksCalUser4.getId(), TestIds.WorksCalUser4.getPw());
+    }
+
+    /*
+     * Step : 일반설정 > 캘린더 기본화면 확인
+    * Result : 캘린더 기본 화면의 현재 값을 확인
+    */
+
+    //@Test
+    public void TC_01_Works_일정쓰기_Test()throws Exception {
+
+        for(int i=0; i<400; i++){
+            util.waitForIsElementPresent(By.xpath("//a[@class='write_schedule single']"));
+            util.click(By.xpath("//a[@class='write_schedule single']"));
+
+            util.waitForIsElementPresent(By.xpath("//input[@class='_content_text input_txt pos_tit']"));
+            util.type(By.xpath("//input[@class='_content_text input_txt pos_tit']"), "일정 :"+i);
+
+            //util.click(By.xpath("//button[@class='save _save_btn']"));
+            util.click(By.xpath("//button[@class='save _save_btn _save']"));
+
+            //util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']"));
+            //util.click(By.xpath("//button[@class='_ok normal']"));
+
+            util.waitForIsElementPresent(By.xpath("//a[@title='일정 :"+i+"']"));
+            util.click(By.xpath("//a[@title='일정 :"+i+"']"));
+
+            util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap long_width no_view']"));
+            util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+
+            //util.waitForIsElementPresent(By.xpath("//div[@class='_schedule_entry_popup schedule_entry_alarm_layer layer_popup no_view select_free_layer join_schedule_edit_layer']"));
+            //util.click(By.xpath("//button[@class='_ok normal']"));
+
+            util.getAlert().accept();
+            util.waitForPageLoaded();
+            util.sleep(3);
+        }
+
+
+
+        //환경설정 이동
+        util.click(By.className("_config"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+        //환경설정 > 일정설정 이동
+        util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
+
+    }
+
 
     /*
      * Step : 일반설정 > 캘린더 기본화면 확인
