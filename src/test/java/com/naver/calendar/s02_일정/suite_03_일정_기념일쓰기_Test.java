@@ -182,10 +182,10 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.click(By.xpath("//div[@class='_frequencySelectbox  selectbox13']"));
 
         //100일 선택
-        util.waitForIsElementPresent(By.xpath("//div[@class='//div[@class='_frequencySelectbox  selectbox13']/div[2]']"));
-        util.click(By.xpath("//div[@class='_frequencySelectbox  selectbox13']/div[2]/div/ul/li[2]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='_frequencySelectbox  selectbox13']/div[1]/div")).getText().contains("100일"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']")).getText().contains("100일"));
+        util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequencySelectbox  selectbox13')]/div[2]"));
+        util.click(By.xpath("//div[contains(@class,'_frequencySelectbox  selectbox13')]/div[2]/div/ul/li[2]"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequencySelectbox  selectbox13')]/div[1]/div")).getText().contains("100일"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//p[@class='_preview']/span[2]")).getText().contains("100일"));
 
         util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
         util.click(By.xpath("//button[@class='_save normal']"));

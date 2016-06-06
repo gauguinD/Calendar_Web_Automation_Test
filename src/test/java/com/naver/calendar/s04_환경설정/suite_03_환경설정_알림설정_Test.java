@@ -127,7 +127,6 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.waitForIsElementPresent(By.xpath("//button[@class='normal _no']"));
             util.click(By.xpath("//button[@class='normal _no']"));
 
-
             //환경설정 재 진입
             util.waitForIsElementPresent(By.xpath("//a[@class='btn_settingcal']"));
             util.click(By.xpath("//a[@class='btn_settingcal']"));

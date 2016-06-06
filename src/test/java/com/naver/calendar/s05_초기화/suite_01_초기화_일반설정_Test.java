@@ -17,7 +17,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Step : 로그인 > 해당 계정으로 로그인
     * Result : 해당하는 계정으로 로그인 됨
     */
-    @Test
+    //@Test
     public void TC_00_Footer_로그인_Test() throws Exception {
         //util.goTo("https://calendar.worksmobile.com");
 
@@ -87,7 +87,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
      * Step : 일반설정 > 캘린더 기본화면 확인
      * Result : 캘린더 기본 화면의 현재 값을 확인
      */
-    @Test
+    //@Test
     public void TC_01_일반설정_캘린더기본화면_Test() throws Exception {
 
         //환경설정 이동
@@ -105,7 +105,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Result : 해당 캘린더 목록에서 노출 안됨
     */
 
-    @Test
+    //@Test
     public void TC_16_일정설정_삭제_Test() throws Exception {
 
         //String calName;
@@ -173,4 +173,36 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
     }
+
+    /*
+    * Step : 로그인 > 해당 계정으로 로그인
+    * Result : 해당하는 계정으로 로그인 됨
+    */
+
+    @Test
+    public void TC_04_초기화_할일삭제_Test() throws Exception {
+        module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
+
+        util.waitForTitle(module.calTitle);
+        util.goTo(module.taskURL);
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+
+        assertTrue(Title.contains(module.taskTitle));
+        assertTrue(URL.contains(module.taskURL));
+        while (util.waitForIsElementPresent(By.xpath("//div[@class='_list todo_list']/div/ul/li")).isDisplayed()) {
+            util.click(By.xpath("//div[@class='_list todo_list']/div/ul/li/div/a[3]"));
+
+            util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_wrap']"));
+            util.click(By.xpath("//button[@class='_delete btn_delete']"));
+
+            util.getAlert().accept();
+            util.sleep(3);
+        }
+    }
+
 }

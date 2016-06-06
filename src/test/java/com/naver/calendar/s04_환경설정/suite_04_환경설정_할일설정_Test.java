@@ -132,7 +132,7 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_02_할일설정_할일순서변경_Test() throws Exception {
+    public void TC_03_할일설정_할일순서변경_Test() throws Exception {
 
 
         util.click(By.className("_config"));
