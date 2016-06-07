@@ -194,6 +194,10 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
 
         assertTrue(Title.contains(module.taskTitle));
         assertTrue(URL.contains(module.taskURL));
+
+        util.waitForIsElementPresent(By.xpath("//input[@class='_includingCompleted']"));
+        util.click(By.xpath("//input[@class='_includingCompleted']"));
+
         while (util.waitForIsElementPresent(By.xpath("//div[@class='_list todo_list']/div/ul/li")).isDisplayed()) {
             util.click(By.xpath("//div[@class='_list todo_list']/div/ul/li/div/a[3]"));
 

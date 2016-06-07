@@ -85,6 +85,7 @@ public class Modules {
 	//java의 calendar 클래스 이용
 	Calendar cal = Calendar.getInstance();
 	SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
+	SimpleDateFormat sdf3 = new SimpleDateFormat("yyMMddhhmm");
 	String datetime = sdf1.format(cal.getTime());
 
 	//시스템 타이머 이용
@@ -93,6 +94,9 @@ public class Modules {
 	String datetime2 = sdf2.format(new Date(systemTime));
 
 	public String contents = "일정 "+ datetime;
+	public String subjectKey = sdf3.format(cal.getTime());
+
+
 
 	public Modules() {
 	}
