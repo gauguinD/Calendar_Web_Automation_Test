@@ -357,16 +357,16 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
     @Test
     public void TC_14_상단영역_인쇄_Test() throws Exception{
         util.click(By.className("print"));
-        util.sleep(10);
+        //util.sleep(10);
 
-        //util.waitForNewWindow();
+        util.waitForNewWindow();
 
         Title = util.getTitle();
         URL = util.getCurrentUrl();
-        //assertTrue(URL.contains("https://calendar.naver.com/printconfig.nhn"));
-        //assertTrue(Title.contains("네이버 캘린더"));
+        assertTrue(URL.contains("https://calendar.naver.com/printconfig.nhn"));
+        assertTrue(Title.contains("네이버 캘린더"));
 
-        //util.switchTo();
+        util.switchTo();
         util.close();
         util.selectMainWindow();
 
