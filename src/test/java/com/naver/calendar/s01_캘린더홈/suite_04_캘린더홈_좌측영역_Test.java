@@ -40,8 +40,10 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     public void TC_01_좌측영역_일정약속쓰기_Test() throws Exception {
 
         util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
+        util.sleep(5);
+        util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']"));
 
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
         util.click(By.xpath("//a[@class='_back btn_back_calender']"));
 
     }
@@ -143,6 +145,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     public void TC_07_좌측영역_내캘린더_Test() throws Exception{
 
         String calendarName;
+        util.waitForIsElementPresent(By.xpath("//li/a[2]/span[@class='cal_type' and contains(text(),'[기본]')]"));
         util.click(By.xpath("//li/a[2]/span[@class='cal_type' and contains(text(),'[기본]')]"));
         calendarName = util.isElementPresent(By.xpath("//li[@calendarid='6819065']")).getAttribute("class");
         assertTrue(calendarName.contains("select"));
@@ -556,6 +559,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         URL = util.getCurrentUrl();
         assertTrue(URL.contains("https://calendar.naver.com/tasks.nhn"));
         assertTrue(Title.contains("할 일 : 네이버 캘린더"));
+        util.sleep(5);
 
         util.click(By.xpath("//button[@class='_viewSchedule type_schedule']"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_go_task type_schedule todo']"));

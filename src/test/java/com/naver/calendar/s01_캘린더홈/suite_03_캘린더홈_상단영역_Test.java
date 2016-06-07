@@ -363,15 +363,15 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
 
         Title = util.getTitle();
         URL = util.getCurrentUrl();
-        assertTrue(URL.contains("https://calendar.naver.com/printconfig.nhn"));
-        assertTrue(Title.contains("네이버 캘린더"));
+        //assertTrue(URL.contains("https://calendar.naver.com/printconfig.nhn"));
+        //assertTrue(Title.contains("네이버 캘린더"));
 
         //util.switchTo();
         util.close();
         util.selectMainWindow();
 
         util.waitForTitle("일정 : 네이버 캘린더");
-
+        assertTrue(Title.contains("일정 : 네이버 캘린더"));
     }
 
 }
