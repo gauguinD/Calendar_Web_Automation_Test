@@ -359,7 +359,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         util.click(By.className("print"));
         util.sleep(10);
 
-        util.waitForNewWindow();
+        //util.waitForNewWindow();
 
         Title = util.getTitle();
         URL = util.getCurrentUrl();

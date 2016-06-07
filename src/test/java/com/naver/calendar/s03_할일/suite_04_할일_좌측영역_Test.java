@@ -103,11 +103,11 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
     @Test
     public void TC_04_좌측영역_전체할일보기_Test() throws Exception{
 
+        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_select') and contains(text(),'전체 할 일')]"));
         util.click(By.xpath("//a[contains(@class,'_select') and contains(text(),'전체 할 일')]"));
-        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='view_todo']/li[1]")).getAttribute("class");
-        util.printLog(taskName);
-        viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget  on select']")).getAttribute("data-type");
-        assertTrue(viewType.contains("all"));
+         assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_listName']")).getText().contains("전체 할 일"));
+        //viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget  on select']")).getAttribute("data-type");
+        //assertTrue(viewType.contains("all"));
     }
 
 
@@ -119,12 +119,11 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
 
     @Test
     public void TC_05_좌측영역_오늘할일보기_Test() throws Exception{
-
+        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_select') and contains(text(),'오늘 할 일')]"));
         util.click(By.xpath("//a[contains(@class,'_select') and contains(text(),'오늘 할 일')]"));
-        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='view_todo']/li[2]")).getAttribute("class");
-        util.printLog(taskName);
-        viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget on select']")).getAttribute("data-type");
-        assertTrue(viewType.contains("today"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_listName']")).getText().contains("오늘 할 일"));
+        //viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget on select']")).getAttribute("data-type");
+        //assertTrue(viewType.contains("today"));
     }
 
 
@@ -136,46 +135,43 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
 
     @Test
     public void TC_06_좌측영역_이번주할일보기_Test() throws Exception{
-
+        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_select') and contains(text(),'이번 주 할 일')]"));
         util.click(By.xpath("//a[contains(@class,'_select') and contains(text(),'이번 주 할 일')]"));
-        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='view_todo']/li[3]")).getAttribute("class");
-        util.printLog(taskName);
-        viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget on select']")).getAttribute("data-type");
-        assertTrue(viewType.contains("thisweek"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_listName']")).getText().contains("이번 주 할 일"));
+        //viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget on select']")).getAttribute("data-type");
+        //assertTrue(viewType.contains("thisweek"));
     }
 
 
     /*
-    * Step : 좌측영역 > 이번주 할 일 클릭
-    * Result : 이번주 할 일 노출 됨
+    * Step : 좌측영역 > 중요 할 일 클릭
+    * Result : 중요 할 일 노출 됨
     *
     */
 
     @Test
     public void TC_07_좌측영역_중요할일보기_Test() throws Exception{
-
+        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_select') and contains(text(),'중 할 일')]"));
         util.click(By.xpath("//a[contains(@class,'_select') and contains(text(),'중요 할 일')]"));
-        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='view_todo']/li[4]")).getAttribute("class");
-        util.printLog(taskName);
-        viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget on select']")).getAttribute("data-type");
-        assertTrue(viewType.contains("important"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_listName']")).getText().contains("중요 할 일"));
+        //viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget on select']")).getAttribute("data-type");
+        //assertTrue(viewType.contains("important"));
     }
 
 
     /*
-    * Step : 좌측영역 > 이번주 할 일 클릭
-    * Result : 이번주 할 일 노출 됨
+    * Step : 좌측영역 > 완료 할 일 보기 클릭
+    * Result : 완료 할 일 노출 됨
     *
     */
 
     @Test
     public void TC_08_좌측영역_완료할일보기_Test() throws Exception{
-
+        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_select') and contains(text(),'완료된 할 일')]"));
         util.click(By.xpath("//a[contains(@class,'_select') and contains(text(),'완료된 할일')]"));
-        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='view_todo']/li[5]")).getAttribute("class");
-        util.printLog(taskName);
-        viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget on select']")).getAttribute("data-type");
-        assertTrue(viewType.contains("completed"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_listName']")).getText().contains("완료된 할일"));
+        //viewType = util.waitForIsElementPresent(By.xpath("//li[@class='_hover _selectTarget on select']")).getAttribute("data-type");
+        //assertTrue(viewType.contains("completed"));
     }
 
 
@@ -190,11 +186,13 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
         //현재 그룹 개수를 저장(실제 전체 내 할 일이 개수에 포함되어서 이게 생성한 그룹 번호가 됨)
         taskNum = util.getXpathCount(By.xpath("//ul[@class='_groups category_list my']/li"));
         util.click(By.xpath("//a[@class='_newGroup btn_makecal']"));
+        util.click(By.xpath("//a[contains(text(),'내 할 일')]"));
 
         //생성한 그룹이 노출되는지 확인하고 생성된 그룹의 이름을 저장
         util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]"));
         assertTrue(util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]")).isDisplayed());
-        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]/a")).getAttribute("title");
+        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]")).getAttribute("data-value");
+        util.printLog(taskName);
 
         //그룹 개수가 1 늘었는지 확인
         newTaskNum = util.getXpathCount(By.xpath("//ul[@class='_groups category_list my']/li"));
@@ -211,13 +209,13 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
     @Test
     public void TC_10_좌측영역_할일그룹삭제_Test() throws Exception{
 
-        //생성한 그룹에 마우스 오버 하여 메뉴창 클릭
-        util.mouseOver(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]"));
-        util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]/a[2]"));
-        util.click(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]/a[2]"));
+        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_hover _selectTarget') and contains(@data-value,'"+taskName+"')]"));
+        util.mouseOver(By.xpath("//li[contains(@class,'_hover _selectTarget') and contains(@data-value,'"+taskName+"')]"));
+
+        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_hover _selectTarget') and contains(@data-value,'"+taskName+"')]/a[2]"));
+        util.click(By.xpath("//li[contains(@class,'_hover _selectTarget') and contains(@data-value,'"+taskName+"')]/a[2]"));
 
         util.waitForIsElementPresent(By.xpath("//div[@class='calendar_menu_wrap']"));
-
         util.waitForIsElementPresent(By.xpath("//a[@class='_delete']"));
         util.click(By.xpath("//a[@class='_delete']"));
 
