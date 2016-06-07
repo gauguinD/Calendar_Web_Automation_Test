@@ -19,6 +19,8 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
     public String tasks[] = {};
     int maxTaskNum;
     public String alertText;
+    public int taskNum;
+    public int newTaskNum;
 
     /*
    * Step : 로그인 > 해당 계정으로 로그인
@@ -69,32 +71,45 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
         util.waitForPageLoaded();
     }
 
-        /*
+    /*
     * Step : 할일설정 > 할일 그룹 추가
     * Result : 할일 그룹이 추가 됨
     */
 
     @Test
-    public void TC_02_할일설정_할일그룹추가후삭제_Test() throws Exception {
+    public void TC_02_할일설정_할일그룹추가_Test() throws Exception {
 
         //할일 그룹 추가
-
-        util.sleep(3);
         util.goTo(module.taskURL);
+        util.waitForPageLoaded();
+        util.sleep(3);
 
-        util.waitForIsElementPresent(By.xpath("//a[@class='_newGroup btn_makecal']"));
-        util.click(By.xpath("//div[@class='snb_todo']/div/div[3]/div/div/a[1]"));
-        util.click(By.xpath("//p[contains(@class,'all')]"));
+        //현재 그룹 개수를 저장(실제 전체 내 할 일이 개수에 포함되어서 이게 생성한 그룹 번호가 됨)
+        taskNum = util.getXpathCount(By.xpath("//ul[@class='_groups category_list my']/li"));
+        util.click(By.xpath("//a[@class='_newGroup btn_makecal']"));
+        util.click(By.xpath("//a[contains(text(),'내 할 일')]"));
+        System.out.println(taskNum);
 
-        //util.waitForIsElementPresent(By.xpath("//div[@class='snb_todo']/div/div[3]/div/div/a[1]"));
-        //module.removeBlindText(util,"//div[@class='snb_todo']/div/div[3]");
-        //util.click(By.xpath("//div[@class='snb_todo']/div/div[3]/div/div/a[1]"));
-        //assertTrue(util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li[6]")).isDisplayed());
+        //생성한 그룹이 노출되는지 확인하고 생성된 그룹의 이름을 저장
+        util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]")).isDisplayed());
+        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li["+taskNum+"]/a")).getAttribute("title");
+        util.printLog(taskName);
 
+        //그룹 개수가 1 늘었는지 확인
+        newTaskNum = util.getXpathCount(By.xpath("//ul[@class='_groups category_list my']/li"));
+        System.out.println(newTaskNum);
+        assertTrue(newTaskNum == taskNum+1);
 
-        //새 그룹 추가된것 확인하고 해당 그룹 이름 받아옴
-        util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li[6]"));
-        taskName = util.waitForIsElementPresent(By.xpath("//ul[@class='_groups category_list my']/li[6]/a[1]")).getText();
+    }
+
+    /*
+    * Step : 할일설정 > 할일 그룹 추가
+    * Result : 할일 그룹이 추가 됨
+    */
+
+    @Test
+    public void TC_03_할일설정_할일그룹삭제_Test() throws Exception {
 
         //환경설정 > 할일 설정으로 이동
         util.click(By.className("_config"));
@@ -103,10 +118,11 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[4]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_task tc-panel tc-selected']"));
 
-        //5번째 그룹생긴것 확인
-        util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_task_group']/tr[5]"));
-        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar_title') and contains(text(),':"+taskName+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar_title') and contains(text(),':"+taskName+"')]")).isDisplayed());
+        //새그룹생긴것 확인
+        util.printLog(taskName);
+        util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_task_group']/tr["+taskNum+"]"));
+        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar_title') and contains(text(),'"+taskName+"')]"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar_title') and contains(text(),'"+taskName+"')]")).isDisplayed());
 
         util.click(By.xpath("//tr[contains(@class,'tr_28780122 _cfg_task_group_list') and ./td[contains(text(),'"+taskName+"')]]/td[2]"));
 
@@ -132,7 +148,7 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_03_할일설정_할일순서변경_Test() throws Exception {
+    public void TC_04_할일설정_할일순서변경_Test() throws Exception {
 
 
         util.click(By.className("_config"));
@@ -147,7 +163,12 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
 
         //1번 할일 그룹을 가장 하단으로 이동하고 확인[2,3,4,1]
         util.click(By.xpath("//tbody[@class='_private_task_group']/tr[1]/td[3]/div/a[4]"));
+
+        //기본 할일은 제일 위로 올림
+        util.click(By.xpath("//tr[contains(@class,'tr_28780122 _cfg_task_group_list') and ./td/span]/td[3]/div/a[1]"));
+
         util.click(By.xpath("//button[@class='_save normal']"));
+
 
         alertText = util.getAlert().getText();
         assertTrue(alertText.contains("환경설정의 변경 사항이 저장되었습니다."));
