@@ -93,7 +93,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
 
         //캘린더로 돌아가기 노출되는것 확인
         //제목에 검색에 유지되는것 확인
-        util.waitForIsElementPresent(By.className("_back btn_back_calender"));
+        util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']"));
         util.printLog(util.waitForIsElementPresent(By.xpath("//div[@class='_noenddate_set']/ul/li/div/p/a")).getText());
 
         searchResult = util.isElementPresent(By.xpath("//div[@class='_noenddate_set']/ul/li/div/p/a")).getText();
@@ -113,6 +113,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     @Test
     public void TC_03_상단영역_일정보기_Test() throws Exception{
 
+        util.waitForIsNotVisible(By.xpath("//button[@class='_viewSchedule type_schedule']"));
         util.click(By.xpath("//button[@class='_viewSchedule type_schedule']"));
 
         Title = util.getTitle();
@@ -241,7 +242,6 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     */
     @Test
     public void TC_09_상단영역_완료된할일포함_Test() throws Exception{
-
 
         util.waitForIsElementPresent(By.xpath("//input[@class='_includingCompleted']"));
 
