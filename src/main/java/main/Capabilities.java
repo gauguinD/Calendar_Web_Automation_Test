@@ -1,6 +1,7 @@
 package main;
 
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
@@ -20,9 +21,14 @@ public class Capabilities {
 
 		// ****************** chrome Capabilities
 		if (browser.equalsIgnoreCase("chrome")) {
+			ChromeOptions options = new ChromeOptions();
+			//options.addArguments("-incognito");
+			options.addArguments("--disable-popup-blocking");
+
 			capability = DesiredCapabilities.chrome();
 			capability.setBrowserName("chrome");
 			capability.setPlatform(Platform.ANY);
+			capability.setCapability(ChromeOptions.CAPABILITY, options);
 		}
 
 		// ****************** safari Capabilities

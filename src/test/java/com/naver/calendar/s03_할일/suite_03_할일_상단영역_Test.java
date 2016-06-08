@@ -291,7 +291,10 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         util.close();
         util.selectMainWindow();
 
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
         util.waitForTitle("할 일 : 네이버 캘린더");
+        assertTrue(Title.contains("할 일 : 네이버 캘린더"));
 
     }
 

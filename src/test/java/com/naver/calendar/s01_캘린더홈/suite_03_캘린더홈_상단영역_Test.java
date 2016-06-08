@@ -370,6 +370,9 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         util.close();
         util.selectMainWindow();
 
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+
         util.waitForTitle("일정 : 네이버 캘린더");
         assertTrue(Title.contains("일정 : 네이버 캘린더"));
     }
