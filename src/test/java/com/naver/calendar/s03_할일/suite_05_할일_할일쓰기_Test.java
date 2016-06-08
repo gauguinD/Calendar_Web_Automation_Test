@@ -49,6 +49,7 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
 
     @Test
     public void TC_01_할일쓰기_빠른쓰기_Test() throws Exception {
+        module.ifViewIsNotTask(util,module);
 
         if(util.waitForIsNotVisible(By.xpath("//div[@class='no_list']")))
         {
@@ -75,21 +76,6 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         assertTrue(newTaskNum == taskNum+1);
 
         module.deleteTask(util,taskId,newTaskNum);
-        /*
-        //빠른 할일 쓰기 상세보기로 진입
-        util.click(By.xpath("//li[@id='"+taskId+"']/div/a[3]"));
-        util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_wrap']"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_wrap']")).isDisplayed());
-
-        util.waitForIsElementPresent(By.xpath("//button[@class='_delete btn_delete']"));
-        util.click(By.xpath("//button[@class='_delete btn_delete']"));
-        util.getAlert().accept();
-        util.waitForPageLoaded();
-
-        //할일의 개수를 확인해서 한개 늘어난것 확인
-        taskNum = util.getXpathCount(By.xpath("//div[@class='_list todo_list']/div/ul/li"));
-        assertTrue(taskNum == newTaskNum-1);
-        */
     }
 
 
@@ -398,6 +384,12 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
     @Test
     public void TC_09_할일쓰기_완료할일쓰기_Test() throws Exception {
 
+
+        //완료된 할 일 포함 노출 안되어 있을 경우 클릭
+        if (util.waitForIsNotVisible(By.xpath("//li[@class='_task complete']/div/a[contains(@class,'_progress_status btn_state v3')]"))) {
+            util.click(By.xpath("//input[@class='_includingCompleted']"));
+        }
+
         if(util.waitForIsNotVisible(By.xpath("//div[@class='no_list']")))
         {
             taskNum = util.getXpathCount(By.xpath("//div[@class='_list todo_list']/div/ul/li"));
@@ -405,10 +397,7 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         else{
             taskNum=0;
         }
-        //완료된 할 일 포함 노출 안되어 있을 경우 클릭
-        if (util.waitForIsNotVisible(By.xpath("//li[@class='_task complete']/div/a[contains(@class,'_progress_status btn_state v3')]"))) {
-            util.click(By.xpath("//input[@class='_includingCompleted']"));
-        }
+
         //할 일 쓰기 클릭해서 할일 쓰기로 진입
         util.click(By.xpath("//span[contains(text(),'할 일 쓰기')]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_wrap']"));
@@ -436,6 +425,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         //할일의 개수를 확인해서 한개 늘어난것 확인
         util.waitForPageLoaded();
         newTaskNum = util.getXpathCount(By.xpath("//div[@class='_list todo_list']/div/ul/li"));
+        System.out.println(taskNum+"  "+newTaskNum);
+
         assertTrue(newTaskNum == taskNum + 1);
 
         module.deleteTask(util, taskId, newTaskNum);

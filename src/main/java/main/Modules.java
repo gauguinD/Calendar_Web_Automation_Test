@@ -529,6 +529,34 @@ public class Modules {
 		assertTrue(URL.contains(taskURL));
 	}
 
+	public void ifViewIsNotTask(Utilities util,Modules module) throws Exception{
+
+		Title = util.getTitle();
+		URL = util.getCurrentUrl();
+
+		if(Title != module.taskTitle)
+		{
+			util.goTo(module.taskURL);
+			util.waitForPageLoaded();
+		}
+
+		Title = util.getTitle();
+		URL = util.getCurrentUrl();
+
+		assertTrue(Title.contains(module.taskTitle));
+		assertTrue(URL.contains(module.taskURL));
+	}
+
+	public void ifNoTask(Utilities util) throws Exception{
+		if(util.waitForIsNotVisible(By.xpath("//div[@class='no_list']")))
+		{
+			taskNum = util.getXpathCount(By.xpath("//div[@class='_list todo_list']/div/ul/li"));
+		}
+		else{
+			taskNum=0;
+		}
+	}
+
 
 	public void taskOrder(Utilities util) throws Exception{
 		maxTaskNum = util.getXpathCount(By.xpath("//tbody[@class='_private_task_group']/tr"));
