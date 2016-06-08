@@ -71,6 +71,7 @@ public class Modules {
 	public int taskNum;
 	public String taskName;
 	public int newTaskNum;
+	public String alertText;
 
 	public String tasks[] ={};
 
@@ -588,4 +589,21 @@ public class Modules {
 		assertTrue(taskNum == newTaskNum);
 	}
 
+	public void deleteAnniv(Utilities util, String subject) throws Exception {
+
+		util.waitForIsElementPresent(By.xpath("//span[contains(text(),'기념일 관리')]"));
+		util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
+
+		if(util.waitForIsNotVisible(By.xpath("//tbody[@class='no_result']"))){
+			util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+subject+"')]"));
+			util.click(By.xpath("//div[contains(@class,'_memorialday_wrap_table ts scroll') and ./table/tbody/tr/td[4]/a[contains(text(),'"+subject+"')]]/table/tbody/tr/td[7]"));
+			alertText = util.getAlert().getText();
+			assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+			util.getAlert().accept();
+		}
+		else{
+			util.printLog("현재 기념일 목록에 기념일이 없습니다.");
+
+		}
+	}
 }

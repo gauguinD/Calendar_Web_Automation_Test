@@ -174,7 +174,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         //기념일 상세쓰기 진입
         util.click(By.xpath("//a[@class='_detail_add dc_8']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='schedule_section']"));
-        util.type(By.xpath("//input[@class='_contentText input_txt pos_tit']"),"제목");
+        util.type(By.xpath("//input[@class='_contentText input_txt pos_tit']"),"기념일_100일"+module.subjectKey);
         util.click(By.xpath("//a[@class='_editRecurrence btn_sy']"));
 
         //반복 옵션 진입
@@ -187,14 +187,54 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         assertTrue(util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequencySelectbox  selectbox13')]/div[1]/div")).getText().contains("100일"));
         assertTrue(util.waitForIsElementPresent(By.xpath("//p[@class='_preview']/span[2]")).getText().contains("100일"));
 
+        //저장버튼 탭
         util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
         util.click(By.xpath("//button[@class='_save normal']"));
-
+        //빈도 노출되는것 확인
         util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']"));
         assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']")).getText().contains("100일"));
 
         util.waitForIsElementPresent(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
         util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
+
+        module.deleteAnniv(util,module.subjectKey);
+    }
+
+        /*
+    * Step : 기념일관리 > 기념일 상세쓰기 > 1000일 간격으로 기념일 생성
+    * Result : 1000일 간격으로 기념일 생성됨
+    */
+
+    @Test
+    public void TC_06_기념일_기념일상세쓰기_1000일_Test() throws Exception {
+
+        //기념일 상세쓰기 진입
+        util.click(By.xpath("//a[@class='_detail_add dc_8']"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='schedule_section']"));
+        util.type(By.xpath("//input[@class='_contentText input_txt pos_tit']"),"기념일_1000일"+module.subjectKey);
+        util.click(By.xpath("//a[@class='_editRecurrence btn_sy']"));
+
+        //반복 옵션 진입
+        util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']"));
+        util.click(By.xpath("//div[@class='_frequencySelectbox  selectbox13']"));
+
+        //100일 선택
+        util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequencySelectbox  selectbox13')]/div[2]"));
+        util.click(By.xpath("//div[contains(@class,'_frequencySelectbox  selectbox13')]/div[2]/div/ul/li[3]"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequencySelectbox  selectbox13')]/div[1]/div")).getText().contains("1000일"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//p[@class='_preview']/span[2]")).getText().contains("1000일"));
+
+        //저장버튼 탭
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
+        util.click(By.xpath("//button[@class='_save normal']"));
+        //빈도 노출되는것 확인
+        util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']")).getText().contains("1000일"));
+
+        util.waitForIsElementPresent(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
+        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
+
+        module.deleteAnniv(util,module.subjectKey);
     }
 
 
