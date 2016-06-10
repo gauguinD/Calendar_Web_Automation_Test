@@ -1506,16 +1506,19 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 	 * @param locator 존재 확인 할 Element를 지정
 	 * @return locator에 존재하는 WebElement (element, null)
 	 */
-	public boolean isElementPresentNoExist(By locator) {
+	public boolean isAlertExist(Utilities util) throws Exception {
+		WebDriverWait wait = new WebDriverWait(this,300);
 
-		try {
-			findElement(locator);
+		if (wait.until(ExpectedConditions.alertIsPresent()) == null){
+			System.out.println("alert was not present");
+			return false;
 		}
-		catch (Exception e){
+
+		else{
+			System.out.println("alert was present");
 			return true;
-		}
-		return false;
-	}
+			}
 
+	}
 
 }
