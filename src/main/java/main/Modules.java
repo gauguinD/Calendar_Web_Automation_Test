@@ -29,7 +29,7 @@ public class Modules {
 	public final String contactURL = "https://contact.naver.com/";
 	public final String contactTitle = "네이버 주소록";
 
-	public final String cloudURL = "http://photo.cloud.naver.com/";
+	public final String cloudURL = "https://photo.cloud.naver.com/";
 	public final String cloudTitle = "네이버 클라우드";
 
 	public final String moneybookURL = "http://moneybook.naver.com/";
