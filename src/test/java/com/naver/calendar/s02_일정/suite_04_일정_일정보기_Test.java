@@ -920,18 +920,18 @@ public class suite_04_일정_일정보기_Test extends Testcase {
             //선택한 날짜에 일정이 2개 이상일 경우 일치하는 제목 찾아서 클릭
             //제목이 동일한 일정이 있을경우???
             for(int i = 1; i < NumOfEvent+1; i++)
+            {
+                util.printLog(module.contents);
+                Subject = util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).getText();
+                util.printLog(i+"번 일정의 제목은 : "+Subject+" 입니다.");
+                //util.scrollToElement(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a"));
+                if(module.contents == Subject)
                 {
-                    util.printLog(module.contents);
-                    Subject = util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).getText();
-                    util.printLog(i+"번 일정의 제목은 : "+Subject+" 입니다.");
-                    //util.scrollToElement(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a"));
-                    if(module.contents == Subject)
-                    {
-                        util.printLog("제목 : "+Subject+" 일정을 삭제합니다");
-                        util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).click();
-                    }
+                    util.printLog("제목 : "+Subject+" 일정을 삭제합니다");
+                    util.waitForIsElementPresent(By.xpath("html/body/div[5]/div/ul/li["+i+"]/a")).click();
                 }
             }
+        }
         else
             //일정 간편보기 클릭
             util.click(By.xpath("//a[contains(text(),'" + module.contents + "')]"));

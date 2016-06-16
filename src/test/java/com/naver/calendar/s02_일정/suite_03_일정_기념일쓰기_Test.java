@@ -20,9 +20,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     public String annivDay;
 
     public String stickerTitle;
-    public String stickerAlt;
     public String tempTitle;
-    public String tempAlt;
     public String alertText;
     public String stickerKey;
     public String tempName;
@@ -69,7 +67,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
     */
 
-    //@Test
+    @Test
     public void TC_02_기념일_기념일간편쓰기_Test() throws Exception {
 
         annivSubject = "기념일 간편쓰기"+module.subjectKey;
@@ -118,7 +116,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
     */
 
-    //@Test
+    @Test
     public void TC_03_기념일_기념일간편쓰기_음력_Test() throws Exception {
 
         annivSubject = "기념일 간편쓰기_음력"+module.subjectKey;
@@ -182,7 +180,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
     */
 
-    //@Test
+    @Test
     public void TC_04_기념일_기념일간편쓰기_윤달_Test() throws Exception {
 
         annivSubject = "기념일 간편쓰기_음력_윤달"+module.subjectKey;
@@ -259,8 +257,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
     */
 
-    //@Test
-    public void TC_05_기념일간편쓰기_스티커쓰기_Test() throws Exception {
+    @Test
+    public void TC_05_기념일간편쓰기_스티커_Test() throws Exception {
 
         annivSubject = "기념일 간편쓰기_스티커"+module.subjectKey;
 
@@ -335,7 +333,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     * Result : 100일 간격으로 기념일 생성됨
     */
 
-    //@Test
+    @Test
     public void TC_06_기념일_기념일상세쓰기_100일_Test() throws Exception {
 
         annivSubject = "기념일 상세쓰기_100일"+module.subjectKey;
@@ -374,7 +372,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     * Result : 1000일 간격으로 기념일 생성됨
     */
 
-    //@Test
+    @Test
     public void TC_07_기념일_기념일상세쓰기_1000일_Test() throws Exception {
 
         annivSubject = "기념일 상세쓰기_1000일"+module.subjectKey;
@@ -414,8 +412,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
     */
 
-    //@Test
-    public void TC_08_기념일_기념일상세쓰기_스티커쓰기_Test() throws Exception {
+    @Test
+    public void TC_08_기념일_기념일상세쓰기_스티커_Test() throws Exception {
 
 
         annivSubject = "기념일 상세쓰기_스티커"+module.subjectKey;
@@ -472,7 +470,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
     */
 
-    //@Test
+    @Test
     public void TC_09_기념일_기념일상세쓰기_캘린더_Test() throws Exception {
 
         annivSubject = "기념일 상세쓰기_캘린더"+module.subjectKey;

@@ -1502,23 +1502,78 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 	}
 
 	/**
-	 * Element가 존재하는지 확인하는 메소드
+	 * Alert이 존재하는지 확인하는 메소드
 	 * @param locator 존재 확인 할 Element를 지정
 	 * @return locator에 존재하는 WebElement (element, null)
 	 */
-	public boolean isAlertExist(Utilities util) throws Exception {
-		WebDriverWait wait = new WebDriverWait(this,300);
+	public boolean isAlertExist(Utilities util) {
+
+		WebDriverWait wait = new WebDriverWait(this,5);
 
 		if (wait.until(ExpectedConditions.alertIsPresent()) == null){
 			System.out.println("alert was not present");
 			return false;
 		}
-
 		else{
 			System.out.println("alert was present");
 			return true;
 			}
 
 	}
+
+
+	/**
+	 * Alert이 존재하는지 확인하는 메소드
+	 * @param locator 존재 확인 할 Element를 지정
+	 * @return locator에 존재하는 WebElement (element, null)
+	 */
+	public boolean isAlertNotExist(Utilities util) {
+
+		WebDriverWait wait = new WebDriverWait(this,5);
+
+		try{
+			wait.until(ExpectedConditions.alertIsPresent());
+			System.out.println("alert was present");
+			return true;
+		}
+		catch (Exception e){
+			System.out.println("alert was not present");
+			return false;
+		}
+
+	}
+
+	/**
+	 * Element가 존재할때까지 대기하는 메소드
+	 * @param locator 존재 확인 할 Element를 지정
+	 * @return locator에 존재하는 WebElement (element, null)
+	 * @throws Exception - Selenium Exception
+	 */
+	public boolean waitForIsElementNotPresent(By locator) throws Exception {
+
+		int tryCnt = 0;
+		WebDriverWait wait = (WebDriverWait) new WebDriverWait(this,
+				PAGE_LOAD_TIME_OUT);
+		while (tryCnt < MAX_TRY_COUNT) {
+			try {
+				WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+				if (element != null) {
+					//highlightElement(element);
+					return true;
+				}
+				else {
+					return false;
+				}
+			} catch (Exception e) {
+				printLog(e.getMessage());
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+
 
 }
