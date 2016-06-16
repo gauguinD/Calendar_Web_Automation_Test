@@ -11,34 +11,34 @@ import static org.testng.Assert.assertTrue;
 
 public class Modules {
 	
-	public final String mainURL = "http://www.naver.com/";
+	public final String mainURL = "www.naver.com";
 	public final String mainTitle = "NAVER";
 
-	public final String meURL = "http://me.naver.com/";
+	public final String meURL = "me.naver.com";
 	public final String meTitle = "네이버me";
 
-	public final String mailURL = "https://mail.naver.com/";
+	public final String mailURL = "mail.naver.com";
 	public final String mailTitle = "네이버 메일";
 
-	public final String noteURL = "http://note.naver.com/";
+	public final String noteURL = "note.naver.com";
 	public final String noteTitle = "받은쪽지함 : 네이버 쪽지";
 
-	public final String memoURL = "https://memo.naver.com/";
+	public final String memoURL = "memo.naver.com";
 	public final String memoTitle = "네이버 메모";
 
-	public final String contactURL = "https://contact.naver.com/";
+	public final String contactURL = "contact.naver.com";
 	public final String contactTitle = "네이버 주소록";
 
-	public final String cloudURL = "https://photo.cloud.naver.com/";
+	public final String cloudURL = "photo.cloud.naver.com";
 	public final String cloudTitle = "네이버 클라우드";
 
-	public final String moneybookURL = "http://moneybook.naver.com/";
+	public final String moneybookURL = "moneybook.naver.com";
 	public final String moneybookTitle = "네이버 가계부";
 
-	public final String officeURL = "http://office.naver.com/";
+	public final String officeURL = "office.naver.com";
 	public final String officeTitle = "네이버 오피스";
 
-	public final String calURL = "https://calendar.naver.com/";
+	public final String calURL = "calendar.naver.com";
 	public final String calTitle = "일정 : 네이버 캘린더";
 
 	public final String taskURL = "https://calendar.naver.com/tasks.nhn";
