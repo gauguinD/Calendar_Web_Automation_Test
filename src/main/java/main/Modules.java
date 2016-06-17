@@ -38,7 +38,7 @@ public class Modules {
 	public final String officeURL = "office.naver.com";
 	public final String officeTitle = "네이버 오피스";
 
-	public final String calURL = "calendar.naver.com";
+	public final String calURL = "https://calendar.naver.com";
 	public final String calTitle = "일정 : 네이버 캘린더";
 
 	public final String taskURL = "https://calendar.naver.com/tasks.nhn";

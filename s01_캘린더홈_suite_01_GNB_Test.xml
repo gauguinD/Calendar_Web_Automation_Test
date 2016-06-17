@@ -18,7 +18,7 @@
             <!--
              <class name="com.naver.calendar.s01_캘린더홈.suite_05_캘린더홈_캘린더영역_Test"/>
 
-            <class name="com.naver.calendar.s01_캘린더홈.suite_02_캘린더홈_Footer_Test"/>
+            <class name="com.naver.calendar.mvn s01_캘린더홈.suite_02_캘린더홈_Footer_Test"/>
             <class name="com.naver.calendar.s01_캘린더홈.suite_04_캘린더홈_좌측영역_Test"/>
             <class name="com.naver.calendar.s01_캘린더홈.suite_05_캘린더홈_캘린더영역_Test"/>
             -->

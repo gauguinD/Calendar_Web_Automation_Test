@@ -85,7 +85,7 @@
                         <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
-                        <suiteXmlFile>suite_01_캘린더홈_Test.xml</suiteXmlFile>
+                        <suiteXmlFile>s01_캘린더홈_suite_01_GNB_Test.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
                     <properties>
