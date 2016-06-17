@@ -14,8 +14,8 @@ public class suite_01_할일_GNB_Test extends Testcase {
     public String URL = null;
 
     /*
-   * Step : 로그인 > 해당 계정으로 로그인
-   * Result : 해당하는 계정으로 로그인 됨
+    * Step : 로그인 > 해당 계정으로 로그인
+    * Result : 해당하는 계정으로 로그인 됨
     */
     @Test
     public void TC_00_GNB_로그인_Test() throws Exception {
@@ -24,14 +24,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         util.waitForTitle(module.calTitle);
         util.goTo(module.taskURL);
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-
-        assertTrue(Title.contains(module.taskTitle));
-        assertTrue(URL.contains(module.taskURL));
+        module.assertCalendarPage(util,module.taskTitle,module.taskURL);
     }
 
 
@@ -63,15 +56,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
         util.click(By.className("me"));
         util.waitForIsElementPresent(By.xpath("//a[@class='N=a:PNB.me']"));
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-
-        assertTrue(Title.contains(module.meTitle));
-        assertTrue(URL.contains(module.meURL));
-
+        module.assertCalendarPage(util,module.meTitle,module.meURL);
         module.goBackToTask(util);
     }
 
@@ -87,12 +72,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
 
         util.click(By.className("mail"));
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.mailTitle));
-        assertTrue(URL.contains(module.mailURL));
+        module.assertCalendarPage(util,module.mailTitle,module.mailURL);
 
         module.goBackToTask(util);
     }
@@ -109,12 +89,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
 
         util.click(By.className("note"));
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.noteTitle));
-        assertTrue(URL.contains(module.noteURL));
+        module.assertCalendarPage(util,module.noteTitle,module.noteURL);
 
         module.goBackToTask(util);
     }
@@ -131,12 +106,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
 
         util.click(By.className("memo"));
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.memoTitle));
-        assertTrue(URL.contains(module.memoURL));
+        module.assertCalendarPage(util,module.memoTitle,module.memoURL);
 
         module.goBackToTask(util);
     }
@@ -153,12 +123,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
 
         util.click(By.className("contact"));
 
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.contactTitle));
-        assertTrue(URL.contains(module.contactURL));
+        module.assertCalendarPage(util,module.contactTitle,module.contactURL);
 
         module.goBackToTask(util);
     }
@@ -172,15 +137,18 @@ public class suite_01_할일_GNB_Test extends Testcase {
 
     @Test
     public void TC_07_GNB_탭_클라우드_Test() throws Exception{
+        if(util.waitForIsNotVisible(By.xpath("//a[@class='btn_more']")))
+        {
+            util.waitForIsElementPresent(By.xpath("//li[@class='_ndrive ndrive']"));
+            util.click(By.xpath("//li[@class='_ndrive ndrive']"));
+        }
+        else{
+            util.click(By.xpath("//a[@class='btn_more']"));
+            util.waitForIsElementPresent(By.xpath("//li[@class='_ndrive ndrive']"));
+            util.click(By.xpath("//li[@class='_ndrive ndrive']"));
+        }
 
-        util.click(By.className("ndrive"));
-
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.cloudTitle));
-        assertTrue(URL.contains(module.cloudURL));
+        module.assertCalendarPage(util,module.cloudTitle,module.cloudURL);
 
         module.goBackToTask(util);
     }
@@ -194,15 +162,17 @@ public class suite_01_할일_GNB_Test extends Testcase {
 
     @Test
     public void TC_08_GNB_탭_오피스_Test() throws Exception{
-
-        util.click(By.className("office"));
-
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.officeTitle));
-        assertTrue(URL.contains(module.officeURL));
+        if(util.waitForIsNotVisible(By.xpath("//a[@class='btn_more']")))
+        {
+            util.waitForIsElementPresent(By.xpath("//li[@class='_office office']"));
+            util.click(By.xpath("//li[@class='_office office']"));
+        }
+        else{
+            util.click(By.xpath("//a[@class='btn_more']"));
+            util.waitForIsElementPresent(By.xpath("//li[@class='_office office']"));
+            util.click(By.xpath("//li[@class='_office office']"));
+        }
+        module.assertCalendarPage(util,module.officeTitle,module.officeURL);
 
         module.goBackToTask(util);
     }
@@ -216,15 +186,17 @@ public class suite_01_할일_GNB_Test extends Testcase {
 
     @Test
     public void TC_09_GNB_탭_가계부_Test() throws Exception{
-
-        util.click(By.className("moneybook"));
-
-        Title = util.getTitle();
-        URL = util.getCurrentUrl();
-        util.printLog("[Title] : " + Title);
-        util.printLog("[URL] : " + URL);
-        assertTrue(Title.contains(module.moneybookTitle));
-        assertTrue(URL.contains(module.moneybookURL));
+        if(util.waitForIsNotVisible(By.xpath("//a[@class='btn_more']")))
+        {
+            util.waitForIsElementPresent(By.xpath("//li[@class='_moneybook moneybook']"));
+            util.click(By.xpath("//li[@class='_moneybook moneybook']"));
+        }
+        else{
+            util.click(By.xpath("//a[@class='btn_more']"));
+            util.waitForIsElementPresent(By.xpath("//li[@class='_moneybook moneybook']"));
+            util.click(By.xpath("//li[@class='_moneybook moneybook']"));
+        }
+        module.assertCalendarPage(util,module.moneybookTitle,module.moneybookURL);
 
         module.goBackToTask(util);
     }

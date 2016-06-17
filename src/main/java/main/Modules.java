@@ -493,4 +493,16 @@ public class Modules {
 		}
 	}
 
+	public void checkURL(Utilities util, String url, String title) throws Exception{
+
+		Title = util.getTitle();
+		URL = util.getCurrentUrl();
+
+		util.printLog("[Title] : " + Title);
+		util.printLog("[URL] : " + URL);
+
+		assertTrue(Title.contains(url));
+		assertTrue(URL.contains(title));
+	}
+
 }
