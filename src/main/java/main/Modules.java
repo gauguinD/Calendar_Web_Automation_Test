@@ -318,71 +318,6 @@ public class Modules {
 		util.printLog(util.waitForIsElementPresent(By.xpath("//button[@class='_user custom on']")).getText());
 	}
 
-	//iterator로 대체
-	public String GetCalendarKey(Utilities util, String calName) throws Exception{
-		int calNum;
-		String calNameTemp;
-		String calId = null;
-
-		calNum = util.getXpathCount(By.xpath("//ul[@class='category_list']/li"));
-
-		for(int i=1; i < calNum; i++){
-			calNameTemp = util.findElement(By.xpath("//ul[@class='category_list']/li["+i+"]/a[2]")).getAttribute("title");
-
-			if (calNameTemp == calName){
-				calId = util.findElement(By.xpath("//ul[@class='category_list']/li["+i+"]")).getAttribute("calendarid");
-			}
-			else
-			{
-				System.out.println("찾는 캘린더가 목록에 없습니다 다시 확인해주세요");
-			}
-				}
-		return calId;
-	}
-
-	public void DayIndex(String xpathValue, int Date,int dayIndex) throws Exception {
-		int tdValue = 0;
-		int divValue = 0;
-		int tempValue = 0;
-
-
-		if(Date > dayIndex)
-		{
-			tempValue = Date-dayIndex;
-			dayIndex = tempValue+dayIndex;
-
-			tdValue = (dayIndex / 7)+1;
-			divValue = (dayIndex % 7);
-		}
-		if(Date < dayIndex)
-		{
-			tempValue = dayIndex-Date;
-			dayIndex = tempValue+dayIndex;
-
-			tdValue = (dayIndex / 7)+1;
-			divValue = (dayIndex % 7);
-
-		}
-		else
-		{
-			tdValue = (Date / 7)+1;
-			divValue = (Date % 7)+1;
-		}
-
-		xpathValue = "*[@id='month_frame']/div/div/div[1]/div["+divValue+"]/table[2]/tbody/tr/td["+tdValue+"]";
-
-		//2월 4일
-		//*[@id="month_frame"]/div/div/div[1]/div[1]/table[2]/tbody/tr/td[5]
-
-		//2월 25일
-		//*[@id="month_frame"]/div/div/div[1]/div[4]/table[2]/tbody/tr[1]/td[5]
-
-		//3월 3일
-		//*[@id="month_frame"]/div/div/div[1]/div[5]/table[2]/tbody/tr/td[5]
-
-		//3월 23일
-		//*[@id="month_frame"]/div/div/div[1]/div[4]/table[2]/tbody/tr[1]/td[4]
-	}
 
 	public String StickerName(int i) throws Exception{
 		String StickerName = null;
@@ -424,56 +359,6 @@ public class Modules {
 
 	}
 
-	public void StickerSelect (Utilities util, Modules module,int i) throws Exception {
-		int Sticker = 0;
-		Sticker = util.getXpathCount(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li"));
-
-		System.out.println(Sticker);
-
-		//큰스티커 카테고리 1~7
-		//스티커 1 502~769
-		//스티커 2 503~763
-		//스티커 3 527~920
-		//스티커 4 921~970
-		//스티커 5 971~1053
-		//스티커 6 1054~1165
-		//스티커 7 1166~1196
-
-		//작은스티커 카테고리1~3
-		//스티커 1 2~269
-		//스티커 2 3~263
-		//스티커 3 27~112
-
-		for(int j=1; j<Sticker+1; j++)
-		{
-			int MaxSticker =0;
-			String NameOfStickerSet = null;
-
-			module.removeBlindText(util,"//div[@class='sticker_category']/ul["+i+"]/li["+j+"]/button/span");
-			NameOfStickerSet = util.findElement(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li["+j+"]/button/span")).getText();
-			System.out.println("현재 스티커 세트는 : "+NameOfStickerSet);
-
-			util.click(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li["+j+"]/button"));
-
-			MaxSticker = util.getXpathCount(By.xpath("//div[@class='sticker_category']/ul["+i+"]/li"));
-			System.out.println("전체 스티커의 개수는 :"+MaxSticker);
-			/*
-            //개별 스티커 클릭
-            for(int j=1; j < MaxSticker+1; j++)
-            {
-                util.click(By.xpath("//ul[@class='_big_sticker_list']/li["+j+"]"));
-
-                ///html/body/div[6]/div/div/div[1]/div[3]/ul/li[1]
-
-                //util.click(By.xpath("li[@class='_sticker'][key='"+j+"']"));
-                util.scrollToElement(By.xpath("//ul[@class='_big_sticker_list']/li["+j+"]"));
-            }
-            */
-			System.out.println(NameOfStickerSet+" 스티커 세트는 정상입니다.");
-		}
-
-		util.click(By.xpath("//button[@class='normal normal_v1 _save']"));
-	}
 
 	public void eventColor (Utilities util) throws Exception {
 		int NumberOfEvent;
@@ -487,7 +372,8 @@ public class Modules {
 	}
 
 	public void uploadImage (Utilities util) throws Exception {
-		String filePath = "/Users/Naver/Desktop/index.jpg";
+		//String filePath = "/Users/Naver/Desktop/index.jpg";
+		String filePath = "c:/Users/nts/calendar/index.jpg";
 
 		//util.click(By.xpath("//*[@id='myfile']"));
 		//util.executeScript("document.getElementById('fileName').value='" + filePath + "';");
@@ -496,8 +382,8 @@ public class Modules {
 	}
 
 	public void uploadFile (Utilities util) throws Exception {
-		String filePath = "/Users/Naver/Desktop/index.txt";
-
+		//String filePath = "/Users/Naver/Desktop/index.txt";
+		String filePath = "c:/Users/nts/calendar/index.txt";
 		//util.click(By.xpath("//*[@id='myfile']"));
 		//util.executeScript("document.getElementById('fileName').value='" + filePath + "';");
 		//util.executeScript("window.document.getElementById('myfile').setAttribute('value','"+filePath+"');");

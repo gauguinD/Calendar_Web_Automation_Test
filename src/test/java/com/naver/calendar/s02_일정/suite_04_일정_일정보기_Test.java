@@ -663,11 +663,11 @@ public class suite_04_일정_일정보기_Test extends Testcase {
 
         //큰스티커 확인
         util.click(By.className("h_cont"));
-        module.StickerSelect(util, module,1);
+       // module.StickerSelect(util, module,1);
 
         //작은스티커 확인
         util.click(By.xpath("//button[@class='btn_select _small']"));
-        module.StickerSelect(util, module,2);
+        //module.StickerSelect(util, module,2);
 
         //시작 날짜 입력
         util.isElementPresent(By.id("start_date")).clear();

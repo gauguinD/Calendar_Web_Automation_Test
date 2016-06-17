@@ -36,7 +36,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     public void saveSchedule(Utilities util, String subject) throws Exception{
         //저장버튼 클릭하여 일정 저장
         util.click(By.xpath("//button[@class ='btn_sys pos_save']"));
-        util.sleep(3);
+        util.sleep(2);
         if(util.waitForIsNotVisible(By.xpath("//div[@class='layer_content']"))){
         }
         else{
@@ -49,11 +49,13 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
 
     public void deleteSchedule(Utilities util, String subject) throws Exception{
         //일정 삭제
+        util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
+
         assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(text(),'"+subject+"')]")).isDisplayed());
         util.click(By.xpath("//a[contains(text(),'"+subject+"')]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_pop']"));
         util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
-        util.sleep(3);
+        util.sleep(2);
 
         //일정이 생성된 캘린더가 공유캘린더 일 경우 예외처리
         //1. 얼럿이 노출되는지 확인 하고
@@ -91,6 +93,9 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     @Test
     public void TC_01_일정_일정쓰기_Test() throws Exception {
         scheduleSubject = "일정쓰기"+module.subjectKey;
+        util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_list list')]"));
+        util.click(By.xpath("//button[contains(@class,'_list list')]"));
+
         writeSchedule(util,scheduleSubject);
         saveSchedule(util,scheduleSubject);
         deleteSchedule(util,scheduleSubject);
@@ -179,10 +184,15 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         lunarDate = lunarDate.substring(5).replace(".", "-");
         saveSchedule(util,scheduleSubject);
 
+        //일정 확인하기 위해서 음력 날짜로 이동
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + lunarDate + "\"}}";
         util.goTo(URL);
         util.waitForPageLoaded();
         deleteSchedule(util,scheduleSubject);
+
+        //삭제 하고 다시 오늘 날짜로 복귀
+        util.click(By.className("today"));
+        util.waitForPageLoaded();
     }
 
 
@@ -221,10 +231,15 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
             lunarDate = lunarDate.substring(5).replace(".", "-");
             saveSchedule(util,scheduleSubject);
 
+            //일정 확인하기 위해서 음력 날짜로 이동
             URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + lunarDate + "\"}}";
             util.goTo(URL);
             util.waitForPageLoaded();
             deleteSchedule(util,scheduleSubject);
+
+            //삭제 하고 다시 오늘 날짜로 복귀
+            util.click(By.className("today"));
+            util.waitForPageLoaded();
         }
     }
 
@@ -335,7 +350,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
 
     @Test
     public void TC_12_일정_일정쓰기_스티커_Test() throws Exception {
-        scheduleSubject = "일정쓰기_범주"+module.subjectKey;
+        scheduleSubject = "일정쓰기_스티커"+module.subjectKey;
         writeSchedule(util,scheduleSubject);
 
         util.click(By.xpath("//span[@class='h_cont']"));
@@ -361,6 +376,8 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
                 util.waitForIsElementPresent(By.xpath("//div[@class='layer_popup layer_add_sticker']"));
             }
         }
+        util.click(By.xpath("//button[@class='normal normal_v1 _save']"));
+
         saveSchedule(util,scheduleSubject);
         deleteSchedule(util,scheduleSubject);
     }
@@ -376,7 +393,9 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         scheduleSubject = "일정쓰기_설명"+module.subjectKey;
         writeSchedule(util,scheduleSubject);
 
-        util.type(By.xpath("//div[@class='txtbox focus_txt']"),"설명");
+        util.waitForIsElementPresent(By.xpath("//div[@class='txtbox focus_txt']"));
+        util.click(By.xpath("//div[@class='txtbox focus_txt']"));
+        util.type(By.xpath("//textarea[@class='txtbox']"),"설명");
 
         saveSchedule(util,scheduleSubject);
         deleteSchedule(util,scheduleSubject);
@@ -394,6 +413,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         writeSchedule(util,scheduleSubject);
 
         module.uploadImage(util);
+        util.sleep(5);
 
         saveSchedule(util,scheduleSubject);
         deleteSchedule(util,scheduleSubject);
@@ -411,6 +431,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         writeSchedule(util,scheduleSubject);
 
         module.uploadFile(util);
+        util.sleep(5);
 
         saveSchedule(util,scheduleSubject);
         deleteSchedule(util,scheduleSubject);
