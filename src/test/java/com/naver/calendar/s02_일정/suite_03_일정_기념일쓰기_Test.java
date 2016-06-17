@@ -102,6 +102,23 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         }
     }
 
+    public void getTodayDate(Utilities util) throws Exception{
+        //기념일에서 현재 일자에 있는 날짜를 가져옴
+        annivYear = util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar-today calendar-selected')]")).getAttribute("data-year");
+        annivMonth = util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar-today calendar-selected')]")).getAttribute("data-month");
+        annivDay = util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar-today calendar-selected')]")).getAttribute("data-date");
+        if(Integer.parseInt(annivMonth)< 10){
+            annivMonth = "0"+annivMonth;
+            if(Integer.parseInt(annivDay)<10)
+                annivDay="0"+annivDay;
+        }
+        annivStartDate = annivYear+"."+annivMonth+"."+annivDay;
+
+        //오늘 날짜 선택해서 레이어 닫기
+        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar-selected')]"));
+        util.click(By.xpath("//td[contains(@class,'calendar-selected')]"));
+    }
+
 
 
 
@@ -149,22 +166,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.click(By.xpath("//input[@class='_start_date dc text']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='layer_calendar layer-show']"));
 
-        //기념일에서 현재 일자에 있는 날짜를 가져옴
-        annivYear = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-year");
-        annivMonth = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-month");
-        annivDay = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-date");
-        if(Integer.parseInt(annivMonth)< 10){
-            annivMonth = "0"+annivMonth;
-            if(Integer.parseInt(annivDay)<10)
-                annivDay="0"+annivDay;
-        }
-        annivStartDate = annivYear+"."+annivMonth+"."+annivDay;
-
-
-        //오늘 날짜 선택해서 레이어 닫기
-        util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']"));
-        util.click(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']"));
-
+        getTodayDate(util);
         saveSimpleAnniv(util);
         deleteAnniv(util,module.subjectKey);
     }
@@ -205,20 +207,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
             util.click(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']"));
         }
 */
-        //기념일에서 현재 일자에 있는 날짜를 가져옴
-        annivYear = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-year");
-        annivMonth = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-month");
-        annivDay = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-date");
-        if(Integer.parseInt(annivMonth)< 10){
-            annivMonth = "0"+annivMonth;
-            if(Integer.parseInt(annivDay)<10)
-                annivDay="0"+annivDay;
-        }
-        annivStartDate = annivYear+"."+annivMonth+"."+annivDay;
 
-        //오늘 날짜 선택해서 레이어 닫기
-        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar-selected')]"));
-        util.click(By.xpath("//td[contains(@class,'calendar-selected')]"));
+        getTodayDate(util);
         util.sleep(2);
 
         saveSimpleAnniv(util);
@@ -268,20 +258,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         }
         */
 
-        //기념일에서 현재 일자에 있는 날짜를 가져옴
-        annivYear = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-year");
-        annivMonth = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-month");
-        annivDay = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-date");
-        if(Integer.parseInt(annivMonth)< 10){
-            annivMonth = "0"+annivMonth;
-            if(Integer.parseInt(annivDay)<10)
-                annivDay="0"+annivDay;
-        }
-        annivStartDate = annivYear+"."+annivMonth+"."+annivDay;
-
-        //오늘 날짜 선택해서 레이어 닫기
-        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar-selected')]"));
-        util.click(By.xpath("//td[contains(@class,'calendar-selected')]"));
+        getTodayDate(util);
 
         //기념일 추가하기 클릭
         util.waitForIsElementPresent(By.xpath("//button[@class='_add small']"));
@@ -323,20 +300,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.click(By.xpath("//input[@class='_start_date dc text']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='layer_calendar layer-show']"));
 
-        //기념일에서 현재 일자에 있는 날짜를 가져옴
-        annivYear = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-year");
-        annivMonth = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-month");
-        if(Integer.parseInt(annivMonth)< 10)
-        {
-            annivMonth = "0"+annivMonth;
-        }
-        annivDay = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-date");
-
-        annivStartDate = annivYear+"."+annivMonth+"."+annivDay;
-
-        //오늘 날짜 선택해서 레이어 닫기
-        util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']"));
-        util.click(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']"));
+        getTodayDate(util);
 
         for(int i=1; i<4; i++){
 
