@@ -83,7 +83,7 @@
 						<org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>s02_일정쓰기_suite_02_약속쓰기_Test.xml</suiteXmlFile>
+						<suiteXmlFile>s02_일정쓰기_suite_02_반복일정쓰기_Test.xml</suiteXmlFile>
 					</suiteXmlFiles>
 
 					<properties>
