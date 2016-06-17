@@ -2,6 +2,7 @@ package com.naver.calendar.s02_일정;
 
 import main.TestIds;
 import main.Testcase;
+import main.Utilities;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -31,7 +32,75 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     public int stickerCategoryNum;
     public int maxColor;
 
+    public void saveAnniv(Utilities util) throws Exception {
+        //저장 버튼 탭
+        util.waitForIsElementPresent(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
+        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
+        util.sleep(2);
 
+        if(util.waitForIsNotVisible(By.xpath("//div[@class='layer_content']"))){
+        }
+        else{
+            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal']"));
+            util.click(By.xpath("//button[@class='_ok normal']"));
+        }
+        //기념일 관리 클릭
+        util.waitForIsElementPresent(By.xpath("//span[contains(text(),'기념일 관리')]"));
+        util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
+
+        //annivSubject 가지고 있는 기념일 확인 해당 기념일 calendarName 확인
+        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]")).isDisplayed());
+        //calendarName = util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_memorialday_wrap_table ts scroll') and ./table/tbody/tr/td[4]/a[contains(text(),'"+annivSubject+"')]]/table/tbody/tr/td[3]")).getText();
+        //assertTrue(tempName.contains(calendarName));
+    }
+
+
+    public void saveSimpleAnniv(Utilities util) throws Exception {
+        //기념일 추가하기 클릭
+        util.waitForIsElementPresent(By.xpath("//button[@class='_add small']"));
+        util.click(By.xpath("//button[@class='_add small']"));
+        util.sleep(2);
+
+        if(util.waitForIsNotVisible(By.xpath("//div[@class='layer_content']"))){
+        }
+        else{
+            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal']"));
+            util.click(By.xpath("//button[@class='_ok normal']"));
+        }
+
+        //annivSubject, annivStartDate 가지고 있는 기념일 있는지 확인
+        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]")).isDisplayed());
+    }
+
+    public void deleteAnniv(Utilities util, String subject) throws Exception {
+
+        util.waitForIsElementPresent(By.xpath("//span[contains(text(),'기념일 관리')]"));
+        util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
+
+        if(util.waitForIsNotVisible(By.xpath("//tbody[@class='no_result']"))){
+            util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+subject+"')]"));
+            util.click(By.xpath("//div[contains(@class,'_memorialday_wrap_table ts scroll') and ./table/tbody/tr/td[4]/a[contains(text(),'"+subject+"')]]/table/tbody/tr/td[7]"));
+        }
+        else{
+            util.printLog("현재 기념일 목록에 기념일이 없습니다.");
+
+        }
+
+        //일정이 생성된 캘린더가 공유캘린더 일 경우 예외처리
+        //1. 얼럿이 노출되는지 확인 하고
+        //2. 공유캘린더 인지 확인
+        if(util.isAlertNotExist(util)){
+            alertText = util.getAlert().getText();
+            assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+            util.getAlert().accept();
+        }
+        else if(util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()){
+            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal']"));
+            util.click(By.xpath("//button[@class='_ok normal']"));
+        }
+    }
 
 
 
@@ -96,17 +165,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']"));
         util.click(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']"));
 
-        //기념일 추가하기 클릭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_add small']"));
-        util.click(By.xpath("//button[@class='_add small']"));
-
-        //annivSubject, annivStartDate 가지고 있는 기념일 있는지 확인
-        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]")).isDisplayed());
-        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'date') and contains(text(),'"+annivStartDate+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//td[contains(@class,'date') and contains(text(),'"+annivStartDate+"')]")).isDisplayed());
-
-        module.deleteAnniv(util,module.subjectKey);
+        saveSimpleAnniv(util);
+        deleteAnniv(util,module.subjectKey);
     }
 
 
@@ -133,7 +193,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         //미니 달력 레이어에서 현재 날짜 선택 되어있는 레이어 노출
         util.click(By.xpath("//input[@class='_start_date dc text']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='layer_calendar layer-show']"));
-
+/*
         //변환이 불가능한 양력날짜 예외처리(5월 31일)
         if(util.isAlertExist(util)){
             util.getAlert().accept();
@@ -144,8 +204,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
             util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']"));
             util.click(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']"));
         }
-
-
+*/
         //기념일에서 현재 일자에 있는 날짜를 가져옴
         annivYear = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-year");
         annivMonth = util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today calendar-selected']")).getAttribute("data-month");
@@ -160,18 +219,10 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         //오늘 날짜 선택해서 레이어 닫기
         util.waitForIsElementPresent(By.xpath("//td[contains(@class,'calendar-selected')]"));
         util.click(By.xpath("//td[contains(@class,'calendar-selected')]"));
+        util.sleep(2);
 
-        //기념일 추가하기 클릭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_add small']"));
-        util.click(By.xpath("//button[@class='_add small']"));
-
-        //annivSubject, annivStartDate 가지고 있는 기념일 있는지 확인
-        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]")).isDisplayed());
-        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'date') and contains(text(),'"+annivStartDate+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//td[contains(@class,'date') and contains(text(),'"+annivStartDate+"')]")).isDisplayed());
-
-        module.deleteAnniv(util,annivSubject);
+        saveSimpleAnniv(util);
+        deleteAnniv(util,annivSubject);
     }
 
 
@@ -180,7 +231,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
     */
 
-    @Test
+    //@Test
     public void TC_04_기념일_기념일간편쓰기_윤달_Test() throws Exception {
 
         annivSubject = "기념일 간편쓰기_음력_윤달"+module.subjectKey;
@@ -191,13 +242,16 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         //양력에서 음력으로 설정
         util.click(By.xpath("//div[@class='_lunar slt_type dc selectbox1 selectbox-naked']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_lunar slt_type dc selectbox1 selectbox-naked']"));
+
         util.waitForIsElementPresent(By.xpath("//div[@class='selectbox-layer']/ul/ul/li[2]"));
         util.click(By.xpath("//div[@class='selectbox-layer']/ul/ul/li[2]"));
 
+        //윤달 날짜 클릭
         util.waitForIsElementPresent(By.xpath("//input[@class='_leap input_chk']"));
         util.click(By.xpath("//input[@class='_leap input_chk']"));
 
         //미니 달력 레이어에서 현재 날짜 선택 되어있는 레이어 노출
+
         util.click(By.xpath("//input[@class='_start_date dc text']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='layer_calendar layer-show']"));
 
@@ -247,7 +301,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
             util.waitForIsElementPresent(By.xpath("//td[contains(@class,'date') and contains(text(),'"+annivStartDate+"')]"));
             assertTrue(util.waitForIsElementPresent(By.xpath("//td[contains(@class,'date') and contains(text(),'"+annivStartDate+"')]")).isDisplayed());
 
-            module.deleteAnniv(util,annivSubject);
+            deleteAnniv(util,annivSubject);
         }
      }
 
@@ -290,6 +344,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
             util.click(By.xpath("//div[@class='sticker_category']/ul/li["+i+"]/button"));
             util.click(By.xpath("//ul[contains(@class,'_sticker_list')]/li[1]"));
             maxSticker = util.getXpathCount(By.xpath("//ul[contains(@class,'_sticker_list')]/li"));
+            //maxSticker = 3;
             util.click(By.xpath("//button[@class='normal normal_v1 _save']"));
 
             for(int j=2; j<maxSticker; j++){
@@ -312,18 +367,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
                 }
             }
         }
-
-        //기념일 추가하기 클릭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_add small']"));
-        util.click(By.xpath("//button[@class='_add small']"));
-
-        //annivSubject, annivStartDate 가지고 있는 기념일 있는지 확인
-        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]")).isDisplayed());
-        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'date') and contains(text(),'"+annivStartDate+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//td[contains(@class,'date') and contains(text(),'"+annivStartDate+"')]")).isDisplayed());
-
-        module.deleteAnniv(util,annivSubject);
+        saveSimpleAnniv(util);
+        deleteAnniv(util,annivSubject);
     }
 
 
@@ -361,10 +406,9 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']"));
         assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']")).getText().contains("100일"));
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-
-        module.deleteAnniv(util,module.subjectKey);
+        saveAnniv(util);
+        util.sleep(3);
+        deleteAnniv(util,module.subjectKey);
     }
 
         /*
@@ -400,10 +444,9 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']"));
         assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']")).getText().contains("1000일"));
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-
-        module.deleteAnniv(util,module.subjectKey);
+        saveAnniv(util);
+        util.sleep(3);
+        deleteAnniv(util,module.subjectKey);
     }
 
 
@@ -450,18 +493,9 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         }
         util.click(By.xpath("//button[@class='normal normal_v1 _save']"));
 
-        //기념일 관리 클릭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-
-        util.waitForIsElementPresent(By.xpath("//span[contains(text(),'기념일 관리')]"));
-        util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
-
-        //annivSubject, annivStartDate 가지고 있는 기념일 있는지 확인
-        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]")).isDisplayed());
-
-        module.deleteAnniv(util,annivSubject);
+        saveAnniv(util);
+        util.sleep(3);
+        deleteAnniv(util,annivSubject);
     }
 
 
@@ -484,22 +518,10 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='calendar_name']/div[1]/div"));
         tempName = util.waitForIsElementPresent(By.xpath("//div[@class='calendar_name']/div[1]/div")).getText();
 
-        //저장 버튼 탭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-
-        //기념일 관리 클릭
-        util.waitForIsElementPresent(By.xpath("//span[contains(text(),'기념일 관리')]"));
-        util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
-
-        //annivSubject 가지고 있는 기념일 확인 해당 기념일 calendarName 확인
-        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]")).isDisplayed());
-        calendarName = util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_memorialday_wrap_table ts scroll') and ./table/tbody/tr/td[4]/a[contains(text(),'"+annivSubject+"')]]/table/tbody/tr/td[3]")).getText();
-        assertTrue(tempName.contains(calendarName));
-
+        saveAnniv(util);
+        util.sleep(3);
         //해당하는 제목을 가진 캘린더 삭제
-        module.deleteAnniv(util,module.subjectKey);
+        deleteAnniv(util,module.subjectKey);
     }
 
 
@@ -527,20 +549,10 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
             assertTrue(util.waitForIsElementPresent(By.xpath("//ul[@class='category_lst']/li["+i+"]")).getAttribute("class").contains("selected"));
         }
 
-        //저장 버튼 탭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-
-        //기념일 관리 클릭
-        util.waitForIsElementPresent(By.xpath("//span[contains(text(),'기념일 관리')]"));
-        util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
-
-        //annivSubject 가지고 있는 기념일 확인 해당 기념일 calendarName 확인
-        util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+annivSubject+"')]")).isDisplayed());
-
+        saveAnniv(util);
+        util.sleep(3);
         //해당하는 제목을 가진 캘린더 삭제
-        module.deleteAnniv(util,module.subjectKey);
+        deleteAnniv(util,module.subjectKey);
     }
 
 
