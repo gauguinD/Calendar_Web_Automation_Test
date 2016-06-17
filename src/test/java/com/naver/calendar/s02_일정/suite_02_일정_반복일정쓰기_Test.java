@@ -26,6 +26,10 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
 
     public void writeSchedule(Utilities util, String subject) throws Exception{
 
+
+        util.click(By.xpath("//button[contains(@class,'_list list')]"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
+
         util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
         assertTrue(util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
 
@@ -98,6 +102,7 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
     public void TC_01_반복일정_매일일정쓰기_Test() throws Exception {
         scheduleSubject = "반복일정쓰기_매일마다"+module.subjectKey;
         writeSchedule(util,scheduleSubject);
+        util.printLog(scheduleSubject);
 
         util.click(By.xpath("//a[@class='_repeat_btn btn_sy repeat img_ri']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_layer dh_layer']"));
@@ -109,10 +114,10 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
         util.click(By.xpath("//button[@class='_save normal']"));
 
         util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_text txt_nocycle']/p"));
-        util.printLog(repeatText);
         assertTrue(repeatText.contains(util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_text txt_nocycle']/p")).getText()));
 
         saveSchedule(util,scheduleSubject);
+        util.printLog(scheduleSubject);
         deleteSchedule(util,scheduleSubject);
     }
 
