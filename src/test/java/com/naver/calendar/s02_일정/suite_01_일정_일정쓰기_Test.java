@@ -254,7 +254,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     * Result : 해당하는 날짜에 공개 일정 생성 됨
     */
 
-    //@Test
+    @Test
     public void TC_08_일정_일정쓰기_공개_Test() throws Exception {
         scheduleSubject = "일정쓰기_공개"+module.subjectKey;
         writeSchedule(util,scheduleSubject);
