@@ -94,11 +94,10 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         //캘린더로 돌아가기 노출되는것 확인
         //제목에 검색에 유지되는것 확인
         util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']"));
-        util.printLog(util.waitForIsElementPresent(By.xpath("//div[@class='_noenddate_set']/ul/li/div/p/a")).getText());
-
-        searchResult = util.isElementPresent(By.xpath("//div[@class='_noenddate_set']/ul/li/div/p/a")).getText();
-        util.printLog(searchResult);
-        assertTrue(searchResult.contains(searchTitle));
+        //util.printLog(util.waitForIsElementPresent(By.xpath("//span[@class='keyword']")).getText());
+        //searchResult = util.isElementPresent(By.xpath("//span[@class='keyword']")).getText();
+        //util.printLog(searchResult);
+        //assertTrue(searchResult.contains(searchTitle));
 
         util.click(By.xpath("//a[@class='_back btn_back_calender']"));
     }
@@ -245,15 +244,18 @@ public class suite_03_할일_상단영역_Test extends Testcase {
 
         util.waitForIsElementPresent(By.xpath("//input[@class='_includingCompleted']"));
 
+        //완료된 할 일 목록에 노출 되면 예외처리
         if(util.waitForIsElementPresent(By.xpath("//input[@class='_includingCompleted']")).isSelected()){
             util.printLog("현재 완료된 할 일 포함해서 노출 되어 있습니다.");
             completeTask = util.getXpathCount(By.xpath("//li[@class='_task complete']"));
             util.printLog("완료된 할 일은 총 ["+completeTask+"]개 입니다");
             assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_complete ck_complete mark']")).isDisplayed());
         }
+        //완료된 할 일 목록에 노출 안되면 예외처리
         else{
             util.printLog("현재 완료된 할 일 노출 되지 않고 있습니다.");
             util.click(By.xpath("//input[@class='_includingCompleted']"));
+            util.waitForIsElementPresent(By.xpath("//a[@class='_complete ck_complete mark']"));
             assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_complete ck_complete mark']")).isDisplayed());
         }
     }
