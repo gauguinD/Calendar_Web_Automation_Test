@@ -388,6 +388,10 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_cfg_calendar_default inp01') and contains(@value,'6819065')]"));
         util.click(By.xpath("//input[contains(@class,'_cfg_calendar_default inp01') and contains(@value,'6819065')]"));
 
+        util.click(By.xpath("//button[@class='_save normal']"));
+        util.getAlert().accept();
+        util.waitForPageLoaded();
+
         //환경설정 이동
         util.waitForIsElementPresent(By.className("_config"));
         util.click(By.className("_config"));
