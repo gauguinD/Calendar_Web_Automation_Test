@@ -61,7 +61,7 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
     * Result : <,> 화살표 클릭함에 따라 이전달, 다음달로 이동 됨
     */
 
-   //@Test
+   @Test
     public void TC_03_좌측영역_날짜영역_Test() throws Exception{
 
         String miniCalendar;
