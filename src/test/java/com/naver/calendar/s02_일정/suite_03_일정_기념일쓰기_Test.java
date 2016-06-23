@@ -34,15 +34,15 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
 
     public void saveAnniv(Utilities util) throws Exception {
         //저장 버튼 탭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
-        util.click(By.xpath("//button[@class='_saveBtn btn_sys pos_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='save _saveBtn ']"));
+        util.click(By.xpath("//button[@class='save _saveBtn ']"));
         util.sleep(2);
 
         if(util.waitForIsNotVisible(By.xpath("//div[@class='layer_content']"))){
         }
         else{
-            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal']"));
-            util.click(By.xpath("//button[@class='_ok normal']"));
+            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+            util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
         }
         //기념일 관리 클릭
         util.waitForIsElementPresent(By.xpath("//span[contains(text(),'기념일 관리')]"));
@@ -65,8 +65,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         if(util.waitForIsNotVisible(By.xpath("//div[@class='layer_content']"))){
         }
         else{
-            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal']"));
-            util.click(By.xpath("//button[@class='_ok normal']"));
+            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+            util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
         }
 
         //annivSubject, annivStartDate 가지고 있는 기념일 있는지 확인
@@ -187,8 +187,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.type(By.xpath("//input[@class='_content_text text dc_5']"),annivSubject);
 
         //양력에서 음력으로 설정
-        util.click(By.xpath("//div[@class='_lunar slt_type dc selectbox1 selectbox-naked']"));
-        util.waitForIsElementPresent(By.xpath("//div[@class='_lunar slt_type dc selectbox1 selectbox-naked']"));
+        util.click(By.xpath("//div[@class='_lunar slt_type dc selectbox13 selectbox-naked']"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_lunar slt_type dc selectbox13 selectbox-naked']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='selectbox-layer']/ul/ul/li[2]"));
         util.click(By.xpath("//div[@class='selectbox-layer']/ul/ul/li[2]"));
 
@@ -307,9 +307,10 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
             util.click(By.xpath("//button[@class='_sticker_btn sticker_btn']"));
             util.click(By.xpath("//div[@class='sticker_category']/ul/li["+i+"]/button"));
             util.click(By.xpath("//ul[contains(@class,'_sticker_list')]/li[1]"));
-            maxSticker = util.getXpathCount(By.xpath("//ul[contains(@class,'_sticker_list')]/li"));
-            //maxSticker = 3;
-            util.click(By.xpath("//button[@class='normal normal_v1 _save']"));
+            //maxSticker = util.getXpathCount(By.xpath("//ul[contains(@class,'_sticker_list')]/li"));
+            maxSticker = 3;
+            util.waitForIsElementPresent(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
+            util.click(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
 
             for(int j=2; j<maxSticker; j++){
                 util.click(By.xpath("//button[@class='_sticker_btn sticker_btn']"));
@@ -319,7 +320,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
                 //stickerAlt = util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_sticker') and contains(@key,'"+i+"')]/button")).getAttribute("alt");
                 stickerTitle = util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]/button")).getAttribute("title");
                 util.click(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]"));
-                util.click(By.xpath("//button[@class='normal normal_v1 _save']"));
+                util.waitForIsElementPresent(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
+                util.click(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
 
                 util.waitForIsElementPresent(By.xpath("//button[@class='_sticker_btn sticker_btn']"));
                 //tempAlt = util.waitForIsElementPresent(By.xpath("//button[@class='_sticker_btn sticker_btn']/img")).getAttribute("alt");
@@ -364,8 +366,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         assertTrue(util.waitForIsElementPresent(By.xpath("//p[@class='_preview']/span[2]")).getText().contains("100일"));
 
         //저장버튼 탭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
-        util.click(By.xpath("//button[@class='_save normal']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save normal btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save normal btn_emphasis']"));
         //빈도 노출되는것 확인
         util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']"));
         assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']")).getText().contains("100일"));
@@ -402,8 +404,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         assertTrue(util.waitForIsElementPresent(By.xpath("//p[@class='_preview']/span[2]")).getText().contains("1000일"));
 
         //저장버튼 탭
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
-        util.click(By.xpath("//button[@class='_save normal']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save normal btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save normal btn_emphasis']"));
         //빈도 노출되는것 확인
         util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']"));
         assertTrue(util.waitForIsElementPresent(By.xpath("//span[@class='_frequency']")).getText().contains("1000일"));
@@ -438,15 +440,15 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
 
         for(int i=1; i< stickerCategoryNum; i++){
             util.click(By.xpath("//div[@class='sticker_category']/ul/li["+i+"]/button"));
-            maxSticker = util.getXpathCount(By.xpath("//ul[contains(@class,'_sticker_list')]/li"));
-            //maxSticker = 3;
+            //maxSticker = util.getXpathCount(By.xpath("//ul[contains(@class,'_sticker_list')]/li"));
+            maxSticker = 3;
             for(int j=1; j < maxSticker; j++){
                 stickerKey = util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]")).getAttribute("key");
                 util.printLog(stickerKey);
                 util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]"));
 
                 util.click(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]"));
-                util.click(By.xpath("//button[@class='normal normal_v1 _save']"));
+                util.click(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
 
                 util.waitForIsElementPresent(By.xpath("//ul[@class='sticker_section']/li"));
                 util.printLog(util.waitForIsElementPresent(By.xpath("//ul[@class='sticker_section']/li")).getAttribute("key"));
@@ -455,7 +457,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
                 util.waitForIsElementPresent(By.xpath("//div[@class='layer_popup layer_add_sticker']"));
             }
         }
-        util.click(By.xpath("//button[@class='normal normal_v1 _save']"));
+        util.click(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
 
         saveAnniv(util);
         util.sleep(3);

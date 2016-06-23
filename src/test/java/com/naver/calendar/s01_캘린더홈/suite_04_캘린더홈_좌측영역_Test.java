@@ -22,7 +22,6 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
     int maxCalNum;
 
-
     /*
     * Step : 로그인 > 해당 계정으로 로그인
     * Result : 해당하는 계정으로 로그인 됨
@@ -65,7 +64,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     * Result : 해당 날짜로 일정쓰기 노출 됨
     *
     */
-    @Test
+    //@Test
     public void TC_03_좌측영역_날짜영역_Test() throws Exception{
 
         String miniCalendar;
@@ -161,7 +160,9 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_08_좌측영역_내캘린더만들기_Test() throws Exception{
 
-        util.click(By.className("btn_makecal"));
+        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
+        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        util.click(By.xpath("//a[@class='btn_makecal']"));
         util.click(By.partialLinkText("내 캘린더 만들기"));
 
         //til.clearAndType(By.xpath("//tr[@class='_calendar_info_area']/td/input"),"좌측영역_내캘린더만들기");
@@ -214,8 +215,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
     @Test
     public void TC_09_좌측영역_내캘린더만들기_삭제_Test() throws Exception {
-
-        util.click(By.className("_config"));
+       util.click(By.className("_config"));
         util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
@@ -241,8 +241,9 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_10_좌측영역_공유캘린더만들기_Test() throws Exception{
 
-        util.isElementPresent(By.className("btn_makecal"));
-        util.click(By.className("btn_makecal"));
+        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
+        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        util.click(By.xpath("//a[@class='btn_makecal']"));
         util.click(By.xpath("//li[@class ='_share']"));
 
         util.waitForIsElementPresent(By.xpath("//tr[@class='_calendar_info_area']/td/input"));
@@ -321,7 +322,10 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
     @Test
     public void TC_12_좌측영역_구독캘린더만들기_Test() throws Exception{
-        util.click(By.className("btn_makecal"));
+
+        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
+        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        util.click(By.xpath("//a[@class='btn_makecal']"));
         util.click(By.xpath("//li[@class ='_subscribe']"));
 
 
@@ -347,8 +351,9 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_13_좌측영역_시간표만들기_Test() throws Exception{
 
-        util.waitForIsElementPresent(By.className("btn_makecal"));
-        util.click(By.className("btn_makecal"));
+        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
+        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        util.click(By.xpath("//a[@class='btn_makecal']"));
         util.click(By.xpath("//li[@class='_timetable']"));
 
         util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"));
@@ -430,10 +435,13 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     public void TC_15_좌측영역_환경설정_Test() throws Exception{
 
        util.waitForIsElementPresent(By.xpath("//a[@class='btn_settingcal']"));
+       util.mouseOver(By.xpath("//a[@class='btn_settingcal']"));
        util.click(By.xpath("//a[@class='btn_settingcal']"));
 
+       util.waitForIsElementPresent(By.xpath("//h3[text()='환경설정']"));
+       //assertTrue(util.waitForIsElementPresent(By.xpath("//h3[text()='환경설정']")).isDisplayed());
+       assertTrue(util.waitForIsVisible(By.xpath("//h3[text()='환경설정']")));
        util.waitForIsElementPresent(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
-       assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_btn_back_calender btn_back_calender']")).isDisplayed());
        util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
 
        //할일이나 일정일때 둘다 노출되는 버튼이 나올때까지 기다림
@@ -529,7 +537,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_19_좌측영역_배너_Test() throws Exception{
 
-        util.click(By.xpath("//div[@class ='_works_banner bn_nworks']"));
+        util.click(By.xpath("//div[@class ='bn_nworks']"));
         util.waitForNewWindow();
 
         Title = util.getTitle();

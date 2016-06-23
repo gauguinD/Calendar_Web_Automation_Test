@@ -40,13 +40,13 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
 
     public void saveSchedule(Utilities util, String subject) throws Exception{
         //저장버튼 클릭하여 일정 저장
-        util.click(By.xpath("//button[@class ='btn_sys pos_save']"));
+        util.click(By.xpath("//button[@class ='save _save_btn _save']"));
         util.sleep(3);
         if(util.waitForIsNotVisible(By.xpath("//div[@class='layer_content']"))){
         }
         else{
-            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal']"));
-            util.click(By.xpath("//button[@class='_ok normal']"));
+            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+            util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
         }
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
@@ -74,8 +74,8 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
                 util.waitForIsElementPresent(By.xpath("//input[@id='_wpageTMP8_repeat_del_all']"));
                 util.click(By.xpath("//input[@id='_wpageTMP8_repeat_del_all']"));
             }
-            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal']"));
-            util.click(By.xpath("//button[@class='_ok normal']"));
+            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+            util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
         }
 
         assertTrue(util.waitForIsNotVisible(By.xpath("//a[contains(text(),'"+subject+"')]")));
@@ -111,7 +111,7 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[1]"));
         util.click(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[1]"));
         repeatText = util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_txt repeat_view_section']/p")).getText();
-        util.click(By.xpath("//button[@class='_save normal']"));
+        util.click(By.xpath("//button[@class='_save normal btn_emphasis']"));
 
         util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_text txt_nocycle']/p"));
         assertTrue(repeatText.contains(util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_text txt_nocycle']/p")).getText()));
@@ -139,7 +139,7 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[2]"));
         util.click(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[2]"));
         repeatText = util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_txt repeat_view_section']/p")).getText();
-        util.click(By.xpath("//button[@class='_save normal']"));
+        util.click(By.xpath("//button[@class='_save normal btn_emphasis']"));
 
         util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_text txt_nocycle']/p"));
         util.printLog(repeatText);
@@ -167,7 +167,7 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[3]"));
         util.click(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[3]"));
         repeatText = util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_txt repeat_view_section']/p")).getText();
-        util.click(By.xpath("//button[@class='_save normal']"));
+        util.click(By.xpath("//button[@class='_save normal btn_emphasis']"));
 
 
         util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_text txt_nocycle']/p"));
@@ -196,7 +196,7 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[4]"));
         util.click(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[4]"));
         repeatText = util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_txt repeat_view_section']/p")).getText();
-        util.click(By.xpath("//button[@class='_save normal']"));
+        util.click(By.xpath("//button[@class='_save normal btn_emphasis']"));
 
         util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_text txt_nocycle']/p"));
         util.printLog(repeatText);
@@ -224,7 +224,7 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[4]"));
         util.click(By.xpath("//div[contains(@class,'_frequency_select  selectbox13')]/div[2]/div/ul/li[4]"));
         repeatText = util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_txt repeat_view_section']/p")).getText();
-        util.click(By.xpath("//button[@class='_save normal']"));
+        util.click(By.xpath("//button[@class='_save normal btn_emphasis']"));
 
         util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_text txt_nocycle']/p"));
         util.printLog(repeatText);

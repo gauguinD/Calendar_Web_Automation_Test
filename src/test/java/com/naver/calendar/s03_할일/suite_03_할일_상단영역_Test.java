@@ -62,7 +62,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
         util.click(By.xpath("//input[@class='_search search_btn']"));
 
         util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']"));
-        SearchResult = util.findElement(By.className("keyword")).getText();
+        SearchResult = util.findElement(By.xpath("//p[@class='keyword']/strong")).getText();
 
         assertTrue(SearchResult.contains(searchKeyword));
         util.click(By.xpath("//a[@class='_back btn_back_calender']"));
@@ -269,8 +269,8 @@ public class suite_03_할일_상단영역_Test extends Testcase {
     @Test
     public void TC_10_상단영역_새로고침_Test() throws Exception{
 
-        util.click(By.xpath("//a[@class='_refresh reload']"));
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_refresh reload']")).isDisplayed());
+        util.click(By.xpath("//a[@class='btn_reload _refresh']"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='btn_reload _refresh']")).isDisplayed());
     }
 
 

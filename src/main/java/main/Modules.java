@@ -50,6 +50,7 @@ public class Modules {
 	public final String StartLunaDate = "2016-02-25";
 	public final String EndDate = "2016-02-25";
 	public final String EndTimeDate = "2016-02-27";
+	public String todayDate = null;
 
 	public final String repeatStartDate = null;
 	public final String repeatEndDate = null;
@@ -198,7 +199,7 @@ public class Modules {
 
 	}
 
-	public void CurrentDate(Utilities util) throws Exception {
+	public void oldCurrentDate(Utilities util) throws Exception {
 
 		//case 1. 이번달이면서 미니 달력이 접혀있을경우 - YY,MM,DD 로 노출 됨
 		//caes 2. 이번달이면서 미니 달력이 접혀있지 않을 경우 - YY,MM 로 노출 됨
@@ -258,20 +259,73 @@ public class Modules {
 		}
 	}
 
+	public void CurrentDate(Utilities util) throws Exception {
+
+		if (util.waitForIsElementPresent(By.xpath("//div[@class='_title date']")).getText().length() > 4) {
+			GetDate(util);
+			String g = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[9]")).getAttribute("class").substring(4);
+			String h = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[10]")).getAttribute("class").substring(4);
+			int date = Integer.parseInt(g + h);
+			todayCal.set(Calendar.DATE, date);
+			String dateFormat = format1.format(todayCal.getTime());
+		}
+		//미니 달력이 안접혀서 년,월만 보일때는 미니 달력에서 오늘 날짜를 가져와서 표시해준다
+		else {
+			//case 3. 이번달이 아니면서 미니달력이 접혀있지 않을 경우 - YY,MM 로 노출 됨
+			if(!util.isElementPresentNotExist(By.xpath("//td[@class='calendar-date calendar-today select_area']")))
+			{
+				//SimpleDateFormat format2 = new SimpleDateFormat("yyyy.MM.dd");
+
+				GetDate(util);
+
+				String dateFormat1 = format1.format(todayCal.getTime());
+
+				//System.out.println("case 3. 이번달이 아니면서 미니달력이 접혀있지 않을 경우 - YY,MM 로 노출 됨");
+				//String dateFormat = format2.format(todayCal.getTime());
+				//System.out.println("현재 달력 날짜는 case 3: " + dateFormat1);
+			}
+			//caes 2. 이번달이면서 미니 달력이 접혀있지 않을 경우 - YY,MM 로 노출 됨
+			else {
+				//System.out.println("caes 2. 이번달이면서 미니 달력이 접혀있지 않을 경우 - YY,MM 로 노출 됨");
+
+				GetDate(util);
+
+				int date = Integer.parseInt(util.waitForIsElementPresent(By.xpath("//td[@class='calendar-date calendar-today select_area']/a")).getText());
+				//System.out.println(date);
+
+				todayCal.set(Calendar.DATE, date);
+
+				String dateFormat = format1.format(todayCal.getTime());
+
+				//System.out.println("CurrentDate 함수에서 가져온 오늘의 날짜 :" + a + b + c + d + "." + e + f);
+				//System.out.println("현재 달력 날짜는 case 2: " + dateFormat);
+			}
+
+		}
+	}
+
+
 	public String GetDate(Utilities util) throws Exception{
 
 
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM");
 
-		a = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[1]")).getAttribute("class").substring(4);
-		b = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[2]")).getAttribute("class").substring(4);
-		c = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[3]")).getAttribute("class").substring(4);
-		d = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[4]")).getAttribute("class").substring(4);
-		e = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[6]")).getAttribute("class").substring(4);
-		f = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[7]")).getAttribute("class").substring(4);
+		//a = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[1]")).getAttribute("class").substring(4);
+		//b = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[2]")).getAttribute("class").substring(4);
+		//c = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[3]")).getAttribute("class").substring(4);
+		//d = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[4]")).getAttribute("class").substring(4);
+		//e = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[6]")).getAttribute("class").substring(4);
+		//f = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']/span[7]")).getAttribute("class").substring(4);
 
-		year = Integer.parseInt(a + b + c + d);
-		month = Integer.parseInt(e + f);
+		//year = Integer.parseInt(a + b + c + d);
+		//month = Integer.parseInt(e + f);
+
+		todayDate = util.waitForIsElementPresent(By.xpath("//div[@class='_title date']")).getText();
+
+		year = Integer.parseInt(todayDate.substring(1,4));
+		System.out.println(year);
+		month = Integer.parseInt(todayDate.substring(6,7));
+		System.out.println(month);
 
 		todayCal.set(Calendar.YEAR, year);
 		todayCal.set(Calendar.MONTH, month-1);
@@ -313,40 +367,9 @@ public class Modules {
 		util.waitForIsElementPresent(By.xpath("//div[@class='period_edit_layer layer_popup']"));
 
 		util.click(By.xpath(option));
-		util.click(By.xpath("//button[@class='_save normal2']"));
+		util.click(By.xpath("//button[@class='_save normal2 btn_emphasis']"));
 
 		util.printLog(util.waitForIsElementPresent(By.xpath("//button[@class='_user custom on']")).getText());
-	}
-
-
-	public String StickerName(int i) throws Exception{
-		String StickerName = null;
-
-		switch (i){
-			case 1:
-				 StickerName = "특정 주제";
-				break;
-			case 2:
-				StickerName = "취미,여가";
-				break;
-			case 3:
-				StickerName = "감정,강조";
-				break;
-			case 4:
-				StickerName = "감정,강조";
-				break;
-			case 5:
-				StickerName = "old_특정주제";
-				break;
-			case 6:
-				StickerName = "old_취미,여가";
-				break;
-			case 7:
-				StickerName = "old_감정,강조";
-				break;
-		}
-
-		return StickerName;
 	}
 
 	public void removeBlindText (Utilities util, String xpath)  {
@@ -392,8 +415,10 @@ public class Modules {
 
 	public void goBackToCalendar(Utilities util) throws Exception{
 		util.goBack();
-		if(util.waitForIsNotVisible(By.xpath("//a[@class='_svc_lnk pwe_home']")))
+		if(util.waitForIsNotVisible(By.xpath("//button[@class='_go_task type_schedule todo']"))){
 			util.goTo(calURL);
+			util.waitForPageLoaded();
+		}
 		util.waitForTitle(calTitle);
 
 		Title = util.getTitle();

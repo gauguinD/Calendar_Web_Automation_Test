@@ -61,7 +61,7 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
     * Result : <,> 화살표 클릭함에 따라 이전달, 다음달로 이동 됨
     */
 
-    @Test
+   //@Test
     public void TC_03_좌측영역_날짜영역_Test() throws Exception{
 
         String miniCalendar;
@@ -220,7 +220,7 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
         util.click(By.xpath("//a[@class='_delete']"));
 
         util.waitForIsElementPresent(By.xpath("//diy[@class='ly_todo_wrap group']"));
-        util.click(By.xpath("//button[@class='_submit']"));
+        util.click(By.xpath("//button[@class='_submit btn_emphasis']"));
     }
 
 
@@ -233,6 +233,7 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
     @Test
     public void TC_20_좌측영역_오늘일정_Test() throws Exception{
 
+        util.waitForIsElementPresent(By.xpath("//a[@class='_viewTodaySchedule']"));
         util.click(By.xpath("//a[@class ='_viewTodaySchedule']"));
         util.waitForIsElementPresent(By.xpath("//a[@class='_openNewTaskForm write_todo']"));
 
