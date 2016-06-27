@@ -91,7 +91,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         //일정이 생성된 캘린더가 공유캘린더 일 경우 예외처리
         //1. 얼럿이 노출되는지 확인 하고
         //2. 공유캘린더 인지 확인
-        if(util.isAlertNotExist(util)){
+        if(util.isAlertPresent(util)){
             alertText = util.getAlert().getText();
             assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
             util.getAlert().accept();
@@ -197,7 +197,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='layer_calendar layer-show']"));
 /*
         //변환이 불가능한 양력날짜 예외처리(5월 31일)
-        if(util.isAlertExist(util)){
+        if(util.isAlertPresent(util)){
             util.getAlert().accept();
             util.click(By.xpath("//input[@class='_start_date dc text']"));
             util.waitForIsElementPresent(By.xpath("//div[@class='layer_calendar layer-show']"));

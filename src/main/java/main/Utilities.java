@@ -1527,6 +1527,7 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 	 * @param locator 존재 확인 할 Element를 지정
 	 * @return locator에 존재하는 WebElement (element, null)
 	 */
+	/*
 	public boolean isAlertNotExist(Utilities util) {
 
 		WebDriverWait wait = new WebDriverWait(this,5);
@@ -1542,6 +1543,7 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 		}
 
 	}
+*/
 
 	/**
 	 * Element가 존재할때까지 대기하는 메소드
@@ -1571,6 +1573,24 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Alert이 존재하는지 확인하는 메소드
+	 * @param  Alert이  존재 하는지 확인
+	 * @return Alert의 존재 유무
+	 */
+	public boolean isAlertPresent(Utilities util)
+	{
+		try
+		{
+			util.switchTo().alert();
+			return true;
+		}   // try
+		catch (NoAlertPresentException Ex)
+		{
+			return false;
+		}
 	}
 
 

@@ -44,9 +44,14 @@ public class Testcase {
 	
 	@AfterMethod
 	 public void afterScreenShot(ITestResult result) throws Exception {
-		
-		util.captureScreen(result);
-	} 
+		if(util.isAlertPresent(util)){
+			util.getAlert().accept();
+			util.captureScreen(result);
+		}
+		else{
+			util.captureScreen(result);
+		}
+	}
 	
 	@BeforeMethod(alwaysRun=true)
 	 public void beforeScreenShot() throws Exception {
@@ -58,7 +63,7 @@ public class Testcase {
 	public void tearDownClass(){
 		
 		try {
-			util.quit();
+				util.quit();
 		}
 		catch (WebDriverException we) {
 			System.out.println(" ** tearDownClass catch WebDriverException");
