@@ -87,7 +87,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
      * Step : 일반설정 > 캘린더 기본화면 확인
      * Result : 캘린더 기본 화면의 현재 값을 확인
      */
-    @Test
+    //@Test
     public void TC_02_일반설정_캘린더기본화면_Test() throws Exception {
 
         //환경설정 이동
@@ -105,7 +105,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Result : 해당 캘린더 목록에서 노출 안됨
     */
 
-    @Test
+    //@Test
     public void TC_03_일정설정_삭제_Test() throws Exception {
 
         //String calName;
@@ -179,7 +179,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Result : 해당하는 계정으로 로그인 됨
     */
 
-    @Test
+    //@Test
     public void TC_04_초기화_할일삭제_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
 
@@ -206,6 +206,52 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
 
             util.getAlert().accept();
             util.sleep(3);
+        }
+    }
+
+        /*
+    * Step : 로그인 > 해당 계정으로 로그인
+    * Result : 해당하는 계정으로 로그인 됨
+    */
+
+    @Test
+    public void TC_05_초기화_일정삭제_Test() throws Exception {
+
+        util.waitForTitle(module.calTitle);
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+
+        assertTrue(Title.contains(module.calTitle));
+        assertTrue(URL.contains(module.calURL));
+
+        util.click(By.xpath("//button[contains(@class,'_list list')]"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
+
+        int numberOfSchedule = util.getXpathCount(By.xpath("//dd[@class='line ']"));
+        String alertText;
+        System.out.println(numberOfSchedule);
+
+        for(int i=1; i<=numberOfSchedule; i++) {
+            util.waitForIsElementPresent(By.xpath("//dd[@class='line ']/p[3]"));
+            util.click(By.xpath("//dd[@class='line ']/p[3]/a"));
+            System.out.println(numberOfSchedule);
+            util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+            util.sleep(1);
+            if(util.isAlertPresent(util)){
+                alertText = util.getAlert().getText();
+                assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+                util.getAlert().accept();
+                util.sleep(2);
+            }
+            else if(util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()){
+                util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+                util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+                util.sleep(2);
+            }
         }
     }
 

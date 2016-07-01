@@ -100,8 +100,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
 
         util.type(By.xpath("//div[@class='input_txt']/input"),"할일 쓰기"+module.subjectKey);
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
         //할일 쓰기라는 제목을 가진 할 일 노출 되는것 확인
         util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_content') and contains(text(),'"+module.subjectKey+"')]"));
@@ -139,14 +139,14 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
 
         //중요 할일 쓰기 생성
         util.type(By.xpath("//div[@class='input_txt']/input"),"중요 할일 쓰기"+module.subjectKey);
-        util.waitForIsElementPresent(By.xpath("//div[@class='selectbox-box']"));
-        util.click(By.xpath("//div[@class='selectbox-box']"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='_importanceField selectbox13']"));
+        util.click(By.xpath("//div[@class='_importanceField selectbox13']"));
 
         util.waitForIsElementPresent(By.xpath("//div[@class='selectbox-list']/ul/li[3]"));
         util.click(By.xpath("//div[@class='selectbox-list']/ul/li[3]"));
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
         //중요 할일 쓰기라는 제목을 가진 할 일 노출 되는것 확인
         util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_content') and contains(text(),'"+module.subjectKey+"')]"));
@@ -191,8 +191,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         taskOption = util.waitForIsElementPresent(By.xpath("//div[@class='_select selectbox13']/div[2]/div/ul/li[2]")).getText();
         util.printLog(taskOption);
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
         //빠른 할일 쓰기라는 제목을 가진 할 일 노출 되는것 확인
         util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_content') and contains(text(),'"+module.subjectKey+"')]"));
@@ -234,8 +234,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         util.click(By.xpath("//div[@class='cont cplt']/input[1]"));
         assertTrue(util.waitForIsElementPresent(By.xpath("//button[@class='_shortcut today on']")).isDisplayed());
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
 
         //할일 쓰기라는 제목을 가진 할 일 노출 되는것 확인
@@ -278,10 +278,10 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         util.click(By.xpath("//button[@class='_recurrence btn_rpt']"));
 
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_wrap recycle']"));
-        util.click(By.xpath("//button[@class='_set']"));
+        util.click(By.xpath("//button[@class='_set btn_emphasis']"));
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
         //할일 쓰기라는 제목을 가진 할 일 노출 되는것 확인
         util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_content') and contains(text(),'"+module.subjectKey+"')]"));
@@ -319,8 +319,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         util.type(By.xpath("//div[@class='input_txt']/input"), "시작전 할일 쓰기"+module.subjectKey);
         util.click(By.xpath("//input[@id='_task_detail_progressStatus_0']"));
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
         //할일 쓰기라는 제목을 가진 할 일 노출 되는것 확인
         util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_content') and contains(text(),'"+module.subjectKey+"')]"));
@@ -359,8 +359,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         util.type(By.xpath("//div[@class='input_txt']/input"), "진행중 할일 쓰기"+module.subjectKey);
         util.click(By.xpath("//input[@id='_task_detail_progressStatus_1']"));
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
         //할일 쓰기라는 제목을 가진 할 일 노출 되는것 확인
         util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_content') and contains(text(),'"+module.subjectKey+"')]"));
@@ -406,8 +406,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         util.type(By.xpath("//div[@class='input_txt']/input"), "완료 할일 쓰기"+module.subjectKey);
         util.click(By.xpath("//input[@id='_task_detail_progressStatus_2']"));
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
         util.waitForIsElementPresent(By.xpath("//input[@class='_includingCompleted']"));
         util.click(By.xpath("//input[@class='_includingCompleted']"));
@@ -455,8 +455,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='_alarmField article alarm']/div/input"));
         util.click(By.xpath("//div[@class='_alarmField article alarm']/div/input"));
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
         //할일 쓰기라는 제목을 가진 할 일 노출 되는것 확인
         util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_content') and contains(text(),'"+module.subjectKey+"')]"));
@@ -494,8 +494,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='_memoField script_area']/div/div"));
         util.type(By.xpath("//div[@class='_memoField script_area']/div/div/textarea"),"설명 작성");
 
-        util.waitForIsElementPresent(By.xpath("//button[@class='_save']"));
-        util.click(By.xpath("//button[@class='_save']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_save btn_emphasis']"));
 
         //할일 쓰기라는 제목을 가진 할 일 노출 되는것 확인
         util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_content') and contains(text(),'"+module.subjectKey+"')]"));

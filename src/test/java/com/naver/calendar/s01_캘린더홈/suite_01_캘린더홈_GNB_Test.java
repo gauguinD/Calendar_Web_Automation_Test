@@ -68,9 +68,7 @@ public class suite_01_캘린더홈_GNB_Test extends Testcase {
     public void TC_03_GNB_탭_메일_Test() throws Exception{
 
         util.click(By.className("mail"));
-
         module.assertCalendarPage(util,module.mailTitle,module.mailURL);
-
         module.goBackToCalendar(util);
     }
 
