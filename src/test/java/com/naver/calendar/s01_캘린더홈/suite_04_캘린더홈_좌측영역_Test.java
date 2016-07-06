@@ -2,6 +2,7 @@ package com.naver.calendar.s01_캘린더홈;
 
 import main.TestIds;
 import main.Testcase;
+import main.Utilities;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -21,6 +22,20 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     String timeTableValue = null;
 
     int maxCalNum;
+
+    public void settingClick(Utilities util) throws Exception {
+        util.waitForIsElementPresent(By.xpath("//a[@class='btn_settingcal']"));
+        util.mouseOver(By.xpath("//a[@class='btn_settingcal']"));
+        util.click(By.xpath("//a[@class='btn_settingcal']"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+    }
+
+    public void makeCalendar(Utilities util) throws Exception{
+        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
+        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        util.click(By.xpath("//a[@class='btn_makecal']"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='calendar_menu_wrap']"));
+    }
 
     /*
     * Step : 로그인 > 해당 계정으로 로그인
@@ -160,10 +175,8 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_08_좌측영역_내캘린더만들기_Test() throws Exception{
 
-        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
-        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
-        util.click(By.xpath("//a[@class='btn_makecal']"));
-        util.click(By.partialLinkText("내 캘린더 만들기"));
+        makeCalendar(util);
+        util.click(By.xpath("//li[@class='_private']"));
 
         //til.clearAndType(By.xpath("//tr[@class='_calendar_info_area']/td/input"),"좌측영역_내캘린더만들기");
         util.clear(By.xpath("//tr[@class='_calendar_info_area']/td/input"));
@@ -176,8 +189,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
 
         //환경설정 이동
-        util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        settingClick(util);
 
         //환경설정 > 일정설정 이동
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
@@ -215,8 +227,8 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
     @Test
     public void TC_09_좌측영역_내캘린더만들기_삭제_Test() throws Exception {
-       util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+
+        settingClick(util);
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -241,9 +253,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_10_좌측영역_공유캘린더만들기_Test() throws Exception{
 
-        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
-        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
-        util.click(By.xpath("//a[@class='btn_makecal']"));
+        makeCalendar(util);
         util.click(By.xpath("//li[@class ='_share']"));
 
         util.waitForIsElementPresent(By.xpath("//tr[@class='_calendar_info_area']/td/input"));
@@ -294,8 +304,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_11_좌측영역_공유캘린더만들기_삭제_Test() throws Exception {
 
-        util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        settingClick(util);
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -323,9 +332,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_12_좌측영역_구독캘린더만들기_Test() throws Exception{
 
-        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
-        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
-        util.click(By.xpath("//a[@class='btn_makecal']"));
+        makeCalendar(util);
         util.click(By.xpath("//li[@class ='_subscribe']"));
 
 
@@ -351,9 +358,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_13_좌측영역_시간표만들기_Test() throws Exception{
 
-        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
-        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
-        util.click(By.xpath("//a[@class='btn_makecal']"));
+        makeCalendar(util);
         util.click(By.xpath("//li[@class='_timetable']"));
 
         util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_calendar_name calender_name calendar_color')]"));
@@ -368,8 +373,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.xpath("//button[@class ='_save normal']"));
 
         //환경설정 이동
-        util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        settingClick(util);
 
         //환경설정 > 일정설정 이동
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
@@ -407,8 +411,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_14_좌측영역_시간표만들기_삭제_Test() throws Exception {
 
-        util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        settingClick(util);
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
@@ -434,9 +437,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
    @Test
     public void TC_15_좌측영역_환경설정_Test() throws Exception{
 
-       util.waitForIsElementPresent(By.xpath("//a[@class='btn_settingcal']"));
-       util.mouseOver(By.xpath("//a[@class='btn_settingcal']"));
-       util.click(By.xpath("//a[@class='btn_settingcal']"));
+       settingClick(util);
 
        util.waitForIsElementPresent(By.xpath("//h3[text()='환경설정']"));
        //assertTrue(util.waitForIsElementPresent(By.xpath("//h3[text()='환경설정']")).isDisplayed());

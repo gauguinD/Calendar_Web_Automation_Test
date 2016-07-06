@@ -48,7 +48,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
         util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
         util.click(By.xpath("//a[@class='btn_makecal']"));
-        util.waitForIsElementPresent(By.linkText("캘린더 상세 보기"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='calendar_menu_wrap']"));
     }
 
     /*

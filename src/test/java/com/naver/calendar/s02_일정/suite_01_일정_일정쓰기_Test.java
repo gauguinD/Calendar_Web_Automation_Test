@@ -337,7 +337,6 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
             util.click(By.xpath("//ul[@class='category_lst']/li["+i+"]/label"));
             assertTrue(util.waitForIsElementPresent(By.xpath("//ul[@class='category_lst']/li["+i+"]")).getAttribute("class").contains("selected"));
         }
-
         saveSchedule(util,scheduleSubject);
         deleteSchedule(util,scheduleSubject);
     }
