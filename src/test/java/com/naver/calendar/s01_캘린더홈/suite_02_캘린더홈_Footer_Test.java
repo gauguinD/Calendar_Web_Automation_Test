@@ -2,6 +2,7 @@ package com.naver.calendar.s01_캘린더홈;
 
 import main.TestIds;
 import main.Testcase;
+import main.Utilities;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -12,6 +13,13 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
 
     public String Title = null;
     public String URL = null;
+
+
+    public void settingClick(Utilities util) throws Exception {
+        util.waitForIsElementPresent(By.xpath("//a[@class='_config']"));
+        util.click(By.xpath("//a[@class='_config']"));
+        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+    }
 
     /*
    * Step : 로그인 > 해당 계정으로 로그인
@@ -29,7 +37,7 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
     @Test
     public void TC_01_Footer_환경설정_Test() throws Exception {
 
-        util.click(By.className("_config"));
+        settingClick(util);
         assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_btn_back_calender btn_back_calender']")).isDisplayed());
 
         util.click(By.xpath("//a[@class='_btn_back_calender btn_back_calender']"));
