@@ -225,12 +225,13 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
     * Result : 일간 > 시간일정 생성 됨
     */
 
-    @Test
+    //@Test
     public void TC_09_캘린더영역_일간_시간일정_생성_Test() throws Exception {
 
         util.waitForIsElementPresent(By.xpath("//div[@class='timeline']"));
-        //util.mouseOver(By.xpath("//div[@class='timeline']"));
-        util.click(By.xpath("//div[@class='_week_time_schedule_col schedule_list time_schedule_drop']"));
+        util.mouseOver(By.xpath("//div[@class='timeline']"));
+        util.click(By.xpath("//div[@class='timeline']"));
+        //util.click(By.xpath("//div[@class='_week_time_schedule_col schedule_list time_schedule_drop']"));
 
         //일간영역_시간 제목으로 일정 생성
         util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
@@ -248,7 +249,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
     * Result : 일간 > 시간일정 삭제 됨
     */
 
-    @Test
+    //@Test
     public void TC_10_캘린더영역_일간_시간일정_삭제_Test() throws Exception{
 
         util.waitForIsElementPresent(By.xpath("//td[@class='_time_schedule_container']"));
@@ -456,11 +457,18 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
     * Result : 주간 > 시간일정 생성 됨
     */
 
-    @Test
-    public void TC_19_캘린더영역_주간_시간일정_생성_Test() throws Exception {
+    //@Test
+    public void TC_02_캘린더영역_주간_시간일정_생성_Test() throws Exception {
+
+        int x;
+        int y;
+
+        x = util.getMouseLocation(By.xpath("//td[@class='today']/div/div/div")).getX();
+        y = util.getMouseLocation(By.xpath("//div[@class='timeline']")).getY();
 
         util.waitForIsElementPresent(By.xpath("//div[@class='timeline']"));
-        util.click(By.xpath("//div[@class='_week_time_schedule_col schedule_list time_schedule_drop']"));
+        util.mouseOver(By.xpath("//td[@class='today']/div/div/div"),x,y);
+        util.clickLocation(x,y);
 
         //주간영역_시간 제목으로 일정 생성
         util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
@@ -469,6 +477,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //주간영역_시간 제목으로 시간일정 생성 되었는지 확인
         tempEventSubject = util.waitForIsElementPresent(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div/p/a")).getText();
+        util.printLog(tempEventSubject);
         assertTrue(tempEventSubject.contains("주간영역_시간"));
     }
 
@@ -478,8 +487,8 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
     * Result : 주간 > 시간일정 삭제 됨
     */
 
-    @Test
-    public void TC_20_캘린더영역_주간_시간일정_삭제_Test() throws Exception{
+    //@Test
+    public void TC_03_캘린더영역_주간_시간일정_삭제_Test() throws Exception{
 
         util.waitForIsElementPresent(By.xpath("//td[@class='_time_schedule_container']"));
         util.click(By.xpath("//tr[@class='_time_schedule_container']/td/div/div/div"));
@@ -521,9 +530,10 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
     * Result : 월간 > 일정 생성 됨
     */
 
-    @Test
+    //@Test
     public void TC_22_캘린더영역_월간_일정_생성_Test() throws Exception {
 
+        util.waitForPageLoaded();
         util.waitForIsElementPresent(By.xpath("//td[@class='_month_cell month_schedule_drop today_area']"));
         util.click(By.xpath("//td[@class='_month_cell month_schedule_drop today_area']"));
 
@@ -543,7 +553,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
     * Result : 월간 > 일정 삭제 됨
     */
 
-    @Test
+    //@Test
     public void TC_23_캘린더영역_월간_일정_삭제_Test() throws Exception{
 
         util.waitForIsElementPresent(By.xpath("//a[contains(text(),'월간영역_일정')]"));

@@ -1,9 +1,11 @@
 package main;
- 
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.DriverCommand;
@@ -728,7 +730,8 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 	    Actions action = new Actions (this);	    
 		WebElement element = waitForIsElementPresent(locator);
 	
-	    action.moveToElement(element, offset_X, offset_Y).perform();	    
+	    action.moveToElement(element, offset_X, offset_Y).perform();
+
 	    waitForPageToLoad();
 	 }
 	
@@ -1220,49 +1223,7 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 		fail("마지막 창이  " + TIME_OUT_SEC + "초내에 로드되지 않음");
 		return false;
 	}
-	
-	/*
-	public boolean waitForNewWindow() throws Exception {
 
-		int getWinHandlesSize = 0;
-		String tempHandle = null;
-		
-		mainWindowHandle = getWindowHandle();
-		lastWindowHandle = null;
-		
-		
-		for (int second = 0; second <= TIME_OUT_SEC; second += WAIT_SEC) {
-			
-			Set<String> getHandles = getWindowHandles();
-			getWinHandlesSize = getHandles.size();
-
-			if (getWinHandlesSize >= 2) {
-		    	
-				Iterator<String> winHandles = getHandles.iterator();
-				
-				while (winHandles.hasNext()) {
-					
-					tempHandle = winHandles.next();
-
-					if (!tempHandle.equals(mainWindowHandle)) {
-						lastWindowHandle = tempHandle;
-						switchTo().window(lastWindowHandle);
-						waitForPageToLoad();
-						
-						return true;
-					}
-				}
-		
-				fail ("failed to read new window handle");
-				return false;
-				}
-			sleep(WAIT_SEC);
-			}
-		
-		fail  ("새창이  " + TIME_OUT_SEC + "초내에 로드되지 않음");
-		return false;
-	}
-	*/
 	/**
 	 * 메인윈도우로 포커스 전환 메소드
 	 * @throws Exception
@@ -1593,7 +1554,42 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 		}
 	}
 
+	/**
+	 * getMouseLocation을 위한 메소드
+	 * @param locator 링크
+	 * @throws Exception - Selenium Exception
+	 */
 
+	public Point getMouseLocation (By locator) throws Exception {
 
+		Locatable elementLocation;
+		Point locationPoint;
+
+		Actions action = new Actions (this);
+		WebElement element = waitForIsElementPresent(locator);
+
+		elementLocation = (Locatable) element;
+		locationPoint = elementLocation.getCoordinates().inViewPort();
+		System.out.println(locationPoint);
+
+		return locationPoint;
+	}
+
+	/**
+	 * clickLocation을 위한 메소드
+	 * @param X , Y 좌표
+	 * @throws Exception - Selenium Exception
+	 */
+
+	public void clickLocation (int x, int y) throws Exception {
+
+		Actions action = new Actions (this);
+
+		action.moveByOffset(x,y);
+		action.doubleClick();
+		//action.click();
+
+		waitForPageLoaded();
+	}
 
 }
