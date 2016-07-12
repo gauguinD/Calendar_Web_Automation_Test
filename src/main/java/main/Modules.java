@@ -410,6 +410,19 @@ public class Modules {
 		assertTrue(URL.contains(taskURL));
 	}
 
+
+	public void goTask(Utilities util) throws Exception{
+		if(util.waitForIsNotVisible(By.xpath("//button[@class='_viewSchedule type_schedule']")))
+			util.click(By.xpath("//button[@class='_go_task type_schedule todo']"));
+		util.waitForTitle(taskTitle);
+
+		Title = util.getTitle();
+		URL = util.getCurrentUrl();
+
+		assertTrue(Title.contains(taskTitle));
+		assertTrue(URL.contains(taskURL));
+	}
+
 	public void ifViewIsNotTask(Utilities util,Modules module) throws Exception{
 
 		Title = util.getTitle();

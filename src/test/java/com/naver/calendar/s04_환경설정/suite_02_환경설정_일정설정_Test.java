@@ -1355,14 +1355,12 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                 util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
                 util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
 
+                util.sleep(1);
                 assertAlert = util.getAlert().getText();
                 assertTrue(assertAlert.contains("해지하시겠습니까?"));
                 util.getAlert().accept();
-                //util.sleep(1);
 
-                util.waitForIsElementPresent(By.className("btn_settingcal"));
-                util.click(By.className("btn_settingcal"));
-                util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+                settingClick(util);
 
                 util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
                 util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));

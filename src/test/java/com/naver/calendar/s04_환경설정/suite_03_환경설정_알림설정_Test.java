@@ -110,13 +110,19 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.waitForIsElementPresent(By.linkText("캘린더 상세 보기"));
 
             //캘린더 상세 설정에서 시간일정 12개중 임의의값 선택
-            util.waitForIsElementPresent(By.xpath("//select[@class='_schedule_alarm_time']/option["+randomNum+"]"));
-            util.click(By.xpath("//select[@class='_schedule_alarm_time']/option["+randomNum+"]"));
+            util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_schedule_alarm_time')]"));
+            util.click(By.xpath("//div[contains(@class,'_schedule_alarm_time')]"));
+
+            util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_schedule_alarm_time')]/div[2]/div/ul/li["+randomNum+"]"));
+            util.click(By.xpath("//div[contains(@class,'_schedule_alarm_time')]/div[2]/div/ul/li["+randomNum+"]"));
             fixedTimeAlert = util.waitForIsElementPresent(By.xpath("//select[@class='_schedule_alarm_time']/option["+randomNum+"]")).getText();
 
-            util.waitForIsElementPresent(By.xpath("//select[@class='_anniversary_alarm_time']/option["+randomNum/3+"]"));
-            util.click(By.xpath("//select[@class='_anniversary_alarm_time']/option["+randomNum/3+"]"));
-            fixedDayAlert = util.waitForIsElementPresent(By.xpath("//select[@class='_anniversary_alarm_time']/option["+randomNum/3+"]")).getText();
+            util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
+            util.click(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
+
+            util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
+            util.click(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]/div[2]/div/ul/li["+randomNum/3+"]"));
+            fixedDayAlert = util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]/div[2]/div/ul/li["+randomNum/3+"]")).getText();
 
             //설정 저장
             util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));

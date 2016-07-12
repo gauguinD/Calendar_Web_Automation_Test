@@ -444,14 +444,14 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
             maxSticker = 3;
             for(int j=1; j < maxSticker; j++){
                 stickerKey = util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]")).getAttribute("key");
-                util.printLog(stickerKey);
+                //util.printLog(stickerKey);
                 util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]"));
 
                 util.click(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]"));
                 util.click(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
 
                 util.waitForIsElementPresent(By.xpath("//ul[@class='sticker_section']/li"));
-                util.printLog(util.waitForIsElementPresent(By.xpath("//ul[@class='sticker_section']/li")).getAttribute("key"));
+                //util.printLog(util.waitForIsElementPresent(By.xpath("//ul[@class='sticker_section']/li")).getAttribute("key"));
                 assertTrue(util.waitForIsElementPresent(By.xpath("//ul[@class='sticker_section']/li")).getAttribute("key").contains(stickerKey));
                 util.click(By.xpath("//span[@class='h_cont']"));
                 util.waitForIsElementPresent(By.xpath("//div[@class='layer_popup layer_add_sticker']"));

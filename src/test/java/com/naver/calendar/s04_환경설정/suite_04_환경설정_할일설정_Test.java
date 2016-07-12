@@ -80,13 +80,18 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
     public void TC_02_할일설정_할일그룹추가_Test() throws Exception {
 
         //할일 그룹 추가
-        util.goTo(module.taskURL);
-        util.waitForPageLoaded();
+        module.goTask(util);
         util.sleep(3);
 
         //현재 그룹 개수를 저장(실제 전체 내 할 일이 개수에 포함되어서 이게 생성한 그룹 번호가 됨)
         taskNum = util.getXpathCount(By.xpath("//ul[@class='_groups category_list my']/li"));
+        util.waitForIsElementPresent(By.xpath("//a[@class='_newGroup btn_makecal']"));
+        util.mouseOver(By.xpath("//a[@class='_newGroup btn_makecal']"));
         util.click(By.xpath("//a[@class='_newGroup btn_makecal']"));
+
+        util.waitForIsElementPresent(By.xpath("//li[@class='modify']"));
+        //util.type(By.xpath("//li[@class='modify']"),"새 그룹"+module.contents);
+
         util.click(By.xpath("//a[contains(text(),'내 할 일')]"));
         System.out.println(taskNum);
 
@@ -127,8 +132,8 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
         util.click(By.xpath("//tr[contains(@class,'tr_28780122 _cfg_task_group_list') and ./td[contains(text(),'"+taskName+"')]]/td[2]"));
 
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_basic']"));
-        util.waitForIsElementPresent(By.xpath("//button[@class='_submit']"));
-        util.click(By.xpath("//button[@class='_submit']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_submit btn_emphasis']"));
+        util.click(By.xpath("//button[@class='_submit btn_emphasis']"));
 
         util.sleep(3);
 
