@@ -254,6 +254,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     public void TC_10_좌측영역_공유캘린더만들기_Test() throws Exception{
 
         makeCalendar(util);
+        util.waitForIsElementPresent(By.xpath("//li[@class ='_share']"));
         util.click(By.xpath("//li[@class ='_share']"));
 
         util.waitForIsElementPresent(By.xpath("//tr[@class='_calendar_info_area']/td/input"));

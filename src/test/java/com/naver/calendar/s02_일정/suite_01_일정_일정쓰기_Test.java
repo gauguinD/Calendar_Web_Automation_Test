@@ -42,13 +42,16 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         else{
             util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
             util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+            util.waitForPageLoaded();
         }
         util.waitForIsElementPresent(By.xpath("//button[contains(@class,'_go_task type_schedule todo')]"));
     }
 
 
     public void deleteSchedule(Utilities util, String subject) throws Exception{
-        //일정 삭제
+
+        //월뷰 목로뷰로 설정
+        util.click(By.xpath("//button[contains(@class,'_list list')]"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
 
         assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(text(),'"+subject+"')]")).isDisplayed());
@@ -188,6 +191,8 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + lunarDate + "\"}}";
         util.goTo(URL);
         util.waitForPageLoaded();
+        util.sleep(3);
+
         deleteSchedule(util,scheduleSubject);
 
         //삭제 하고 다시 오늘 날짜로 복귀
@@ -237,10 +242,11 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
             util.waitForPageLoaded();
             deleteSchedule(util,scheduleSubject);
 
-            //삭제 하고 다시 오늘 날짜로 복귀
-            util.click(By.className("today"));
-            util.waitForPageLoaded();
         }
+        //삭제 하고 다시 오늘 날짜로 복귀
+        util.sleep(3);
+        util.click(By.className("today"));
+        util.waitForPageLoaded();
     }
 
     /*
@@ -354,14 +360,14 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
 
         util.click(By.xpath("//span[@class='h_cont']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='layer_popup layer_add_sticker']"));
-        stickerCategoryNum = util.getXpathCount(By.xpath("//div[@class='sticker_category']/ul[contains(@style,'display: block')]/li"));
-        //stickerCategoryNum = 2;
+        //stickerCategoryNum = util.getXpathCount(By.xpath("//div[@class='sticker_category']/ul[contains(@style,'display: block')]/li"));
+        stickerCategoryNum = 2;
 
 
         for(int i=1; i< stickerCategoryNum; i++){
             util.click(By.xpath("//div[@class='sticker_category']/ul/li["+i+"]/button"));
-            maxSticker = util.getXpathCount(By.xpath("//ul[contains(@class,'_sticker_list')]/li"));
-            //maxSticker = 3;
+            //maxSticker = util.getXpathCount(By.xpath("//ul[contains(@class,'_sticker_list')]/li"));
+            maxSticker = 3;
             for(int j=1; j < maxSticker; j++){
                 stickerKey = util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]")).getAttribute("key");
                 util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]"));
