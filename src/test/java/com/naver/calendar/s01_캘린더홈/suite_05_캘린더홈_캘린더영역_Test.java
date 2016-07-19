@@ -338,7 +338,9 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //주간영역_할일 제목으로 할일 생성 되었는지 확인
         tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_task']/div/div/a")).getText();
-        assertTrue(tempEventSubject.contains("주간영역_할일"));
+        util.printLog(tempEventSubject);
+        //assertTrue(tempEventSubject.contains("주간영역_할일"));
+        assertTrue(util.waitForIsVisible(By.xpath("//a[contains(text(),'주간영역_할일')]")));
     }
 
 

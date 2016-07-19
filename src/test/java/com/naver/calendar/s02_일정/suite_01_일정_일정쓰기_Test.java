@@ -52,7 +52,9 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
 
         //월뷰 목로뷰로 설정
         util.click(By.xpath("//button[contains(@class,'_list list')]"));
+        util.sleep(3);
         util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
+        util.mouseOver(By.xpath("//a[contains(text(),'"+subject+"')]"));
 
         assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(text(),'"+subject+"')]")).isDisplayed());
         util.click(By.xpath("//a[contains(text(),'"+subject+"')]"));
