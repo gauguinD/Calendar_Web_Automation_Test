@@ -101,7 +101,8 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //일간영역_할일 제목으로 할일 생성 되었는지 확인
         tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_task']/div/div/a")).getText();
-        assertTrue(tempEventSubject.contains("일간영역_할일"));
+        //assertTrue(tempEventSubject.contains("일간영역_할일"));
+        assertTrue(util.waitForIsVisible(By.xpath("//a[contains(text(),'일간영역_할일')]")));
     }
 
 
@@ -427,8 +428,9 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
         util.click(By.xpath("//button[@class='save _save_btn _save']"));
 
         //주간영역_종일 제목으로 종일일정 생성 되었는지 확인
-        tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_schedule']/div/div/a")).getText();
-        assertTrue(tempEventSubject.contains("주간영역_종일일정"));
+        //tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_schedule']/div/div/a")).getText();
+        //assertTrue(tempEventSubject.contains("주간영역_종일일정"));
+        assertTrue(util.waitForIsVisible(By.xpath("//a[contains(text(),'주간영역_종일일정')]")));
     }
 
 
