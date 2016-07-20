@@ -1592,4 +1592,11 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 		waitForPageLoaded();
 	}
 
+	public void focusElement (By locator) throws Exception {
+
+		WebElement element = waitForIsElementPresent(locator);
+		JavascriptExecutor jse = null;
+		jse.executeScript("document.getElementById('" + locator + "').focus();");
+
+	}
 }
