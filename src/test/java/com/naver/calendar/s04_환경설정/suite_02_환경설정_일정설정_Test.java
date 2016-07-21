@@ -38,9 +38,8 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     public  String assertAlert;
 
     public void settingClick(Utilities util) throws Exception {
-        util.waitForIsElementPresent(By.xpath("//a[@class='btn_settingcal']"));
-        util.mouseOver(By.xpath("//a[@class='btn_settingcal']"));
-        util.click(By.xpath("//a[@class='btn_settingcal']"));
+        util.waitForIsElementPresent(By.xpath("//a[@class='_config']"));
+        util.click(By.xpath("//a[@class='_config']"));
         util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
     }
 

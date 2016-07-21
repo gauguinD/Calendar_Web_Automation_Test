@@ -17,7 +17,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Step : 로그인 > 해당 계정으로 로그인
     * Result : 해당하는 계정으로 로그인 됨
     */
-    @Test
+    //@Test
     public void TC_00_Footer_로그인_Test() throws Exception {
         //util.goTo("https://calendar.worksmobile.com");
 
@@ -179,9 +179,11 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Result : 해당하는 계정으로 로그인 됨
     */
 
-    //@Test
+    @Test
     public void TC_04_초기화_할일삭제_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
+
+        util.sleep(5);
 
         util.waitForTitle(module.calTitle);
         util.goTo(module.taskURL);
@@ -214,7 +216,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Result : 해당하는 계정으로 로그인 됨
     */
 
-    @Test
+    //@Test
     public void TC_05_초기화_일정삭제_Test() throws Exception {
 
         util.waitForTitle(module.calTitle);

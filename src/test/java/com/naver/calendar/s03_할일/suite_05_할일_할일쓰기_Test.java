@@ -55,7 +55,8 @@ public class suite_05_할일_할일쓰기_Test extends Testcase {
         {
             taskNum = util.getXpathCount(By.xpath("//div[@class='_list todo_list']/div/ul/li"));
         }
-        else{
+        else
+        {
             taskNum=0;
         }
 
