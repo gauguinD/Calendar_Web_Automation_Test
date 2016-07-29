@@ -26,7 +26,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     public void writeSchedule(Utilities util, String subject) throws Exception{
 
         util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
-        assertTrue(util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
 
         util.waitForIsElementPresent(By.xpath("//input[@id='tx0_0']"));
         util.type(By.xpath("//input[@id='tx0_0']"),subject);
@@ -50,16 +50,18 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
 
     public void deleteSchedule(Utilities util, String subject) throws Exception{
 
-        //월뷰 목로뷰로 설정
+        //월뷰 목록뷰로 설정
         util.click(By.xpath("//button[contains(@class,'_list list')]"));
         util.sleep(3);
         util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
         //util.mouseOver(By.xpath("//a[contains(text(),'"+subject+"')]"));
-        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'"+subject+"')]"));
         //util.focusElement(By.xpath("//a[contains(text(),'"+subject+"')]"));
+        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'"+subject+"')]"));
+        util.printLog(subject);
+        util.sleep(3);
 
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(text(),'"+subject+"')]")).isDisplayed());
-        util.click(By.xpath("//a[contains(text(),'"+subject+"')]"));
+        assertTrue(util.waitForIsVisible(By.xpath("//a[contains(@class,'_schedule')][contains(text(),'"+subject+"')]")));
+        util.click(By.xpath("//a[contains(@class,'_schedule')][contains(text(),'"+subject+"')]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_pop']"));
         util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
         util.sleep(2);
@@ -197,9 +199,33 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForPageLoaded();
         util.sleep(3);
 
-        deleteSchedule(util,scheduleSubject);
+        //월뷰 목록뷰로 설정
+        util.click(By.xpath("//button[contains(@class,'_day diary')]"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_day diary on']"));
+        util.waitForIsElementPresent(By.xpath("//td[contains(@class,'_schedule')]/div/div/a[contains(text(),'"+scheduleSubject+"')]"));
+        util.sleep(3);
+
+        assertTrue(util.waitForIsVisible(By.xpath("//td[contains(@class,'_schedule')]/div/div/a[contains(text(),'"+scheduleSubject+"')]")));
+        util.click(By.xpath("//td[contains(@class,'_schedule')]/div/div/a[contains(text(),'"+scheduleSubject+"')]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='ly_pop']"));
+        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+
+        //일정이 생성된 캘린더가 공유캘린더 일 경우 예외처리
+        //1. 얼럿이 노출되는지 확인 하고
+        //2. 공유캘린더 인지 확인
+        if(util.isAlertPresent(util)){
+            alertText = util.getAlert().getText();
+            assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+            util.getAlert().accept();
+        }
+        else if(util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()){
+            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+            util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+        }
+        assertTrue(util.waitForIsNotVisible(By.xpath("//a[contains(text(),'"+scheduleSubject+"')]")));
 
         //삭제 하고 다시 오늘 날짜로 복귀
+        util.sleep(5);
         util.click(By.className("today"));
         util.waitForPageLoaded();
     }

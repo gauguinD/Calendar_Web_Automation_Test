@@ -27,7 +27,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//a[@class='btn_settingcal']"));
         util.mouseOver(By.xpath("//a[@class='btn_settingcal']"));
         util.click(By.xpath("//a[@class='btn_settingcal']"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']"));
     }
 
     public void makeCalendar(Utilities util) throws Exception{
