@@ -189,7 +189,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
 
         //환경설정 이동
-        settingClick(util);
+            settingClick(util);
 
         //환경설정 > 일정설정 이동
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
@@ -514,14 +514,16 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         //기본 상태는 전체보기로 되어 있음
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_all all_view')]"));
 
-
         //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_cleaning delete')]")).getAttribute("class"));
+        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_cleaning delete')]/a"));
+        util.click(By.xpath("//li[contains(@class,'_cleaning delete')]/a"));
 
-        util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_cleaning delete')]"));
-        util.click(By.xpath("//li[contains(@class,'_cleaning delete')]"));
+        //util.waitForIsElementPresent(By.xpath("//div[contains(@class,'ly_delete_schedule layer_popup')]"));
+        //assertTrue(util.waitForIsElementPresent(By.xpath("//div[contains(@class,'ly_delete_schedule layer_popup')]")).isDisplayed());
 
-        util.waitForIsElementPresent(By.xpath("//div[contains(@class,'ly_delete_schedule layer_popup')]"));
-        assertTrue(util.isElementPresent(By.xpath("//div[@class='layer_header']")).isDisplayed());
+        util.waitForIsElementPresent(By.xpath("//h4[contains(text(),'오래된 일정 정리하기')]"));
+        util.waitForIsNotVisible(By.xpath("//h4[contains(text(),'오래된 일정 정리하기')]"));
+
 
         util.click(By.xpath("//button[@class='_close normal']"));
         util.waitForIsNotVisible(By.xpath("//div[@class='layer_header']"));
