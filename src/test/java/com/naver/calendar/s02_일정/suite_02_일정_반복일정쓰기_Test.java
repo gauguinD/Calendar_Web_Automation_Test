@@ -31,7 +31,7 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
 
         util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
-        assertTrue(util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+        assertTrue(util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed());
 
         util.waitForIsElementPresent(By.xpath("//input[@id='tx0_0']"));
         util.type(By.xpath("//input[@id='tx0_0']"),subject);
