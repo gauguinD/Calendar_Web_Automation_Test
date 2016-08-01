@@ -62,10 +62,10 @@ public class suite_04_할일_좌측영역_Test extends Testcase {
     */
 
    @Test
-    public void TC_03_좌측영역_날짜영역_Test() throws Exception{
+    public void TC_02_좌측영역_날짜영역_Test() throws Exception{
 
         String miniCalendar;
-        miniCalendar = util.isElementPresent(By.xpath("//div[@class='_miniCalendar mini_calender']")).getAttribute("style");
+        miniCalendar = util.waitForIsElementPresent(By.xpath("//div[@class='_miniCalendar mini_calender']")).getAttribute("style");
         //접혀있을때 97px 안접혀있을때 233px
         module.CurrentDate(util);
 

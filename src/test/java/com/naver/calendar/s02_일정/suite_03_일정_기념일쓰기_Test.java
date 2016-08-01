@@ -143,7 +143,7 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//span[contains(text(),'기념일 관리')]"));
         util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
 
-        assertTrue(util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed());
+        assertTrue(util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed());
         assertTrue(util.waitForIsElementPresent(By.xpath("//h3[contains(@class,'_header') and contains(text(),'기념일 관리')]")).isDisplayed());
     }
 

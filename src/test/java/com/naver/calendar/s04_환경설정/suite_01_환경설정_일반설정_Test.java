@@ -30,7 +30,7 @@ public class suite_01_환경설정_일반설정_Test extends Testcase {
     public void TC_01_일반설정_캘린더기본화면_Test() throws Exception {
 
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
        if(util.waitForIsElementPresent(By.id("default_main_view_schedule")).isSelected()) {
             util.printLog("현재 캘린더 기본 화면은 [일정보기] 로 설정되어 있습니다.");
@@ -51,7 +51,7 @@ public class suite_01_환경설정_일반설정_Test extends Testcase {
 
         String user;
 
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
         if(util.waitForIsElementPresent(By.id("default_view_day")).isSelected()) {
             util.printLog("현재 일정 기본 화면은 [일별보기] 로 설정되어 있습니다.");
@@ -87,7 +87,7 @@ public class suite_01_환경설정_일반설정_Test extends Testcase {
     @Test
     public void TC_03_일반설정_단축키_Test() throws Exception {
 
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
         if(util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_cfg_hotkey_mode inp01')][contains(@value,'true')]")).isSelected()) {
             util.printLog("현재 단축키 사용은 [사용함] 으로 설정되어 있습니다.");
