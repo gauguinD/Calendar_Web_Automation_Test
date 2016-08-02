@@ -25,14 +25,18 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
     public void settingClick(Utilities util) throws Exception {
         util.waitForIsElementPresent(By.xpath("//a[@class='btn_settingcal']"));
-        util.mouseOver(By.xpath("//a[@class='btn_settingcal']"));
+        //util.mouseOver(By.xpath("//a[@class='btn_settingcal']"));
+        //디자인 패치 이후에 설정,캘린더 생성 버튼이 감춰져서 상위 xpath에 마우스 오버 하고 접근
+        util.mouseOver(By.xpath("//div[@class='cal_tit']/p"));
         util.click(By.xpath("//a[@class='btn_settingcal']"));
         util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']"));
     }
 
     public void makeCalendar(Utilities util) throws Exception{
         util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
-        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        //util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        //디자인 패치 이후에 설정,캘린더 생성 버튼이 감춰져서 상위 xpath에 마우스 오버 하고 접근
+        util.mouseOver(By.xpath("//div[@class='cal_tit']/p"));
         util.click(By.xpath("//a[@class='btn_makecal']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='calendar_menu_wrap']"));
     }
@@ -56,7 +60,6 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
         util.sleep(5);
         util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']"));
-
         assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
         util.click(By.xpath("//a[@class='_back btn_back_calender']"));
 
@@ -471,7 +474,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
         //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_important important')]")).getAttribute("class"));
         util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_important important')]"));
-        assertTrue(util.isElementPresent(By.xpath("//li[contains(@class,'_important important')]")).getAttribute("class").contains("select"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_important important')]")).getAttribute("class").contains("select"));
 
         util.click(By.xpath("//div[contains(@class,'_all all_view')]"));
         util.waitForIsElementPresent(By.xpath("/div[@class='_all all_view select']"));
@@ -488,7 +491,6 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         //기본 상태는 전체보기로 되어 있음
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_all all_view')]"));
 
-
         //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_category color')]")).getAttribute("class"));
 
         util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_category color')]"));
@@ -497,7 +499,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_category color')]")).getAttribute("class"));
 
         util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_category color')]"));
-        assertTrue(util.isElementPresent(By.xpath("//li[contains(@class,'_category color')]")).getAttribute("class").contains("select"));
+        assertTrue(util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_category color')]")).getAttribute("class").contains("select"));
 
         util.click(By.xpath("//div[contains(@class,'_all all_view')]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_all all_view select']"));
@@ -513,20 +515,20 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
         //기본 상태는 전체보기로 되어 있음
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_all all_view')]"));
+        util.click(By.xpath("//div[contains(@class,'_all all_view')]"));
+
 
         //util.printLog(util.isElementPresent(By.xpath("//li[contains(@class,'_cleaning delete')]")).getAttribute("class"));
         util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_cleaning delete')]"));
+        util.mouseOver(By.xpath("//div[@class='view_sort']/ul/li[3]/a/span"));
+        util.click(By.xpath("//div[@class='view_sort']/ul/li[3]/a/span"));
         //util.click(By.xpath("//li[contains(@class,'_cleaning delete')]"));
-        //util.click(By.xpath("//li[contains(@class,'_cleaning delete')]"));
-        util.click(By.xpath("//a[contains(text(),' 오래된 일정 정리하기')]"));
 
 
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'ly_delete_schedule layer_popup')]"));
         assertTrue(util.waitForIsElementPresent(By.xpath("//div[contains(@class,'ly_delete_schedule layer_popup')]")).isDisplayed());
 
         util.waitForIsElementPresent(By.xpath("//h4[contains(text(),'오래된 일정 정리하기')]"));
-        //util.waitForIsNotVisible(By.xpath("//h4[contains(text(),'오래된 일정 정리하기')]"));
-
 
         util.click(By.xpath("//button[@class='_close normal']"));
         util.waitForIsNotVisible(By.xpath("//div[@class='layer_header']"));
