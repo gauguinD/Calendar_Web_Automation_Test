@@ -44,7 +44,7 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
     public void TC_01_알림설정_일정미리알림수신_Test() throws Exception {
 
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[3]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_alarm tc-panel tc-selected']"));
@@ -114,15 +114,15 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.click(By.xpath("//div[contains(@class,'_schedule_alarm_time')]"));
 
             util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_schedule_alarm_time')]/div[2]/div/ul/li["+randomNum+"]"));
+            fixedTimeAlert = util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_schedule_alarm_time')]/div[2]/div/ul/li["+randomNum+"]")).getText();
             util.click(By.xpath("//div[contains(@class,'_schedule_alarm_time')]/div[2]/div/ul/li["+randomNum+"]"));
-            fixedTimeAlert = util.waitForIsElementPresent(By.xpath("//select[@class='_schedule_alarm_time']/option["+randomNum+"]")).getText();
 
             util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
             util.click(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
 
             util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
-            util.click(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]/div[2]/div/ul/li["+randomNum/3+"]"));
             fixedDayAlert = util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]/div[2]/div/ul/li["+randomNum/3+"]")).getText();
+            util.click(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]/div[2]/div/ul/li["+randomNum/3+"]"));
 
             //설정 저장
             util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
@@ -134,8 +134,9 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.click(By.xpath("//button[@class='normal _no']"));
 
             //환경설정 재 진입
-            util.waitForIsElementPresent(By.xpath("//a[@class='btn_settingcal']"));
-            util.click(By.xpath("//a[@class='btn_settingcal']"));
+            util.waitForIsElementPresent(By.className("_config"));
+            util.click(By.className("_config"));
+            util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
             util.waitForIsElementPresent(By.xpath("//ul[@class='tab_setting tabs']/li[3]"));
             util.click(By.xpath("//ul[@class='tab_setting tabs']/li[3]"));

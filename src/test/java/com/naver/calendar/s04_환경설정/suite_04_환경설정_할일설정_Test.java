@@ -29,7 +29,7 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
     @Test
     public void TC_00_할일설정_로그인_Test() throws Exception {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
-        util.waitForPageLoaded();
+        util.sleep(3);
         util.goTo(module.taskURL);
 
     }
@@ -44,7 +44,7 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
     public void TC_01_할일설정_할일목록_Test() throws Exception {
 
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[4]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_task tc-panel tc-selected']"));
@@ -63,6 +63,11 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
 
         //1번 할일 그룹을 가장 하단으로 이동하고 확인[2,3,4,1]
         util.click(By.xpath("//tbody[@class='_private_task_group']/tr[1]/td[3]/div/a[4]"));
+
+        //기본 할일 그룹은 최상위로 이동 시킴
+       util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'tr_28780122 _cfg_task_group_list') and ./td/span[contains(text(),'[기본]')]]/td/div/a[contains(@class,'btn_up_end _sb _btn_up_end')]"));
+        util.click(By.xpath("//tr[contains(@class,'tr_28780122 _cfg_task_group_list') and ./td/span[contains(text(),'[기본]')]]/td/div/a[contains(@class,'btn_up_end _sb _btn_up_end')]"));
+
         util.click(By.xpath("//button[@class='_save normal']"));
 
         alertText = util.getAlert().getText();
@@ -86,7 +91,8 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
         //현재 그룹 개수를 저장(실제 전체 내 할 일이 개수에 포함되어서 이게 생성한 그룹 번호가 됨)
         taskNum = util.getXpathCount(By.xpath("//ul[@class='_groups category_list my']/li"));
         util.waitForIsElementPresent(By.xpath("//a[@class='_newGroup btn_makecal']"));
-        util.mouseOver(By.xpath("//a[@class='_newGroup btn_makecal']"));
+        util.sleep(1);
+        util.mouseOver(By.xpath("//div[@class='cal_tit']"));
         util.click(By.xpath("//a[@class='_newGroup btn_makecal']"));
 
         util.waitForIsElementPresent(By.xpath("//li[@class='modify']"));
@@ -118,7 +124,7 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
 
         //환경설정 > 할일 설정으로 이동
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[4]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_task tc-panel tc-selected']"));
@@ -157,7 +163,7 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
 
 
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[4]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_task tc-panel tc-selected']"));
@@ -171,7 +177,6 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
 
         //기본 할일은 제일 위로 올림
         util.click(By.xpath("//tr[contains(@class,'tr_28780122 _cfg_task_group_list') and ./td/span]/td[3]/div/a[1]"));
-
         util.click(By.xpath("//button[@class='_save normal']"));
 
 
@@ -181,7 +186,7 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
         util.waitForPageLoaded();
         /*
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[4]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_task tc-panel tc-selected']"));
