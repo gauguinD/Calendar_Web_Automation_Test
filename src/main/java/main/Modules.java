@@ -412,9 +412,11 @@ public class Modules {
 
 
 	public void goTask(Utilities util) throws Exception{
-		if(util.waitForIsNotVisible(By.xpath("//button[@class='_viewSchedule type_schedule']")))
+		if(util.waitForIsNotVisible(By.xpath("//button[@class='_viewSchedule type_schedule']"))){
 			util.click(By.xpath("//button[@class='_go_task type_schedule todo']"));
-		util.waitForTitle(taskTitle);
+			util.sleep(3);
+		}
+			util.waitForTitle(taskTitle);
 
 		Title = util.getTitle();
 		URL = util.getCurrentUrl();

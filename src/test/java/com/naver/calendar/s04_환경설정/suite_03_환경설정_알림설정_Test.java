@@ -114,6 +114,7 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.click(By.xpath("//div[contains(@class,'_schedule_alarm_time')]"));
 
             util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_schedule_alarm_time')]/div[2]/div/ul/li["+randomNum+"]"));
+            util.sleep(1);
             fixedTimeAlert = util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_schedule_alarm_time')]/div[2]/div/ul/li["+randomNum+"]")).getText();
             util.click(By.xpath("//div[contains(@class,'_schedule_alarm_time')]/div[2]/div/ul/li["+randomNum+"]"));
 
@@ -121,6 +122,7 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.click(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
 
             util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
+            util.sleep(1);
             fixedDayAlert = util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]/div[2]/div/ul/li["+randomNum/3+"]")).getText();
             util.click(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]/div[2]/div/ul/li["+randomNum/3+"]"));
 
@@ -139,6 +141,7 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
             util.waitForIsElementPresent(By.xpath("//ul[@class='tab_setting tabs']/li[3]"));
+            util.sleep(1);
             util.click(By.xpath("//ul[@class='tab_setting tabs']/li[3]"));
 
             timeAlert = util.waitForIsElementPresent(By.xpath("//tbody[@class='_calendar_alaram_list']/tr["+i+"]/td[2]/span[1]")).getText();

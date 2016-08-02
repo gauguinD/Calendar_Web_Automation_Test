@@ -77,7 +77,7 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
     }
 
     /*
-    * Step : 할일설정 > 할일 그룹 추가
+    * Step : 할일설정 > 할일so 그룹 추가
     * Result : 할일 그룹이 추가 됨
     */
 
@@ -140,10 +140,10 @@ public class suite_04_환경설정_할일설정_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_basic']"));
         util.waitForIsElementPresent(By.xpath("//button[@class='_submit btn_emphasis']"));
         util.click(By.xpath("//button[@class='_submit btn_emphasis']"));
-
         util.sleep(3);
 
         util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
+        util.sleep(1);
         util.click(By.xpath("//button[@class='_save normal']"));
         util.getAlert().accept();
         util.waitForPageLoaded();
