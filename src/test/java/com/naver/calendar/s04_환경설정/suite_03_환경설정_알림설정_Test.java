@@ -139,6 +139,7 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.waitForIsElementPresent(By.className("_config"));
             util.click(By.className("_config"));
             util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
+            util.sleep(1);
 
             util.waitForIsElementPresent(By.xpath("//ul[@class='tab_setting tabs']/li[3]"));
             util.sleep(1);
