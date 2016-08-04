@@ -513,6 +513,9 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_18_좌측영역_오래된일정정리하기_Test() throws Exception{
 
+
+        util.goRefresh();
+        util.waitForPageLoaded();
         //기본 상태는 전체보기로 되어 있음
         util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_all all_view')]"));
         util.click(By.xpath("//div[contains(@class,'_all all_view')]"));
