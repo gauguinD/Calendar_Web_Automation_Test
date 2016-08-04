@@ -84,7 +84,7 @@ public class suite_01_할일_GNB_Test extends Testcase {
     * URL : http://me.naver.com"
     */
 
-    @Test
+    //@Test
     public void TC_04_GNB_탭_메모_쪽지_Test() throws Exception{
 
         util.click(By.className("note"));
