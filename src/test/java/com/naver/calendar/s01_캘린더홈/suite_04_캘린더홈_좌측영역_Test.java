@@ -3,6 +3,7 @@ package com.naver.calendar.s01_캘린더홈;
 import main.TestIds;
 import main.Testcase;
 import main.Utilities;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -239,7 +240,13 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//tr[contains(@data-value,'"+privateCalendarValue+"')]/td[5]/div/a"));
         util.click(By.xpath("//tr[contains(@data-value,'"+privateCalendarValue+"')]/td[5]/div/a"));
 
-        util.getAlert().accept();
+        Alert alert = util.getAlert();
+        util.printLog(alert.getText());
+        alert.accept();
+
+        //util.clickAndNoWait(By.xpath("//tr[contains(@data-value,'"+privateCalendarValue+"')]/td[5]/div/a"));
+
+        //util.getAlert().accept();
         util.waitForPageLoaded();
         util.click(By.xpath("//button[@class='_save normal']"));
 
@@ -272,7 +279,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
         //환경설정 이동
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기"));
 
         //환경설정 > 일정설정 이동
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
@@ -318,9 +325,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
 
         util.getAlert().accept();
         util.waitForPageLoaded();
-
-        util.getAlert().accept();
-        util.waitForPageLoaded();
+        util.sleep(1);
         util.click(By.xpath("//button[@class='_save normal']"));
 
         util.getAlert().accept();

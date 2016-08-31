@@ -48,6 +48,7 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 	 
 	// RemoteWebDriver Hub Address
 	public static String hubAddress = "http://10.12.45.246:4444/wd/hub";
+	//public static String hubAddress = "http://10.12.45.209:5555/wd/hub";
 	//public static String hubAddress = "http://localhost:4444/wd/hub";
 	 
 	public String mainWindowHandle = null;
@@ -773,7 +774,6 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 					//highlightElement (element);
 					element.click();
 					waitForPageToLoad();
-					
 					return true;
 				}
 			}
@@ -782,6 +782,7 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 				Thread.sleep(1000);
 				tryCnt = tryCnt + 1;
 			}
+
 			catch (Exception e) {
 				printLog (e.getMessage());
 				fail (locator + " : 해당 엘리먼트를 찾지 못함");
