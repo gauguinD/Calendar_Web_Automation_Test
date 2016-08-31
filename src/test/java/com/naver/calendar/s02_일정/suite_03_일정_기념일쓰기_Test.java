@@ -377,7 +377,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
         deleteAnniv(util,module.subjectKey);
     }
 
-        /*
+
+    /*
     * Step : 기념일관리 > 기념일 상세쓰기 > 1000일 간격으로 기념일 생성
     * Result : 1000일 간격으로 기념일 생성됨
     */
@@ -417,8 +418,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
 
 
     /*
-    * Step : 기념일관리 > 기념일 간편쓰기 클릭
-    * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
+    * Step : 기념일관리 > 기념일 상세쓰기 > 스티커 추가하여 기념일 생성
+    * Result : 스티커 추가되어 기념일 생성됨
     */
 
     @Test
@@ -465,9 +466,10 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
     }
 
 
+
     /*
-    * Step : 기념일관리 > 기념일 간편쓰기 클릭
-    * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
+    * Step : 기념일관리 > 기념일 상세쓰기 > 캘린더 변경하여 기념일 생성
+    * Result : 캘린더 변경되어 기념일 생성됨
     */
 
     @Test
@@ -492,8 +494,8 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
 
 
     /*
-    * Step : 기념일관리 > 기념일 간편쓰기 클릭
-    * Result : 간편쓰기에서 작성한 제목으로 기념일 생성됨
+    * Step : 기념일관리 > 기념일 상세쓰기 > 범주 변경하여 기념일 생성
+    * Result : 범주 변경되어 기념일 생성됨
     */
 
     @Test

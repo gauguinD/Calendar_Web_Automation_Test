@@ -108,7 +108,7 @@ public class Modules {
 		util.click(By.className("btn_login"));
 		util.type(By.id("id"), ID);
 		util.type(By.id("pw"), Password);
-		util.click(By.className("btn_login"));
+		util.click(By.className("btn_global"));
 
 		String currentTitle;
 		currentTitle = util.getTitle();
@@ -133,7 +133,34 @@ public class Modules {
 		util.click(By.xpath("//button[@id='loginStart']"));
 
 		util.waitForIsElementPresent(By.id("inputId"));
-		//util.type(By.id("inputId"), ID);
+		util.type(By.id("password"), Password);
+		util.click(By.id("loginBtn"));
+
+		String currentTitle;
+		currentTitle = util.getTitle();
+		//연락처 입력 화면 노출시 확인 클릭
+
+		if(currentTitle.contains("연락처 정보 업데이트 안내 : 네이버"))
+		{
+			util.click(By.className("btn_close"));
+			util.switchTo().alert().accept();
+
+			util.goTo(calURL);
+		}
+
+		//assertNotNull (util.waitForIsElementPresent(By.linkText("로그아웃")));
+	}
+
+
+	public void ReLogInWorksCal(Utilities util, String ID, String Password) throws Exception {
+
+		util.click(By.xpath("//a[@id='clearIdBtn']"));
+		util.waitForIsElementPresent(By.xpath("//input[@id='user_id']"));
+		util.type(By.xpath("//input[@id='user_id']"),ID);
+
+		util.click(By.xpath("//button[@id='loginStart']"));
+
+		util.waitForIsElementPresent(By.id("password"));
 		util.type(By.id("password"), Password);
 		util.click(By.id("loginBtn"));
 
@@ -374,8 +401,8 @@ public class Modules {
 	}
 
 	public void uploadFile (Utilities util) throws Exception {
-		//String filePath = "/Users/Naver/Desktop/index.txt";
-		String filePath = "c:/Users/nts/calendar/index.txt";
+		String filePath = "/Users/Naver/Desktop/index.txt";
+		//String filePath = "c:/Users/nts/calendar/index.txt";
 		//util.click(By.xpath("//*[@id='myfile']"));
 		//util.executeScript("document.getElementById('fileName').value='" + filePath + "';");
 		//util.executeScript("window.document.getElementById('myfile').setAttribute('value','"+filePath+"');");

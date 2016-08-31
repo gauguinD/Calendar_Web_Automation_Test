@@ -9,8 +9,9 @@
             <!--
             <class name="com.naver.calendar.s04_환경설정.suite_01_환경설정_일반설정_Test"/>
             <class name="com.naver.calendar.s04_환경설정.suite_01_환경설정_일반설정_Test"/>
-            -->
             <class name="com.naver.calendar.s05_초기화.suite_01_초기화_일반설정_Test"/>
+            -->
+            <class name="com.naver.calendar.s05_초기화.suite_02_초기화_약속쓰기_Test"/>
             <!--
             <class name="com.naver.calendar.s01_캘린더홈.suite_04_캘린더홈_좌측영역_Test"/>
             <class name="com.naver.calendar.s02_일정.suite_01_일정_일정쓰기_Test"/>

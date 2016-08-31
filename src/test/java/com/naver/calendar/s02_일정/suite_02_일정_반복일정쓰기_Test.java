@@ -93,6 +93,7 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
         module.로그인(util, TestIds.CalUser.getId(), TestIds.CalUser.getPw());
     }
 
+
      /*
      * Step : 일정 > 반복일정_매일일정쓰기
      * Result : 매일 반복되는 일정 생성 됨

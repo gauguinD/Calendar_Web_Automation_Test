@@ -24,6 +24,7 @@ public class Capabilities {
 			ChromeOptions options = new ChromeOptions();
 			//options.addArguments("-incognito");
 			options.addArguments("--disable-popup-blocking");
+			options.addArguments("--disable-extensions");
 
 			capability = DesiredCapabilities.chrome();
 			capability.setBrowserName("chrome");
