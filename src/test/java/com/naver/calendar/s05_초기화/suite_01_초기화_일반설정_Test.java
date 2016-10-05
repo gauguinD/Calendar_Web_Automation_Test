@@ -242,12 +242,12 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
         }
     }
 
-        /*
+    /*
     * Step : 로그인 > 해당 계정으로 로그인
     * Result : 해당하는 계정으로 로그인 됨
     */
 
-    @Test
+    //@Test
     public void TC_05_초기화_일정삭제_Test() throws Exception {
 
         util.waitForTitle(module.calTitle);
@@ -294,5 +294,56 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
             }
         }
     }
+
+    /*
+    * Step : 로그인 > 해당 계정으로 로그인
+    * Result : 해당하는 계정으로 로그인 됨
+    */
+
+    @Test
+    public void TC_06_초기화_기념일삭제_Test() throws Exception {
+
+        util.waitForTitle(module.calTitle);
+
+        Title = util.getTitle();
+        URL = util.getCurrentUrl();
+
+        util.printLog("[Title] : " + Title);
+        util.printLog("[URL] : " + URL);
+
+        assertTrue(Title.contains(module.calTitle));
+        assertTrue(URL.contains(module.calURL));
+
+        util.waitForIsElementPresent(By.xpath("//span[contains(text(),'기념일 관리')]"));
+        util.click(By.xpath("//span[contains(text(),'기념일 관리')]"));
+
+        assertTrue(util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed());
+        assertTrue(util.waitForIsElementPresent(By.xpath("//h3[contains(@class,'_header') and contains(text(),'기념일 관리')]")).isDisplayed());
+
+        while(util.waitForIsElementPresent(By.xpath("//div[@class='_memorialday_wrap_table ts scroll']/table/tbody/tr[1]/td[7]")).isDisplayed()){
+
+            util.waitForIsElementPresent(By.xpath("//div[@class='_memorialday_wrap_table ts scroll']/table/tbody/tr[1]/td[7]"));
+            util.click(By.xpath("//div[@class='_memorialday_wrap_table ts scroll']/table/tbody/tr[1]/td[7]"));
+
+            String alertText;
+
+            if(util.waitForIsNotVisible(By.xpath("//div[@class='layer_content']"))){
+                util.printLog("Delete Compelete");
+            }
+            else if(util.isAlertPresent(util)){
+                alertText = util.getAlert().getText();
+                assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+                util.getAlert().accept();
+                util.sleep(2);
+            }
+            else if(util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()){
+                util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+                util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+                util.sleep(2);
+            }
+        }
+
+    }
+
 
 }
