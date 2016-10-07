@@ -326,6 +326,10 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.getAlert().accept();
         util.waitForPageLoaded();
         util.sleep(1);
+
+        util.getAlert().accept();
+        util.waitForPageLoaded();
+        util.sleep(1);
         util.click(By.xpath("//button[@class='_save normal']"));
 
         util.getAlert().accept();

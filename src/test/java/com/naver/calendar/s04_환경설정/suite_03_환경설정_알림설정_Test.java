@@ -2,6 +2,7 @@ package com.naver.calendar.s04_환경설정;
 
 import main.TestIds;
 import main.Testcase;
+import main.Utilities;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -24,6 +25,13 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
     public int maxCalNum;
     public int tempNum;
 
+
+
+    public void settingClick(Utilities util) throws Exception {
+        util.waitForIsElementPresent(By.xpath("//a[@class='_config']"));
+        util.click(By.xpath("//a[@class='_config']"));
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기"));
+    }
 
     /*
    * Step : 로그인 > 해당 계정으로 로그인
@@ -79,13 +87,15 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
     */
 
     @Test
-    public void TC_02_알림설정_미리알림기본값설_Test() throws Exception{
+    public void TC_02_알림설정_미리알림기본값설정_Test() throws Exception{
 
         String calName;
         String timeAlert;
         String dayAlert;
 
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_calendar_alaram_list']/tr"));
+        //maxCalNum = 2;
+
 
         int randomNum;
         randomNum = util.getRandomNum(1,12);
@@ -136,13 +146,10 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.click(By.xpath("//button[@class='normal _no']"));
 
             //환경설정 재 진입
-            util.waitForIsElementPresent(By.className("_config"));
-            util.click(By.className("_config"));
-            util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
+            settingClick(util);
             util.sleep(1);
 
             util.waitForIsElementPresent(By.xpath("//ul[@class='tab_setting tabs']/li[3]"));
-            util.sleep(1);
             util.click(By.xpath("//ul[@class='tab_setting tabs']/li[3]"));
 
             timeAlert = util.waitForIsElementPresent(By.xpath("//tbody[@class='_calendar_alaram_list']/tr["+i+"]/td[2]/span[1]")).getText();

@@ -190,7 +190,7 @@ public class Modules {
 
 		util.type(By.id("id"), ID);
 		util.type(By.id("pw"), Password);
-		util.click(By.className("btn_login"));
+		util.click(By.className("btn_global"));
 
 		String currentTitle;
 		currentTitle = util.getTitle();
@@ -392,7 +392,7 @@ public class Modules {
 
 	public void uploadImage (Utilities util) throws Exception {
 		//String filePath = "/Users/Naver/Desktop/index.jpg";
-		String filePath = "c:/Users/nts/calendar/index.jpg";
+		String filePath = "c:/Users/nts/Documents/Calendar/index.jpg";
 
 		//util.click(By.xpath("//*[@id='myfile']"));
 		//util.executeScript("document.getElementById('fileName').value='" + filePath + "';");
@@ -401,7 +401,7 @@ public class Modules {
 	}
 
 	public void uploadFile (Utilities util) throws Exception {
-		String filePath = "/Users/Naver/Desktop/index.txt";
+		String filePath = "c:/Users/nts/Documents/Calendar/index.txt";
 		//String filePath = "c:/Users/nts/calendar/index.txt";
 		//util.click(By.xpath("//*[@id='myfile']"));
 		//util.executeScript("document.getElementById('fileName').value='" + filePath + "';");

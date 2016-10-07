@@ -23,6 +23,17 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     public int maxSticker=0;
     public int stickerCategoryNum=0;
 
+
+    public void makeCalendar(Utilities util) throws Exception{
+        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
+        //util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        //디자인 패치 이후에 설정,캘린더 생성 버튼이 감춰져서 상위 xpath에 마우스 오버 하고 접근
+        util.mouseOver(By.xpath("//div[@class='cal_tit']/p"));
+        util.click(By.xpath("//a[@class='btn_makecal']"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='calendar_menu_wrap']"));
+    }
+
+
     public void writeSchedule(Utilities util, String subject) throws Exception{
 
         util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));

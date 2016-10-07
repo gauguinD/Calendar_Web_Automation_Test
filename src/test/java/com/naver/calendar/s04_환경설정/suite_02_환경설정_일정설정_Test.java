@@ -40,15 +40,24 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     public void settingClick(Utilities util) throws Exception {
         util.waitForIsElementPresent(By.xpath("//a[@class='_config']"));
         util.click(By.xpath("//a[@class='_config']"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기"));
     }
 
     public void makeCalendar(Utilities util) throws Exception{
         util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
-        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        //util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
+        //디자인 패치 이후에 설정,캘린더 생성 버튼이 감춰져서 상위 xpath에 마우스 오버 하고 접근
+        util.mouseOver(By.xpath("//div[@class='cal_tit']/p"));
         util.click(By.xpath("//a[@class='btn_makecal']"));
         util.waitForIsElementPresent(By.xpath("//div[@class='calendar_menu_wrap']"));
     }
+
+    /*public void makeCalendar(Utilities util) throws Exception{
+        util.waitForIsElementPresent(By.xpath("//div[@class='cal_tit']/a[1]"));
+        util.mouseOver(By.xpath("//div[@class='cal_tit']/a[1]"));
+        util.click(By.xpath("//div[@class='cal_tit']/a[1]"));
+        util.waitForIsElementPresent(By.xpath("//div[@class='calendar_menu_wrap']"));
+    }*/
 
     /*
     * Step : 로그인 > 해당 계정으로 로그인
@@ -328,6 +337,9 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         int calList;
         int calNum;
 
+        util.goRefresh();
+        util.waitForPageToLoad();
+
         //환경설정 이동
         settingClick(util);
 
@@ -583,10 +595,16 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     @Test
     public void TC_15_일정설정_삭제_삭제할캘린더생성_Test() throws Exception{
 
+        makeCalendar(util);
+        /*
         util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
         util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
         util.click(By.xpath("//a[@class='btn_makecal']"));
         util.click(By.partialLinkText("내 캘린더 만들기"));
+
+        */
+        util.click(By.xpath("//li[@class='_private']"));
+
 
         util.clearAndType(By.id("$$_calendar_name"),"삭제할캘린더"+module.contents);
         subName = util.waitForIsElementPresent(By.id("$$_calendar_name")).getAttribute("value");
@@ -1142,9 +1160,8 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
     @Test
     public void TC_25_일정설정_폐쇄_캘린더생성_Test() throws Exception{
 
-        util.waitForIsElementPresent(By.xpath("//a[@class='btn_makecal']"));
-        util.mouseOver(By.xpath("//a[@class='btn_makecal']"));
-        util.click(By.xpath("//a[@class='btn_makecal']"));
+
+        makeCalendar(util);
         util.click(By.xpath("//li[@class ='_share']"));
 
         util.clearAndType(By.id("$$_calendar_name"),"폐쇄할캘린더"+module.contents);
