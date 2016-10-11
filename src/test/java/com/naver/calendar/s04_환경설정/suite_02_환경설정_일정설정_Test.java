@@ -829,7 +829,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
 
                     else if (calEditMemberList.contains("조회")){
                         util.click(By.xpath("//tbody[@class='_member_list_body']/tr[./td[3][contains(text(),'조회')]]/td/input[@class='radio01']"));
-                        calEditMemberValue = util.waitForIsElementPresent(By.xpath("//tbody[@class='_member_list_body']/tr[./td[3][contains(text(),'수정/삭제')]]/td/input[@class='radio01']")).getAttribute("value");
+                        calEditMemberValue = util.waitForIsElementPresent(By.xpath("//tbody[@class='_member_list_body']/tr[./td[3][contains(text(),'조회')]]/td/input[@class='radio01']")).getAttribute("value");
                         util.printLog(calEditMemberValue);
                         //조회권한일경우 취소 버튼 예외처리
                         util.click(By.xpath("//div[@class='layer_footer']/button[2]"));
