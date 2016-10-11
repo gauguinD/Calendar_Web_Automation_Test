@@ -256,7 +256,7 @@ public class suite_03_할일_상단영역_Test extends Testcase {
             util.printLog("현재 완료된 할 일 노출 되지 않고 있습니다.");
             util.click(By.xpath("//input[@class='_includingCompleted']"));
             util.waitForIsElementPresent(By.xpath("//a[@class='_complete ck_complete mark']"));
-            assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_complete ck_complete mark']")).isDisplayed());
+            //assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_complete ck_complete mark']")).isDisplayed());
         }
     }
 
