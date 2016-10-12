@@ -163,9 +163,12 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
     @Test
     public void TC_07_좌측영역_내캘린더_Test() throws Exception{
 
-        util.waitForIsElementPresent(By.xpath("//div[@class='mycal fold']"));
-        util.click(By.xpath("//button[@class='btn_fold']"));
 
+        if(util.waitForIsVisible(By.xpath("//div[contains(@class,'mycal fold')]"))){
+            util.waitForIsElementPresent(By.xpath("//div[@class='mycal fold']"));
+            util.waitForIsElementPresent(By.xpath("//button[@class='btn_fold']"));
+            util.click(By.xpath("//button[@class='btn_fold']"));
+        }
         String calendarName;
         util.waitForIsElementPresent(By.xpath("//li/a[2]/span[@class='cal_type' and contains(text(),'[기본]')]"));
         util.click(By.xpath("//li/a[2]/span[@class='cal_type' and contains(text(),'[기본]')]"));
