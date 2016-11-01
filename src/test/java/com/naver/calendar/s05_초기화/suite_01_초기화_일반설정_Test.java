@@ -29,6 +29,26 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Result : 해당하는 계정으로 로그인 됨
     */
 
+
+
+    /*
+     * Step : 일반설정 > 캘린더 기본화면 확인
+     * Result : 캘린더 기본 화면의 현재 값을 확인
+     */
+    //@Test
+    public void TC_01_일반설정_카페_Test() throws Exception {
+        util.goTo("http://cafe.naver.com");
+        util.waitForPageLoaded();
+
+        util.goTo("http://cafe.naver.com/201304041115");
+        util.waitForPageLoaded();
+
+        util.waitForIsElementPresent(By.xpath("//a[@id='special-menuLink-0']"));
+        util.waitForIsElementPresent(By.xpath("//a[@id='special-menuLink-0']")).click();
+        //util.click(By.xpath("//a[@id='special-menuLink-0']"));
+
+    }
+
     //@Test
     public void TC_00_Works_로그인_Test() throws Exception {
         util.goTo("https://calendar.worksmobile.com");
@@ -87,7 +107,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
      * Step : 일반설정 > 캘린더 기본화면 확인
      * Result : 캘린더 기본 화면의 현재 값을 확인
      */
-    //@Test
+    @Test
     public void TC_02_일반설정_캘린더기본화면_Test() throws Exception {
 
         //환경설정 이동
@@ -105,8 +125,8 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Result : 해당 캘린더 목록에서 노출 안됨
     */
 
-    //@Test
-    public void TC_03_일정설정_삭제_Test() throws Exception {
+    @Test
+    public void TC_03_일정설정_캘린더삭제_Test() throws Exception {
 
         //String calName;
         String calEdit;
@@ -114,7 +134,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
         //String tempValue;
 
         int maxCalNum;
-        util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[5]/div/a[contains(@class,'_del_del link')]]"));
+        util.waitForIsElementPresent(By.xpath("//tr[contains(@class,'_cfg_calendar_list') and ./td[4]/div/a[contains(@class,'_del_del link')]]"));
         maxCalNum = util.getXpathCount(By.xpath("//tbody[@class='_private_calendar_list']/tr"));
 
         //기본 캘린더만 있을때 예외처리
@@ -122,14 +142,14 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
             util.printLog("현재 삭제할 캘린더가 없습니다.");
         } else {
             for (int i = 2; i < maxCalNum + 1; i++) {
-                calEdit = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div")).getText();
+                calEdit = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div")).getText();
                 //비공개캘린더일때 삭제 노출 됨
                 if (calEdit.contains("삭제")) {
                     tempCalName = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]/td[1]/a")).getText();
                     //tempValue = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]")).getAttribute("data-value");
 
-                    util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
-                    util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
+                    util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[1]"));
+                    util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[1]"));
                     util.printLog("삭제하는 캘린더 명은  [" + tempCalName + "] 입니다.");
 
                     String assertAlert = util.getAlert().getText();
@@ -140,8 +160,8 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
                     tempCalName = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]/td[1]/a")).getText();
                     //tempValue = util.waitForIsElementPresent(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr[" + i + "]")).getAttribute("data-value");
 
-                    util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
-                    util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
+                    util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
+                    util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
                     util.printLog("삭제하는 캘린더 명은  [" + tempCalName + "] 입니다.");
 
                     String assertAlert = util.getAlert().getText();
@@ -300,7 +320,7 @@ public class suite_01_초기화_일반설정_Test extends Testcase {
     * Result : 해당하는 계정으로 로그인 됨
     */
 
-    @Test
+    //@Test
     public void TC_06_초기화_기념일삭제_Test() throws Exception {
 
         util.waitForTitle(module.calTitle);

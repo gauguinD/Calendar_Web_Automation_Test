@@ -18,7 +18,7 @@ public class suite_02_캘린더홈_Footer_Test extends Testcase {
     public void settingClick(Utilities util) throws Exception {
         util.waitForIsElementPresent(By.xpath("//a[@class='_config']"));
         util.click(By.xpath("//a[@class='_config']"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기"));
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기"));
     }
 
     /*

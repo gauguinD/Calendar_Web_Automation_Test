@@ -383,6 +383,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='schedule_body anniversary_edit']"));
         util.type(By.xpath("//div[@class='pos_input']/input"),"주간영역_기념일");
         util.click(By.xpath("//button[@class='save _saveBtn ']"));
+        util.waitForPageLoaded();
 
         //주간영역_기념일 제목으로 기념일 생성 되었는지 확인
         tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_anniversary']/div/div/a")).getText();

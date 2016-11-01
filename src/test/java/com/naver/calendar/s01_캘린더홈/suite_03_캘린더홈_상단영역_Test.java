@@ -49,7 +49,7 @@ public class suite_03_캘린더홈_상단영역_Test extends Testcase {
         util.click(By.className("search_btn"));
 
         util.waitForIsElementPresent(By.className("btn_back_calender"));
-        SearchResult = util.findElement(By.className("keyword")).getText();
+        SearchResult = util.waitForIsElementPresent(By.className("keyword")).getText();
 
         assertTrue(SearchResult.contains(searchKeyword));
         util.click(By.className("btn_back_calender"));
