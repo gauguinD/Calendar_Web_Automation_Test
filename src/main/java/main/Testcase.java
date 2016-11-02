@@ -19,8 +19,6 @@ public class Testcase {
 	public void setupClass (String browser) throws Exception {
 
 		try {
-			//ChromeOptions options = new ChromeOptions();
-			//options.addArguments("--start-maximized");
 			capability = Capabilities.gridSetUp(browser);
 			util = new Utilities(capability);
 			util.goTo(module.calURL);

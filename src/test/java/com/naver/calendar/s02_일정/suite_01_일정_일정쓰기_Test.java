@@ -75,14 +75,19 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.click(By.xpath("//a[contains(@class,'_schedule')][contains(text(),'"+subject+"')]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_pop']"));
         util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        System.out.println("1");
         util.sleep(2);
+        System.out.println("2");
 
         //일정이 생성된 캘린더가 공유캘린더 일 경우 예외처리
         //1. 얼럿이 노출되는지 확인 하고
         //2. 공유캘린더 인지 확인
         if(util.isAlertPresent(util)){
+            System.out.println("3");
             alertText = util.getAlert().getText();
+            System.out.println("4");
             assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+            System.out.println("5");
             util.getAlert().accept();
         }
         else if(util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()){

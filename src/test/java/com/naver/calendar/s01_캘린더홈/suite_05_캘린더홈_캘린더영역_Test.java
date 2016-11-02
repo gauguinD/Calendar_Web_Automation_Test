@@ -143,6 +143,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='schedule_body anniversary_edit']"));
         util.type(By.xpath("//div[@class='pos_input']/input"),"일간영역_기념일");
         util.click(By.xpath("//button[@class='save _saveBtn ']"));
+        util.waitForPageLoaded();
 
         //일간영역_기념일 제목으로 기념일 생성 되었는지 확인
         tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_anniversary']/div/div/a")).getText();
@@ -336,6 +337,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
         util.waitForIsElementPresent(By.id("_taskForm"));
         util.type(By.className("_content"),"주간영역_할일");
         util.click(By.xpath("//button[@class='_save btn_emphasis']"));
+        util.waitForPageLoaded();
 
         //주간영역_할일 제목으로 할일 생성 되었는지 확인
         tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_task']/div/div/a")).getText();
@@ -427,6 +429,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
         util.type(By.xpath("//div[@class='pos_input']/input"),"주간영역_종일일정");
         util.click(By.xpath("//button[@class='save _save_btn _save']"));
+        util.waitForPageLoaded();
 
         //주간영역_종일 제목으로 종일일정 생성 되었는지 확인
         //tempEventSubject = util.waitForIsElementPresent(By.xpath("//td[@class='_schedule']/div/div/a")).getText();
@@ -612,6 +615,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@id='_real_schedule_body']"));
         util.type(By.xpath("//div[@class='pos_input']/input"),"목록영역_일정");
         util.click(By.xpath("//button[@class='save _save_btn _save']"));
+        util.waitForPageLoaded();
 
         //목록영역_일 제목으로 시간일정 생성 되었는지 확인
         tempEventSubject = util.waitForIsElementPresent(By.xpath("//a[contains(text(),'목록영역_일정')]")).getText();

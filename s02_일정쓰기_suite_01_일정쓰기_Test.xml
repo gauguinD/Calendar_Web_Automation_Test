@@ -5,6 +5,11 @@
 
     <test name="chrome" preserve-order = "true">
         <parameter name="browser"  value="chrome"/>
+
+    <!--
+    <test name="safari" preserve-order = "true">
+        <parameter name="browser"  value="safari"/>
+        -->
         <classes>
             <!--
             <class name="com.naver.calendar.s02_일정.suite_01_일정_일정쓰기_Test"/>

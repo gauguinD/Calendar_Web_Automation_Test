@@ -40,11 +40,12 @@ public class Capabilities {
 		}
 
 		// ****************** IE Capabilities
-		if (browser.equalsIgnoreCase("IE10")) {
+		if (browser.equalsIgnoreCase("IE11")) {
+
 			capability = DesiredCapabilities.internetExplorer();
-			capability.setBrowserName("IE10");
+			capability.setBrowserName("internet explorer");
 			capability.setPlatform(Platform.ANY);
-			capability.setVersion("10");
+			//capability.setVersion("11");
 		}
 
 		return capability;
