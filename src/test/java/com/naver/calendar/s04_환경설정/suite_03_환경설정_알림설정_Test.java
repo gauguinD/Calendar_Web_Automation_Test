@@ -114,8 +114,8 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.printLog("현재 "+calName+"의 알림 상태는 \n시간일정 :"+timeAlert+"\n종일일정 :"+dayAlert);
 
             //수정버튼 클릭해서 캘린더 상세 설정으로 이동
-            util.waitForIsElementPresent(By.xpath("//tbody[@class='_calendar_alaram_list']/tr["+i+"]/td[2]/button"));
-            util.click(By.xpath("//tbody[@class='_calendar_alaram_list']/tr["+i+"]/td[2]/button"));
+            util.waitForIsElementPresent(By.xpath("//tbody[@class='_calendar_alaram_list']/tr["+i+"]/td[3]/button"));
+            util.click(By.xpath("//tbody[@class='_calendar_alaram_list']/tr["+i+"]/td[3]/button"));
 
             util.waitForIsElementPresent(By.linkText("캘린더 상세 보기"));
 
@@ -130,9 +130,9 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
 
             util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
             util.click(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
+            util.waitForPageLoaded();
 
             util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]"));
-            util.sleep(1);
             fixedDayAlert = util.waitForIsElementPresent(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]/div[2]/div/ul/li["+randomNum/3+"]")).getText();
             util.click(By.xpath("//div[contains(@class,'_anniversary_alarm_time')]/div[2]/div/ul/li["+randomNum/3+"]"));
 
@@ -142,9 +142,14 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             util.waitForPageLoaded();
 
             //변경된 알림을 기존 일정에도 적용하시겠습니까 관련 예외처리
-            util.waitForIsElementPresent(By.xpath("//button[@class='normal _no']"));
-            util.click(By.xpath("//button[@class='normal _no']"));
-
+            if(util.waitForIsNotVisible(By.xpath("//button[@class='normal _no']"))){
+                util.sleep(1);
+             }
+            else
+            {
+                util.waitForIsElementPresent(By.xpath("//button[@class='normal _no']"));
+                util.click(By.xpath("//button[@class='normal _no']"));
+            }
             //환경설정 재 진입
             settingClick(util);
             util.sleep(1);
