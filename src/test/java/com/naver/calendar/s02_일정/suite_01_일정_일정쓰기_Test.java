@@ -315,7 +315,8 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
             assertTrue(alertText.contains("선택하신 날짜는 윤달이 아닙니다. 날짜를 확인해 주세요."));
             util.printLog("현재 날짜는 윤달 설정이 불가능한 날짜입니다.");
             util.getAlert().accept();
-            util.click(By.xpath("//button[@class='_footer_cancel_btn _cancel']"));
+
+            util.getAlert(By.xpath("//button[@class='_footer_cancel_btn _cancel']"));
             util.getAlert().accept();
         } catch (Exception e){
             lunarDate = util.waitForIsElementPresent(By.xpath("//p[@class='_converted_solar_date time_default no_view']")).getText();
