@@ -500,8 +500,9 @@ public class Modules {
 		assertTrue(util.waitForIsElementPresent(By.xpath("//div[@class='ly_todo_wrap']")).isDisplayed());
 
 		util.waitForIsElementPresent(By.xpath("//button[@class='_delete btn_delete']"));
-		util.click(By.xpath("//button[@class='_delete btn_delete']"));
 
+		//util.click(By.xpath("//button[@class='_delete btn_delete']"));
+		util.getAlert(By.xpath("//button[@class='_delete btn_delete']"));
 		util.getAlert().accept();
 		util.waitForPageLoaded();
 
@@ -518,6 +519,7 @@ public class Modules {
 
 		if(util.waitForIsNotVisible(By.xpath("//tbody[@class='no_result']"))){
 			util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+subject+"')]"));
+
 			util.click(By.xpath("//div[contains(@class,'_memorialday_wrap_table ts scroll') and ./table/tbody/tr/td[4]/a[contains(text(),'"+subject+"')]]/table/tbody/tr/td[7]"));
 			alertText = util.getAlert().getText();
 			assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
