@@ -57,6 +57,9 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
         assertTrue(util.waitForIsElementPresent(By.xpath("//a[contains(text(),'"+subject+"')]")).isDisplayed());
         util.click(By.xpath("//a[contains(text(),'"+subject+"')]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_pop']"));
+
+
+        /*
         util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
         util.sleep(3);
 
@@ -76,6 +79,23 @@ public class suite_02_일정_반복일정쓰기_Test extends Testcase {
             }
             util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
             util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+        }
+        */
+
+        try {
+            alertText = util.getAlert(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']")).getText();
+            assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+            util.getAlert().accept();
+        } catch (Exception e) {
+            if(util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()){
+                util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_del repeat_del']"));
+                if(util.waitForIsElementPresent(By.xpath("//div[@class='_repeat_del repeat_del']")).isDisplayed()){
+                    util.waitForIsElementPresent(By.xpath("//input[@id='_wpageTMP8_repeat_del_all']"));
+                    util.click(By.xpath("//input[@id='_wpageTMP8_repeat_del_all']"));
+                }
+                util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+                util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+            }
         }
 
         assertTrue(util.waitForIsNotVisible(By.xpath("//a[contains(text(),'"+subject+"')]")));

@@ -59,7 +59,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
     }
 
 
-    public void deleteSchedule(Utilities util, String subject) throws Exception{
+    public void deleteSchedule(Utilities util, String subject) throws Exception {
 
         //월뷰 목록뷰로 설정
         util.click(By.xpath("//button[contains(@class,'_list list')]"));
@@ -67,17 +67,16 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//button[@class='_list list on']"));
         //util.mouseOver(By.xpath("//a[contains(text(),'"+subject+"')]"));
         //util.focusElement(By.xpath("//a[contains(text(),'"+subject+"')]"));
-        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'"+subject+"')]"));
+        util.waitForIsElementPresent(By.xpath("//a[contains(text(),'" + subject + "')]"));
         util.printLog(subject);
         util.sleep(3);
 
-        assertTrue(util.waitForIsVisible(By.xpath("//a[contains(@class,'_schedule')][contains(text(),'"+subject+"')]")));
-        util.click(By.xpath("//a[contains(@class,'_schedule')][contains(text(),'"+subject+"')]"));
+        assertTrue(util.waitForIsVisible(By.xpath("//a[contains(@class,'_schedule')][contains(text(),'" + subject + "')]")));
+        util.click(By.xpath("//a[contains(@class,'_schedule')][contains(text(),'" + subject + "')]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_pop']"));
-        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
-        System.out.println("1");
-        util.sleep(2);
-        System.out.println("2");
+
+        /*util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        //util.sleep(2);
 
         //일정이 생성된 캘린더가 공유캘린더 일 경우 예외처리
         //1. 얼럿이 노출되는지 확인 하고
@@ -93,9 +92,19 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         else if(util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()){
             util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
             util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
-        }
+        }*/
 
-        assertTrue(util.waitForIsNotVisible(By.xpath("//a[contains(text(),'"+subject+"')]")));
+        try {
+            alertText = util.getAlert(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']")).getText();
+            assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+            util.getAlert().accept();
+        } catch (Exception e) {
+            if (util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()) {
+                util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+                util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+            }
+            assertTrue(util.waitForIsNotVisible(By.xpath("//a[contains(text(),'" + subject + "')]")));
+        }
     }
 
 
@@ -224,20 +233,29 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         assertTrue(util.waitForIsVisible(By.xpath("//td[contains(@class,'_schedule')]/div/div/a[contains(text(),'"+scheduleSubject+"')]")));
         util.click(By.xpath("//td[contains(@class,'_schedule')]/div/div/a[contains(text(),'"+scheduleSubject+"')]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='ly_pop']"));
-        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
-
-        //일정이 생성된 캘린더가 공유캘린더 일 경우 예외처리
-        //1. 얼럿이 노출되는지 확인 하고
-        //2. 공유캘린더 인지 확인
-        if(util.isAlertPresent(util)){
-            alertText = util.getAlert().getText();
+        //util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+//
+//        //일정이 생성된 캘린더가 공유캘린더 일 경우 예외처리
+//        //1. 얼럿이 노출되는지 확인 하고
+//        //2. 공유캘린더 인지 확인
+//        if(util.isAlertPresent(util)){
+//            alertText = util.getAlert().getText();
+//            assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+//            util.getAlert().accept();
+//        }
+//        else if(util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()){
+//            util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+//            util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+//        }
+        try {
+            alertText = util.getAlert(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']")).getText();
             assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
             util.getAlert().accept();
-        }
-        else if(util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()){
+        } catch (Exception e) {
             util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
             util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
         }
+
         assertTrue(util.waitForIsNotVisible(By.xpath("//a[contains(text(),'"+scheduleSubject+"')]")));
 
         //삭제 하고 다시 오늘 날짜로 복귀
@@ -268,6 +286,7 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.click(By.xpath("//div[contains(@class,'_lunar_type  selectbox13')]/div[2]/div/ul/li[2]"));
 
         //현재 날짜가 윤달이 가능한지에 관한 예외처리
+        /*
         util.click(By.xpath("//input[@id='ch1_2']"));
         if(util.isAlertExist(util)){
             alertText = util.getAlert().getText();
@@ -289,6 +308,27 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
             deleteSchedule(util,scheduleSubject);
 
         }
+        */
+        try{
+            util.getAlert(By.xpath("//input[@id='ch1_2']"));
+            alertText = util.getAlert().getText();
+            assertTrue(alertText.contains("선택하신 날짜는 윤달이 아닙니다. 날짜를 확인해 주세요."));
+            util.printLog("현재 날짜는 윤달 설정이 불가능한 날짜입니다.");
+            util.getAlert().accept();
+            util.click(By.xpath("//button[@class='_footer_cancel_btn _cancel']"));
+            util.getAlert().accept();
+        } catch (Exception e){
+            lunarDate = util.waitForIsElementPresent(By.xpath("//p[@class='_converted_solar_date time_default no_view']")).getText();
+            lunarDate = lunarDate.substring(5).replace(".", "-");
+            saveSchedule(util,scheduleSubject);
+
+            //일정 확인하기 위해서 음력 날짜로 이동
+            URL = module.calURL + "#{\"sSection\":\"scheduleMain\",\"oParameter\":{\"sViewType\":\"month\",\"sDate\":\"" + lunarDate + "\"}}";
+            util.goTo(URL);
+            util.waitForPageLoaded();
+            deleteSchedule(util,scheduleSubject);
+        }
+
         //삭제 하고 다시 오늘 날짜로 복귀
         util.sleep(3);
         util.click(By.className("today"));

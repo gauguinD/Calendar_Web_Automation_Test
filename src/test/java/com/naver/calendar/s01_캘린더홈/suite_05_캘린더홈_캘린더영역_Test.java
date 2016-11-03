@@ -119,7 +119,8 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //할일 노출 되고 할일 삭제 버튼 클릭
         util.waitForIsElementPresent(By.id("_taskForm"));
-        util.click(By.xpath("//button[@class='_delete btn_delete']"));
+        //util.click(By.xpath("//button[@class='_delete btn_delete']"));
+        util.getAlert(By.xpath("//button[@class='_delete btn_delete']"));
         util.getAlert().accept();
 
         //할일 사라지고 _new_task 노출되는것 확인
@@ -259,7 +260,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //시간일정 노출 되고 일정 삭제 버튼 클릭
         util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
-        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
         util.getAlert().accept();
 
         //시간일정 사라지고 _new_anniversary 노출되는것 확인
@@ -361,7 +362,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //할일 노출 되고 할일 삭제 버튼 클릭
         util.waitForIsElementPresent(By.id("_taskForm"));
-        util.click(By.xpath("//button[@class='_delete btn_delete']"));
+        util.getAlert(By.xpath("//button[@class='_delete btn_delete']"));
         util.getAlert().accept();
 
         //할일 사라지고 _new_task 노출되는것 확인
@@ -451,7 +452,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //종일일정 노출 되고 종일일정 삭제 버튼 클릭
         util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
-        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
         util.getAlert().accept();
 
         //종일일정 사라지고 _new_allday 노출되는것 확인
@@ -503,7 +504,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //시간일정 노출 되고 일정 삭제 버튼 클릭
         util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
-        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
         util.getAlert().accept();
 
         //시간일정 사라지고 _new_anniversary 노출되는것 확인
@@ -569,7 +570,7 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //일정 노출 되고 일정 삭제 버튼 클릭
         util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
-        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        util.getAlert(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
         util.getAlert().accept();
 
         //일정 사라지는것 확인
@@ -636,8 +637,11 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
 
         //일정 노출 되고 일정 삭제 버튼 클릭
         util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view long_width']"));
-        util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+        //util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
+
+        util.getAlert(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
         util.getAlert().accept();
+
 
         //일정 사라지는것 확인
         util.waitForIsNotVisible(By.xpath("//a[contains(text(),'목록영역_일정')]"));

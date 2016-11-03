@@ -81,12 +81,23 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
 
         if(util.waitForIsNotVisible(By.xpath("//tbody[@class='no_result']"))){
             util.waitForIsElementPresent(By.xpath("//a[contains(@class,'_quick_view') and contains(text(),'"+subject+"')]"));
-            util.click(By.xpath("//div[contains(@class,'_memorialday_wrap_table ts scroll') and ./table/tbody/tr/td[4]/a[contains(text(),'"+subject+"')]]/table/tbody/tr/td[7]"));
+            try {
+                alertText = util.getAlert(By.xpath("//div[contains(@class,'_memorialday_wrap_table ts scroll') and ./table/tbody/tr/td[4]/a[contains(text(),'"+subject+"')]]/table/tbody/tr/td[7]")).getText();
+                assertTrue(alertText.contains("일정을 삭제하시겠습니까?"));
+                util.getAlert().accept();
+            } catch (Exception e) {
+                if (util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']")).isDisplayed()) {
+                    util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+                    util.click(By.xpath("//button[@class='_ok normal btn_emphasis']"));
+                }
+                assertTrue(util.waitForIsNotVisible(By.xpath("//a[contains(text(),'" + subject + "')]")));
+            }
         }
         else{
             util.printLog("현재 기념일 목록에 기념일이 없습니다.");
 
         }
+        /*
 
         //일정이 생성된 캘린더가 공유캘린더 일 경우 예외처리
         //1. 얼럿이 노출되는지 확인 하고
@@ -100,6 +111,9 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
             util.waitForIsElementPresent(By.xpath("//button[@class='_ok normal']"));
             util.click(By.xpath("//button[@class='_ok normal']"));
         }
+*/
+
+
     }
 
     public void getTodayDate(Utilities util) throws Exception{

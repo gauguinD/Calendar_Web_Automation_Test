@@ -71,7 +71,9 @@ public class suite_05_환경설정_위젯설정_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//input[@class='_on_widget inp01']"));
         util.click(By.xpath("//input[@class='_on_widget inp01']"));
 
-        util.click(By.xpath("//button[@class='_save normal']"));
+        //util.click(By.xpath("//button[@class='_save normal']"));
+
+        util.getAlert(By.xpath("//button[@class='_save normal']"));
         util.getAlert().accept();
 
         util.waitForPageLoaded();

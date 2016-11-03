@@ -1269,10 +1269,10 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                 calEditName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[1]/a/strong")).getText();
 
                 util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
-                util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
 
-
-                assertAlert = util.getAlert().getText();
+                //util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
+                assertAlert = util.getAlert(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]")).getText();
+                //assertAlert = util.getAlert().getText();
                 assertTrue(assertAlert.contains("공유 캘린더를 폐쇄하면 참여자가 모두 탈퇴 처리되고,\n" +
                         "캘린더에 등록한 모든 일정이 삭제됩니다."));
                 util.getAlert().accept();
@@ -1370,10 +1370,10 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                 calEditName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[1]/a/strong")).getText();
 
                 util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[1]"));
-                util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[1]"));
+                //util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
 
-                util.sleep(1);
-                assertAlert = util.getAlert().getText();
+                assertAlert = util.getAlert(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[1]")).getText();
+                //assertAlert = util.getAlert().getText();
                 assertTrue(assertAlert.contains("해지하시겠습니까?"));
                 util.getAlert().accept();
 

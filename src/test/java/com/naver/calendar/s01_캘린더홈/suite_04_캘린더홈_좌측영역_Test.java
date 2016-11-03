@@ -245,18 +245,17 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@data-value,'"+privateCalendarValue+"')]/td[4]/div/a"));
-        util.click(By.xpath("//tr[contains(@data-value,'"+privateCalendarValue+"')]/td[4]/div/a"));
+        //util.click(By.xpath("//tr[contains(@data-value,'"+privateCalendarValue+"')]/td[4]/div/a"));
 
-        Alert alert = util.getAlert();
+        Alert alert = util.getAlert(By.xpath("//tr[contains(@data-value,'"+privateCalendarValue+"')]/td[4]/div/a"));
         util.printLog(alert.getText());
-        alert.accept();
 
         //util.clickAndNoWait(By.xpath("//tr[contains(@data-value,'"+privateCalendarValue+"')]/td[5]/div/a"));
 
-        //util.getAlert().accept();
+        util.getAlert().accept();
         util.waitForPageLoaded();
-        util.click(By.xpath("//button[@class='_save normal']"));
 
+        util.getAlert(By.xpath("//button[@class='_save normal']"));
         util.getAlert().accept();
         util.waitForPageLoaded();
 
@@ -328,8 +327,9 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@data-value,'" + publicCalendarValue + "')]/td[4]/div/a[3]"));
-        util.click(By.xpath("//tr[contains(@data-value,'" + publicCalendarValue + "')]/td[4]/div/a[3]"));
+        //util.click(By.xpath("//tr[contains(@data-value,'" + publicCalendarValue + "')]/td[4]/div/a[3]"));
 
+        util.getAlert(By.xpath("//tr[contains(@data-value,'" + publicCalendarValue + "')]/td[4]/div/a[3]"));
         util.getAlert().accept();
         util.waitForPageLoaded();
         util.sleep(1);
@@ -337,9 +337,10 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.getAlert().accept();
         util.waitForPageLoaded();
         util.sleep(1);
-        util.click(By.xpath("//button[@class='_save normal']"));
 
+        util.getAlert(By.xpath("//button[@class='_save normal']"));
         util.getAlert().accept();
+
         util.waitForPageLoaded();
     }
 
@@ -396,6 +397,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         settingClick(util);
 
         //환경설정 > 일정설정 이동
+        util.waitForIsElementPresent(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
@@ -437,16 +439,12 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
         util.waitForIsElementPresent(By.xpath("//tr[contains(@data-value,'"+timeTableValue+"')]/td[4]/div/a"));
-        util.click(By.xpath("//tr[contains(@data-value,'"+timeTableValue+"')]/td[4]/div/a"));
+        //util.click(By.xpath("//tr[contains(@data-value,'"+timeTableValue+"')]/td[4]/div/a"));
 
+        util.getAlert(By.xpath("//tr[contains(@data-value,'"+timeTableValue+"')]/td[4]/div/a"));
         util.getAlert().accept();
-
         util.waitForPageLoaded();
-        //util.click(By.xpath("//button[@class='_save normal']"));
-
-        //util.getAlert().accept();
-        //util.waitForPageLoaded();
-    }
+         }
 
 
     /*
