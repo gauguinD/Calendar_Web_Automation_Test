@@ -36,7 +36,9 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
 
     public void writeSchedule(Utilities util, String subject) throws Exception{
 
+        util.waitForIsElementPresent(By.xpath("//span[contains(text(),'약속쓰기')]"));
         util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
+        util.waitForPageLoaded();
         assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
 
         util.waitForIsElementPresent(By.xpath("//input[@id='tx0_0']"));
@@ -405,8 +407,17 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
 
         util.waitForIsElementPresent(By.xpath("//div[@id='calendar_selectbox']"));
         util.click(By.xpath("//div[@id='calendar_selectbox']"));
-        util.click(By.xpath("//div[@class='scroll selectbox-list']/ul/li[2]"));
 
+        if(util.getXpathCount(By.xpath("//div[@class='scroll selectbox-list']/ul/li"))==1)
+        {
+            util.waitForIsElementPresent(By.xpath("//div[@class='scroll selectbox-list']/ul/li[1]"));
+            util.click(By.xpath("//div[@class='scroll selectbox-list']/ul/li[1]"));
+        }
+        else
+        {
+            util.waitForIsElementPresent(By.xpath("//div[@class='scroll selectbox-list']/ul/li[2]"));
+            util.click(By.xpath("//div[@class='scroll selectbox-list']/ul/li[2]"));
+        }
         saveSchedule(util,scheduleSubject);
         deleteSchedule(util,scheduleSubject);
     }

@@ -381,7 +381,9 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         }
 
         //저장하고 얼럿에서 확인
-        util.click(By.xpath("//button[@class='_save normal']"));
+        //util.click(By.xpath("//button[@class='_save normal']"));
+
+        util.getAlert(By.xpath("//button[@class='_save normal']"));
         util.getAlert().accept();
         util.waitForPageLoaded();
 
@@ -412,7 +414,8 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//input[contains(@class,'_cfg_calendar_default inp01') and contains(@value,'6819065')]"));
         util.click(By.xpath("//input[contains(@class,'_cfg_calendar_default inp01') and contains(@value,'6819065')]"));
 
-        util.click(By.xpath("//button[@class='_save normal']"));
+        //util.click(By.xpath("//button[@class='_save normal']"));
+        util.getAlert(By.xpath("//button[@class='_save normal']"));
         util.getAlert().accept();
         util.waitForPageLoaded();
 
@@ -465,7 +468,8 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
             util.printLog("목록에서 삭제할 캘린더 명은 : " + tempCalName);
 
             //저장하고 얼럿에서 확인
-            util.click(By.xpath("//button[@class='_save normal']"));
+            //util.click(By.xpath("//button[@class='_save normal']"));
+            util.getAlert(By.xpath("//button[@class='_save normal']"));
             util.getAlert().accept();
 
             //환경설정 재 진입
@@ -510,8 +514,8 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
             util.click(By.xpath("//tr[contains(@class,'" + tempValue + "')]/td[3]/input"));
 
             //저장하고 얼럿에서 확인
-            util.click(By.xpath("//button[@class='_save normal']"));
-            assertAlert = util.getAlert().getText();
+            //util.click(By.xpath("//button[@class='_save normal']"));
+            assertAlert = util.getAlert(By.xpath("//button[@class='_save normal']")).getText();
             assertTrue(assertAlert.contains("환경설정의 변경 사항이 저장되었습니다."));
             util.getAlert().accept();
             util.waitForPageLoaded();
@@ -687,7 +691,8 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
 
         //저장하고 얼럿에서 확인
         util.waitForIsElementPresent(By.xpath("//button[@class='_save normal']"));
-        util.click(By.xpath("//button[@class='_save normal']"));
+        //util.click(By.xpath("//button[@class='_save normal']"));
+        util.getAlert(By.xpath("//button[@class='_save normal']"));
         util.getAlert().accept();
 
         //환경설정 재 진입
@@ -884,9 +889,9 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                 calEditName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[1]/a/strong")).getText();
 
                 util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
-                util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
+                //util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
 
-
+                util.getAlert(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[3]"));
                 assertAlert = util.getAlert().getText();
                 assertTrue(assertAlert.contains("공유 캘린더를 폐쇄하면 참여자가 모두 탈퇴 처리되고,\n" +
                         "캘린더에 등록한 모든 일정이 삭제됩니다."));
@@ -1005,7 +1010,8 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                 //공유캘린더 마스터 일때 양도,탈퇴,폐쇄 노출 됨
                 if (calEdit.contains("탈퇴") && !calEdit.contains("양도")) {
                     util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[1]"));
-                    util.click(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr["+i+"]/td[4]/div/a[contains(text(),'탈퇴')]"));
+                    //util.click(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr["+i+"]/td[4]/div/a[contains(text(),'탈퇴')]"));
+                    util.getAlert(By.xpath("//tbody[contains(@class,'_private_calendar_list')]/tr["+i+"]/td[4]/div/a[contains(text(),'탈퇴')]"));
                     //util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[5]/div/a[1]"));
                     //공유캘린더 탈퇴시에 참가자가 있을경우 예외처리
                     //calEditMemberList = util.waitForIsElementPresent(By.xpath("//tbody[@class='_member_list_body']")).getText();
@@ -1110,8 +1116,8 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                 calEditName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[1]/a/strong")).getText();
 
                 util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
-                util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
-
+                //util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
+                util.getAlert(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
 
                 assertAlert = util.getAlert().getText();
                 assertTrue(assertAlert.contains("공유 캘린더를 폐쇄하면 참여자가 모두 탈퇴 처리되고,\n" +
@@ -1269,10 +1275,8 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
                 calEditName = util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[1]/a/strong")).getText();
 
                 util.waitForIsElementPresent(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
-
                 //util.click(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]"));
                 assertAlert = util.getAlert(By.xpath("//tbody[@class='_private_calendar_list']/tr[" + i + "]/td[4]/div/a[3]")).getText();
-                //assertAlert = util.getAlert().getText();
                 assertTrue(assertAlert.contains("공유 캘린더를 폐쇄하면 참여자가 모두 탈퇴 처리되고,\n" +
                         "캘린더에 등록한 모든 일정이 삭제됩니다."));
                 util.getAlert().accept();
