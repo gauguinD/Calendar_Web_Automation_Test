@@ -40,7 +40,7 @@ public class suite_05_환경설정_위젯설정_Test extends Testcase {
 
         util.sleep(3);
         util.click(By.className("_config"));
-        util.waitForIsElementPresent(By.linkText("캘린더로 돌아가기")).isDisplayed();
+        util.waitForIsElementPresent(By.linkText("이전으로 돌아가기")).isDisplayed();
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[5]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_widget tc-panel tc-selected']"));
@@ -62,7 +62,7 @@ public class suite_05_환경설정_위젯설정_Test extends Testcase {
     * Result : 위젯 설정 사용함으로 설정하면 위젯이 노출 됨
     */
 
-    @Test
+    //@Test
     public void TC_02_위젯설정_위젯사용_Test() throws Exception {
 
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[5]"));
