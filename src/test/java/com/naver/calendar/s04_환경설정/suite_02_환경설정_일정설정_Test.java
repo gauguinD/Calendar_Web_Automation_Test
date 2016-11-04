@@ -1247,6 +1247,7 @@ public class suite_02_환경설정_일정설정_Test extends Testcase {
 
         settingClick(util);
         //환경설정 > 일정설정 진입
+        util.waitForIsElementPresent(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.click(By.xpath("//ul[@class='tab_setting tabs']/li[2]"));
         util.waitForIsElementPresent(By.xpath("//div[@class='_schedule tc-panel tc-selected']"));
 
