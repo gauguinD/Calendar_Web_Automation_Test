@@ -116,6 +116,7 @@ public class suite_03_환경설정_알림설정_Test extends Testcase {
             //수정버튼 클릭해서 캘린더 상세 설정으로 이동
             util.waitForIsElementPresent(By.xpath("//tbody[@class='_calendar_alaram_list']/tr["+i+"]/td[3]/button"));
             util.click(By.xpath("//tbody[@class='_calendar_alaram_list']/tr["+i+"]/td[3]/button"));
+            util.waitForPageLoaded();
 
             util.waitForIsElementPresent(By.linkText("캘린더 상세 보기"));
 

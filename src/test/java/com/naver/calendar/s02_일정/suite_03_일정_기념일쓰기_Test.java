@@ -318,8 +318,13 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
 
         for(int i=1; i<4; i++){
 
+            util.waitForIsElementPresent(By.xpath("//button[@class='_sticker_btn sticker_btn']"));
             util.click(By.xpath("//button[@class='_sticker_btn sticker_btn']"));
+
+            util.waitForIsElementPresent(By.xpath("//div[@class='sticker_category']/ul/li["+i+"]/button"));
             util.click(By.xpath("//div[@class='sticker_category']/ul/li["+i+"]/button"));
+
+            util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li[1]"));
             util.click(By.xpath("//ul[contains(@class,'_sticker_list')]/li[1]"));
             //maxSticker = util.getXpathCount(By.xpath("//ul[contains(@class,'_sticker_list')]/li"));
             maxSticker = 3;
