@@ -39,8 +39,8 @@ public class suite_01_일정_일정쓰기_Test extends Testcase {
         util.waitForIsElementPresent(By.xpath("//span[contains(text(),'약속쓰기')]"));
         util.click(By.xpath("//span[contains(text(),'약속쓰기')]"));
         util.waitForPageLoaded();
-        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
 
+        assertTrue(util.waitForIsElementPresent(By.xpath("//a[@class='_back btn_back_calender']")).isDisplayed());
         util.waitForIsElementPresent(By.xpath("//input[@id='tx0_0']"));
         util.type(By.xpath("//input[@id='tx0_0']"),subject);
     }

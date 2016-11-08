@@ -330,21 +330,26 @@ public class suite_03_일정_기념일쓰기_Test extends Testcase {
             maxSticker = 3;
             util.waitForIsElementPresent(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
             util.click(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
+            util.waitForPageLoaded();
 
             for(int j=2; j<maxSticker; j++){
+
                 util.waitForIsElementPresent(By.xpath("//button[@class='_sticker_btn sticker_btn']"));
                 util.click(By.xpath("//button[@class='_sticker_btn sticker_btn']"));
-                util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']"));
+                util.waitForPageLoaded();
 
+                util.waitForIsElementPresent(By.xpath("//div[@class='layer_content']"));
                 util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]"));
                 //stickerAlt = util.waitForIsElementPresent(By.xpath("//li[contains(@class,'_sticker') and contains(@key,'"+i+"')]/button")).getAttribute("alt");
                 stickerTitle = util.waitForIsElementPresent(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]/button")).getAttribute("title");
                 util.click(By.xpath("//ul[contains(@class,'_sticker_list')]/li["+j+"]"));
+                util.waitForPageLoaded();
+
                 util.waitForIsElementPresent(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
                 util.click(By.xpath("//button[@class='normal normal_v1 btn_emphasis _save']"));
+                util.waitForPageLoaded();
 
                 util.waitForIsElementPresent(By.xpath("//button[@class='_sticker_btn sticker_btn']"));
-                //tempAlt = util.waitForIsElementPresent(By.xpath("//button[@class='_sticker_btn sticker_btn']/img")).getAttribute("alt");
                 tempTitle = util.waitForIsElementPresent(By.xpath("//button[@class='_sticker_btn sticker_btn']")).getAttribute("title");
                 if(stickerTitle.contains(tempTitle)){
                 }
