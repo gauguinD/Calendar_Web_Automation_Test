@@ -569,7 +569,7 @@ public class suite_04_캘린더홈_좌측영역_Test extends Testcase {
         Title = util.getTitle();
         URL = util.getCurrentUrl();
         assertTrue(URL.contains("https://www.worksmobile.com/kr/"));
-        assertTrue(Title.contains("Works Mobile 비즈니스 협업 서비스"));
+        assertTrue(Title.contains("Works Mobile 기업 협업 서비스"));
 
         util.close();
         util.selectMainWindow();

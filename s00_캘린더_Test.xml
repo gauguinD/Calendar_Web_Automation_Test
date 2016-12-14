@@ -4,7 +4,7 @@
 <suite name="CalendarWeb Regression Test" parallel="tests" thread-count="10">
 
     <test name="chrome" preserve-order = "true">
-        <parameter name="browser"  value="chrome"/>
+        <parameter name="browser"  value="firefox"/>
         <classes>
             <class name="com.naver.calendar.s01_캘린더홈.suite_01_캘린더홈_GNB_Test"/>
             <class name="com.naver.calendar.s01_캘린더홈.suite_02_캘린더홈_Footer_Test"/>

@@ -406,7 +406,8 @@ public class suite_05_캘린더홈_캘린더영역_Test extends Testcase {
         util.click(By.xpath("//td[@class='_anniversary']"));
 
         //기념일 노출 되고 기념일 삭제 버튼 클릭
-        util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view']"));
+        //util.waitForIsElementPresent(By.xpath("//div[@class='_quick_schedule_view ly_quick_wrap  no_view']"));
+        util.waitForIsElementPresent(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
         util.click(By.xpath("//button[@class='_del_btn btn_default btn_default_v1']"));
 
         //기념일 사라지고 _new_anniversary 노출되는것 확인

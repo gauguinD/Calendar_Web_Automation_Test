@@ -48,7 +48,7 @@ public class Utilities extends RemoteWebDriver implements TakesScreenshot {
 	 
 	// RemoteWebDriver Hub Address
 	//public static String hubAddress = "http://10.12.45.246:4444/wd/hub";
-	public static String hubAddress = "http://10.12.45.209:5555/wd/hub";
+	public static String hubAddress = "http://10.12.45.210:5556/wd/hub";
 	//public static String hubAddress = "http://10.12.57.196:5555/wd/hub";
 	 
 	public String mainWindowHandle = null;

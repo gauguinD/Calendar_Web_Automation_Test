@@ -44,17 +44,17 @@ public class Testcase {
 	 public void afterScreenShot(ITestResult result) throws Exception {
 		if(util.isAlertPresent(util)){
 			util.getAlert().accept();
-			util.captureScreen(result);
+			//util.captureScreen(result);
 		}
 		else{
-			util.captureScreen(result);
+			//util.captureScreen(result);
 		}
 	}
 	
 	@BeforeMethod(alwaysRun=true)
 	 public void beforeScreenShot() throws Exception {
 		
-		util.captureScreen();
+		//util.captureScreen();
 	}
 	
 	@AfterClass
